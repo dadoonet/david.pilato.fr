@@ -15,7 +15,7 @@
 <script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script>
 <script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js integrity="sha256-Zmpaaj+GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE=" crossorigin></script>
 <meta name=description content="Discover all articles I wrote here&mldr;">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"name":"3 years! Time flies!","description":"3 years! Can you imagine that? Already 3 years spent working at elastic? Time flies!\n2015 has been an uncommon year for me.\nNot because Marty Mc Fly and Doc Emmett Brown finally arrived\u0026hellip;\n  Not because, Han Solo, Leia and friends were finally back again\u0026hellip;\n  But for technical and also personal reasons.\nOn a personal side, I had to deal with two major issues which cause some slow down in my professional activities.","url":"https://david.pilato.fr/blog/2016-01-12-3-years-time-flies/"},{"@type":"ListItem","position":2,"name":"Understanding Zipf's law","description":"I just discovered a nice video which explains the Zipf\u0026rsquo;s law.\n  I\u0026rsquo;m wondering if I can index the french lexique from Université de Savoie and find some funny things based on that\u0026hellip;\nDownload french words wget http://www.lexique.org/listes/liste_mots.txt head -20 liste_mots.txt  What do we have?\nIt\u0026rsquo;s a CSV file (tabulation as separator):\n1_graph 8_frantfreqparm 0 279.84 1 612.10 2 1043.90 3 839.32 4 832.23 5 913.87 6 603.42 7 600.61 8 908.03 9 1427.","url":"https://david.pilato.fr/blog/2016-01-05-understanding-zipfs-law/"},{"@type":"ListItem","position":3,"name":"Building a directory map with ELK","description":"I gave a BBL talk recently and while chatting with attendees, one of them told me a simple use case he covered with elasticsearch: indexing metadata files on a NAS with a simple ls -lR like command. His need is to be able to search on a NAS for files when a user wants to restore a deleted file.\nAs you can imagine a search engine is super helpful when you have hundreds of millions files!","url":"https://david.pilato.fr/blog/2015-12-10-building-a-directory-map-with-elk/"},{"@type":"ListItem","position":4,"name":"Index Twitter on found","description":"Some months ago, I published a recipe on how to index Twitter with Logstash and Elasticsearch.\nI have the same need today as I want to monitor Twitter when we run the elastic FR meetup (join us by the way if you are in France!).\nWell, this recipe can be really simplified and actually I don\u0026rsquo;t want to waste my time anymore on building and managing elasticsearch and Kibana clusters anymore.\nLet\u0026rsquo;s use a Found by elastic cluster instead.","url":"https://david.pilato.fr/blog/2015-11-17-index-twitter-on-found/"},{"@type":"ListItem","position":5,"name":"Next movie to watch based on recommendation","description":"This article is based on Recommender System with Mahout and Elasticsearch tutorial created by MapR.\nIt now uses the 20M MovieLens dataset which contains: 20 million ratings and 465 000 tag applications applied to 27 000 movies by 138 000 users and was released in 4/2015. The format with this recent version has changed a bit so I needed to adapt the existing scripts to the new format.\nPrerequisites  Download the 20M MovieLens dataset. Unzip it.","url":"https://david.pilato.fr/blog/2015-09-17-next-movie-to-watch-based-on-recommendation/"},{"@type":"ListItem","position":6,"name":"Importing from a database without a database","description":"Recently, I got a database MySQL dump and I was thinking of importing it into elasticsearch.\nThe first idea which pops up was:\n install MySQL import the database read the database with Logstash and import into elasticsearch drop the database uninstall MySQL  Well. I found that some of the steps are really not needed.\nI can actually use ELK stack and create a simple recipe which can be used to import SQL dump scripts without needing to actually load the data to a database and then read it again from the database.","url":"https://david.pilato.fr/blog/2015-09-14-import-from-sql-without-database/"},{"@type":"ListItem","position":7,"name":"Indexing Twitter with Logstash and Elasticsearch","description":"I\u0026rsquo;m often running some demos during conferences where we have a booth. As many others, I\u0026rsquo;m using Twitter feed as my datasource.\nI have been using Twitter river plugin for many years but, you know, rivers have been deprecated.\nLogstash 1.5.0 provides a safer and more flexible way to deal with tweets with its twitter input.\nLet\u0026rsquo;s do it!\nLet\u0026rsquo;s assume that you have already elasticsearch 1.5.2, Logstash 1.5.0 and Kibana 4.0.2 running on your laptop or on a cloud instance.","url":"https://david.pilato.fr/blog/2015-06-01-indexing-twitter-with-logstash-and-elasticsearch/"},{"@type":"ListItem","position":8,"name":"Reindex elasticsearch with Logstash","description":"Sometimes, you would like to reindex your data to change your mapping or to change your index settings or to move from one server to another or to one cluster to another (think about multiple data centers for example).\nFor the later you can use Snapshot and Restore feature but if you need to change any index settings, you need something else.\nWith Logstash 1.5.0, you can now do it super easily using elasticsearch input and elasticsearch output.","url":"https://david.pilato.fr/blog/2015-05-20-reindex-elasticsearch-with-logstash/"},{"@type":"ListItem","position":9,"name":"Using JS Auth with found cluster","description":"Using Found by elastic cluster helps a lot to have a ready to use and managed elasticsearch cluster.\nI started my own cluster yesterday to power brownbaglunch.fr website (work in progress) and it was ready to use after some clicks!\nIt\u0026rsquo;s a kind of magic!\n  But I ran into an issue when you secure it and use the elasticsearch javascript client.\nCreating your cluster  Found Console\n  Adding ACL By default, your cluster is opened but you can fix that by opening \u0026ldquo;Access Control\u0026rdquo; menu.","image":"https://david.pilato.fr/blog/2015-05-19-using-js-auth-with-found-cluster/found_byelastic_logo_512x185.png","url":"https://david.pilato.fr/blog/2015-05-19-using-js-auth-with-found-cluster/"},{"@type":"ListItem","position":10,"name":"Advanced search for your Legacy application","description":"I gave recently a talk at Voxxed Istanbul 2015 and I\u0026rsquo;d like to share here the story of this talk.\nThe talk was about adding a real search engine for your legacy application. Here \u0026ldquo;legacy\u0026rdquo; means an application which is still using SQL statements to execute search requests.\n Our current CRM application can visualize our customers. Each person is represented as a Person bean and have some properties like name, dateOfBirth, children, country, city and some metrics related to the number of clicks each person did on the car or food buttons on our mobile application (center of interests that is).","url":"https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/"},{"@type":"ListItem","position":11,"name":"Devoxx France 2015","description":"I gave recently a talk at Devoxx France 2015 with Colin Surprenant and I\u0026rsquo;d like to share here some of the examples we used for the talk.\nThe talk was about \u0026ldquo;what my data look like?\u0026rdquo;.\n We said that our manager was asking us to answer some questions:\n who are our customers? how do they use our services? what do they think about us on Twitter?  Our CRM database So we have a PostgreSQL database containing our data.","url":"https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/"},{"@type":"ListItem","position":12,"name":"Exploring Capitaine Train dataset","description":"Recently I saw a tweet where Capitaine Train team started to open data they have collected and enriched or corrected.\nOuvrez, ouvrez, les données structurées. Capitaine Train libère les gares : https://t.co/y6DjWsbALF #opendata\n\u0026mdash; Trainline France (@trainline_fr) April 23, 2015  I decided to play a bit with ELK stack and create a simple recipe which can be used with any other CSV like data.\nPrerequisites You will need:\n Logstash: I\u0026rsquo;m using 1.5.0-rc3. Elasticsearch: I\u0026rsquo;m using 1.","url":"https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/"},{"@type":"ListItem","position":13,"name":"Using Log4J2 with Hibernate 4","description":"I was trying to use Hibernate 4.3.8.Final with Log4J2 and I spent some hours to find why Hibernate was not using Log4J2 though it was declared in my pom.xml file.\nActually, I hit issue JBLOGGING-107.\nThe workaround is simply to add a more recent jboss-logging dependency than the one shipped by default with Hibernate 4.3.8.Final.\n\u0026lt;dependency\u0026gt; \u0026lt;groupId\u0026gt;org.jboss.logging\u0026lt;/groupId\u0026gt; \u0026lt;artifactId\u0026gt;jboss-logging\u0026lt;/artifactId\u0026gt; \u0026lt;version\u0026gt;3.2.1.Final\u0026lt;/version\u0026gt; \u0026lt;/dependency\u0026gt;  ","url":"https://david.pilato.fr/blog/2015-03-05-using-log4j2-with-hibernate-4/"},{"@type":"ListItem","position":14,"name":"Once upon a time: Make your dreams come true","description":"Oh wait! Already 2 years spent working for Elasticsearch? Time flies!\nAfter the first year, I wrote that I did 58 talks in 4 countries, 37 towns for about 18 000 kilometers traveled. I was pretty sure that things would continue to grow.\nThis year, I spoke 78 times! Around 2 talks per week! I did around 48 000 kilometers. 8 000 km more than the earth\u0026rsquo;s circumference! I still can\u0026rsquo;t believe it\u0026hellip; 12 countries. And no need to say that I love giving talks and sharing my enthusiasm about Elasticsearch!","url":"https://david.pilato.fr/blog/2015-01-19-once-upon-a-time-make-your-dreams-come-true/"},{"@type":"ListItem","position":15,"name":"Once upon a time: a year later...","description":"I joined Elasticsearch Inc one year ago. Those were pretty exciting days!\nBut now\u0026hellip;\nIt\u0026rsquo;s more than that! Really! You could think that after one year, my motivation would start to decrease. I have the total opposite feeling. Still excited by my job, by the company and by the project, but most of all by the amazing team I\u0026rsquo;m lucky to work with! Everyone is different and each of us adds different value to Elasticsearch. Personally, I learn a lot from my co-workers.","url":"https://david.pilato.fr/blog/2014-01-10-once-upon-a-time-a-year-later-dot-dot-dot/"},{"@type":"ListItem","position":16,"name":"Once upon a time...","description":"Once upon a time\u0026hellip;\n In fact 2 years ago, I was looking for a way to make Hibernate search distributed on multiple nodes. My first idea was to store indexes in a single database shared by my nodes. Yes, it’s a stupid idea in term of performances but I would like to try to build it.\nDigging for source code, I came to the JdbcDirectory class from the compass project. And I saw on the compass front page something talking about the future of Compass and Elasticsearch.","url":"https://david.pilato.fr/blog/2013-01-15-once-upon-a-time-dot-dot-dot/"},{"@type":"ListItem","position":17,"name":"Il était une fois : un conte de fées élastique !","description":"Il était une fois\u0026hellip;\n En fait, il y a 2 ans, je cherchais un moyen pour distribuer Hibernate search sur plusieurs noeuds. Ma première idée était de stocker les index dans une base de données partagée par les différents noeuds. Oui ! Il s\u0026rsquo;agit d\u0026rsquo;une idée stupide en terme de performances, mais j\u0026rsquo;avais envie d\u0026rsquo;essayer et de construire ce modèle.\nAprès avoir cherché du code source, je suis finalement tombé sur la classe JdbcDirectory du projet Compass.","url":"https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/"},{"@type":"ListItem","position":18,"name":"ScrutMyDocs : un moteur de recherche pour documents","description":"Avec Malloum, nous venons de publier notre premier projet open-source commun: Scrut My Docs !\n Technical overview\n  Nos objectifs  Fournir une application web clé en main permettant d’indexer des documents de vos disques locaux. Fournir à la communauté Elasticsearch un modèle de base pour développer votre propre webapp pour une utilisation simple de recherche (« à la google »). Aider les débutants Elasticsearch Java avec des exemples concrets en Java  Les technologies employées  Elasticsearch !","image":"https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/scrutmydocs.png","url":"https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/"},{"@type":"ListItem","position":19,"name":"La factory Spring pour Elasticsearch est sortie !","description":"Et voilà, la première release de la factory spring vient d\u0026rsquo;être faite.\nVous pouvez donc maintenant l\u0026rsquo;utiliser dans vos projets Maven :\n\u0026lt;dependency\u0026gt; \u0026lt;groupId\u0026gt;fr.pilato.spring\u0026lt;/groupId\u0026gt; \u0026lt;artifactId\u0026gt;spring-elasticsearch\u0026lt;/artifactId\u0026gt; \u0026lt;version\u0026gt;0.0.1\u0026lt;/version\u0026gt; \u0026lt;/dependency\u0026gt;  Le code source est disponible sur github.","url":"https://david.pilato.fr/blog/2012-05-25-la-factory-spring-pour-elasticsearch-est-sortie/"},{"@type":"ListItem","position":20,"name":"Protéger son cluster Elasticsearch avec Jetty","description":"Nativement, Elasticsearch expose l\u0026rsquo;ensemble de ses services sans aucune authentification et donc une commande du type curl -XDELETE http://localhost:9200/myindex peut faire de nombreux dégâts non désirés.\nDe plus, si vous développez une application JQuery avec un accès direct depuis le poste client à votre cluster Elasticsearch, le risque qu\u0026rsquo;un utilisateur joue un peu avec votre cluster est grand !\nAlors, pas de panique\u0026hellip; La société Sonian Inc. a open sourcé son plugin Jetty pour Elasticsearch pour notre plus grand bonheur 😉","url":"https://david.pilato.fr/blog/2012-04-10-proteger-son-cluster-elasticsearch-avec-jetty/"}]}</script><meta property="og:title" content="Blog | David Pilato">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"name":"3 years! Time flies!","description":"3 years! Can you imagine that? Already 3 years spent working at elastic? Time flies!\n2015 has been an uncommon year for me.\nNot because Marty Mc Fly and Doc Emmett Brown finally arrived\u0026hellip;\n  Not because, Han Solo, Leia and friends were finally back again\u0026hellip;\n  But for technical and also personal reasons.\nOn a personal side, I had to deal with two major issues which cause some slow down in my professional activities.","image":"https://david.pilato.fr/blog/2016-01-12-3-years-time-flies/featured.jpg","url":"https://david.pilato.fr/blog/2016-01-12-3-years-time-flies/"},{"@type":"ListItem","position":2,"name":"Understanding Zipf's law","description":"I just discovered a nice video which explains the Zipf\u0026rsquo;s law.\n  I\u0026rsquo;m wondering if I can index the french lexique from Université de Savoie and find some funny things based on that\u0026hellip;\nDownload french words wget http://www.lexique.org/listes/liste_mots.txt head -20 liste_mots.txt  What do we have?\nIt\u0026rsquo;s a CSV file (tabulation as separator):\n1_graph 8_frantfreqparm 0 279.84 1 612.10 2 1043.90 3 839.32 4 832.23 5 913.87 6 603.42 7 600.61 8 908.03 9 1427.","image":"https://david.pilato.fr/blog/2016-01-05-understanding-zipfs-law/featured.png","url":"https://david.pilato.fr/blog/2016-01-05-understanding-zipfs-law/"},{"@type":"ListItem","position":3,"name":"Building a directory map with ELK","description":"I gave a BBL talk recently and while chatting with attendees, one of them told me a simple use case he covered with elasticsearch: indexing metadata files on a NAS with a simple ls -lR like command. His need is to be able to search on a NAS for files when a user wants to restore a deleted file.\nAs you can imagine a search engine is super helpful when you have hundreds of millions files!","image":"https://david.pilato.fr/blog/2015-12-10-building-a-directory-map-with-elk/featured.png","url":"https://david.pilato.fr/blog/2015-12-10-building-a-directory-map-with-elk/"},{"@type":"ListItem","position":4,"name":"Index Twitter on found","description":"Some months ago, I published a recipe on how to index Twitter with Logstash and Elasticsearch.\nI have the same need today as I want to monitor Twitter when we run the elastic FR meetup (join us by the way if you are in France!).\nWell, this recipe can be really simplified and actually I don\u0026rsquo;t want to waste my time anymore on building and managing elasticsearch and Kibana clusters anymore.\nLet\u0026rsquo;s use a Found by elastic cluster instead.","image":"https://david.pilato.fr/blog/2015-11-17-index-twitter-on-found/featured.png","url":"https://david.pilato.fr/blog/2015-11-17-index-twitter-on-found/"},{"@type":"ListItem","position":5,"name":"Next movie to watch based on recommendation","description":"This article is based on Recommender System with Mahout and Elasticsearch tutorial created by MapR.\nIt now uses the 20M MovieLens dataset which contains: 20 million ratings and 465 000 tag applications applied to 27 000 movies by 138 000 users and was released in 4/2015. The format with this recent version has changed a bit so I needed to adapt the existing scripts to the new format.\nPrerequisites  Download the 20M MovieLens dataset. Unzip it.","url":"https://david.pilato.fr/blog/2015-09-17-next-movie-to-watch-based-on-recommendation/"},{"@type":"ListItem","position":6,"name":"Importing from a database without a database","description":"Recently, I got a database MySQL dump and I was thinking of importing it into elasticsearch.\nThe first idea which pops up was:\n install MySQL import the database read the database with Logstash and import into elasticsearch drop the database uninstall MySQL  Well. I found that some of the steps are really not needed.\nI can actually use ELK stack and create a simple recipe which can be used to import SQL dump scripts without needing to actually load the data to a database and then read it again from the database.","url":"https://david.pilato.fr/blog/2015-09-14-import-from-sql-without-database/"},{"@type":"ListItem","position":7,"name":"Indexing Twitter with Logstash and Elasticsearch","description":"I\u0026rsquo;m often running some demos during conferences where we have a booth. As many others, I\u0026rsquo;m using Twitter feed as my datasource.\nI have been using Twitter river plugin for many years but, you know, rivers have been deprecated.\nLogstash 1.5.0 provides a safer and more flexible way to deal with tweets with its twitter input.\nLet\u0026rsquo;s do it!\nLet\u0026rsquo;s assume that you have already elasticsearch 1.5.2, Logstash 1.5.0 and Kibana 4.0.2 running on your laptop or on a cloud instance.","image":"https://david.pilato.fr/blog/2015-06-01-indexing-twitter-with-logstash-and-elasticsearch/featured.png","url":"https://david.pilato.fr/blog/2015-06-01-indexing-twitter-with-logstash-and-elasticsearch/"},{"@type":"ListItem","position":8,"name":"Reindex elasticsearch with Logstash","description":"Sometimes, you would like to reindex your data to change your mapping or to change your index settings or to move from one server to another or to one cluster to another (think about multiple data centers for example).\nFor the later you can use Snapshot and Restore feature but if you need to change any index settings, you need something else.\nWith Logstash 1.5.0, you can now do it super easily using elasticsearch input and elasticsearch output.","image":"https://david.pilato.fr/blog/2015-05-20-reindex-elasticsearch-with-logstash/featured.png","url":"https://david.pilato.fr/blog/2015-05-20-reindex-elasticsearch-with-logstash/"},{"@type":"ListItem","position":9,"name":"Using JS Auth with found cluster","description":"Using Found by elastic cluster helps a lot to have a ready to use and managed elasticsearch cluster.\nI started my own cluster yesterday to power brownbaglunch.fr website (work in progress) and it was ready to use after some clicks!\nIt\u0026rsquo;s a kind of magic!\n  But I ran into an issue when you secure it and use the elasticsearch javascript client.\nCreating your cluster  Found Console\n  Adding ACL By default, your cluster is opened but you can fix that by opening \u0026ldquo;Access Control\u0026rdquo; menu.","image":"https://david.pilato.fr/blog/2015-05-19-using-js-auth-with-found-cluster/featured.png","url":"https://david.pilato.fr/blog/2015-05-19-using-js-auth-with-found-cluster/"},{"@type":"ListItem","position":10,"name":"Advanced search for your Legacy application","description":"I gave recently a talk at Voxxed Istanbul 2015 and I\u0026rsquo;d like to share here the story of this talk.\nThe talk was about adding a real search engine for your legacy application. Here \u0026ldquo;legacy\u0026rdquo; means an application which is still using SQL statements to execute search requests.\n Our current CRM application can visualize our customers. Each person is represented as a Person bean and have some properties like name, dateOfBirth, children, country, city and some metrics related to the number of clicks each person did on the car or food buttons on our mobile application (center of interests that is).","image":"https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/featured.png","url":"https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/"},{"@type":"ListItem","position":11,"name":"Devoxx France 2015","description":"I gave recently a talk at Devoxx France 2015 with Colin Surprenant and I\u0026rsquo;d like to share here some of the examples we used for the talk.\nThe talk was about \u0026ldquo;what my data look like?\u0026rdquo;.\n We said that our manager was asking us to answer some questions:\n who are our customers? how do they use our services? what do they think about us on Twitter?  Our CRM database So we have a PostgreSQL database containing our data.","image":"https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/featured.png","url":"https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/"},{"@type":"ListItem","position":12,"name":"Exploring Capitaine Train dataset","description":"Recently I saw a tweet where Capitaine Train team started to open data they have collected and enriched or corrected.\nOuvrez, ouvrez, les données structurées. Capitaine Train libère les gares : https://t.co/y6DjWsbALF #opendata\n\u0026mdash; Trainline France (@trainline_fr) April 23, 2015  I decided to play a bit with ELK stack and create a simple recipe which can be used with any other CSV like data.\nPrerequisites You will need:\n Logstash: I\u0026rsquo;m using 1.5.0-rc3. Elasticsearch: I\u0026rsquo;m using 1.","image":"https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/featured.png","url":"https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/"},{"@type":"ListItem","position":13,"name":"Using Log4J2 with Hibernate 4","description":"I was trying to use Hibernate 4.3.8.Final with Log4J2 and I spent some hours to find why Hibernate was not using Log4J2 though it was declared in my pom.xml file.\nActually, I hit issue JBLOGGING-107.\nThe workaround is simply to add a more recent jboss-logging dependency than the one shipped by default with Hibernate 4.3.8.Final.\n\u0026lt;dependency\u0026gt; \u0026lt;groupId\u0026gt;org.jboss.logging\u0026lt;/groupId\u0026gt; \u0026lt;artifactId\u0026gt;jboss-logging\u0026lt;/artifactId\u0026gt; \u0026lt;version\u0026gt;3.2.1.Final\u0026lt;/version\u0026gt; \u0026lt;/dependency\u0026gt;  ","url":"https://david.pilato.fr/blog/2015-03-05-using-log4j2-with-hibernate-4/"},{"@type":"ListItem","position":14,"name":"Once upon a time: Make your dreams come true","description":"Oh wait! Already 2 years spent working for Elasticsearch? Time flies!\nAfter the first year, I wrote that I did 58 talks in 4 countries, 37 towns for about 18 000 kilometers traveled. I was pretty sure that things would continue to grow.\nThis year, I spoke 78 times! Around 2 talks per week! I did around 48 000 kilometers. 8 000 km more than the earth\u0026rsquo;s circumference! I still can\u0026rsquo;t believe it\u0026hellip; 12 countries. And no need to say that I love giving talks and sharing my enthusiasm about Elasticsearch!","image":"https://david.pilato.fr/blog/2015-01-19-once-upon-a-time-make-your-dreams-come-true/featured.jpg","url":"https://david.pilato.fr/blog/2015-01-19-once-upon-a-time-make-your-dreams-come-true/"},{"@type":"ListItem","position":15,"name":"Once upon a time: a year later...","description":"I joined Elasticsearch Inc one year ago. Those were pretty exciting days!\nBut now\u0026hellip;\nIt\u0026rsquo;s more than that! Really! You could think that after one year, my motivation would start to decrease. I have the total opposite feeling. Still excited by my job, by the company and by the project, but most of all by the amazing team I\u0026rsquo;m lucky to work with! Everyone is different and each of us adds different value to Elasticsearch. Personally, I learn a lot from my co-workers.","image":"https://david.pilato.fr/blog/2014-01-10-once-upon-a-time-a-year-later-dot-dot-dot/featured.jpg","url":"https://david.pilato.fr/blog/2014-01-10-once-upon-a-time-a-year-later-dot-dot-dot/"},{"@type":"ListItem","position":16,"name":"Once upon a time...","description":"Once upon a time\u0026hellip;\n In fact 2 years ago, I was looking for a way to make Hibernate search distributed on multiple nodes. My first idea was to store indexes in a single database shared by my nodes. Yes, it’s a stupid idea in term of performances but I would like to try to build it.\nDigging for source code, I came to the JdbcDirectory class from the compass project. And I saw on the compass front page something talking about the future of Compass and Elasticsearch.","image":"https://david.pilato.fr/blog/2013-01-15-once-upon-a-time-dot-dot-dot/featured.png","url":"https://david.pilato.fr/blog/2013-01-15-once-upon-a-time-dot-dot-dot/"},{"@type":"ListItem","position":17,"name":"Il était une fois : un conte de fées élastique !","description":"Il était une fois\u0026hellip;\n En fait, il y a 2 ans, je cherchais un moyen pour distribuer Hibernate search sur plusieurs noeuds. Ma première idée était de stocker les index dans une base de données partagée par les différents noeuds. Oui ! Il s\u0026rsquo;agit d\u0026rsquo;une idée stupide en terme de performances, mais j\u0026rsquo;avais envie d\u0026rsquo;essayer et de construire ce modèle.\nAprès avoir cherché du code source, je suis finalement tombé sur la classe JdbcDirectory du projet Compass.","image":"https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/featured.png","url":"https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/"},{"@type":"ListItem","position":18,"name":"ScrutMyDocs : un moteur de recherche pour documents","description":"Avec Malloum, nous venons de publier notre premier projet open-source commun: Scrut My Docs !\n Technical overview\n  Nos objectifs  Fournir une application web clé en main permettant d’indexer des documents de vos disques locaux. Fournir à la communauté Elasticsearch un modèle de base pour développer votre propre webapp pour une utilisation simple de recherche (« à la google »). Aider les débutants Elasticsearch Java avec des exemples concrets en Java  Les technologies employées  Elasticsearch !","image":"https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/scrutmydocs.png","url":"https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/"},{"@type":"ListItem","position":19,"name":"La factory Spring pour Elasticsearch est sortie !","description":"Et voilà, la première release de la factory spring vient d\u0026rsquo;être faite.\nVous pouvez donc maintenant l\u0026rsquo;utiliser dans vos projets Maven :\n\u0026lt;dependency\u0026gt; \u0026lt;groupId\u0026gt;fr.pilato.spring\u0026lt;/groupId\u0026gt; \u0026lt;artifactId\u0026gt;spring-elasticsearch\u0026lt;/artifactId\u0026gt; \u0026lt;version\u0026gt;0.0.1\u0026lt;/version\u0026gt; \u0026lt;/dependency\u0026gt;  Le code source est disponible sur github.","url":"https://david.pilato.fr/blog/2012-05-25-la-factory-spring-pour-elasticsearch-est-sortie/"},{"@type":"ListItem","position":20,"name":"Protéger son cluster Elasticsearch avec Jetty","description":"Nativement, Elasticsearch expose l\u0026rsquo;ensemble de ses services sans aucune authentification et donc une commande du type curl -XDELETE http://localhost:9200/myindex peut faire de nombreux dégâts non désirés.\nDe plus, si vous développez une application JQuery avec un accès direct depuis le poste client à votre cluster Elasticsearch, le risque qu\u0026rsquo;un utilisateur joue un peu avec votre cluster est grand !\nAlors, pas de panique\u0026hellip; La société Sonian Inc. a open sourcé son plugin Jetty pour Elasticsearch pour notre plus grand bonheur 😉","url":"https://david.pilato.fr/blog/2012-04-10-proteger-son-cluster-elasticsearch-avec-jetty/"}]}</script><meta property="og:title" content="Blog | David Pilato">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://david.pilato.fr/blog/">
 <meta property="og:description" content="Developer | Evangelist">
@@ -73,7 +73,7 @@
 <div class="overflow-hidden divide-y">
 <div class=py-6>
 <div class="flex flex-col-reverse lg:flex-row justify-between">
-<div class=w-full>
+<div class="w-full lg:w-2/3">
 <div class=mb-4>
 <a href=https://david.pilato.fr/blog/2016-01-12-3-years-time-flies/ class="font-bold text-xl hover:text-eureka">3 years! Time flies!</a>
 </div>
@@ -104,11 +104,14 @@ On a personal side, I had to deal with two major issues which cause some slow do
 </div>
 </div>
 </div>
+<div class="w-full lg:w-1/3 mb-4 lg:mb-0 lg:ml-8">
+<img src=https://david.pilato.fr/blog/2016-01-12-3-years-time-flies/featured.jpg class=w-full alt="Featured Image">
+</div>
 </div>
 </div>
 <div class=py-6>
 <div class="flex flex-col-reverse lg:flex-row justify-between">
-<div class=w-full>
+<div class="w-full lg:w-2/3">
 <div class=mb-4>
 <a href=https://david.pilato.fr/blog/2016-01-05-understanding-zipfs-law/ class="font-bold text-xl hover:text-eureka">Understanding Zipf's law</a>
 </div>
@@ -134,11 +137,14 @@ It’s a CSV file (tabulation as separator):
 </div>
 </div>
 </div>
+<div class="w-full lg:w-1/3 mb-4 lg:mb-0 lg:ml-8">
+<img src=https://david.pilato.fr/blog/2016-01-05-understanding-zipfs-law/featured.png class=w-full alt="Featured Image">
+</div>
 </div>
 </div>
 <div class=py-6>
 <div class="flex flex-col-reverse lg:flex-row justify-between">
-<div class=w-full>
+<div class="w-full lg:w-2/3">
 <div class=mb-4>
 <a href=https://david.pilato.fr/blog/2015-12-10-building-a-directory-map-with-elk/ class="font-bold text-xl hover:text-eureka">Building a directory map with ELK</a>
 </div>
@@ -161,11 +167,14 @@ As you can imagine a search engine is super helpful when you have hundreds of mi
 </div>
 </div>
 </div>
+<div class="w-full lg:w-1/3 mb-4 lg:mb-0 lg:ml-8">
+<img src=https://david.pilato.fr/blog/2015-12-10-building-a-directory-map-with-elk/featured.png class=w-full alt="Featured Image">
+</div>
 </div>
 </div>
 <div class=py-6>
 <div class="flex flex-col-reverse lg:flex-row justify-between">
-<div class=w-full>
+<div class="w-full lg:w-2/3">
 <div class=mb-4>
 <a href=https://david.pilato.fr/blog/2015-11-17-index-twitter-on-found/ class="font-bold text-xl hover:text-eureka">Index Twitter on found</a>
 </div>
@@ -193,6 +202,9 @@ Let’s use a Found by elastic cluster instead.
 <a href=https://david.pilato.fr/series/indexing-twitter/ class=hover:text-eureka>indexing twitter</a>
 </div>
 </div>
+</div>
+<div class="w-full lg:w-1/3 mb-4 lg:mb-0 lg:ml-8">
+<img src=https://david.pilato.fr/blog/2015-11-17-index-twitter-on-found/featured.png class=w-full alt="Featured Image">
 </div>
 </div>
 </div>
@@ -255,7 +267,7 @@ I can actually use ELK stack and create a simple recipe which can be used to imp
 </div>
 <div class=py-6>
 <div class="flex flex-col-reverse lg:flex-row justify-between">
-<div class=w-full>
+<div class="w-full lg:w-2/3">
 <div class=mb-4>
 <a href=https://david.pilato.fr/blog/2015-06-01-indexing-twitter-with-logstash-and-elasticsearch/ class="font-bold text-xl hover:text-eureka">Indexing Twitter with Logstash and Elasticsearch</a>
 </div>
@@ -285,11 +297,14 @@ Let’s assume that you have already elasticsearch 1.5.2, Logstash 1.5.0 and Kib
 </div>
 </div>
 </div>
+<div class="w-full lg:w-1/3 mb-4 lg:mb-0 lg:ml-8">
+<img src=https://david.pilato.fr/blog/2015-06-01-indexing-twitter-with-logstash-and-elasticsearch/featured.png class=w-full alt="Featured Image">
+</div>
 </div>
 </div>
 <div class=py-6>
 <div class="flex flex-col-reverse lg:flex-row justify-between">
-<div class=w-full>
+<div class="w-full lg:w-2/3">
 <div class=mb-4>
 <a href=https://david.pilato.fr/blog/2015-05-20-reindex-elasticsearch-with-logstash/ class="font-bold text-xl hover:text-eureka">Reindex elasticsearch with Logstash</a>
 </div>
@@ -312,6 +327,9 @@ With Logstash 1.5.0, you can now do it super easily using elasticsearch input an
 <a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
 </div>
 </div>
+</div>
+<div class="w-full lg:w-1/3 mb-4 lg:mb-0 lg:ml-8">
+<img src=https://david.pilato.fr/blog/2015-05-20-reindex-elasticsearch-with-logstash/featured.png class=w-full alt="Featured Image">
 </div>
 </div>
 </div>
@@ -345,13 +363,13 @@ Adding ACL By default, your cluster is opened but you can fix that by opening �
 </div>
 </div>
 <div class="w-full lg:w-1/3 mb-4 lg:mb-0 lg:ml-8">
-<img src=https://david.pilato.fr/blog/2015-05-19-using-js-auth-with-found-cluster/found_byelastic_logo_512x185.png class=w-full alt="Featured Image">
+<img src=https://david.pilato.fr/blog/2015-05-19-using-js-auth-with-found-cluster/featured.png class=w-full alt="Featured Image">
 </div>
 </div>
 </div>
 <div class=py-6>
 <div class="flex flex-col-reverse lg:flex-row justify-between">
-<div class=w-full>
+<div class="w-full lg:w-2/3">
 <div class=mb-4>
 <a href=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/ class="font-bold text-xl hover:text-eureka">Advanced search for your Legacy application</a>
 </div>
@@ -375,11 +393,14 @@ Our current CRM application can visualize our customers. Each person is represen
 </div>
 </div>
 </div>
+<div class="w-full lg:w-1/3 mb-4 lg:mb-0 lg:ml-8">
+<img src=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/featured.png class=w-full alt="Featured Image">
+</div>
 </div>
 </div>
 <div class=py-6>
 <div class="flex flex-col-reverse lg:flex-row justify-between">
-<div class=w-full>
+<div class="w-full lg:w-2/3">
 <div class=mb-4>
 <a href=https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/ class="font-bold text-xl hover:text-eureka">Devoxx France 2015</a>
 </div>
@@ -404,11 +425,14 @@ who are our customers? how do they use our services? what do they think about us
 </div>
 </div>
 </div>
+<div class="w-full lg:w-1/3 mb-4 lg:mb-0 lg:ml-8">
+<img src=https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/featured.png class=w-full alt="Featured Image">
+</div>
 </div>
 </div>
 <div class=py-6>
 <div class="flex flex-col-reverse lg:flex-row justify-between">
-<div class=w-full>
+<div class="w-full lg:w-2/3">
 <div class=mb-4>
 <a href=https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/ class="font-bold text-xl hover:text-eureka">Exploring Capitaine Train dataset</a>
 </div>
@@ -433,6 +457,9 @@ Logstash: I’m using 1.5.0-rc3. Elasticsearch: I’m using 1.
 <a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
 </div>
 </div>
+</div>
+<div class="w-full lg:w-1/3 mb-4 lg:mb-0 lg:ml-8">
+<img src=https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/featured.png class=w-full alt="Featured Image">
 </div>
 </div>
 </div>
@@ -467,7 +494,7 @@ The workaround is simply to add a more recent jboss-logging dependency than the 
 </div>
 <div class=py-6>
 <div class="flex flex-col-reverse lg:flex-row justify-between">
-<div class=w-full>
+<div class="w-full lg:w-2/3">
 <div class=mb-4>
 <a href=https://david.pilato.fr/blog/2015-01-19-once-upon-a-time-make-your-dreams-come-true/ class="font-bold text-xl hover:text-eureka">Once upon a time: Make your dreams come true</a>
 </div>
@@ -495,11 +522,14 @@ This year, I spoke 78 times! Around 2 talks per week! I did around 48 000 kilome
 </div>
 </div>
 </div>
+<div class="w-full lg:w-1/3 mb-4 lg:mb-0 lg:ml-8">
+<img src=https://david.pilato.fr/blog/2015-01-19-once-upon-a-time-make-your-dreams-come-true/featured.jpg class=w-full alt="Featured Image">
+</div>
 </div>
 </div>
 <div class=py-6>
 <div class="flex flex-col-reverse lg:flex-row justify-between">
-<div class=w-full>
+<div class="w-full lg:w-2/3">
 <div class=mb-4>
 <a href=https://david.pilato.fr/blog/2014-01-10-once-upon-a-time-a-year-later-dot-dot-dot/ class="font-bold text-xl hover:text-eureka">Once upon a time: a year later...</a>
 </div>
@@ -527,11 +557,14 @@ It’s more than that! Really! You could think that after one year, my motivatio
 </div>
 </div>
 </div>
+<div class="w-full lg:w-1/3 mb-4 lg:mb-0 lg:ml-8">
+<img src=https://david.pilato.fr/blog/2014-01-10-once-upon-a-time-a-year-later-dot-dot-dot/featured.jpg class=w-full alt="Featured Image">
+</div>
 </div>
 </div>
 <div class=py-6>
 <div class="flex flex-col-reverse lg:flex-row justify-between">
-<div class=w-full>
+<div class="w-full lg:w-2/3">
 <div class=mb-4>
 <a href=https://david.pilato.fr/blog/2013-01-15-once-upon-a-time-dot-dot-dot/ class="font-bold text-xl hover:text-eureka">Once upon a time...</a>
 </div>
@@ -559,11 +592,14 @@ Digging for source code, I came to the JdbcDirectory class from the compass proj
 </div>
 </div>
 </div>
+<div class="w-full lg:w-1/3 mb-4 lg:mb-0 lg:ml-8">
+<img src=https://david.pilato.fr/blog/2013-01-15-once-upon-a-time-dot-dot-dot/featured.png class=w-full alt="Featured Image">
+</div>
 </div>
 </div>
 <div class=py-6>
 <div class="flex flex-col-reverse lg:flex-row justify-between">
-<div class=w-full>
+<div class="w-full lg:w-2/3">
 <div class=mb-4>
 <a href=https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/ class="font-bold text-xl hover:text-eureka">Il était une fois : un conte de fées élastique !</a>
 </div>
@@ -590,6 +626,9 @@ Après avoir cherché du code source, je suis finalement tombé sur la classe J
 <a href=https://david.pilato.fr/series/career-at-elastic/ class=hover:text-eureka>career at elastic</a>
 </div>
 </div>
+</div>
+<div class="w-full lg:w-1/3 mb-4 lg:mb-0 lg:ml-8">
+<img src=https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/featured.png class=w-full alt="Featured Image">
 </div>
 </div>
 </div>
