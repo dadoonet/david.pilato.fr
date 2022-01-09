@@ -1,0 +1,850 @@
+<!doctype html><html lang=en><meta charset=utf-8>
+<meta name=viewport content="width=device-width">
+<title>Enriching your postal addresses with Elastic stack - part 2 | David Pilato</title>
+<meta name=generator content="Hugo Eureka 0.8.4">
+<link rel=stylesheet href=https://david.pilato.fr/css/eureka.min.css>
+<script defer src=https://david.pilato.fr/js/eureka.min.js></script>
+<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+<link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload="this.onload=null,this.rel='stylesheet'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css media=print onload="this.media='all',this.onload=null" crossorigin>
+<script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js integrity="sha256-uNYoXefWRqv+PsIF/OflNmwtKM4lStn9yrz2gVl6ymo=" crossorigin></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X media=print onload="this.media='all',this.onload=null" crossorigin>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script>
+<script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js integrity="sha256-Zmpaaj+GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE=" crossorigin></script>
+<meta name=description content="This blog post is part of a series of 3:
+ Importing Bano dataset with Logstash Using Logstash to lookup for addresses in Bano index Using Logstash to enrich an existing dataset with Bano  In the previous post, we described how we indexed data coming from the BANO project so we now have indices containing all the french postal addresses.
+Let&rsquo;s see what we can do now with this dataset.
+Searching for addresses Good. Can we use a search engine to search?">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog","item":"https://david.pilato.fr/blog/"},{"@type":"ListItem","position":2,"name":"Enriching your postal addresses with Elastic stack - part 2","item":"https://david.pilato.fr/blog/2018-03-23-enriching-your-postal-addresses-with-elastic-stack-part-2/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://david.pilato.fr/blog/2018-03-23-enriching-your-postal-addresses-with-elastic-stack-part-2/"},"headline":"Enriching your postal addresses with Elastic stack - part 2 | David Pilato","datePublished":"2018-03-23T10:20:28+02:00","dateModified":"2018-03-23T10:20:28+02:00","wordCount":2384,"author":{"@type":"Person","name":["David Pilato"]},"publisher":{"@type":"Person","name":"David Pilato"},"description":"This blog post is part of a series of 3:\n Importing Bano dataset with Logstash Using Logstash to lookup for addresses in Bano index Using Logstash to enrich an existing dataset with Bano  In the previous post, we described how we indexed data coming from the BANO project so we now have indices containing all the french postal addresses.\nLet\u0026rsquo;s see what we can do now with this dataset.\nSearching for addresses Good. Can we use a search engine to search?"}</script><meta property="og:title" content="Enriching your postal addresses with Elastic stack - part 2 | David Pilato">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://david.pilato.fr/blog/2018-03-23-enriching-your-postal-addresses-with-elastic-stack-part-2/">
+<meta property="og:description" content="This blog post is part of a series of 3:
+ Importing Bano dataset with Logstash Using Logstash to lookup for addresses in Bano index Using Logstash to enrich an existing dataset with Bano  In the previous post, we described how we indexed data coming from the BANO project so we now have indices containing all the french postal addresses.
+Let&rsquo;s see what we can do now with this dataset.
+Searching for addresses Good. Can we use a search engine to search?">
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="David Pilato">
+<meta property="article:published_time" content="2018-03-23T10:20:28+02:00">
+<meta property="article:modified_time" content="2018-03-23T10:20:28+02:00">
+<meta property="article:section" content="blog">
+<meta property="article:tag" content="logstash">
+<meta property="article:tag" content="elasticsearch">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2018-03-24-enriching-your-postal-addresses-with-elastic-stack-part-3/">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2018-03-22-enriching-your-postal-addresses-with-elastic-stack-part-1/">
+<body class="flex flex-col min-h-screen">
+<header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+<div class="w-full max-w-screen-xl mx-auto"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=='Auto'||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName('html')[0].classList.add('dark')</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+<a href=/ class="mr-6 text-primary-text text-xl font-bold">David Pilato</a>
+<button id=navbar-btn class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+<i class="fas fa-bars"></i>
+</button>
+<div id=target class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+<div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+<a href=/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Home</a>
+<a href=/blog/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Blog</a>
+<a href=https://djdadoo.pilato.fr/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">DJ Mixes</a>
+<a href=/authors/david-pilato/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">About me</a>
+</div>
+<div class=flex>
+<div class="relative pt-4 md:pt-0">
+<div class="cursor-pointer hover:text-eureka" id=lightDarkMode>
+<i class="fas fa-adjust"></i>
+</div>
+<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open>
+</div>
+<div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions>
+<span class="px-4 py-1 hover:text-eureka" name=Light>Light</span>
+<span class="px-4 py-1 hover:text-eureka" name=Dark>Dark</span>
+<span class="px-4 py-1 hover:text-eureka" name=Auto>Auto</span>
+</div>
+</div>
+</div>
+</div>
+<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile>
+</div>
+</nav>
+<script>let element=document.getElementById('lightDarkMode');storageColorScheme==null||storageColorScheme=='Auto'?document.addEventListener('DOMContentLoaded',()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change',switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'sun'),element.firstElementChild.classList.add('fa-sun')):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'moon'),element.firstElementChild.classList.add('fa-moon')),document.addEventListener('DOMContentLoaded',()=>{getcolorscheme(),switchBurger()})</script>
+</div>
+</header>
+<main class="flex-grow pt-16">
+<div class=pl-scrollbar>
+<div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+<div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+<h1 class="font-bold text-3xl text-primary-text">Enriching your postal addresses with Elastic stack - part 2</h1>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2018-03-23</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>12 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-th-list mr-1"></i>
+<a href=https://david.pilato.fr/series/bano/ class=hover:text-eureka>bano</a>
+</div>
+</div>
+<div class=content>
+<p>This blog post is part of a series of 3:</p>
+<ul>
+<li><a href=https://david.pilato.fr/blog/2018-03-22-enriching-your-postal-addresses-with-elastic-stack-part-1/>Importing Bano dataset with Logstash</a></li>
+<li><a href=https://david.pilato.fr/blog/2018-03-23-enriching-your-postal-addresses-with-elastic-stack-part-2/>Using Logstash to lookup for addresses in Bano index</a></li>
+<li><a href=https://david.pilato.fr/blog/2018-03-24-enriching-your-postal-addresses-with-elastic-stack-part-3/>Using Logstash to enrich an existing dataset with Bano</a></li>
+</ul>
+<p>In the <a href=https://david.pilato.fr/blog/2018-03-22-enriching-your-postal-addresses-with-elastic-stack-part-1/>previous post</a>, we described how we indexed data coming from the <a href=http://openstreetmap.fr/bano>BANO project</a> so we now have indices containing all the french postal addresses.</p>
+<p>Let&rsquo;s see what we can do now with this dataset.</p>
+<h2 id=searching-for-addresses>Searching for addresses</h2>
+<p>Good. Can we use a search engine to search?</p>
+<pre><code class=language-json>GET .bano/_search?search_type=dfs_query_then_fetch
+{
+  &quot;size&quot;: 1,
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;should&quot;: [
+        {
+          &quot;match&quot;: {
+            &quot;address.number&quot;: &quot;23&quot;
+          }
+        },
+        {
+          &quot;match&quot;: {
+            &quot;address.street_name&quot;: &quot;r verdiere&quot;
+          }
+        },
+        {
+          &quot;match&quot;: {
+            &quot;address.city&quot;: &quot;rochelle&quot;
+          }
+        }
+
+      ]
+    }
+  }
+}
+</code></pre>
+<p>This gives us back:</p>
+<pre><code class=language-json>{
+  &quot;took&quot;: 170,
+  &quot;timed_out&quot;: false,
+  &quot;_shards&quot;: {
+    &quot;total&quot;: 99,
+    &quot;successful&quot;: 99,
+    &quot;skipped&quot;: 0,
+    &quot;failed&quot;: 0
+  },
+  &quot;hits&quot;: {
+    &quot;total&quot;: 10380977,
+    &quot;max_score&quot;: 23.681055,
+    &quot;hits&quot;: [
+      {
+        &quot;_index&quot;: &quot;.bano-17&quot;,
+        &quot;_type&quot;: &quot;doc&quot;,
+        &quot;_id&quot;: &quot;173008250H-23&quot;,
+        &quot;_score&quot;: 23.681055,
+        &quot;_source&quot;: {
+          &quot;address&quot;: {
+            &quot;zipcode&quot;: &quot;17000&quot;,
+            &quot;number&quot;: &quot;23&quot;,
+            &quot;city&quot;: &quot;La Rochelle&quot;,
+            &quot;street_name&quot;: &quot;Rue Verdière&quot;
+          },
+          &quot;location&quot;: {
+            &quot;lon&quot;: -1.155167,
+            &quot;lat&quot;: 46.157353
+          },
+          &quot;id&quot;: &quot;173008250H-23&quot;,
+          &quot;source&quot;: &quot;C+O&quot;,
+          &quot;region&quot;: &quot;17&quot;
+        }
+      }
+    ]
+  }
+}
+</code></pre>
+<p>This takes <code>170ms</code> on my machine but it can be faster if we know in advance the department number. So we can optimize the number of shards to hit:</p>
+<pre><code class=language-json>GET .bano-17/_search?search_type=dfs_query_then_fetch
+{
+  // Same query
+}
+</code></pre>
+<p>It now gives the same result but much faster:</p>
+<pre><code class=language-json>{
+  &quot;took&quot;: 6,
+  &quot;timed_out&quot;: false,
+  &quot;_shards&quot;: {
+    &quot;total&quot;: 1,
+    &quot;successful&quot;: 1,
+    &quot;skipped&quot;: 0,
+    &quot;failed&quot;: 0
+  },
+  &quot;hits&quot;: {
+    &quot;total&quot;: 212872,
+    &quot;max_score&quot;: 18.955963,
+    &quot;hits&quot;: [
+      {
+        &quot;_index&quot;: &quot;.bano-17&quot;,
+        &quot;_type&quot;: &quot;doc&quot;,
+        &quot;_id&quot;: &quot;173008250H-23&quot;,
+        &quot;_score&quot;: 18.955963,
+        &quot;_source&quot;: {
+          &quot;address&quot;: {
+            &quot;zipcode&quot;: &quot;17000&quot;,
+            &quot;number&quot;: &quot;23&quot;,
+            &quot;city&quot;: &quot;La Rochelle&quot;,
+            &quot;street_name&quot;: &quot;Rue Verdière&quot;
+          },
+          &quot;location&quot;: {
+            &quot;lon&quot;: -1.155167,
+            &quot;lat&quot;: 46.157353
+          },
+          &quot;id&quot;: &quot;173008250H-23&quot;,
+          &quot;source&quot;: &quot;C+O&quot;,
+          &quot;region&quot;: &quot;17&quot;
+        }
+      }
+    ]
+  }
+}
+</code></pre>
+<p>Note that this query is finding <code>212.872</code> addresses but the most relevant one is the one we are searching for. Yeah, relevancy is one of the key points of a search engine.</p>
+<h3 id=searching-by-geo-point>Searching by geo point</h3>
+<p>We know that we can also have to search by a geo point.</p>
+<p>Let&rsquo;s do a naive approach first. We search for all the points in the dataset but we want to sort by distance from the point we have as an input. Which means that the first point we are getting back is the closest address:</p>
+<pre><code class=language-json>GET .bano/_search
+{
+  &quot;size&quot;: 1, 
+  &quot;sort&quot;: [
+    {
+      &quot;_geo_distance&quot;: {
+        &quot;location&quot;: {
+          &quot;lat&quot;: 46.15735,
+          &quot;lon&quot;: -1.1551
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+<p>This gives:</p>
+<pre><code class=language-json>{
+  &quot;took&quot;: 403,
+  &quot;timed_out&quot;: false,
+  &quot;_shards&quot;: {
+    &quot;total&quot;: 99,
+    &quot;successful&quot;: 99,
+    &quot;skipped&quot;: 0,
+    &quot;failed&quot;: 0
+  },
+  &quot;hits&quot;: {
+    &quot;total&quot;: 16402853,
+    &quot;max_score&quot;: null,
+    &quot;hits&quot;: [
+      {
+        &quot;_index&quot;: &quot;.bano-17&quot;,
+        &quot;_type&quot;: &quot;doc&quot;,
+        &quot;_id&quot;: &quot;173008250H-23&quot;,
+        &quot;_score&quot;: null,
+        &quot;_source&quot;: {
+          &quot;address&quot;: {
+            &quot;zipcode&quot;: &quot;17000&quot;,
+            &quot;number&quot;: &quot;23&quot;,
+            &quot;city&quot;: &quot;La Rochelle&quot;,
+            &quot;street_name&quot;: &quot;Rue Verdière&quot;
+          },
+          &quot;location&quot;: {
+            &quot;lon&quot;: -1.155167,
+            &quot;lat&quot;: 46.157353
+          },
+          &quot;id&quot;: &quot;173008250H-23&quot;,
+          &quot;source&quot;: &quot;C+O&quot;,
+          &quot;region&quot;: &quot;17&quot;
+        },
+        &quot;sort&quot;: [
+          5.176690615711886
+        ]
+      }
+    ]
+  }
+}
+</code></pre>
+<p>Few things to note here. First, we asked for:</p>
+<pre><code class=language-json>{
+  &quot;lat&quot;: 46.15735,
+  &quot;lon&quot;: -1.1551  
+}
+</code></pre>
+<p>We are getting back another point. Of course, Bano does not have every single centimer but just addresses:</p>
+<pre><code class=language-json>{
+  &quot;lat&quot;: 46.157353,
+  &quot;lon&quot;: -1.155167
+}
+</code></pre>
+<p>Second thing, the total number of hits we are doing the sort on: <code>16.402.853</code>, the full dataset that is. Which has a consequence on the response time: <code>403ms</code>.</p>
+<p>We can easily assume that when we are looking for an address, we will most likely be able to find one in an area of may be 2 kilometers around the point. So instead of sorting all the points, we can just filter first by distance the dataset:</p>
+<pre><code class=language-json>GET .bano/_search
+{
+  &quot;size&quot;: 1,
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;filter&quot;: {
+        &quot;geo_distance&quot;: {
+          &quot;distance&quot;: &quot;1km&quot;,
+          &quot;location&quot;: {
+            &quot;lat&quot;: 46.15735,
+            &quot;lon&quot;: -1.1551
+          }
+        }
+      }
+    }
+  },
+  &quot;sort&quot;: [
+    {
+      &quot;_geo_distance&quot;: {
+        &quot;location&quot;: {
+          &quot;lat&quot;: 46.15735,
+          &quot;lon&quot;: -1.1551
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+<p>This gives back the same point but with a different header:</p>
+<pre><code class=language-json>{
+  &quot;took&quot;: 45,
+  &quot;timed_out&quot;: false,
+  &quot;_shards&quot;: {
+    &quot;total&quot;: 99,
+    &quot;successful&quot;: 99,
+    &quot;skipped&quot;: 0,
+    &quot;failed&quot;: 0
+  },
+  &quot;hits&quot;: {
+    &quot;total&quot;: 4467,
+    &quot;max_score&quot;: null,
+    &quot;hits&quot;: [ /* ... */ ]
+  }
+}
+</code></pre>
+<p><code>45ms</code> because we dramatically reduced the number of points to sort to <code>4.467</code>.</p>
+<p>And if we know the department, that can be even better:</p>
+<pre><code class=language-json>GET .bano-17/_search
+{
+  // Same query
+}
+</code></pre>
+<p>We now have a really decent response time. Note that filesystem cache plays a great role here as well:</p>
+<pre><code class=language-json>{
+  &quot;took&quot;: 2,
+  &quot;timed_out&quot;: false,
+  &quot;_shards&quot;: {
+    &quot;total&quot;: 1,
+    &quot;successful&quot;: 1,
+    &quot;skipped&quot;: 0,
+    &quot;failed&quot;: 0
+  }
+}
+</code></pre>
+<p>So we know how to query the data.
+Let&rsquo;s use all that to read an existing dataset and enrich it with Logstash.</p>
+<h2 id=building-incrementally-a-logstash-enrichment-pipeline>Building incrementally a Logstash enrichment pipeline</h2>
+<p>If you have been following this blog, I&rsquo;m always starting with a default pipeline like this (<code>bano-enrich.conf</code> file):</p>
+<pre><code class=language-ruby>input { 
+  stdin { } 
+}
+
+filter {
+}
+
+output {
+  stdout { codec =&gt; rubydebug }
+}
+</code></pre>
+<p>It&rsquo;s simple to use as you just the run:</p>
+<pre><code class=language-sh>head -1 mydata | bin/logstash -f bano-enrich.conf
+</code></pre>
+<p>So far so good. But what is the problem?</p>
+<p>Anytime you change your configuration and you want to test it, you need to send the same command line again. Which is not an issue. Your terminal has probably an history :).</p>
+<p>The problem is the time taken by Logstash to start the process (the JVM and Logstash initialization itself). On my laptop, it can take around 20 seconds.</p>
+<p>And this is not super developer friendly in my opinion.</p>
+<p>Let me share a small trick to make that better. Use the <code>http-input-plugin</code> instead:</p>
+<pre><code class=language-ruby>input {
+  http { }
+}
+</code></pre>
+<p>This will start an HTTP server running on 8080 port which you can use by running something like:</p>
+<pre><code class=language-sh>curl -XPOST &quot;localhost:8080&quot; -H &quot;Content-Type: application/json&quot; -d '{
+  &quot;test_case&quot;: &quot;Address with text&quot;,
+  &quot;name&quot;: &quot;Joe Smith&quot;,
+  &quot;address&quot;: {
+    &quot;number&quot;: &quot;23&quot;,
+    &quot;street_name&quot;: &quot;r verdiere&quot;,
+    &quot;city&quot;: &quot;rochelle&quot;,
+    &quot;country&quot;: &quot;France&quot;
+  }
+}'
+</code></pre>
+<p>What is the difference? Well, because you are not using stdin, you can ask logstash to hot reload your pipeline anytime you save a new version of the file:</p>
+<pre><code class=language-sh>bin/logstash -r -f bano-enrich.conf
+</code></pre>
+<p>Then, when you update the <code>bano-enrich.conf</code>, you can see in logs:</p>
+<pre><code class=language-txt>[2018-03-24T11:06:17,680][INFO ][logstash.pipelineaction.reload] Reloading pipeline {&quot;pipeline.id&quot;=&gt;:main}
+[2018-03-24T11:06:18,007][INFO ][logstash.pipeline        ] Pipeline has terminated {:pipeline_id=&gt;&quot;main&quot;, :thread=&gt;&quot;#&lt;Thread:0x457a565f run&gt;&quot;}
+[2018-03-24T11:06:18,082][INFO ][logstash.pipeline        ] Starting pipeline {:pipeline_id=&gt;&quot;main&quot;, &quot;pipeline.workers&quot;=&gt;4, &quot;pipeline.batch.size&quot;=&gt;125, &quot;pipeline.batch.delay&quot;=&gt;50}
+[2018-03-24T11:06:18,122][INFO ][logstash.pipeline        ] Pipeline started succesfully {:pipeline_id=&gt;&quot;main&quot;, :thread=&gt;&quot;#&lt;Thread:0x6d4b91c4 sleep&gt;&quot;}
+[2018-03-24T11:06:18,133][INFO ][logstash.agent           ] Pipelines running {:count=&gt;2, :pipelines=&gt;[&quot;.monitoring-logstash&quot;, &quot;main&quot;]}
+</code></pre>
+<p>So less than 1 second to reload the pipeline. That&rsquo;s a huge win!</p>
+<h2 id=sending-our-first-data>Sending our first data</h2>
+<p>Let&rsquo;s call again our sample. I actually created a <code>samples.sh</code> script which allows me to add more use cases:</p>
+<pre><code class=language-sh>curl -XPOST &quot;localhost:8080&quot; -H &quot;Content-Type: application/json&quot; -d '{
+  &quot;test_case&quot;: &quot;Address with text&quot;,
+  &quot;name&quot;: &quot;Joe Smith&quot;,
+  &quot;address&quot;: {
+    &quot;number&quot;: &quot;23&quot;,
+    &quot;street_name&quot;: &quot;r verdiere&quot;,
+    &quot;city&quot;: &quot;rochelle&quot;,
+    &quot;country&quot;: &quot;France&quot;
+  }
+}'
+</code></pre>
+<p>Running it gives:</p>
+<pre><code class=language-ruby>{
+     &quot;test_case&quot; =&gt; &quot;Address with text&quot;,
+      &quot;@version&quot; =&gt; &quot;1&quot;,
+          &quot;host&quot; =&gt; &quot;0:0:0:0:0:0:0:1&quot;,
+    &quot;@timestamp&quot; =&gt; 2018-03-24T09:09:58.749Z,
+          &quot;name&quot; =&gt; &quot;Joe Smith&quot;,
+       &quot;address&quot; =&gt; {
+               &quot;city&quot; =&gt; &quot;rochelle&quot;,
+        &quot;street_name&quot; =&gt; &quot;r verdiere&quot;,
+             &quot;number&quot; =&gt; &quot;23&quot;,
+            &quot;country&quot; =&gt; &quot;France&quot;
+    },
+       &quot;headers&quot; =&gt; {
+         &quot;content_length&quot; =&gt; &quot;158&quot;,
+         &quot;request_method&quot; =&gt; &quot;POST&quot;,
+           &quot;content_type&quot; =&gt; &quot;application/json&quot;,
+              &quot;http_host&quot; =&gt; &quot;localhost:8080&quot;,
+           &quot;request_path&quot; =&gt; &quot;/&quot;,
+        &quot;http_user_agent&quot; =&gt; &quot;curl/7.54.0&quot;,
+            &quot;request_uri&quot; =&gt; &quot;/&quot;,
+           &quot;http_version&quot; =&gt; &quot;HTTP/1.1&quot;,
+            &quot;http_accept&quot; =&gt; &quot;*/*&quot;
+    }
+}
+</code></pre>
+<h2 id=calling-elasticsearch-with-addresses>Calling Elasticsearch with addresses</h2>
+<p>We saw at the begining of this post how we can query elasticsearch to get meaningful data from our bano dataset.</p>
+<p>Let&rsquo;s just connect it with logstash by using the <code>elasticsearch-filter-plugin</code>:</p>
+<pre><code class=language-ruby>elasticsearch {
+  query_template =&gt; &quot;search-by-name.json&quot;
+  index =&gt; &quot;.bano&quot;
+  fields =&gt; {
+    &quot;location&quot; =&gt; &quot;[location]&quot;
+    &quot;address&quot; =&gt; &quot;[address]&quot;
+  }
+  remove_field =&gt; [&quot;headers&quot;, &quot;host&quot;, &quot;@version&quot;, &quot;@timestamp&quot;]
+}
+</code></pre>
+<p>Let&rsquo;s explain some new parameters we have never spoke about.</p>
+<p><code>query_template</code> helps to write an elasticsearch query within an external file instead of having to flatten it inside the logstash configuration. That makes the code more readable but has a drawback. When you update the <code>search-by-name.json</code> Logstash <a href=https://github.com/logstash-plugins/logstash-filter-elasticsearch/issues/90>does not detect this &ldquo;change&rdquo;</a> and does not update the pipeline. So have to fake it by doing a super small change in the pipeline to be reloading again.</p>
+<p>Here is the content of the <code>search-by-name.json</code> file:</p>
+<pre><code class=language-json>{
+  &quot;size&quot;: 1,
+  &quot;query&quot;:{
+    &quot;bool&quot;: {
+      &quot;should&quot;: [
+        {
+          &quot;match&quot;: {
+            &quot;address.number&quot;: &quot;%{[address][number]}&quot;
+          }
+        },
+        {
+          &quot;match&quot;: {
+            &quot;address.street_name&quot;: &quot;%{[address][street_name]}&quot;
+          }
+        },
+        {
+          &quot;match&quot;: {
+            &quot;address.city&quot;: &quot;%{[address][city]}&quot;
+          }
+        }
+      ]
+    }
+  }
+}
+</code></pre>
+<p>This looks familiar right?</p>
+<p><code>index</code> is the elasticsearch index or alias we want to query. Here we want to query <code>.bano</code> alias.</p>
+<p><code>fields</code> are the fields we want to extract from the elasticsearch response to populate our &ldquo;event&rdquo; (or document if you prefer).</p>
+<p>Running again <code>samples.sh</code> gives:</p>
+<pre><code class=language-ruby>{
+    &quot;test_case&quot; =&gt; &quot;Address with text&quot;,
+     &quot;location&quot; =&gt; {
+        &quot;lon&quot; =&gt; -1.155167,
+        &quot;lat&quot; =&gt; 46.157353
+    },
+         &quot;name&quot; =&gt; &quot;Joe Smith&quot;,
+      &quot;address&quot; =&gt; {
+               &quot;city&quot; =&gt; &quot;La Rochelle&quot;,
+        &quot;street_name&quot; =&gt; &quot;Rue Verdière&quot;,
+            &quot;zipcode&quot; =&gt; &quot;17000&quot;,
+             &quot;number&quot; =&gt; &quot;23&quot;
+    }
+}
+</code></pre>
+<p>Great! It works!</p>
+<h2 id=calling-elasticsearch-with-geo-points>Calling Elasticsearch with geo points</h2>
+<p>But we have another use case. We also want to be able to search by location with a document like the following which I add to <code>samples.sh</code> script:</p>
+<pre><code class=language-sh>curl -XPOST &quot;localhost:8080&quot; -H &quot;Content-Type: application/json&quot; -d '{
+  &quot;test_case&quot;: &quot;Address with geo&quot;,
+  &quot;location&quot;: {
+    &quot;lat&quot;: 46.15735,
+    &quot;lon&quot;: -1.1551
+  }
+}'
+</code></pre>
+<p>Running it gives:</p>
+<pre><code class=language-ruby>{
+    &quot;test_case&quot; =&gt; &quot;Address with geo&quot;,
+     &quot;location&quot; =&gt; {
+        &quot;lat&quot; =&gt; 46.15735,
+        &quot;lon&quot; =&gt; -1.1551
+    }
+}
+</code></pre>
+<p>We need to add some conditionals in the pipeline so we can now search using another <code>query_template</code>:</p>
+<pre><code class=language-ruby>if [location][lat] and [location][lon] {
+  # We search by distance in that case
+  elasticsearch {
+    query_template =&gt; &quot;search-by-geo.json&quot;
+    index =&gt; &quot;.bano&quot;
+    fields =&gt; {
+      &quot;location&quot; =&gt; &quot;[location]&quot;
+      &quot;address&quot; =&gt; &quot;[address]&quot;
+    }
+    remove_field =&gt; [&quot;headers&quot;, &quot;host&quot;, &quot;@version&quot;, &quot;@timestamp&quot;]
+  }
+} else {
+  # We search by address in that case
+  elasticsearch {
+    query_template =&gt; &quot;search-by-name.json&quot;
+    index =&gt; &quot;.bano&quot;
+    fields =&gt; {
+      &quot;location&quot; =&gt; &quot;[location]&quot;
+      &quot;address&quot; =&gt; &quot;[address]&quot;
+    }
+    remove_field =&gt; [&quot;headers&quot;, &quot;host&quot;, &quot;@version&quot;, &quot;@timestamp&quot;]
+  }
+}
+</code></pre>
+<p>The <code>search-by-geo.json</code> template is also looking familiar:</p>
+<pre><code class=language-json>{
+  &quot;size&quot;: 1,
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;filter&quot;: {
+        &quot;geo_distance&quot;: {
+          &quot;distance&quot;: &quot;1km&quot;,
+          &quot;location&quot;: {
+            &quot;lat&quot;: %{[location][lat]},
+            &quot;lon&quot;: %{[location][lon]}
+          }
+        }
+      }
+    }
+  },
+  &quot;sort&quot;: [
+    {
+      &quot;_geo_distance&quot;: {
+        &quot;location&quot;: {
+          &quot;lat&quot;: %{[location][lat]},
+          &quot;lon&quot;: %{[location][lon]}
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+<p>Running our samples again gives now:</p>
+<pre><code class=language-ruby>{
+    &quot;test_case&quot; =&gt; &quot;Address with geo&quot;,
+     &quot;location&quot; =&gt; {
+        &quot;lon&quot; =&gt; -1.155167,
+        &quot;lat&quot; =&gt; 46.157353
+    },
+      &quot;address&quot; =&gt; {
+               &quot;city&quot; =&gt; &quot;La Rochelle&quot;,
+        &quot;street_name&quot; =&gt; &quot;Rue Verdière&quot;,
+            &quot;zipcode&quot; =&gt; &quot;17000&quot;,
+             &quot;number&quot; =&gt; &quot;23&quot;
+    }
+}
+</code></pre>
+<h2 id=optimizing-the-queries>Optimizing the queries</h2>
+<p>We have also seen that it can be really unefficient to read the whole dataset every time. If we have the department number, we can probably help elasticsearch by querying the right index instead of all indices.</p>
+<p>Let&rsquo;s assume that the zipcode or part of the zipcode is provided in the input event. For example, let&rsquo;s add the following use cases to our <code>samples.sh</code>:</p>
+<pre><code class=language-sh>curl -XPOST &quot;localhost:8080&quot; -H &quot;Content-Type: application/json&quot; -d '{
+  &quot;test_case&quot;: &quot;Address with geo and zipcode&quot;,
+  &quot;address&quot;: {
+    &quot;zipcode&quot;: &quot;17000&quot;
+  },
+  &quot;location&quot;: {
+    &quot;lat&quot;: 46.15735,
+    &quot;lon&quot;: -1.1551
+  }
+}'
+curl -XPOST &quot;localhost:8080&quot; -H &quot;Content-Type: application/json&quot; -d '{
+  &quot;test_case&quot;: &quot;Address with geo and partial zipcode&quot;,
+  &quot;address&quot;: {
+    &quot;zipcode&quot;: &quot;17&quot;
+  },
+  &quot;location&quot;: {
+    &quot;lat&quot;: 46.15735,
+    &quot;lon&quot;: -1.1551
+  }
+}'
+</code></pre>
+<p>Let&rsquo;s check first (before calling elasticsearch) if we have a zipcode and if so, let&rsquo;s build a <code>dept</code> temporary field which we truncate to keep only the 2 first digits. This is the department number in France:</p>
+<pre><code class=language-ruby>if [address][zipcode] {
+  mutate { add_field =&gt; { &quot;dept&quot; =&gt; &quot;%{[address][zipcode]}&quot; } }
+  truncate { 
+    fields =&gt; [&quot;dept&quot;]
+    length_bytes =&gt; 2
+  }
+}
+</code></pre>
+<p>Then, let&rsquo;s create an <code>index_suffix</code> field:</p>
+<pre><code class=language-ruby>mutate { add_field =&gt; { &quot;index_suffix&quot; =&gt; &quot;-%{dept}&quot; } }
+</code></pre>
+<p>But if there is no <code>zipcode</code>, we need to add some default values:</p>
+<pre><code class=language-ruby>else {
+  mutate { add_field =&gt; { &quot;dept&quot; =&gt; &quot;&quot; } }
+  mutate { add_field =&gt; { &quot;index_suffix&quot; =&gt; &quot;&quot; } }
+}
+</code></pre>
+<p>So far, so good. But wait, I mentioned that nothing can be that simple in France. And yeah&mldr; We have departments with 3 digits! o_O</p>
+<p>Fortunately, they ate all starting with <code>97</code>. So we need to take that into account as well:</p>
+<pre><code class=language-ruby>if [address][zipcode] {
+  mutate { add_field =&gt; { &quot;dept&quot; =&gt; &quot;%{[address][zipcode]}&quot; } }
+  truncate { 
+    fields =&gt; [&quot;dept&quot;]
+    length_bytes =&gt; 2
+  }
+  if [dept] == &quot;97&quot; {
+    mutate { replace =&gt; { &quot;dept&quot; =&gt; &quot;%{[address][zipcode]}&quot; } }
+    truncate { 
+      fields =&gt; [&quot;dept&quot;]
+      length_bytes =&gt; 3
+    }
+  }
+  mutate { add_field =&gt; { &quot;index_suffix&quot; =&gt; &quot;-%{dept}&quot; } }
+} else {
+  mutate { add_field =&gt; { &quot;dept&quot; =&gt; &quot;&quot; } }
+  mutate { add_field =&gt; { &quot;index_suffix&quot; =&gt; &quot;&quot; } }
+}
+</code></pre>
+<p>We can now change the index name with:</p>
+<pre><code class=language-ruby>index =&gt; &quot;.bano%{index_suffix}&quot;
+</code></pre>
+<p>And also remove to temporary fields we created:</p>
+<pre><code class=language-ruby>remove_field =&gt; [&quot;headers&quot;, &quot;host&quot;, &quot;@version&quot;, &quot;@timestamp&quot;, &quot;index_suffix&quot;, &quot;dept&quot;]
+</code></pre>
+<p>At the end we check that we have no regression, specifically with department <code>974</code></p>
+<pre><code class=language-sh>curl -XPOST &quot;localhost:8080&quot; -H &quot;Content-Type: application/json&quot; -d '{
+  &quot;test_case&quot;: &quot;Address with geo and zipcode in 974&quot;,
+  &quot;address&quot;: {
+    &quot;zipcode&quot;: &quot;97400&quot;
+  },
+  &quot;location&quot;: {
+    &quot;lat&quot;: -21.214204,
+    &quot;lon&quot;: 55.361034
+  }
+}'
+</code></pre>
+<p>Which indeed gives us the right value:</p>
+<pre><code class=language-ruby>{
+    &quot;test_case&quot; =&gt; &quot;Address with geo and zipcode in 974&quot;,
+     &quot;location&quot; =&gt; {
+        &quot;lon&quot; =&gt; 55.361034,
+        &quot;lat&quot; =&gt; -21.214204
+    },
+      &quot;address&quot; =&gt; {
+               &quot;city&quot; =&gt; &quot;Les Avirons&quot;,
+        &quot;street_name&quot; =&gt; &quot;Chemin des Acacias&quot;,
+            &quot;zipcode&quot; =&gt; &quot;97425&quot;,
+             &quot;number&quot; =&gt; &quot;13&quot;
+    }
+}
+</code></pre>
+<h2 id=next-steps>Next steps</h2>
+<p>Have a look at the <a href=https://david.pilato.fr/blog/2018-03-24-enriching-your-postal-addresses-with-elastic-stack-part-3/>next post</a> to see how you can now use this technique to enrich your existing data.</p>
+<h2 id=the-full-logtstash-pipeline>The full logtstash pipeline</h2>
+<p>Here is the full pipeline I ended up with:</p>
+<pre><code class=language-ruby>input {
+  http { }
+}
+
+filter {
+  if [address][zipcode] {
+    mutate { add_field =&gt; { &quot;dept&quot; =&gt; &quot;%{[address][zipcode]}&quot; } }
+    truncate { 
+      fields =&gt; [&quot;dept&quot;]
+      length_bytes =&gt; 2
+    }
+    if [dept] == &quot;97&quot; {
+      mutate { replace =&gt; { &quot;dept&quot; =&gt; &quot;%{[address][zipcode]}&quot; } }
+      truncate { 
+        fields =&gt; [&quot;dept&quot;]
+        length_bytes =&gt; 3
+      }
+    }
+    mutate { add_field =&gt; { &quot;index_suffix&quot; =&gt; &quot;-%{dept}&quot; } }
+  } else {
+    mutate { add_field =&gt; { &quot;dept&quot; =&gt; &quot;&quot; } }
+    mutate { add_field =&gt; { &quot;index_suffix&quot; =&gt; &quot;&quot; } }
+  }
+
+  if [location][lat] and [location][lon] {
+    elasticsearch {
+      query_template =&gt; &quot;search-by-geo.json&quot;
+      index =&gt; &quot;.bano&quot;
+      fields =&gt; {
+        &quot;location&quot; =&gt; &quot;[location]&quot;
+        &quot;address&quot; =&gt; &quot;[address]&quot;
+      }
+      remove_field =&gt; [&quot;headers&quot;, &quot;host&quot;, &quot;@version&quot;, &quot;@timestamp&quot;, &quot;index_suffix&quot;, &quot;dept&quot;]
+    }
+  } else {
+    elasticsearch {
+      query_template =&gt; &quot;search-by-name.json&quot;
+      index =&gt; &quot;.bano&quot;
+      fields =&gt; {
+        &quot;location&quot; =&gt; &quot;[location]&quot;
+        &quot;address&quot; =&gt; &quot;[address]&quot;
+      }
+      remove_field =&gt; [&quot;headers&quot;, &quot;host&quot;, &quot;@version&quot;, &quot;@timestamp&quot;, &quot;index_suffix&quot;, &quot;dept&quot;]
+    }
+  }
+}
+
+output {
+  stdout { codec =&gt; rubydebug }
+}
+</code></pre>
+</div>
+<div class=my-4>
+<a href=https://david.pilato.fr/tags/logstash/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#logstash</a>
+<a href=https://david.pilato.fr/tags/elasticsearch/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#elasticsearch</a>
+</div>
+<div class=py-2>
+<div class="flex flex-col md:flex-row items-center my-8">
+<a href=https://david.pilato.fr/authors/david-pilato/ class="w-24 h-24 md:mr-4">
+<img src=https://david.pilato.fr/authors/david-pilato/david_pilato.png class="w-full bg-primary-bg rounded-full" alt=Avatar>
+</a>
+<div class="w-full md:w-auto mt-4 md:mt-0">
+<a href=https://david.pilato.fr/authors/david-pilato/ class="block font-bold text-lg pb-1 mb-2 border-b">David Pilato</a>
+<span class="block pb-2">20+ years of experience, mostly in Java. Living in Cergy, France.</span>
+<a href=mailto:david+blog@pilato.fr class=mr-1>
+<i class="fas fa-envelope"></i>
+</a>
+<a href=https://twitter.com/dadoonet class=mr-1>
+<i class="fab fa-twitter"></i>
+</a>
+<a href=https://github.com/dadoonet class=mr-1>
+<i class="fab fa-github"></i>
+</a>
+<a href=https://www.linkedin.com/in/dadoonet/ class=mr-1>
+<i class="fab fa-linkedin"></i>
+</a>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+<div>
+<span class="block font-bold">Previous</span>
+<a href=https://david.pilato.fr/blog/2018-03-24-enriching-your-postal-addresses-with-elastic-stack-part-3/ class=block>Enriching your postal addresses with Elastic stack - part 3</a>
+</div>
+<div class="md:text-right mt-4 md:mt-0">
+<span class="block font-bold">Next</span>
+<a href=https://david.pilato.fr/blog/2018-03-22-enriching-your-postal-addresses-with-elastic-stack-part-1/ class=block>Enriching your postal addresses with Elastic stack - part 1</a>
+</div>
+</div>
+</div>
+<div class=col-span-2>
+<div class="bg-secondary-bg rounded p-6">
+<h3 class="text-lg font-semibold mb-4">Series of Posts</h3>
+<div class=content>
+<a href=https://david.pilato.fr/blog/2018-03-24-enriching-your-postal-addresses-with-elastic-stack-part-3/>Enriching your postal addresses with Elastic stack - part 3</a>
+<br>
+<a href=https://david.pilato.fr/blog/2018-03-23-enriching-your-postal-addresses-with-elastic-stack-part-2/>Enriching your postal addresses with Elastic stack - part 2</a>
+<br>
+<a href=https://david.pilato.fr/blog/2018-03-22-enriching-your-postal-addresses-with-elastic-stack-part-1/>Enriching your postal addresses with Elastic stack - part 1</a>
+<br>
+</div>
+</div>
+<div class="sticky top-16 z-10 hidden lg:block px-6 py-4 bg-primary-bg">
+<span class="text-lg font-semibold">On This Page</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#searching-for-addresses>Searching for addresses</a>
+<ul>
+<li><a href=#searching-by-geo-point>Searching by geo point</a></li>
+</ul>
+</li>
+<li><a href=#building-incrementally-a-logstash-enrichment-pipeline>Building incrementally a Logstash enrichment pipeline</a></li>
+<li><a href=#sending-our-first-data>Sending our first data</a></li>
+<li><a href=#calling-elasticsearch-with-addresses>Calling Elasticsearch with addresses</a></li>
+<li><a href=#calling-elasticsearch-with-geo-points>Calling Elasticsearch with geo points</a></li>
+<li><a href=#optimizing-the-queries>Optimizing the queries</a></li>
+<li><a href=#next-steps>Next steps</a></li>
+<li><a href=#the-full-logtstash-pipeline>The full logtstash pipeline</a></li>
+</ul>
+</nav>
+</div>
+<script>window.addEventListener('DOMContentLoaded',()=>{enableStickyToc()})</script>
+</div>
+<div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded p-6">
+<h2 class="text-lg font-semibold mb-4">See Also</h2>
+<div class=content>
+<a href=https://david.pilato.fr/blog/2018-03-22-enriching-your-postal-addresses-with-elastic-stack-part-1/>Enriching your postal addresses with Elastic stack - part 1</a>
+<br>
+<a href=https://david.pilato.fr/blog/2016-01-05-understanding-zipfs-law/>Understanding Zipf's law</a>
+<br>
+<a href=https://david.pilato.fr/blog/2015-12-10-building-a-directory-map-with-elk/>Building a directory map with ELK</a>
+<br>
+<a href=https://david.pilato.fr/blog/2015-11-17-index-twitter-on-found/>Index Twitter on found</a>
+<br>
+<a href=https://david.pilato.fr/blog/2015-09-14-import-from-sql-without-database/>Importing from a database without a database</a>
+<br>
+<a href=https://david.pilato.fr/blog/2015-06-01-indexing-twitter-with-logstash-and-elasticsearch/>Indexing Twitter with Logstash and Elasticsearch</a>
+<br>
+</div>
+</div>
+</div>
+<script>document.addEventListener('DOMContentLoaded',()=>{hljs.initHighlightingOnLoad()})</script>
+</div>
+</div>
+</main>
+<footer class=pl-scrollbar>
+<div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+<p class="text-sm text-tertiary-text">&copy; 2022, David Pilato, France
+&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p>
+</div></div>
+</footer>
+</body>
+</html>

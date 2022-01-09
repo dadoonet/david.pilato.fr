@@ -1,0 +1,346 @@
+<!doctype html><html lang=en><meta charset=utf-8>
+<meta name=viewport content="width=device-width">
+<title>Using JS Auth with found cluster | David Pilato</title>
+<meta name=generator content="Hugo Eureka 0.8.4">
+<link rel=stylesheet href=https://david.pilato.fr/css/eureka.min.css>
+<script defer src=https://david.pilato.fr/js/eureka.min.js></script>
+<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+<link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload="this.onload=null,this.rel='stylesheet'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css media=print onload="this.media='all',this.onload=null" crossorigin>
+<script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js integrity="sha256-uNYoXefWRqv+PsIF/OflNmwtKM4lStn9yrz2gVl6ymo=" crossorigin></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X media=print onload="this.media='all',this.onload=null" crossorigin>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script>
+<script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js integrity="sha256-Zmpaaj+GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE=" crossorigin></script>
+<meta name=description content="Using Found by elastic cluster helps a lot to have a ready to use and managed elasticsearch cluster.
+I started my own cluster yesterday to power brownbaglunch.fr website (work in progress) and it was ready to use after some clicks!
+It&rsquo;s a kind of magic!
+  But I ran into an issue when you secure it and use the elasticsearch javascript client.
+Creating your cluster  Found Console
+  Adding ACL By default, your cluster is opened but you can fix that by opening &ldquo;Access Control&rdquo; menu.">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog","item":"https://david.pilato.fr/blog/"},{"@type":"ListItem","position":2,"name":"Using JS Auth with found cluster","item":"https://david.pilato.fr/blog/2015-05-19-using-js-auth-with-found-cluster/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://david.pilato.fr/blog/2015-05-19-using-js-auth-with-found-cluster/"},"headline":"Using JS Auth with found cluster | David Pilato","image":"https://david.pilato.fr/blog/2015-05-19-using-js-auth-with-found-cluster/found_byelastic_logo_512x185.png","datePublished":"2015-05-19T17:06:22+02:00","dateModified":"2015-05-19T17:06:22+02:00","wordCount":492,"author":{"@type":"Person","name":["David Pilato"]},"publisher":{"@type":"Person","name":"David Pilato"},"description":"Using Found by elastic cluster helps a lot to have a ready to use and managed elasticsearch cluster.\nI started my own cluster yesterday to power brownbaglunch.fr website (work in progress) and it was ready to use after some clicks!\nIt\u0026rsquo;s a kind of magic!\n  But I ran into an issue when you secure it and use the elasticsearch javascript client.\nCreating your cluster  Found Console\n  Adding ACL By default, your cluster is opened but you can fix that by opening \u0026ldquo;Access Control\u0026rdquo; menu."}</script><meta property="og:title" content="Using JS Auth with found cluster | David Pilato">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://david.pilato.fr/blog/2015-05-19-using-js-auth-with-found-cluster/">
+<meta property="og:description" content="Using Found by elastic cluster helps a lot to have a ready to use and managed elasticsearch cluster.
+I started my own cluster yesterday to power brownbaglunch.fr website (work in progress) and it was ready to use after some clicks!
+It&rsquo;s a kind of magic!
+  But I ran into an issue when you secure it and use the elasticsearch javascript client.
+Creating your cluster  Found Console
+  Adding ACL By default, your cluster is opened but you can fix that by opening &ldquo;Access Control&rdquo; menu.">
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="David Pilato">
+<meta property="article:published_time" content="2015-05-19T17:06:22+02:00">
+<meta property="article:modified_time" content="2015-05-19T17:06:22+02:00">
+<meta property="article:section" content="blog">
+<meta property="article:tag" content="elasticsearch">
+<meta property="article:tag" content="found">
+<meta property="article:tag" content="js">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2012-05-25-la-factory-spring-pour-elasticsearch-est-sortie/">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2012-04-10-proteger-son-cluster-elasticsearch-avec-jetty/">
+<body class="flex flex-col min-h-screen">
+<header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+<div class="w-full max-w-screen-xl mx-auto"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=='Auto'||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName('html')[0].classList.add('dark')</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+<a href=/ class="mr-6 text-primary-text text-xl font-bold">David Pilato</a>
+<button id=navbar-btn class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+<i class="fas fa-bars"></i>
+</button>
+<div id=target class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+<div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+<a href=/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Home</a>
+<a href=/blog/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Blog</a>
+<a href=https://djdadoo.pilato.fr/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">DJ Mixes</a>
+<a href=/authors/david-pilato/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">About me</a>
+</div>
+<div class=flex>
+<div class="relative pt-4 md:pt-0">
+<div class="cursor-pointer hover:text-eureka" id=lightDarkMode>
+<i class="fas fa-adjust"></i>
+</div>
+<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open>
+</div>
+<div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions>
+<span class="px-4 py-1 hover:text-eureka" name=Light>Light</span>
+<span class="px-4 py-1 hover:text-eureka" name=Dark>Dark</span>
+<span class="px-4 py-1 hover:text-eureka" name=Auto>Auto</span>
+</div>
+</div>
+</div>
+</div>
+<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile>
+</div>
+</nav>
+<script>let element=document.getElementById('lightDarkMode');storageColorScheme==null||storageColorScheme=='Auto'?document.addEventListener('DOMContentLoaded',()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change',switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'sun'),element.firstElementChild.classList.add('fa-sun')):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'moon'),element.firstElementChild.classList.add('fa-moon')),document.addEventListener('DOMContentLoaded',()=>{getcolorscheme(),switchBurger()})</script>
+</div>
+</header>
+<main class="flex-grow pt-16">
+<div class=pl-scrollbar>
+<div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+<div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+<h1 class="font-bold text-3xl text-primary-text">Using JS Auth with found cluster</h1>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2015-05-19</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>3 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
+</div>
+</div>
+<div class=my-4>
+<img src=https://david.pilato.fr/blog/2015-05-19-using-js-auth-with-found-cluster/found_byelastic_logo_512x185.png class=w-full alt="Featured Image">
+</div>
+<div class=content>
+<p>Using <a href=https://www.found.no/>Found by elastic</a> cluster helps a lot to have a ready to use and managed elasticsearch cluster.</p>
+<p>I started my own cluster yesterday to power <a href=http://www.brownbaglunch.fr/>brownbaglunch.fr</a> website (work in progress) and it was ready to use after some clicks!</p>
+<p><strong>It&rsquo;s a kind of magic!</strong></p>
+<div style=position:relative;padding-bottom:56.25%;height:0;overflow:hidden>
+<iframe src=https://www.youtube.com/embed/0p_1QSUsbsM style=position:absolute;top:0;left:0;width:100%;height:100%;border:0 allowfullscreen title="YouTube Video"></iframe>
+</div>
+<p>But I ran into an issue when you secure it and use the <a href=https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/index.html>elasticsearch javascript client</a>.</p>
+<h2 id=creating-your-cluster>Creating your cluster</h2>
+<figure><img src=found-1.png alt="Found Console"><figcaption>
+<p>Found Console</p>
+</figcaption>
+</figure>
+<h2 id=adding-acl>Adding ACL</h2>
+<p>By default, your cluster is opened but you can fix that by opening &ldquo;Access Control&rdquo; menu.
+Found proposes a default configuration which generates two users and restrict some access.</p>
+<pre><code class=language-yaml># Deny everyone by default, as authentication is required.
+# Deny is the default also if no &quot;default&quot; is specified,
+# so it's only necessary to specify it if you want the
+# default to be &quot;allow&quot;.
+default: deny
+
+auth:
+  users:
+    searchonly: searchonlypassword
+    readwrite: readwritepassword
+
+rules:
+  - paths:
+      # Match all search requests.
+      - '/_search|/([^_/]+/_search)|/[^_/]+/[^_/]+/_search'
+    conditions:
+      - basic_auth:
+          users: [searchonly]
+    action: allow
+
+  # Also, allow any GET-request.
+  - paths: ['.*']
+    conditions:
+      - basic_auth:
+          users:
+            - searchonly
+      - method:
+          verbs: [GET]
+    action: allow
+
+  # Allow everything for the readwrite-user
+  - paths: ['.*']
+    conditions:
+      - basic_auth:
+          users:
+            - readwrite
+# Uncomment the following if you want to require SSL.
+#      - ssl:
+#          require: true
+    action: allow
+</code></pre>
+<h2 id=create-your-javascript-application>Create your javascript application</h2>
+<pre><code class=language-html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script src=&quot;https://cdn.rawgit.com/elastic/bower-elasticsearch-js/12ec0b8ee6d776e077b160e6dd6fc2e1b5818a86/elasticsearch.min.js&quot;&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;script&gt;
+      var login = &quot;readwrite&quot;;
+      var password = &quot;readwritepassword&quot;;
+      var hostname = &quot;youclusteraddress.foundcluster.com&quot;;
+      
+      var client = new elasticsearch.Client({
+        hosts: [
+          {
+            host: hostname,
+            auth: login + ':' + password
+          } 
+        ]
+      });
+      
+      client.cluster.health().then(done, done);
+      
+      function done(resp) {
+        console.log(resp);
+      }
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>If you run it, you will get something like:</p>
+<pre><code class=language-txt>elasticsearch.min.js:18 OPTIONS http://youclusteraddress.foundcluster.com:9200/_cluster/health 401 (Unauthorized)26.d.request @ elasticsearch.min.js:18c @ elasticsearch.min.js:1842.j.applyArgs @ elasticsearch.min.js:18k @ elasticsearch.min.js:11(anonymous function) @ elasticsearch.min.js:11
+bblfr_elasticsearch.dev/:1 XMLHttpRequest cannot load http://youclusteraddress.foundcluster.com:9200/_cluster/health. Invalid HTTP status code 401
+elasticsearch.min.js:18 ERROR: 2015-05-19T14:47:01Z
+  Error: Request error, retrying -- Request failed to complete.
+      at d.29.d.error (http://bblfr_elasticsearch.dev/lib/elasticsearch.min.js:18:15537)
+      at d (http://bblfr_elasticsearch.dev/lib/elasticsearch.min.js:18:22917)
+      at XMLHttpRequest.26.d.request.d.onreadystatechange (http://bblfr_elasticsearch.dev/lib/elasticsearch.min.js:18:9781)
+</code></pre>
+<h2 id=modify-acl>Modify ACL</h2>
+<p>The javascript client needs to discuss with found using <code>OPTIONS</code> verb. So you basically need to add:</p>
+<pre><code class=language-yaml>  - paths:
+      - '.*'
+    conditions:
+      - method:
+          verbs: [OPTIONS]
+    action: allow
+</code></pre>
+<p>Running the same code will now work as expected!</p>
+<pre><code class=language-js>{
+  cluster_name: &quot;youclusteraddress&quot;, 
+  status: &quot;green&quot;, 
+  timed_out: false, 
+  number_of_nodes: 1, 
+  number_of_data_nodes: 1
+  // ...
+}
+</code></pre>
+<h2 id=using-acl-for-aliases>Using ACL for aliases</h2>
+<p>Note that for the project, I created one index named <code>bbl_1</code> and one alias on top of it <code>bbl</code>.
+So I opened read access to anonymous users on this alias and add a secured one when it comes to write operations.
+<code>OPTIONS</code> in that case is applied only to the <code>bbl</code> alias. I came up with this config:</p>
+<pre><code class=language-yaml>default: deny
+
+auth:
+  users:
+    readwrite: readwritepassword
+
+rules:
+  - paths:
+      - '/bbl/.*'
+    conditions:
+      - method:
+          verbs: [OPTIONS]
+    action: allow
+
+  - paths:
+      - '/bbl/_search'
+    conditions:
+      - method:
+          verbs: [GET, POST]
+    action: allow
+
+  - paths: ['/bbl/.*']
+    conditions:
+      - method:
+          verbs: [GET]
+    action: allow
+
+  - paths: ['/bbl/.*']
+    conditions:
+      - method:
+          verbs: [PUT, DELETE]
+      - basic_auth:
+          users: [readwrite]
+    action: allow
+</code></pre>
+</div>
+<div class=my-4>
+<a href=https://david.pilato.fr/tags/elasticsearch/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#elasticsearch</a>
+<a href=https://david.pilato.fr/tags/found/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#found</a>
+<a href=https://david.pilato.fr/tags/js/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#js</a>
+</div>
+<div class=py-2>
+<div class="flex flex-col md:flex-row items-center my-8">
+<a href=https://david.pilato.fr/authors/david-pilato/ class="w-24 h-24 md:mr-4">
+<img src=https://david.pilato.fr/authors/david-pilato/david_pilato.png class="w-full bg-primary-bg rounded-full" alt=Avatar>
+</a>
+<div class="w-full md:w-auto mt-4 md:mt-0">
+<a href=https://david.pilato.fr/authors/david-pilato/ class="block font-bold text-lg pb-1 mb-2 border-b">David Pilato</a>
+<span class="block pb-2">20+ years of experience, mostly in Java. Living in Cergy, France.</span>
+<a href=mailto:david+blog@pilato.fr class=mr-1>
+<i class="fas fa-envelope"></i>
+</a>
+<a href=https://twitter.com/dadoonet class=mr-1>
+<i class="fab fa-twitter"></i>
+</a>
+<a href=https://github.com/dadoonet class=mr-1>
+<i class="fab fa-github"></i>
+</a>
+<a href=https://www.linkedin.com/in/dadoonet/ class=mr-1>
+<i class="fab fa-linkedin"></i>
+</a>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+<div>
+<span class="block font-bold">Previous</span>
+<a href=https://david.pilato.fr/blog/2015-05-20-reindex-elasticsearch-with-logstash/ class=block>Reindex elasticsearch with Logstash</a>
+</div>
+<div class="md:text-right mt-4 md:mt-0">
+<span class="block font-bold">Next</span>
+<a href=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/ class=block>Advanced search for your Legacy application</a>
+</div>
+</div>
+</div>
+<div class=col-span-2>
+<div class="sticky top-16 z-10 hidden lg:block px-6 py-4 bg-primary-bg">
+<span class="text-lg font-semibold">On This Page</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#creating-your-cluster>Creating your cluster</a></li>
+<li><a href=#adding-acl>Adding ACL</a></li>
+<li><a href=#create-your-javascript-application>Create your javascript application</a></li>
+<li><a href=#modify-acl>Modify ACL</a></li>
+<li><a href=#using-acl-for-aliases>Using ACL for aliases</a></li>
+</ul>
+</nav>
+</div>
+<script>window.addEventListener('DOMContentLoaded',()=>{enableStickyToc()})</script>
+</div>
+<div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded p-6">
+<h2 class="text-lg font-semibold mb-4">See Also</h2>
+<div class=content>
+<a href=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/>Advanced search for your Legacy application</a>
+<br>
+<a href=https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/>Devoxx France 2015</a>
+<br>
+<a href=https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/>Exploring Capitaine Train dataset</a>
+<br>
+<a href=https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/>ScrutMyDocs : un moteur de recherche pour documents</a>
+<br>
+<a href=https://david.pilato.fr/blog/2012-05-25-la-factory-spring-pour-elasticsearch-est-sortie/>La factory Spring pour Elasticsearch est sortie !</a>
+<br>
+<a href=https://david.pilato.fr/blog/2012-04-10-proteger-son-cluster-elasticsearch-avec-jetty/>Protéger son cluster Elasticsearch avec Jetty</a>
+<br>
+</div>
+</div>
+</div>
+<script>document.addEventListener('DOMContentLoaded',()=>{hljs.initHighlightingOnLoad()})</script>
+</div>
+</div>
+</main>
+<footer class=pl-scrollbar>
+<div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+<p class="text-sm text-tertiary-text">&copy; 2022, David Pilato, France
+&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p>
+</div></div>
+</footer>
+</body>
+</html>

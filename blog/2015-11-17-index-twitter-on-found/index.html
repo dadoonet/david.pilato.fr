@@ -1,0 +1,400 @@
+<!doctype html><html lang=en><meta charset=utf-8>
+<meta name=viewport content="width=device-width">
+<title>Index Twitter on found | David Pilato</title>
+<meta name=generator content="Hugo Eureka 0.8.4">
+<link rel=stylesheet href=https://david.pilato.fr/css/eureka.min.css>
+<script defer src=https://david.pilato.fr/js/eureka.min.js></script>
+<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+<link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload="this.onload=null,this.rel='stylesheet'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css media=print onload="this.media='all',this.onload=null" crossorigin>
+<script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js integrity="sha256-uNYoXefWRqv+PsIF/OflNmwtKM4lStn9yrz2gVl6ymo=" crossorigin></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X media=print onload="this.media='all',this.onload=null" crossorigin>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script>
+<script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js integrity="sha256-Zmpaaj+GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE=" crossorigin></script>
+<meta name=description content="Some months ago, I published a recipe on how to index Twitter with Logstash and Elasticsearch.
+I have the same need today as I want to monitor Twitter when we run the elastic FR meetup (join us by the way if you are in France!).
+Well, this recipe can be really simplified and actually I don&rsquo;t want to waste my time anymore on building and managing elasticsearch and Kibana clusters anymore.
+Let&rsquo;s use a Found by elastic cluster instead.">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog","item":"https://david.pilato.fr/blog/"},{"@type":"ListItem","position":2,"name":"Index Twitter on found","item":"https://david.pilato.fr/blog/2015-11-17-index-twitter-on-found/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://david.pilato.fr/blog/2015-11-17-index-twitter-on-found/"},"headline":"Index Twitter on found | David Pilato","datePublished":"2015-11-17T11:51:43+01:00","dateModified":"2015-11-17T11:51:43+01:00","wordCount":694,"author":{"@type":"Person","name":["David Pilato"]},"publisher":{"@type":"Person","name":"David Pilato"},"description":"Some months ago, I published a recipe on how to index Twitter with Logstash and Elasticsearch.\nI have the same need today as I want to monitor Twitter when we run the elastic FR meetup (join us by the way if you are in France!).\nWell, this recipe can be really simplified and actually I don\u0026rsquo;t want to waste my time anymore on building and managing elasticsearch and Kibana clusters anymore.\nLet\u0026rsquo;s use a Found by elastic cluster instead."}</script><meta property="og:title" content="Index Twitter on found | David Pilato">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://david.pilato.fr/blog/2015-11-17-index-twitter-on-found/">
+<meta property="og:description" content="Some months ago, I published a recipe on how to index Twitter with Logstash and Elasticsearch.
+I have the same need today as I want to monitor Twitter when we run the elastic FR meetup (join us by the way if you are in France!).
+Well, this recipe can be really simplified and actually I don&rsquo;t want to waste my time anymore on building and managing elasticsearch and Kibana clusters anymore.
+Let&rsquo;s use a Found by elastic cluster instead.">
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="David Pilato">
+<meta property="article:published_time" content="2015-11-17T11:51:43+01:00">
+<meta property="article:modified_time" content="2015-11-17T11:51:43+01:00">
+<meta property="article:section" content="blog">
+<meta property="article:tag" content="elasticsearch">
+<meta property="article:tag" content="logstash">
+<meta property="article:tag" content="kibana">
+<meta property="article:tag" content="cloud">
+<meta property="article:tag" content="twitter">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2015-06-01-indexing-twitter-with-logstash-and-elasticsearch/">
+<body class="flex flex-col min-h-screen">
+<header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+<div class="w-full max-w-screen-xl mx-auto"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=='Auto'||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName('html')[0].classList.add('dark')</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+<a href=/ class="mr-6 text-primary-text text-xl font-bold">David Pilato</a>
+<button id=navbar-btn class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+<i class="fas fa-bars"></i>
+</button>
+<div id=target class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+<div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+<a href=/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Home</a>
+<a href=/blog/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Blog</a>
+<a href=https://djdadoo.pilato.fr/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">DJ Mixes</a>
+<a href=/authors/david-pilato/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">About me</a>
+</div>
+<div class=flex>
+<div class="relative pt-4 md:pt-0">
+<div class="cursor-pointer hover:text-eureka" id=lightDarkMode>
+<i class="fas fa-adjust"></i>
+</div>
+<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open>
+</div>
+<div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions>
+<span class="px-4 py-1 hover:text-eureka" name=Light>Light</span>
+<span class="px-4 py-1 hover:text-eureka" name=Dark>Dark</span>
+<span class="px-4 py-1 hover:text-eureka" name=Auto>Auto</span>
+</div>
+</div>
+</div>
+</div>
+<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile>
+</div>
+</nav>
+<script>let element=document.getElementById('lightDarkMode');storageColorScheme==null||storageColorScheme=='Auto'?document.addEventListener('DOMContentLoaded',()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change',switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'sun'),element.firstElementChild.classList.add('fa-sun')):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'moon'),element.firstElementChild.classList.add('fa-moon')),document.addEventListener('DOMContentLoaded',()=>{getcolorscheme(),switchBurger()})</script>
+</div>
+</header>
+<main class="flex-grow pt-16">
+<div class=pl-scrollbar>
+<div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+<div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+<h1 class="font-bold text-3xl text-primary-text">Index Twitter on found</h1>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2015-11-17</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>4 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-th-list mr-1"></i>
+<a href=https://david.pilato.fr/series/indexing-twitter/ class=hover:text-eureka>indexing twitter</a>
+</div>
+</div>
+<div class=content>
+<p>Some months ago, I published a recipe on how to <a href=https://david.pilato.fr/blog/2015-06-01-indexing-twitter-with-logstash-and-elasticsearch/>index Twitter with Logstash and Elasticsearch</a>.</p>
+<p>I have the same need today as I want to monitor Twitter when we run the <a href=http://meetup.com/elasticfr>elastic FR meetup</a> (join us by the way if you are in France!).</p>
+<p>Well, this recipe can be really simplified and actually I don&rsquo;t want to waste my time anymore on building and managing elasticsearch and Kibana clusters anymore.</p>
+<p>Let&rsquo;s use a <a href=https://found.elastic.co/>Found by elastic</a> cluster instead.</p>
+<figure><img src=found_logo.png alt="Found by elastic"><figcaption>
+<p>Found by elastic</p>
+</figcaption>
+</figure>
+<h2 id=create-your-cluster>Create your cluster</h2>
+<p>Well. That&rsquo;s easy. Just connect to <a href=https://found.elastic.co/>Found</a> and create your cluster.
+Found is always up to date with all the latest elasticsearch versions so here I&rsquo;m using a 2.0.0 elasticsearch cluster.</p>
+<h2 id=add-kibana-4>Add Kibana 4</h2>
+<p>In the configuration tab, just activate Kibana 4 and you&rsquo;re done with Kibana! :D
+Same here, Kibana is always up to date so I&rsquo;m using here Kibana 4.2.1 which has just been released yesterday evening!</p>
+<figure><img src=activate_kibana.png alt="Activate Kibana 4"><figcaption>
+<p>Activate Kibana 4</p>
+</figcaption>
+</figure>
+<h2 id=create-shield-users>Create Shield users</h2>
+<p>Well, with found you have automatically out of the box all the security needed to operate an elasticsearch cluster in the cloud. You just have to configure it (and it comes with good defaults).</p>
+<p>I defined 3 roles:</p>
+<ul>
+<li><code>kibana4admin</code>: can read and write Kibana dashboards</li>
+<li><code>kibana4</code>: can read only Kibana dashboards</li>
+<li><code>twitter</code>: can write data to any index which name starts with <code>twitter-</code></li>
+</ul>
+<pre><code class=language-yml>kibana4admin:
+  cluster:
+      - cluster:monitor/nodes/info
+      - cluster:monitor/health
+  indices:
+    '*':
+      - indices:admin/mappings/fields/get
+      - indices:admin/validate/query
+      - indices:data/read/search
+      - indices:data/read/msearch
+      - indices:admin/get
+    '.kibana':
+      - indices:admin/exists
+      - indices:admin/mapping/put
+      - indices:admin/mappings/fields/get
+      - indices:admin/refresh
+      - indices:admin/validate/query
+      - indices:data/read/get
+      - indices:data/read/mget
+      - indices:data/read/search
+      - indices:data/write/delete
+      - indices:data/write/index
+      - indices:data/write/update
+      - indices:admin/create
+
+kibana4:
+  cluster:
+      - cluster:monitor/nodes/info
+      - cluster:monitor/health
+  indices:
+    '*':
+      - indices:admin/mappings/fields/get
+      - indices:admin/validate/query
+      - indices:data/read/search
+      - indices:data/read/msearch
+      - indices:admin/get
+    '.kibana':
+      - indices:admin/exists
+      - indices:admin/mappings/fields/get
+      - indices:admin/validate/query
+      - indices:data/read/get
+      - indices:data/read/mget
+      - indices:data/read/search
+
+twitter:
+  cluster:
+    - indices:admin/template/get
+    - indices:admin/template/put
+  indices:
+    '*':
+      - indices:data/write/bulk
+    'twitter':
+      - indices:admin/create
+      - indices:data/write/index
+</code></pre>
+<p>I add 3 users:</p>
+<pre><code class=language-yml>kibana: password1
+kibanaadmin: password2
+logstash: password3
+</code></pre>
+<p>And I map my roles and users:</p>
+<pre><code class=language-yml>kibana4: kibana
+kibana4admin: kibanaadmin
+twitter: logstash
+</code></pre>
+<p>Just save the configuration and everything in found is now set up!</p>
+<h2 id=get-data-from-twitter>Get data from Twitter</h2>
+<p>For now, found does not run Logstash clusters so for that part, so I will build my own instance on AWS here.
+But note that it can run from whatever cloud provider you want.</p>
+<h3 id=twitter-application>Twitter application</h3>
+<p>Create your <a href=https://apps.twitter.com/>Twitter application</a> and open the &ldquo;Keys and Access Tokens&rdquo; tab.
+Note your <code>consumer_key</code> and <code>consumer_secret</code> (generate them if needed).
+Note also your <code>access_token</code> and <code>access_token_secret</code> (generate them if needed).</p>
+<h3 id=logstash>Logstash</h3>
+<p>On the instance, I install <a href=https://www.elastic.co/downloads/logstash>logstash</a>:</p>
+<pre><code class=language-sh>wget https://download.elastic.co/logstash/logstash/logstash-2.0.0.tar.gz
+tar xzf logstash-2.0.0.tar.gz
+</code></pre>
+<p>Then I create an elasticsearch template file as explained in <a href=https://david.pilato.fr/blog/2015-06-01-indexing-twitter-with-logstash-and-elasticsearch/>my previous post</a>:</p>
+<pre><code class=language-json>{
+  &quot;template&quot;: &quot;twitter*&quot;,
+  &quot;order&quot;:    1, 
+  &quot;settings&quot;: {
+    &quot;number_of_shards&quot;: 1 
+  },
+  &quot;mappings&quot;: {
+    &quot;tweet&quot;: { 
+      &quot;_all&quot;: {
+        &quot;enabled&quot;: false
+      },
+      &quot;dynamic_templates&quot; : [ {
+         &quot;message_field&quot; : {
+           &quot;match&quot; : &quot;message&quot;,
+           &quot;match_mapping_type&quot; : &quot;string&quot;,
+           &quot;mapping&quot; : {
+             &quot;type&quot; : &quot;string&quot;, &quot;index&quot; : &quot;analyzed&quot;, &quot;omit_norms&quot; : true
+           }
+         }
+       }, {
+         &quot;string_fields&quot; : {
+           &quot;match&quot; : &quot;*&quot;,
+           &quot;match_mapping_type&quot; : &quot;string&quot;,
+           &quot;mapping&quot; : {
+             &quot;type&quot; : &quot;string&quot;, &quot;index&quot; : &quot;analyzed&quot;, &quot;omit_norms&quot; : true,
+               &quot;fields&quot; : {
+                 &quot;raw&quot; : {&quot;type&quot;: &quot;string&quot;, &quot;index&quot; : &quot;not_analyzed&quot;, &quot;ignore_above&quot; : 256}
+               }
+           }
+         }
+       } ],
+      &quot;properties&quot;: {
+        &quot;text&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;coordinates&quot;: {
+          &quot;properties&quot;: {
+             &quot;coordinates&quot;: {
+                &quot;type&quot;: &quot;geo_point&quot;
+             },
+             &quot;type&quot;: {
+                &quot;type&quot;: &quot;string&quot;
+             }
+          }
+       }
+      }
+    }
+  }
+}
+</code></pre>
+<p>Then I create my logstash configuration file <code>meetup_fr.conf</code>. I will track everything about <code>elasticfr</code>:</p>
+<pre><code class=language-ruby>input {
+  twitter {
+      consumer_key =&gt; &quot;consumer_key&quot;
+      consumer_secret =&gt; &quot;consumer_secret&quot;
+      oauth_token =&gt; &quot;access_token&quot;
+      oauth_token_secret =&gt; &quot;access_token_secret&quot;
+      keywords =&gt; [ &quot;elasticfr&quot; ]
+      full_tweet =&gt; true
+  }
+}
+
+filter {
+}
+
+output {
+  stdout { codec =&gt; dots }
+  elasticsearch {
+    ssl =&gt; true
+    hosts =&gt; [ &quot;MYCLUSTERONFOUND.found.io:9243&quot; ]
+    index =&gt; &quot;twitter_meetup_fr_201511&quot;
+    document_type =&gt; &quot;tweet&quot;
+    template =&gt; &quot;twitter_template.json&quot;
+    template_name =&gt; &quot;twitter&quot;
+    user =&gt; &quot;logstash&quot;
+    password =&gt; &quot;password3&quot;
+  }
+}
+</code></pre>
+<p>Then, just launch logstash:</p>
+<pre><code class=language-sh>./logstash-2.0.0/bin/logstash -f meetup_fr.conf
+</code></pre>
+<p>Tweet!</p>
+<blockquote class=twitter-tweet><p lang=en dir=ltr>Don't forget our next <a href="https://twitter.com/ElasticFR?ref_src=twsrc%5Etfw">@ElasticFR</a> meetup! See you there guys! :D <a href="https://twitter.com/hashtag/elasticfr?src=hash&ref_src=twsrc%5Etfw">#elasticfr</a> <a href=https://t.co/SO2KxdEbv5>https://t.co/SO2KxdEbv5</a></p>&mdash; David Pilato🇪🇺🇫🇷 (@dadoonet) <a href="https://twitter.com/dadoonet/status/666600269246038016?ref_src=twsrc%5Etfw">November 17, 2015</a></blockquote>
+<script async src=https://platform.twitter.com/widgets.js></script>
+<h2 id=understand-your-data>Understand your data</h2>
+<p>Well, just open your Kibana 4 instance which is running on found and build as usual your dashboards.</p>
+<p>Our tweet is here!</p>
+<figure><img src=kibana_tweet.png alt="Tweet is here"><figcaption>
+<p>Tweet is here</p>
+</figcaption>
+</figure>
+</div>
+<div class=my-4>
+<a href=https://david.pilato.fr/tags/elasticsearch/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#elasticsearch</a>
+<a href=https://david.pilato.fr/tags/logstash/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#logstash</a>
+<a href=https://david.pilato.fr/tags/kibana/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#kibana</a>
+<a href=https://david.pilato.fr/tags/cloud/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#cloud</a>
+<a href=https://david.pilato.fr/tags/twitter/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#twitter</a>
+</div>
+<div class=py-2>
+<div class="flex flex-col md:flex-row items-center my-8">
+<a href=https://david.pilato.fr/authors/david-pilato/ class="w-24 h-24 md:mr-4">
+<img src=https://david.pilato.fr/authors/david-pilato/david_pilato.png class="w-full bg-primary-bg rounded-full" alt=Avatar>
+</a>
+<div class="w-full md:w-auto mt-4 md:mt-0">
+<a href=https://david.pilato.fr/authors/david-pilato/ class="block font-bold text-lg pb-1 mb-2 border-b">David Pilato</a>
+<span class="block pb-2">20+ years of experience, mostly in Java. Living in Cergy, France.</span>
+<a href=mailto:david+blog@pilato.fr class=mr-1>
+<i class="fas fa-envelope"></i>
+</a>
+<a href=https://twitter.com/dadoonet class=mr-1>
+<i class="fab fa-twitter"></i>
+</a>
+<a href=https://github.com/dadoonet class=mr-1>
+<i class="fab fa-github"></i>
+</a>
+<a href=https://www.linkedin.com/in/dadoonet/ class=mr-1>
+<i class="fab fa-linkedin"></i>
+</a>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+<div>
+<span class="block font-bold">Previous</span>
+<a href=https://david.pilato.fr/blog/2015-12-10-building-a-directory-map-with-elk/ class=block>Building a directory map with ELK</a>
+</div>
+<div class="md:text-right mt-4 md:mt-0">
+<span class="block font-bold">Next</span>
+<a href=https://david.pilato.fr/blog/2015-09-17-next-movie-to-watch-based-on-recommendation/ class=block>Next movie to watch based on recommendation</a>
+</div>
+</div>
+</div>
+<div class=col-span-2>
+<div class="bg-secondary-bg rounded p-6">
+<h3 class="text-lg font-semibold mb-4">Series of Posts</h3>
+<div class=content>
+<a href=https://david.pilato.fr/blog/2015-11-17-index-twitter-on-found/>Index Twitter on found</a>
+<br>
+<a href=https://david.pilato.fr/blog/2015-06-01-indexing-twitter-with-logstash-and-elasticsearch/>Indexing Twitter with Logstash and Elasticsearch</a>
+<br>
+</div>
+</div>
+<div class="sticky top-16 z-10 hidden lg:block px-6 py-4 bg-primary-bg">
+<span class="text-lg font-semibold">On This Page</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#create-your-cluster>Create your cluster</a></li>
+<li><a href=#add-kibana-4>Add Kibana 4</a></li>
+<li><a href=#create-shield-users>Create Shield users</a></li>
+<li><a href=#get-data-from-twitter>Get data from Twitter</a>
+<ul>
+<li><a href=#twitter-application>Twitter application</a></li>
+<li><a href=#logstash>Logstash</a></li>
+</ul>
+</li>
+<li><a href=#understand-your-data>Understand your data</a></li>
+</ul>
+</nav>
+</div>
+<script>window.addEventListener('DOMContentLoaded',()=>{enableStickyToc()})</script>
+</div>
+<div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded p-6">
+<h2 class="text-lg font-semibold mb-4">See Also</h2>
+<div class=content>
+<a href=https://david.pilato.fr/blog/2015-06-01-indexing-twitter-with-logstash-and-elasticsearch/>Indexing Twitter with Logstash and Elasticsearch</a>
+<br>
+<a href=https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/>Devoxx France 2015</a>
+<br>
+<a href=https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/>Exploring Capitaine Train dataset</a>
+<br>
+<a href=https://david.pilato.fr/blog/2015-09-14-import-from-sql-without-database/>Importing from a database without a database</a>
+<br>
+<a href=https://david.pilato.fr/blog/2015-05-20-reindex-elasticsearch-with-logstash/>Reindex elasticsearch with Logstash</a>
+<br>
+<a href=https://david.pilato.fr/blog/2015-09-17-next-movie-to-watch-based-on-recommendation/>Next movie to watch based on recommendation</a>
+<br>
+</div>
+</div>
+</div>
+<script>document.addEventListener('DOMContentLoaded',()=>{hljs.initHighlightingOnLoad()})</script>
+</div>
+</div>
+</main>
+<footer class=pl-scrollbar>
+<div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+<p class="text-sm text-tertiary-text">&copy; 2022, David Pilato, France
+&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p>
+</div></div>
+</footer>
+</body>
+</html>

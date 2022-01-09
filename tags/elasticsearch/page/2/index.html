@@ -1,0 +1,716 @@
+<!doctype html><html lang=en><meta charset=utf-8>
+<meta name=viewport content="width=device-width">
+<title>elasticsearch | David Pilato</title>
+<meta name=generator content="Hugo Eureka 0.8.4">
+<link rel=stylesheet href=https://david.pilato.fr/css/eureka.min.css>
+<script defer src=https://david.pilato.fr/js/eureka.min.js></script>
+<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+<link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload="this.onload=null,this.rel='stylesheet'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css media=print onload="this.media='all',this.onload=null" crossorigin>
+<script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js integrity="sha256-uNYoXefWRqv+PsIF/OflNmwtKM4lStn9yrz2gVl6ymo=" crossorigin></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X media=print onload="this.media='all',this.onload=null" crossorigin>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script>
+<script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js integrity="sha256-Zmpaaj+GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE=" crossorigin></script>
+<meta name=description content="Developer | Evangelist">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tags","item":"https://david.pilato.fr/tags/"},{"@type":"ListItem","position":2,"name":"elasticsearch","item":"https://david.pilato.fr/tags/elasticsearch/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"name":"Building a directory map with ELK","description":"I gave a BBL talk recently and while chatting with attendees, one of them told me a simple use case he covered with elasticsearch: indexing metadata files on a NAS with a simple ls -lR like command. His need is to be able to search on a NAS for files when a user wants to restore a deleted file.\nAs you can imagine a search engine is super helpful when you have hundreds of millions files!","url":"https://david.pilato.fr/blog/2015-12-10-building-a-directory-map-with-elk/"},{"@type":"ListItem","position":2,"name":"Index Twitter on found","description":"Some months ago, I published a recipe on how to index Twitter with Logstash and Elasticsearch.\nI have the same need today as I want to monitor Twitter when we run the elastic FR meetup (join us by the way if you are in France!).\nWell, this recipe can be really simplified and actually I don\u0026rsquo;t want to waste my time anymore on building and managing elasticsearch and Kibana clusters anymore.\nLet\u0026rsquo;s use a Found by elastic cluster instead.","url":"https://david.pilato.fr/blog/2015-11-17-index-twitter-on-found/"},{"@type":"ListItem","position":3,"name":"Next movie to watch based on recommendation","description":"This article is based on Recommender System with Mahout and Elasticsearch tutorial created by MapR.\nIt now uses the 20M MovieLens dataset which contains: 20 million ratings and 465 000 tag applications applied to 27 000 movies by 138 000 users and was released in 4/2015. The format with this recent version has changed a bit so I needed to adapt the existing scripts to the new format.\nPrerequisites  Download the 20M MovieLens dataset. Unzip it.","url":"https://david.pilato.fr/blog/2015-09-17-next-movie-to-watch-based-on-recommendation/"},{"@type":"ListItem","position":4,"name":"Importing from a database without a database","description":"Recently, I got a database MySQL dump and I was thinking of importing it into elasticsearch.\nThe first idea which pops up was:\n install MySQL import the database read the database with Logstash and import into elasticsearch drop the database uninstall MySQL  Well. I found that some of the steps are really not needed.\nI can actually use ELK stack and create a simple recipe which can be used to import SQL dump scripts without needing to actually load the data to a database and then read it again from the database.","url":"https://david.pilato.fr/blog/2015-09-14-import-from-sql-without-database/"},{"@type":"ListItem","position":5,"name":"Indexing Twitter with Logstash and Elasticsearch","description":"I\u0026rsquo;m often running some demos during conferences where we have a booth. As many others, I\u0026rsquo;m using Twitter feed as my datasource.\nI have been using Twitter river plugin for many years but, you know, rivers have been deprecated.\nLogstash 1.5.0 provides a safer and more flexible way to deal with tweets with its twitter input.\nLet\u0026rsquo;s do it!\nLet\u0026rsquo;s assume that you have already elasticsearch 1.5.2, Logstash 1.5.0 and Kibana 4.0.2 running on your laptop or on a cloud instance.","url":"https://david.pilato.fr/blog/2015-06-01-indexing-twitter-with-logstash-and-elasticsearch/"},{"@type":"ListItem","position":6,"name":"Reindex elasticsearch with Logstash","description":"Sometimes, you would like to reindex your data to change your mapping or to change your index settings or to move from one server to another or to one cluster to another (think about multiple data centers for example).\nFor the later you can use Snapshot and Restore feature but if you need to change any index settings, you need something else.\nWith Logstash 1.5.0, you can now do it super easily using elasticsearch input and elasticsearch output.","url":"https://david.pilato.fr/blog/2015-05-20-reindex-elasticsearch-with-logstash/"},{"@type":"ListItem","position":7,"name":"Using JS Auth with found cluster","description":"Using Found by elastic cluster helps a lot to have a ready to use and managed elasticsearch cluster.\nI started my own cluster yesterday to power brownbaglunch.fr website (work in progress) and it was ready to use after some clicks!\nIt\u0026rsquo;s a kind of magic!\n  But I ran into an issue when you secure it and use the elasticsearch javascript client.\nCreating your cluster  Found Console\n  Adding ACL By default, your cluster is opened but you can fix that by opening \u0026ldquo;Access Control\u0026rdquo; menu.","image":"https://david.pilato.fr/blog/2015-05-19-using-js-auth-with-found-cluster/found_byelastic_logo_512x185.png","url":"https://david.pilato.fr/blog/2015-05-19-using-js-auth-with-found-cluster/"},{"@type":"ListItem","position":8,"name":"Advanced search for your Legacy application","description":"I gave recently a talk at Voxxed Istanbul 2015 and I\u0026rsquo;d like to share here the story of this talk.\nThe talk was about adding a real search engine for your legacy application. Here \u0026ldquo;legacy\u0026rdquo; means an application which is still using SQL statements to execute search requests.\n Our current CRM application can visualize our customers. Each person is represented as a Person bean and have some properties like name, dateOfBirth, children, country, city and some metrics related to the number of clicks each person did on the car or food buttons on our mobile application (center of interests that is).","url":"https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/"},{"@type":"ListItem","position":9,"name":"Devoxx France 2015","description":"I gave recently a talk at Devoxx France 2015 with Colin Surprenant and I\u0026rsquo;d like to share here some of the examples we used for the talk.\nThe talk was about \u0026ldquo;what my data look like?\u0026rdquo;.\n We said that our manager was asking us to answer some questions:\n who are our customers? how do they use our services? what do they think about us on Twitter?  Our CRM database So we have a PostgreSQL database containing our data.","url":"https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/"},{"@type":"ListItem","position":10,"name":"Exploring Capitaine Train dataset","description":"Recently I saw a tweet where Capitaine Train team started to open data they have collected and enriched or corrected.\nOuvrez, ouvrez, les données structurées. Capitaine Train libère les gares : https://t.co/y6DjWsbALF #opendata\n\u0026mdash; Trainline France (@trainline_fr) April 23, 2015  I decided to play a bit with ELK stack and create a simple recipe which can be used with any other CSV like data.\nPrerequisites You will need:\n Logstash: I\u0026rsquo;m using 1.5.0-rc3. Elasticsearch: I\u0026rsquo;m using 1.","url":"https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/"},{"@type":"ListItem","position":11,"name":"ScrutMyDocs : un moteur de recherche pour documents","description":"Avec Malloum, nous venons de publier notre premier projet open-source commun: Scrut My Docs !\n Technical overview\n  Nos objectifs  Fournir une application web clé en main permettant d’indexer des documents de vos disques locaux. Fournir à la communauté Elasticsearch un modèle de base pour développer votre propre webapp pour une utilisation simple de recherche (« à la google »). Aider les débutants Elasticsearch Java avec des exemples concrets en Java  Les technologies employées  Elasticsearch !","image":"https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/scrutmydocs.png","url":"https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/"},{"@type":"ListItem","position":12,"name":"La factory Spring pour Elasticsearch est sortie !","description":"Et voilà, la première release de la factory spring vient d\u0026rsquo;être faite.\nVous pouvez donc maintenant l\u0026rsquo;utiliser dans vos projets Maven :\n\u0026lt;dependency\u0026gt; \u0026lt;groupId\u0026gt;fr.pilato.spring\u0026lt;/groupId\u0026gt; \u0026lt;artifactId\u0026gt;spring-elasticsearch\u0026lt;/artifactId\u0026gt; \u0026lt;version\u0026gt;0.0.1\u0026lt;/version\u0026gt; \u0026lt;/dependency\u0026gt;  Le code source est disponible sur github.","url":"https://david.pilato.fr/blog/2012-05-25-la-factory-spring-pour-elasticsearch-est-sortie/"},{"@type":"ListItem","position":13,"name":"Protéger son cluster Elasticsearch avec Jetty","description":"Nativement, Elasticsearch expose l\u0026rsquo;ensemble de ses services sans aucune authentification et donc une commande du type curl -XDELETE http://localhost:9200/myindex peut faire de nombreux dégâts non désirés.\nDe plus, si vous développez une application JQuery avec un accès direct depuis le poste client à votre cluster Elasticsearch, le risque qu\u0026rsquo;un utilisateur joue un peu avec votre cluster est grand !\nAlors, pas de panique\u0026hellip; La société Sonian Inc. a open sourcé son plugin Jetty pour Elasticsearch pour notre plus grand bonheur 😉","url":"https://david.pilato.fr/blog/2012-04-10-proteger-son-cluster-elasticsearch-avec-jetty/"},{"@type":"ListItem","position":14,"name":"Une factory Spring pour Elasticsearch","description":"Le besoin Il existe dans Hibernate une fonctionnalité que j\u0026rsquo;aime beaucoup : la mise à jour automatique du schéma de la base en fonction des entités manipulées.\nMon besoin est de faire quasiment la même chose avec Elasticsearch. C\u0026rsquo;est à dire que je souhaite pouvoir appliquer un mapping pour un type donné à chaque fois que je démarre mon projet (en l’occurrence une webapp).\nEn me basant sur le projet développé par Erez Mazor, j\u0026rsquo;ai donc développé unefactory Spring visant à démarrer des clients (voire des noeuds) Elasticsearch.","url":"https://david.pilato.fr/blog/2012-04-02-une-factory-spring-pour-elasticsearch/"},{"@type":"ListItem","position":15,"name":"Mon talk sur Elasticsearch sélectionné pour Devoxx France","description":"Bonjour,\nC\u0026rsquo;est avec une certaine émotion et fierté que j\u0026rsquo;ai appris samedi dernier la sélection de mon talk sur Elasticsearch à Devoxx France.\nDevoxx France est une conférence organisée du 18 au 20 avril 2012 à Paris, pour les Développeurs. Y faire parti au milieu de talents incroyables est vraiment un honneur.\nJe suis d\u0026rsquo;autant plus comblé que je vais pouvoir parler du sujet qui me passionne depuis maintenant 1 an : Elasticsearch.\nA l\u0026rsquo;origine, Shay Banon devait venir lui-même nous parler de l\u0026rsquo;analyse des données avec les facettes Elasticsearch, mais il ne pourra malheureusement pas être présent.","url":"https://david.pilato.fr/blog/2012-03-14-mon-talk-sur-elasticsearch-selectionne-pour-devoxx-france/"},{"@type":"ListItem","position":16,"name":"Quel client Java pour elasticsearch ?","description":"Il existe deux modes d\u0026rsquo;accès à elasticsearch en Java :\n Inscrire un noeud client dans le cluster elasticsearch Utiliser un client \u0026ldquo;simple\u0026rdquo;  Noeud client dans un cluster elasticsearch L\u0026rsquo;idée de cette méthode est de fabriquer un noeud elasticsearch (node) qui démarre avec les mêmes caractéristiques qu\u0026rsquo;un noeud d\u0026rsquo;indexation et de recherche sauf qu\u0026rsquo;on lui précise qu\u0026rsquo;il n\u0026rsquo;hébergera pas de données.\nPour cela, on utilise la propriété suivante :\nnode.data=false  Elle indique que le noeud que nous démarrons n\u0026rsquo;hébergera pas de données.","url":"https://david.pilato.fr/blog/2012-02-13-quel-client-java-pour-elasticsearch/"},{"@type":"ListItem","position":17,"name":"Mon premier plugin elasticsearch : RSS River","description":"Il existe dans elasticsearch la notion de river (rivière) qui comme son nom le laisse supposer permet de voir s\u0026rsquo;écouler des données depuis une source jusqu\u0026rsquo;à elasticsearch.\nAu fur et à mesure que les données arrivent, la rivière les transporte et les envoie à l\u0026rsquo;indexation dans elasticsearch.\nEn standard, il existe 4 rivières :\n CouchDB qui permet d\u0026rsquo;indexer toutes les nouveautés d\u0026rsquo;une base CouchDB. Voir aussi cet article à ce propos. RabbitMQ qui permet de récupérer des documents dans une queue de traitement asynchrone (genre JMS) Twitter qui permet d\u0026rsquo;indexer votre flux de messages twitter par exemple Wikipedia qui permet d\u0026rsquo;indexer toutes les nouveautés de l\u0026rsquo;encyclopédie au fur et à mesure de leurs publications  Premiers pas J\u0026rsquo;ai commencé par bidouiller un peu la rivière CouchDB pour y apporter quelques fonctionnalités dont mes collègues avaient besoin :","url":"https://david.pilato.fr/blog/2011-09-14-mon-premier-plugin-elasticsearch-rss-river/"},{"@type":"ListItem","position":18,"name":"Elasticsearch et les \"facets\"","description":"Les aventures avec Elasticsearch se poursuivent.\nCombien de fois ai-je dit récemment que ce projet est absolument génial et qu\u0026rsquo;il va constituer à mon sens un des projets majeurs des prochaines années\u0026hellip;\nQui n\u0026rsquo;a pas besoin de moteur de recherche ? Qui s\u0026rsquo;est déjà \u0026ldquo;emmerdé\u0026rdquo; à fabriquer ça lui-même ou à utiliser des briques pouvant aider au prix d\u0026rsquo;une complexité plus ou moins grande de mise en oeuvre ?\nJe crois que nous sommes tous passés par là !","url":"https://david.pilato.fr/blog/2011-06-20-elasticsearch-et-les-facets/"},{"@type":"ListItem","position":19,"name":"CouchDB","description":"Après avoir testé Elasticsearch, me voici parti pour regarder ce monde étrange qu\u0026rsquo;on appelle le NoSQL\u0026hellip;\nA dire vrai, j\u0026rsquo;ai entendu ce mot il y a quelques années, sans jamais vraiment m\u0026rsquo;y interesser\u0026hellip; Après tout, une base de données non SQL, ça n\u0026rsquo;est tout simplement pas possible !!!\nPuis, à force de cotoyer le monde d\u0026rsquo;Elasticsearch et les technos JSon et REST, je me lance.\nPour des raisons très pratiques, je choisis CouchDB de Apache. D\u0026rsquo;une part, il est directement intégrable avec Elasticsearch, et à la lecture rapide de sa documentation, il semble répondre à un des besoins auquel une équipe de mon pôle de développement est confrontée.","url":"https://david.pilato.fr/blog/2011-05-13-couchdb/"},{"@type":"ListItem","position":20,"name":"La recherche élastique...","description":"Elasticsearch, un projet mature en quelques mois\u0026hellip; A suivre de très près !\nEn cherchant un bout de code pour rendre la couche Hibernate Search facilement distribuable sur un cluster de machines JBoss, je suis tombé sur le projet Elasticsearch.\nAu début, un peu interloqué\u0026hellip; Puis, je me lance\u0026hellip;\nJe télécharge le projet. Je dézippe.\nJe lance\u0026hellip;\nMiracle. En quelques secondes, je dispose d\u0026rsquo;un outil dans un Cloud, simple, me permettant d\u0026rsquo;indexer n\u0026rsquo;importe quel type de document, de le récupérer et de faire une recherche (au sens google du terme) sur n\u0026rsquo;importe quel champ\u0026hellip; Et cela, quelque soit la technologie employée (Java, C#, .","url":"https://david.pilato.fr/blog/2011-03-09-la-recherche-elastique/"}]}</script><meta property="og:title" content="elasticsearch | David Pilato">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://david.pilato.fr/tags/elasticsearch/">
+<meta property="og:description" content="Developer | Evangelist">
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="David Pilato">
+<meta property="og:updated_time" content="2019-01-10T00:00:00+00:00">
+<meta property="article:section" content="tags">
+<link rel=alternate type=application/rss+xml href=https://david.pilato.fr/tags/elasticsearch/index.xml title="David Pilato">
+<body class="flex flex-col min-h-screen">
+<header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+<div class="w-full max-w-screen-xl mx-auto"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=='Auto'||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName('html')[0].classList.add('dark')</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+<a href=/ class="mr-6 text-primary-text text-xl font-bold">David Pilato</a>
+<button id=navbar-btn class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+<i class="fas fa-bars"></i>
+</button>
+<div id=target class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+<div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+<a href=/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Home</a>
+<a href=/blog/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">Blog</a>
+<a href=https://djdadoo.pilato.fr/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">DJ Mixes</a>
+<a href=/authors/david-pilato/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">About me</a>
+</div>
+<div class=flex>
+<div class="relative pt-4 md:pt-0">
+<div class="cursor-pointer hover:text-eureka" id=lightDarkMode>
+<i class="fas fa-adjust"></i>
+</div>
+<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open>
+</div>
+<div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions>
+<span class="px-4 py-1 hover:text-eureka" name=Light>Light</span>
+<span class="px-4 py-1 hover:text-eureka" name=Dark>Dark</span>
+<span class="px-4 py-1 hover:text-eureka" name=Auto>Auto</span>
+</div>
+</div>
+</div>
+</div>
+<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile>
+</div>
+</nav>
+<script>let element=document.getElementById('lightDarkMode');storageColorScheme==null||storageColorScheme=='Auto'?document.addEventListener('DOMContentLoaded',()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change',switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'sun'),element.firstElementChild.classList.add('fa-sun')):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'moon'),element.firstElementChild.classList.add('fa-moon')),document.addEventListener('DOMContentLoaded',()=>{getcolorscheme(),switchBurger()})</script>
+</div>
+</header>
+<main class="flex-grow pt-16">
+<div class=pl-scrollbar>
+<div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+<article class="mx-6 my-8">
+<h1 class="font-bold text-3xl text-primary-text">elasticsearch</h1>
+</article>
+<div class="bg-secondary-bg rounded px-6">
+<div class="overflow-hidden divide-y">
+<div class=py-6>
+<div class="flex flex-col-reverse lg:flex-row justify-between">
+<div class=w-full>
+<div class=mb-4>
+<a href=https://david.pilato.fr/blog/2015-12-10-building-a-directory-map-with-elk/ class="font-bold text-xl hover:text-eureka">Building a directory map with ELK</a>
+</div>
+<div class=content>
+I gave a BBL talk recently and while chatting with attendees, one of them told me a simple use case he covered with elasticsearch: indexing metadata files on a NAS with a simple ls -lR like command. His need is to be able to search on a NAS for files when a user wants to restore a deleted file.
+As you can imagine a search engine is super helpful when you have hundreds of millions files!
+</div>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2015-12-10</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>9 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=py-6>
+<div class="flex flex-col-reverse lg:flex-row justify-between">
+<div class=w-full>
+<div class=mb-4>
+<a href=https://david.pilato.fr/blog/2015-11-17-index-twitter-on-found/ class="font-bold text-xl hover:text-eureka">Index Twitter on found</a>
+</div>
+<div class=content>
+Some months ago, I published a recipe on how to index Twitter with Logstash and Elasticsearch.
+I have the same need today as I want to monitor Twitter when we run the elastic FR meetup (join us by the way if you are in France!).
+Well, this recipe can be really simplified and actually I don’t want to waste my time anymore on building and managing elasticsearch and Kibana clusters anymore.
+Let’s use a Found by elastic cluster instead.
+</div>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2015-11-17</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>4 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-th-list mr-1"></i>
+<a href=https://david.pilato.fr/series/indexing-twitter/ class=hover:text-eureka>indexing twitter</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=py-6>
+<div class="flex flex-col-reverse lg:flex-row justify-between">
+<div class=w-full>
+<div class=mb-4>
+<a href=https://david.pilato.fr/blog/2015-09-17-next-movie-to-watch-based-on-recommendation/ class="font-bold text-xl hover:text-eureka">Next movie to watch based on recommendation</a>
+</div>
+<div class=content>
+This article is based on Recommender System with Mahout and Elasticsearch tutorial created by MapR.
+It now uses the 20M MovieLens dataset which contains: 20 million ratings and 465 000 tag applications applied to 27 000 movies by 138 000 users and was released in 4/2015. The format with this recent version has changed a bit so I needed to adapt the existing scripts to the new format.
+Prerequisites Download the 20M MovieLens dataset. Unzip it.
+</div>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2015-09-17</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>7 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=py-6>
+<div class="flex flex-col-reverse lg:flex-row justify-between">
+<div class=w-full>
+<div class=mb-4>
+<a href=https://david.pilato.fr/blog/2015-09-14-import-from-sql-without-database/ class="font-bold text-xl hover:text-eureka">Importing from a database without a database</a>
+</div>
+<div class=content>
+Recently, I got a database MySQL dump and I was thinking of importing it into elasticsearch.
+The first idea which pops up was:
+install MySQL import the database read the database with Logstash and import into elasticsearch drop the database uninstall MySQL Well. I found that some of the steps are really not needed.
+I can actually use ELK stack and create a simple recipe which can be used to import SQL dump scripts without needing to actually load the data to a database and then read it again from the database.
+</div>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2015-09-14</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>6 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=py-6>
+<div class="flex flex-col-reverse lg:flex-row justify-between">
+<div class=w-full>
+<div class=mb-4>
+<a href=https://david.pilato.fr/blog/2015-06-01-indexing-twitter-with-logstash-and-elasticsearch/ class="font-bold text-xl hover:text-eureka">Indexing Twitter with Logstash and Elasticsearch</a>
+</div>
+<div class=content>
+I’m often running some demos during conferences where we have a booth. As many others, I’m using Twitter feed as my datasource.
+I have been using Twitter river plugin for many years but, you know, rivers have been deprecated.
+Logstash 1.5.0 provides a safer and more flexible way to deal with tweets with its twitter input.
+Let’s do it!
+Let’s assume that you have already elasticsearch 1.5.2, Logstash 1.5.0 and Kibana 4.0.2 running on your laptop or on a cloud instance.
+</div>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2015-06-01</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>4 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-th-list mr-1"></i>
+<a href=https://david.pilato.fr/series/indexing-twitter/ class=hover:text-eureka>indexing twitter</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=py-6>
+<div class="flex flex-col-reverse lg:flex-row justify-between">
+<div class=w-full>
+<div class=mb-4>
+<a href=https://david.pilato.fr/blog/2015-05-20-reindex-elasticsearch-with-logstash/ class="font-bold text-xl hover:text-eureka">Reindex elasticsearch with Logstash</a>
+</div>
+<div class=content>
+Sometimes, you would like to reindex your data to change your mapping or to change your index settings or to move from one server to another or to one cluster to another (think about multiple data centers for example).
+For the later you can use Snapshot and Restore feature but if you need to change any index settings, you need something else.
+With Logstash 1.5.0, you can now do it super easily using elasticsearch input and elasticsearch output.
+</div>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2015-05-20</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>5 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=py-6>
+<div class="flex flex-col-reverse lg:flex-row justify-between">
+<div class="w-full lg:w-2/3">
+<div class=mb-4>
+<a href=https://david.pilato.fr/blog/2015-05-19-using-js-auth-with-found-cluster/ class="font-bold text-xl hover:text-eureka">Using JS Auth with found cluster</a>
+</div>
+<div class=content>
+Using Found by elastic cluster helps a lot to have a ready to use and managed elasticsearch cluster.
+I started my own cluster yesterday to power brownbaglunch.fr website (work in progress) and it was ready to use after some clicks!
+It’s a kind of magic!
+But I ran into an issue when you secure it and use the elasticsearch javascript client.
+Creating your cluster Found Console
+Adding ACL By default, your cluster is opened but you can fix that by opening “Access Control” menu.
+</div>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2015-05-19</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>3 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
+</div>
+</div>
+</div>
+<div class="w-full lg:w-1/3 mb-4 lg:mb-0 lg:ml-8">
+<img src=https://david.pilato.fr/blog/2015-05-19-using-js-auth-with-found-cluster/found_byelastic_logo_512x185.png class=w-full alt="Featured Image">
+</div>
+</div>
+</div>
+<div class=py-6>
+<div class="flex flex-col-reverse lg:flex-row justify-between">
+<div class=w-full>
+<div class=mb-4>
+<a href=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/ class="font-bold text-xl hover:text-eureka">Advanced search for your Legacy application</a>
+</div>
+<div class=content>
+I gave recently a talk at Voxxed Istanbul 2015 and I’d like to share here the story of this talk.
+The talk was about adding a real search engine for your legacy application. Here “legacy” means an application which is still using SQL statements to execute search requests.
+Our current CRM application can visualize our customers. Each person is represented as a Person bean and have some properties like name, dateOfBirth, children, country, city and some metrics related to the number of clicks each person did on the car or food buttons on our mobile application (center of interests that is).
+</div>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2015-05-09</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>18 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=py-6>
+<div class="flex flex-col-reverse lg:flex-row justify-between">
+<div class=w-full>
+<div class=mb-4>
+<a href=https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/ class="font-bold text-xl hover:text-eureka">Devoxx France 2015</a>
+</div>
+<div class=content>
+I gave recently a talk at Devoxx France 2015 with Colin Surprenant and I’d like to share here some of the examples we used for the talk.
+The talk was about “what my data look like?”.
+We said that our manager was asking us to answer some questions:
+who are our customers? how do they use our services? what do they think about us on Twitter? Our CRM database So we have a PostgreSQL database containing our data.
+</div>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2015-05-02</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>6 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=py-6>
+<div class="flex flex-col-reverse lg:flex-row justify-between">
+<div class=w-full>
+<div class=mb-4>
+<a href=https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/ class="font-bold text-xl hover:text-eureka">Exploring Capitaine Train dataset</a>
+</div>
+<div class=content>
+Recently I saw a tweet where Capitaine Train team started to open data they have collected and enriched or corrected.
+Ouvrez, ouvrez, les données structurées. Capitaine Train libère les gares : https://t.co/y6DjWsbALF #opendata
+— Trainline France (@trainline_fr) April 23, 2015 I decided to play a bit with ELK stack and create a simple recipe which can be used with any other CSV like data.
+Prerequisites You will need:
+Logstash: I’m using 1.5.0-rc3. Elasticsearch: I’m using 1.
+</div>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2015-04-28</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>10 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=py-6>
+<div class="flex flex-col-reverse lg:flex-row justify-between">
+<div class="w-full lg:w-2/3">
+<div class=mb-4>
+<a href=https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/ class="font-bold text-xl hover:text-eureka">ScrutMyDocs : un moteur de recherche pour documents</a>
+</div>
+<div class=content>
+Avec Malloum, nous venons de publier notre premier projet open-source commun: Scrut My Docs !
+Technical overview
+Nos objectifs Fournir une application web clé en main permettant d’indexer des documents de vos disques locaux. Fournir à la communauté Elasticsearch un modèle de base pour développer votre propre webapp pour une utilisation simple de recherche (« à la google »). Aider les débutants Elasticsearch Java avec des exemples concrets en Java Les technologies employées Elasticsearch !
+</div>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2012-07-20</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>1 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/projects/ class=hover:text-eureka>projects</a>
+</div>
+</div>
+</div>
+<div class="w-full lg:w-1/3 mb-4 lg:mb-0 lg:ml-8">
+<img src=https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/scrutmydocs.png class=w-full alt="Featured Image">
+</div>
+</div>
+</div>
+<div class=py-6>
+<div class="flex flex-col-reverse lg:flex-row justify-between">
+<div class=w-full>
+<div class=mb-4>
+<a href=https://david.pilato.fr/blog/2012-05-25-la-factory-spring-pour-elasticsearch-est-sortie/ class="font-bold text-xl hover:text-eureka">La factory Spring pour Elasticsearch est sortie !</a>
+</div>
+<div class=content>
+Et voilà, la première release de la factory spring vient d’être faite.
+Vous pouvez donc maintenant l’utiliser dans vos projets Maven :
+&lt;dependency> &lt;groupId>fr.pilato.spring&lt;/groupId> &lt;artifactId>spring-elasticsearch&lt;/artifactId> &lt;version>0.0.1&lt;/version> &lt;/dependency> Le code source est disponible sur github.
+</div>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2012-05-25</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>1 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/projects/ class=hover:text-eureka>projects</a>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-th-list mr-1"></i>
+<a href=https://david.pilato.fr/series/elasticsearch-spring-factories/ class=hover:text-eureka>elasticsearch spring factories</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=py-6>
+<div class="flex flex-col-reverse lg:flex-row justify-between">
+<div class=w-full>
+<div class=mb-4>
+<a href=https://david.pilato.fr/blog/2012-04-10-proteger-son-cluster-elasticsearch-avec-jetty/ class="font-bold text-xl hover:text-eureka">Protéger son cluster Elasticsearch avec Jetty</a>
+</div>
+<div class=content>
+Nativement, Elasticsearch expose l’ensemble de ses services sans aucune authentification et donc une commande du type curl -XDELETE http://localhost:9200/myindex peut faire de nombreux dégâts non désirés.
+De plus, si vous développez une application JQuery avec un accès direct depuis le poste client à votre cluster Elasticsearch, le risque qu’un utilisateur joue un peu avec votre cluster est grand !
+Alors, pas de panique… La société Sonian Inc. a open sourcé son plugin Jetty pour Elasticsearch pour notre plus grand bonheur 😉
+</div>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2012-04-10</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>2 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=py-6>
+<div class="flex flex-col-reverse lg:flex-row justify-between">
+<div class=w-full>
+<div class=mb-4>
+<a href=https://david.pilato.fr/blog/2012-04-02-une-factory-spring-pour-elasticsearch/ class="font-bold text-xl hover:text-eureka">Une factory Spring pour Elasticsearch</a>
+</div>
+<div class=content>
+Le besoin Il existe dans Hibernate une fonctionnalité que j’aime beaucoup : la mise à jour automatique du schéma de la base en fonction des entités manipulées.
+Mon besoin est de faire quasiment la même chose avec Elasticsearch. C’est à dire que je souhaite pouvoir appliquer un mapping pour un type donné à chaque fois que je démarre mon projet (en l’occurrence une webapp).
+En me basant sur le projet développé par Erez Mazor, j’ai donc développé unefactory Spring visant à démarrer des clients (voire des noeuds) Elasticsearch.
+</div>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2012-04-02</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>2 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/projects/ class=hover:text-eureka>projects</a>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-th-list mr-1"></i>
+<a href=https://david.pilato.fr/series/elasticsearch-spring-factories/ class=hover:text-eureka>elasticsearch spring factories</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=py-6>
+<div class="flex flex-col-reverse lg:flex-row justify-between">
+<div class=w-full>
+<div class=mb-4>
+<a href=https://david.pilato.fr/blog/2012-03-14-mon-talk-sur-elasticsearch-selectionne-pour-devoxx-france/ class="font-bold text-xl hover:text-eureka">Mon talk sur Elasticsearch sélectionné pour Devoxx France</a>
+</div>
+<div class=content>
+Bonjour,
+C’est avec une certaine émotion et fierté que j’ai appris samedi dernier la sélection de mon talk sur Elasticsearch à Devoxx France.
+Devoxx France est une conférence organisée du 18 au 20 avril 2012 à Paris, pour les Développeurs. Y faire parti au milieu de talents incroyables est vraiment un honneur.
+Je suis d’autant plus comblé que je vais pouvoir parler du sujet qui me passionne depuis maintenant 1 an : Elasticsearch.
+A l’origine, Shay Banon devait venir lui-même nous parler de l’analyse des données avec les facettes Elasticsearch, mais il ne pourra malheureusement pas être présent.
+</div>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2012-03-14</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>2 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/speaker/ class=hover:text-eureka>speaker</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=py-6>
+<div class="flex flex-col-reverse lg:flex-row justify-between">
+<div class=w-full>
+<div class=mb-4>
+<a href=https://david.pilato.fr/blog/2012-02-13-quel-client-java-pour-elasticsearch/ class="font-bold text-xl hover:text-eureka">Quel client Java pour elasticsearch ?</a>
+</div>
+<div class=content>
+Il existe deux modes d’accès à elasticsearch en Java :
+Inscrire un noeud client dans le cluster elasticsearch Utiliser un client “simple” Noeud client dans un cluster elasticsearch L’idée de cette méthode est de fabriquer un noeud elasticsearch (node) qui démarre avec les mêmes caractéristiques qu’un noeud d’indexation et de recherche sauf qu’on lui précise qu’il n’hébergera pas de données.
+Pour cela, on utilise la propriété suivante :
+node.data=false Elle indique que le noeud que nous démarrons n’hébergera pas de données.
+</div>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2012-02-13</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>3 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=py-6>
+<div class="flex flex-col-reverse lg:flex-row justify-between">
+<div class=w-full>
+<div class=mb-4>
+<a href=https://david.pilato.fr/blog/2011-09-14-mon-premier-plugin-elasticsearch-rss-river/ class="font-bold text-xl hover:text-eureka">Mon premier plugin elasticsearch : RSS River</a>
+</div>
+<div class=content>
+Il existe dans elasticsearch la notion de river (rivière) qui comme son nom le laisse supposer permet de voir s’écouler des données depuis une source jusqu’à elasticsearch.
+Au fur et à mesure que les données arrivent, la rivière les transporte et les envoie à l’indexation dans elasticsearch.
+En standard, il existe 4 rivières :
+CouchDB qui permet d’indexer toutes les nouveautés d’une base CouchDB. Voir aussi cet article à ce propos. RabbitMQ qui permet de récupérer des documents dans une queue de traitement asynchrone (genre JMS) Twitter qui permet d’indexer votre flux de messages twitter par exemple Wikipedia qui permet d’indexer toutes les nouveautés de l’encyclopédie au fur et à mesure de leurs publications Premiers pas J’ai commencé par bidouiller un peu la rivière CouchDB pour y apporter quelques fonctionnalités dont mes collègues avaient besoin :
+</div>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2011-09-14</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>4 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/projects/ class=hover:text-eureka>projects</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=py-6>
+<div class="flex flex-col-reverse lg:flex-row justify-between">
+<div class=w-full>
+<div class=mb-4>
+<a href=https://david.pilato.fr/blog/2011-06-20-elasticsearch-et-les-facets/ class="font-bold text-xl hover:text-eureka">Elasticsearch et les "facets"</a>
+</div>
+<div class=content>
+Les aventures avec Elasticsearch se poursuivent.
+Combien de fois ai-je dit récemment que ce projet est absolument génial et qu’il va constituer à mon sens un des projets majeurs des prochaines années…
+Qui n’a pas besoin de moteur de recherche ? Qui s’est déjà “emmerdé” à fabriquer ça lui-même ou à utiliser des briques pouvant aider au prix d’une complexité plus ou moins grande de mise en oeuvre ?
+Je crois que nous sommes tous passés par là !
+</div>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2011-06-20</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>5 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-th-list mr-1"></i>
+<a href=https://david.pilato.fr/series/d%C3%A9couverte-elasticsearch/ class=hover:text-eureka>Découverte Elasticsearch</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=py-6>
+<div class="flex flex-col-reverse lg:flex-row justify-between">
+<div class=w-full>
+<div class=mb-4>
+<a href=https://david.pilato.fr/blog/2011-05-13-couchdb/ class="font-bold text-xl hover:text-eureka">CouchDB</a>
+</div>
+<div class=content>
+Après avoir testé Elasticsearch, me voici parti pour regarder ce monde étrange qu’on appelle le NoSQL…
+A dire vrai, j’ai entendu ce mot il y a quelques années, sans jamais vraiment m’y interesser… Après tout, une base de données non SQL, ça n’est tout simplement pas possible !!!
+Puis, à force de cotoyer le monde d’Elasticsearch et les technos JSon et REST, je me lance.
+Pour des raisons très pratiques, je choisis CouchDB de Apache. D’une part, il est directement intégrable avec Elasticsearch, et à la lecture rapide de sa documentation, il semble répondre à un des besoins auquel une équipe de mon pôle de développement est confrontée.
+</div>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2011-05-13</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>5 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-th-list mr-1"></i>
+<a href=https://david.pilato.fr/series/d%C3%A9couverte-elasticsearch/ class=hover:text-eureka>Découverte Elasticsearch</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=py-6>
+<div class="flex flex-col-reverse lg:flex-row justify-between">
+<div class=w-full>
+<div class=mb-4>
+<a href=https://david.pilato.fr/blog/2011-03-09-la-recherche-elastique/ class="font-bold text-xl hover:text-eureka">La recherche élastique...</a>
+</div>
+<div class=content>
+Elasticsearch, un projet mature en quelques mois… A suivre de très près !
+En cherchant un bout de code pour rendre la couche Hibernate Search facilement distribuable sur un cluster de machines JBoss, je suis tombé sur le projet Elasticsearch.
+Au début, un peu interloqué… Puis, je me lance…
+Je télécharge le projet. Je dézippe.
+Je lance…
+Miracle. En quelques secondes, je dispose d’un outil dans un Cloud, simple, me permettant d’indexer n’importe quel type de document, de le récupérer et de faire une recherche (au sens google du terme) sur n’importe quel champ… Et cela, quelque soit la technologie employée (Java, C#, .
+</div>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2011-03-09</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>2 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-th-list mr-1"></i>
+<a href=https://david.pilato.fr/series/d%C3%A9couverte-elasticsearch/ class=hover:text-eureka>Découverte Elasticsearch</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ul class="pagination pagination-default">
+<li class=page-item>
+<a href=/tags/elasticsearch/ aria-label=First class=page-link role=button><span aria-hidden=true>&#171;&#171;</span></a>
+</li>
+<li class=page-item>
+<a href=/tags/elasticsearch/ aria-label=Previous class=page-link role=button><span aria-hidden=true>&#171;</span></a>
+</li>
+<li class=page-item>
+<a href=/tags/elasticsearch/ aria-label="Page 1" class=page-link role=button>1</a>
+</li>
+<li class="page-item active">
+<a aria-current=page aria-label="Page 2" class=page-link role=button>2</a>
+</li>
+<li class="page-item disabled">
+<a aria-disabled=true aria-label=Next class=page-link role=button tabindex=-1><span aria-hidden=true>&#187;</span></a>
+</li>
+<li class="page-item disabled">
+<a aria-disabled=true aria-label=Last class=page-link role=button tabindex=-1><span aria-hidden=true>&#187;&#187;</span></a>
+</li>
+</ul>
+</div>
+</div>
+</main>
+<footer class=pl-scrollbar>
+<div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+<p class="text-sm text-tertiary-text">&copy; 2022, David Pilato, France
+&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p>
+</div></div>
+</footer>
+</body>
+</html>

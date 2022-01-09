@@ -1,0 +1,447 @@
+<!doctype html><html lang=en><meta charset=utf-8>
+<meta name=viewport content="width=device-width">
+<title>Devoxx France 2015 | David Pilato</title>
+<meta name=generator content="Hugo Eureka 0.8.4">
+<link rel=stylesheet href=https://david.pilato.fr/css/eureka.min.css>
+<script defer src=https://david.pilato.fr/js/eureka.min.js></script>
+<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+<link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload="this.onload=null,this.rel='stylesheet'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css media=print onload="this.media='all',this.onload=null" crossorigin>
+<script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js integrity="sha256-uNYoXefWRqv+PsIF/OflNmwtKM4lStn9yrz2gVl6ymo=" crossorigin></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X media=print onload="this.media='all',this.onload=null" crossorigin>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script>
+<script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js integrity="sha256-Zmpaaj+GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE=" crossorigin></script>
+<meta name=description content="I gave recently a talk at Devoxx France 2015 with Colin Surprenant and I&rsquo;d like to share here some of the examples we used for the talk.
+The talk was about &ldquo;what my data look like?&rdquo;.
+ We said that our manager was asking us to answer some questions:
+ who are our customers? how do they use our services? what do they think about us on Twitter?  Our CRM database So we have a PostgreSQL database containing our data.">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog","item":"https://david.pilato.fr/blog/"},{"@type":"ListItem","position":2,"name":"Devoxx France 2015","item":"https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/"},"headline":"Devoxx France 2015 | David Pilato","datePublished":"2015-05-02T01:30:00+02:00","dateModified":"2015-05-02T01:30:00+02:00","wordCount":1080,"author":{"@type":"Person","name":["David Pilato"]},"publisher":{"@type":"Person","name":"David Pilato"},"description":"I gave recently a talk at Devoxx France 2015 with Colin Surprenant and I\u0026rsquo;d like to share here some of the examples we used for the talk.\nThe talk was about \u0026ldquo;what my data look like?\u0026rdquo;.\n We said that our manager was asking us to answer some questions:\n who are our customers? how do they use our services? what do they think about us on Twitter?  Our CRM database So we have a PostgreSQL database containing our data."}</script><meta property="og:title" content="Devoxx France 2015 | David Pilato">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/">
+<meta property="og:description" content="I gave recently a talk at Devoxx France 2015 with Colin Surprenant and I&rsquo;d like to share here some of the examples we used for the talk.
+The talk was about &ldquo;what my data look like?&rdquo;.
+ We said that our manager was asking us to answer some questions:
+ who are our customers? how do they use our services? what do they think about us on Twitter?  Our CRM database So we have a PostgreSQL database containing our data.">
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="David Pilato">
+<meta property="article:published_time" content="2015-05-02T01:30:00+02:00">
+<meta property="article:modified_time" content="2015-05-02T01:30:00+02:00">
+<meta property="article:section" content="blog">
+<meta property="article:tag" content="elasticsearch">
+<meta property="article:tag" content="logstash">
+<meta property="article:tag" content="kibana">
+<meta property="article:tag" content="hibernate">
+<meta property="article:tag" content="sql">
+<meta property="article:tag" content="conference">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2012-03-14-mon-talk-sur-elasticsearch-selectionne-pour-devoxx-france/">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2011-03-09-la-recherche-elastique/">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2015-03-05-using-log4j2-with-hibernate-4/">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2012-05-25-la-factory-spring-pour-elasticsearch-est-sortie/">
+<body class="flex flex-col min-h-screen">
+<header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+<div class="w-full max-w-screen-xl mx-auto"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=='Auto'||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName('html')[0].classList.add('dark')</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+<a href=/ class="mr-6 text-primary-text text-xl font-bold">David Pilato</a>
+<button id=navbar-btn class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+<i class="fas fa-bars"></i>
+</button>
+<div id=target class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+<div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+<a href=/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Home</a>
+<a href=/blog/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Blog</a>
+<a href=https://djdadoo.pilato.fr/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">DJ Mixes</a>
+<a href=/authors/david-pilato/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">About me</a>
+</div>
+<div class=flex>
+<div class="relative pt-4 md:pt-0">
+<div class="cursor-pointer hover:text-eureka" id=lightDarkMode>
+<i class="fas fa-adjust"></i>
+</div>
+<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open>
+</div>
+<div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions>
+<span class="px-4 py-1 hover:text-eureka" name=Light>Light</span>
+<span class="px-4 py-1 hover:text-eureka" name=Dark>Dark</span>
+<span class="px-4 py-1 hover:text-eureka" name=Auto>Auto</span>
+</div>
+</div>
+</div>
+</div>
+<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile>
+</div>
+</nav>
+<script>let element=document.getElementById('lightDarkMode');storageColorScheme==null||storageColorScheme=='Auto'?document.addEventListener('DOMContentLoaded',()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change',switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'sun'),element.firstElementChild.classList.add('fa-sun')):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'moon'),element.firstElementChild.classList.add('fa-moon')),document.addEventListener('DOMContentLoaded',()=>{getcolorscheme(),switchBurger()})</script>
+</div>
+</header>
+<main class="flex-grow pt-16">
+<div class=pl-scrollbar>
+<div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+<div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+<h1 class="font-bold text-3xl text-primary-text">Devoxx France 2015</h1>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2015-05-02</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>6 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
+</div>
+</div>
+<div class=content>
+<p>I gave recently a <a href=http://cfp.devoxx.fr/2015/talk/OMZ-7895/Elles_ressemblent_a_quoi_mes_donnees_%3F>talk at Devoxx France 2015</a> with <a href=https://twitter.com/@colinsurprenant>Colin Surprenant</a> and I&rsquo;d like to share here some of the examples we used for the talk.</p>
+<p>The talk was about &ldquo;what my data look like?&rdquo;.</p>
+<script async class=speakerdeck-embed data-id=84b56957191849ff92b445078abf40aa data-ratio=1.77777777777778 src=//speakerdeck.com/assets/embed.js></script>
+<p>We said that our manager was asking us to answer some questions:</p>
+<ul>
+<li>who are our customers?</li>
+<li>how do they use our services?</li>
+<li>what do they think about us on Twitter?</li>
+</ul>
+<h2 id=our-crm-database>Our CRM database</h2>
+<p>So we have a PostgreSQL database containing our data.
+We created live a Java application which fetch our data, convert them to JSON and send them to elasticsearch.</p>
+<p>We started from an existing code which is able to connect to our database using Hibernate. We have already annotated beans which represent our model.</p>
+<pre><code class=language-java>public class CrmApp {
+    public static void main(String[] args) throws Exception {
+        CrmFactory.sessionFactory();
+        HibernateService hibernate = new HibernateService();
+
+        int from = 1;
+        boolean haveRecords = true;
+
+        // While we have data to get, we read 10 000 records in the database
+        while (haveRecords) {
+            hibernate.beginTransaction();
+            Criteria criteria = hibernate.getSession().createCriteria(Person.class);
+            criteria.setFirstResult(from);
+            criteria.setMaxResults(10000);
+            List&lt;Person&gt; persons = criteria.list();
+            for (Person person : persons) {
+              // We have a person here
+            }
+            hibernate.commitTransaction();
+
+            if (persons.size() == 0) {
+                haveRecords = false;
+            } else {
+                from += 10000;
+            }
+        }
+        CrmFactory.close();
+    }
+}
+</code></pre>
+<p>The first thing to do is to add <code>elasticsearch</code> as a dependency to the project in our <code>pom.xml</code> file:</p>
+<pre><code class=language-xml>&lt;dependency&gt;
+    &lt;groupId&gt;org.elasticsearch&lt;/groupId&gt;
+    &lt;artifactId&gt;elasticsearch&lt;/artifactId&gt;
+    &lt;version&gt;1.5.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>We will also use Jackson library to serialize our documents in JSON:</p>
+<pre><code class=language-xml>&lt;dependency&gt;
+    &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+    &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+    &lt;version&gt;2.3.5&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>We first need to create an elasticsearch client. We will use here a <a href=https://david.pilato.fr/blog/2012-02-13-quel-client-java-pour-elasticsearch/>Transport Client</a>:</p>
+<pre><code class=language-java>// Create a transport client with cluster.name=devoxx and default IP/Port
+Client esClient = new TransportClient(
+    ImmutableSettings.builder().put(&quot;cluster.name&quot;, &quot;devoxx&quot;)
+  ).addTransportAddress(
+    new InetSocketTransportAddress(&quot;127.0.0.1&quot;, 9300)
+  );
+</code></pre>
+<p>We can either index documents one by one but this is super inefficient. The best way for doing that is by using the <code>BulkProcessor</code> class which is provided by elasticsearch. A Bulk will basically execute a given set of requests (index, update or delete) instead of executing each request indivdually:</p>
+<pre><code class=language-java>// Create a bulk processor
+BulkProcessor bulk = BulkProcessor.builder(esClient, new BulkProcessor.Listener() {
+  @Override
+  public void beforeBulk(long executionId, BulkRequest request) { }
+
+  @Override
+  public void afterBulk(long executionId, BulkRequest request, BulkResponse response) { }
+
+  @Override
+  public void afterBulk(long executionId, BulkRequest request, Throwable failure) { }
+})
+  // We will send the bulk every 10 000 requests
+  .setBulkActions(10000)
+  // We will send the bulk every 5 seconds even if we don't have 10 000 requests
+  .setFlushInterval(TimeValue.timeValueSeconds(5))
+  .build();
+</code></pre>
+<p>Let&rsquo;s create an <code>ObjectMapper</code> to serialize into JSON:</p>
+<pre><code class=language-java>// Create Jackson mapper
+ObjectMapper mapper = new ObjectMapper();
+</code></pre>
+<p>And now, we just have to send every single object we get from the database to elasticsearch:</p>
+<pre><code class=language-java>for (Person person : persons) {
+    // Serialize our bean to a JSON (as bytes or String)
+    byte[] bytes = mapper.writeValueAsBytes(person);
+    // Send our JSON to elasticsearch
+    // index name will be &quot;persons&quot;, type is &quot;person&quot; and we use our bean id as id
+    bulk.add(
+      new IndexRequest(&quot;persons&quot;, &quot;person&quot;, &quot;&quot; + person.getId()).source(bytes)
+    );
+}
+</code></pre>
+<p>We can run our application and check that everything is working fine but running:</p>
+<pre><code class=language-sh>curl -XGET localhost:9200/persons/person/_count?pretty
+</code></pre>
+<p>We can also build our Kibana dashboard which represents our customers:</p>
+<figure><img src=dashboard-crm.png alt="CRM dashboard"><figcaption>
+<p>CRM dashboard</p>
+</figcaption>
+</figure>
+<h2 id=service-usage>Service usage</h2>
+<p>We have logs coming from nginx as JSON documents:</p>
+<pre><code class=language-json>{
+    &quot;agent&quot;: &quot;Debian APT-HTTP/1.3 (0.9.7.9)&quot;, 
+    &quot;code&quot;: 404, 
+    &quot;host&quot;: &quot;packages.elasticsearch.org&quot;, 
+    &quot;machine&quot;: &quot;i-ea96c300&quot;, 
+    &quot;origin&quot;: &quot;50.57.209.100&quot;, 
+    &quot;referrer&quot;: &quot;-&quot;, 
+    &quot;remote&quot;: &quot;10.5.45.194&quot;, 
+    &quot;request&quot;: &quot;GET /logstash/1.4/debian/dists/stable/main/i18n/Translation-en_US.bz2 HTTP/1.1&quot;, 
+    &quot;size&quot;: 335, 
+    &quot;time&quot;: &quot;2015-03-01T22:00:01+00:00&quot;
+}
+</code></pre>
+<p>We have collected one day of data in <code>nginx-logs</code>:</p>
+<pre><code class=language-sh>ls nginx-logs
+</code></pre>
+<p>gives</p>
+<pre><code class=language-txt>download.log.2015-04-01.00-00-01.i-4548086a.gz
+download.log.2015-04-01.00-00-01.i-737c3a89.gz
+download.log.2015-04-01.00-00-01.i-8cd72f7c.gz
+download.log.2015-04-01.00-00-01.i-951754ba.gz
+...
+download.log.2015-04-01.23-00-01.i-951754ba.gz
+download.log.2015-04-01.23-00-01.i-97783e6d.gz
+download.log.2015-04-01.23-00-01.i-c4904b34.gz
+</code></pre>
+<p>As an input, we will use <code>stdin</code> input filter with <code>json_lines</code> codec plugin:</p>
+<pre><code class=language-rb>input {
+  stdin {
+    codec =&gt; json_lines
+  }
+}
+</code></pre>
+<p>We will extract the date from <code>time</code> field, generate information about geo location of the user based on its ip address available in <code>origin</code> field and also get some details about the <code>useragent</code> field:</p>
+<pre><code class=language-rb>filter {
+  date {
+    match =&gt; [ &quot;time&quot;, &quot;ISO8601&quot; ]
+    locale =&gt; en
+    remove_field =&gt; &quot;time&quot;
+  }
+
+  geoip {
+    source =&gt; &quot;origin&quot;
+    remove_field =&gt; [&quot;remote&quot;, &quot;machine&quot;]
+  }
+
+  useragent {
+    source =&gt; &quot;agent&quot;
+    target =&gt; &quot;useragent&quot;
+  }
+}
+</code></pre>
+<p>A little trick has been added as a filter. Sometimes, gives back 2 IP addresses in <code>origin</code> field: <code>"origin": "192.168.27.32, 195.214.227.49"</code>. We are going to extract only the last part with <code>mutate</code> <code>gsub</code>:</p>
+<pre><code class=language-rb>mutate {
+  gsub =&gt; [
+    &quot;origin&quot;, &quot;.*, &quot;, &quot;&quot;
+  ]
+}
+</code></pre>
+<p>Then we just have to send all our data to elasticsearch:</p>
+<pre><code class=language-rb>output {
+  stdout { codec =&gt; dots }
+  elasticsearch {
+    protocol =&gt; &quot;http&quot;
+    host =&gt; &quot;localhost&quot;
+  }
+}
+</code></pre>
+<p>Let&rsquo;s parse our logs with logstash:</p>
+<pre><code class=language-sh>gzcat nginx-logs/* | bin/logstash -f nginx.conf
+</code></pre>
+<p>We can now build our Kibana dashboard which represents our logs:</p>
+<figure><img src=dashboard-logs.png alt="LOGS dashboard"><figcaption>
+<p>LOGS dashboard</p>
+</figcaption>
+</figure>
+<h2 id=twitter-tracking>Twitter tracking</h2>
+<p>We just have to use the Twitter input plugin for that. We will track everything about <code>devoxx</code>, <code>elk</code>, <code>elasticsearch</code>, <code>logstash</code> and <code>kibana</code> and we want to index all fields coming from the twitter API:</p>
+<pre><code class=language-rb>input {
+  twitter {
+      consumer_key =&gt; &quot;consumer_key&quot;
+      consumer_secret =&gt; &quot;consumer_secret&quot;
+      oauth_token =&gt; &quot;oauth_token&quot;
+      oauth_token_secret =&gt; &quot;oauth_token_secret&quot;
+      keywords =&gt; [ &quot;devoxx&quot;, &quot;elk&quot;, &quot;elasticsearch&quot;, &quot;logstash&quot;, &quot;kibana&quot; ]
+      full_tweet =&gt; true
+  }
+}
+</code></pre>
+<p>We don&rsquo;t need any filter here:</p>
+<pre><code class=language-rb>filter {
+}
+</code></pre>
+<p>We will index into elasticsearch but we need to provide a specific index template to define what our mapping will look like:</p>
+<pre><code class=language-rb>output {
+  stdout { codec =&gt; dots }
+  elasticsearch {
+    protocol =&gt; &quot;http&quot;
+    host =&gt; &quot;localhost&quot;
+    index =&gt; &quot;twitter&quot;
+    index_type =&gt; &quot;tweet&quot;
+    template =&gt; &quot;twitter_template.json&quot;
+    template_name =&gt; &quot;twitter&quot;
+  }
+}
+</code></pre>
+<p><code>twitter_template.json</code> file contains our template. We define that we use 1 single shard, that we don&rsquo;t need <code>_all</code> field and that we will index <code>coordinates.coordinates</code> field as a <code>geo_point</code>:</p>
+<pre><code class=language-json>{
+  &quot;template&quot;: &quot;twitter&quot;,
+  &quot;order&quot;:    1, 
+  &quot;settings&quot;: {
+    &quot;number_of_shards&quot;: 1 
+  },
+  &quot;mappings&quot;: {
+    &quot;tweet&quot;: { 
+      &quot;_all&quot;: {
+        &quot;enabled&quot;: false
+      },
+      &quot;properties&quot;: {
+        &quot;coordinates&quot;: {
+          &quot;properties&quot;: {
+             &quot;coordinates&quot;: {
+                &quot;type&quot;: &quot;geo_point&quot;
+             },
+             &quot;type&quot;: {
+                &quot;type&quot;: &quot;string&quot;
+             }
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<p>Let&rsquo;s start to listen to Twitter now:</p>
+<pre><code class=language-sh>logstash-1.5.0.rc2/bin/logstash -f twitter.conf
+</code></pre>
+<p>For each tweet coming, you will see a dot printed.</p>
+<p>We can now build our Kibana dashboard which represents our logs.</p>
+<p>The funny thing with this demo is that we are tracking everything about <code>elk</code>. But ELK does not only mean Elasticsearch, Logstash and Kibana. It&rsquo;s also <a href=http://en.wikipedia.org/wiki/Elk>an animal</a>!</p>
+<figure><img src=Rocky_Mountain_Bull_Elk.jpg alt=ELK><figcaption>
+<p>ELK</p>
+</figcaption>
+</figure>
+<p>So when US is awake, we often get tweets with other terms like <code>hunt</code>, <code>hunting</code> and so on. But with Kibana, it&rsquo;s easy to add a &ldquo;negative&rdquo; filter on those terms so we can easily get information on what we are actually looking for!</p>
+<figure><img src=dashboard-twitter.png alt="Twitter dashboard"><figcaption>
+<p>Twitter dashboard</p>
+</figcaption>
+</figure>
+</div>
+<div class=my-4>
+<a href=https://david.pilato.fr/tags/elasticsearch/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#elasticsearch</a>
+<a href=https://david.pilato.fr/tags/logstash/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#logstash</a>
+<a href=https://david.pilato.fr/tags/kibana/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#kibana</a>
+<a href=https://david.pilato.fr/tags/hibernate/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#hibernate</a>
+<a href=https://david.pilato.fr/tags/sql/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#sql</a>
+<a href=https://david.pilato.fr/tags/conference/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#conference</a>
+</div>
+<div class=py-2>
+<div class="flex flex-col md:flex-row items-center my-8">
+<a href=https://david.pilato.fr/authors/david-pilato/ class="w-24 h-24 md:mr-4">
+<img src=https://david.pilato.fr/authors/david-pilato/david_pilato.png class="w-full bg-primary-bg rounded-full" alt=Avatar>
+</a>
+<div class="w-full md:w-auto mt-4 md:mt-0">
+<a href=https://david.pilato.fr/authors/david-pilato/ class="block font-bold text-lg pb-1 mb-2 border-b">David Pilato</a>
+<span class="block pb-2">20+ years of experience, mostly in Java. Living in Cergy, France.</span>
+<a href=mailto:david+blog@pilato.fr class=mr-1>
+<i class="fas fa-envelope"></i>
+</a>
+<a href=https://twitter.com/dadoonet class=mr-1>
+<i class="fab fa-twitter"></i>
+</a>
+<a href=https://github.com/dadoonet class=mr-1>
+<i class="fab fa-github"></i>
+</a>
+<a href=https://www.linkedin.com/in/dadoonet/ class=mr-1>
+<i class="fab fa-linkedin"></i>
+</a>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+<div>
+<span class="block font-bold">Previous</span>
+<a href=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/ class=block>Advanced search for your Legacy application</a>
+</div>
+<div class="md:text-right mt-4 md:mt-0">
+<span class="block font-bold">Next</span>
+<a href=https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/ class=block>Exploring Capitaine Train dataset</a>
+</div>
+</div>
+</div>
+<div class=col-span-2>
+<div class="sticky top-16 z-10 hidden lg:block px-6 py-4 bg-primary-bg">
+<span class="text-lg font-semibold">On This Page</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#our-crm-database>Our CRM database</a></li>
+<li><a href=#service-usage>Service usage</a></li>
+<li><a href=#twitter-tracking>Twitter tracking</a></li>
+</ul>
+</nav>
+</div>
+<script>window.addEventListener('DOMContentLoaded',()=>{enableStickyToc()})</script>
+</div>
+<div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded p-6">
+<h2 class="text-lg font-semibold mb-4">See Also</h2>
+<div class=content>
+<a href=https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/>Exploring Capitaine Train dataset</a>
+<br>
+<a href=https://david.pilato.fr/blog/2012-03-14-mon-talk-sur-elasticsearch-selectionne-pour-devoxx-france/>Mon talk sur Elasticsearch sélectionné pour Devoxx France</a>
+<br>
+<a href=https://david.pilato.fr/blog/2011-03-09-la-recherche-elastique/>La recherche élastique...</a>
+<br>
+<a href=https://david.pilato.fr/blog/2015-03-05-using-log4j2-with-hibernate-4/>Using Log4J2 with Hibernate 4</a>
+<br>
+<a href=https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/>ScrutMyDocs : un moteur de recherche pour documents</a>
+<br>
+<a href=https://david.pilato.fr/blog/2012-05-25-la-factory-spring-pour-elasticsearch-est-sortie/>La factory Spring pour Elasticsearch est sortie !</a>
+<br>
+</div>
+</div>
+</div>
+<script>document.addEventListener('DOMContentLoaded',()=>{hljs.initHighlightingOnLoad()})</script>
+</div>
+</div>
+</main>
+<footer class=pl-scrollbar>
+<div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+<p class="text-sm text-tertiary-text">&copy; 2022, David Pilato, France
+&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p>
+</div></div>
+</footer>
+</body>
+</html>

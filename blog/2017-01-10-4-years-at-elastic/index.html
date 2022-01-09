@@ -1,0 +1,714 @@
+<!doctype html><html lang=en><meta charset=utf-8>
+<meta name=viewport content="width=device-width">
+<title>4 years at elastic! | David Pilato</title>
+<meta name=generator content="Hugo Eureka 0.8.4">
+<link rel=stylesheet href=https://david.pilato.fr/css/eureka.min.css>
+<script defer src=https://david.pilato.fr/js/eureka.min.js></script>
+<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+<link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload="this.onload=null,this.rel='stylesheet'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css media=print onload="this.media='all',this.onload=null" crossorigin>
+<script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js integrity="sha256-uNYoXefWRqv+PsIF/OflNmwtKM4lStn9yrz2gVl6ymo=" crossorigin></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X media=print onload="this.media='all',this.onload=null" crossorigin>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script>
+<script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js integrity="sha256-Zmpaaj+GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE=" crossorigin></script>
+<meta name=description content="This post is starting to become a long series 😊
+Yeah! That&rsquo;s amazing! I just spent 4 years working at elastic and I&rsquo;m starting my happy 5th year!
+If you want to read again my story, it&rsquo;s there:
+ 2013: Once upon a time&mldr; 2014: Once upon a time: a year later&mldr; 2015: Once upon a time: Make your dreams come true 2016: 3 years! Time flies!  This year, I will celebrate this by writing a new tutorial&mldr;">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog","item":"https://david.pilato.fr/blog/"},{"@type":"ListItem","position":2,"name":"4 years at elastic!","item":"https://david.pilato.fr/blog/2017-01-10-4-years-at-elastic/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://david.pilato.fr/blog/2017-01-10-4-years-at-elastic/"},"headline":"4 years at elastic! | David Pilato","datePublished":"2017-01-09T18:15:00+01:00","dateModified":"2017-01-09T18:15:00+01:00","wordCount":1859,"author":{"@type":"Person","name":["David Pilato"]},"publisher":{"@type":"Person","name":"David Pilato"},"description":"This post is starting to become a long series 😊\nYeah! That\u0026rsquo;s amazing! I just spent 4 years working at elastic and I\u0026rsquo;m starting my happy 5th year!\nIf you want to read again my story, it\u0026rsquo;s there:\n 2013: Once upon a time\u0026hellip; 2014: Once upon a time: a year later\u0026hellip; 2015: Once upon a time: Make your dreams come true 2016: 3 years! Time flies!  This year, I will celebrate this by writing a new tutorial\u0026hellip;"}</script><meta property="og:title" content="4 years at elastic! | David Pilato">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://david.pilato.fr/blog/2017-01-10-4-years-at-elastic/">
+<meta property="og:description" content="This post is starting to become a long series 😊
+Yeah! That&rsquo;s amazing! I just spent 4 years working at elastic and I&rsquo;m starting my happy 5th year!
+If you want to read again my story, it&rsquo;s there:
+ 2013: Once upon a time&mldr; 2014: Once upon a time: a year later&mldr; 2015: Once upon a time: Make your dreams come true 2016: 3 years! Time flies!  This year, I will celebrate this by writing a new tutorial&mldr;">
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="David Pilato">
+<meta property="article:published_time" content="2017-01-09T18:15:00+01:00">
+<meta property="article:modified_time" content="2017-01-09T18:15:00+01:00">
+<meta property="article:section" content="blog">
+<meta property="article:tag" content="culture">
+<meta property="article:tag" content="career">
+<meta property="article:tag" content="travels">
+<meta property="article:tag" content="beats">
+<meta property="article:tag" content="elasticsearch">
+<meta property="article:tag" content="elastic-cloud">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2020-01-10-7-years-finding-the-right-balance/">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2019-01-10-from-a-startup-to-a-listed-company-6-years-of-fun/">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2018-01-10-5-years-what-a-milestone/">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2016-01-12-3-years-time-flies/">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2015-01-19-once-upon-a-time-make-your-dreams-come-true/">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2014-01-10-once-upon-a-time-a-year-later-dot-dot-dot/">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2013-01-15-once-upon-a-time-dot-dot-dot/">
+<meta property="og:see_also" content="https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/">
+<body class="flex flex-col min-h-screen">
+<header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+<div class="w-full max-w-screen-xl mx-auto"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=='Auto'||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName('html')[0].classList.add('dark')</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+<a href=/ class="mr-6 text-primary-text text-xl font-bold">David Pilato</a>
+<button id=navbar-btn class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+<i class="fas fa-bars"></i>
+</button>
+<div id=target class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+<div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+<a href=/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Home</a>
+<a href=/blog/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Blog</a>
+<a href=https://djdadoo.pilato.fr/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">DJ Mixes</a>
+<a href=/authors/david-pilato/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">About me</a>
+</div>
+<div class=flex>
+<div class="relative pt-4 md:pt-0">
+<div class="cursor-pointer hover:text-eureka" id=lightDarkMode>
+<i class="fas fa-adjust"></i>
+</div>
+<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open>
+</div>
+<div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions>
+<span class="px-4 py-1 hover:text-eureka" name=Light>Light</span>
+<span class="px-4 py-1 hover:text-eureka" name=Dark>Dark</span>
+<span class="px-4 py-1 hover:text-eureka" name=Auto>Auto</span>
+</div>
+</div>
+</div>
+</div>
+<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile>
+</div>
+</nav>
+<script>let element=document.getElementById('lightDarkMode');storageColorScheme==null||storageColorScheme=='Auto'?document.addEventListener('DOMContentLoaded',()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change',switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'sun'),element.firstElementChild.classList.add('fa-sun')):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'moon'),element.firstElementChild.classList.add('fa-moon')),document.addEventListener('DOMContentLoaded',()=>{getcolorscheme(),switchBurger()})</script>
+</div>
+</header>
+<main class="flex-grow pt-16">
+<div class=pl-scrollbar>
+<div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+<div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+<h1 class="font-bold text-3xl text-primary-text">4 years at elastic!</h1>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2017-01-09</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span>9 min read</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=https://david.pilato.fr/categories/culture/ class=hover:text-eureka>culture</a>
+<span>, </span>
+<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-th-list mr-1"></i>
+<a href=https://david.pilato.fr/series/career-at-elastic/ class=hover:text-eureka>career at elastic</a>
+</div>
+</div>
+<div class=content>
+<p>This post is starting to become a long series 😊</p>
+<p>Yeah! That&rsquo;s amazing! I just spent 4 years working at elastic and I&rsquo;m starting
+my happy 5th year!</p>
+<p>If you want to read again my story, it&rsquo;s there:</p>
+<ul>
+<li>2013: <a href=https://david.pilato.fr/blog/2013-01-15-once-upon-a-time-dot-dot-dot/>Once upon a time&mldr;</a></li>
+<li>2014: <a href=https://david.pilato.fr/blog/2014-01-10-once-upon-a-time-a-year-later-dot-dot-dot/>Once upon a time: a year later&mldr;</a></li>
+<li>2015: <a href=https://david.pilato.fr/blog/2015-01-19-once-upon-a-time-make-your-dreams-come-true/>Once upon a time: Make your dreams come true</a></li>
+<li>2016: <a href=https://david.pilato.fr/blog/2016-01-12-3-years-time-flies/>3 years! Time flies!</a></li>
+</ul>
+<p>This year, I will celebrate this by writing a new tutorial&mldr;</p>
+<p>Why this???</p>
+<p>Actually I have always been reporting the last years some numbers about the evangelist part of my job but I always found bad not using the tools we are building for that.</p>
+<p>To build my yearly report, I&rsquo;m actually collecting in a Numbers document (Numbers is like Excel on MacOS) all the travels I&rsquo;m doing during a year.</p>
+<p>Basically, I have a document which looks like this.</p>
+<figure><img src=numbers.png alt="Talks Trips in 2016"><figcaption>
+<p>Talks Trips in 2016</p>
+</figcaption>
+</figure>
+<p>It would be better if I can get from it some statistics, or display on a map where I&rsquo;m speaking the most frequently, or may be filter by <a href=http://www.brownbaglunch.fr/>BBL</a> type of event&mldr;</p>
+<p>Anyone is aware of a nice project which can give me all that?</p>
+<p>Well, if you are reading this blog the answer is pretty much obvious. Let&rsquo;s use the <a href=https://www.elastic.co/products>elastic stack</a> for that!</p>
+<h2 id=from-csv-to-json>From CSV to JSON</h2>
+<p>I exported my Numbers sheet to a CSV file so I have something like this now:</p>
+<pre><code class=language-txt>;Talk;Nb;Date;Type;Location;Coordinates;Distance;Total;Attendees
+1;SnowCamp;1;20/01/2016;Workshop;GRENOBLE;45.190531,5.713413;627;1254;20
+2;SnowCamp;1;21/01/2016;Talk;GRENOBLE;45.190652,5.767197;0;0;50
+3;Louis Vuitton;1;26/01/2016;BBL;PARIS;48.860952,2.342081;50;100;16
+4;Meetup Paris Data Geek;1;28/01/2016;Talk;PARIS;48.8788901,2.3294209;50;100;90
+5;Meetup ES FR;1;03/02/2016;Meetup;PARIS;48.8753439,2.3358584;50;100;100
+6;Kantar Media;1;04/02/2016;BBL;PARIS;48.8880874,2.231051;50;100;15
+7;Meetup CERN;1;08/02/2016;Talk;GENEVE;46.2521574,6.0312076;592;1184;100
+8;Live AMA (french);1;09/02/2016;Webinar;CERGY;49.0408975,2.0157605;0;0;20
+9;elastic{ON};0;16/02/2016;Conference;SAN FRANCISCO;37.7772284,-122.391211;9400;18800;20
+10;Company All Hands;0;20/01/2017;Company;LAKE TAHOE;38.9578871,-119.9442902;302;604;0
+11;Prisma Media;1;01/03/2016;BBL;GENNEVILLIERS;48.918442,2.2953263;40;80;10
+</code></pre>
+<p>I need to produce a JSON document from each line.</p>
+<p>I could do this myself but I know a tool which is super straightforward to stream the content of file to an elasticsearch cluster&mldr; Got it as well? Yeah! <a href=https://www.elastic.co/products/beats/filebeat>Filebeat</a> FTW!</p>
+<p>Let&rsquo;s <a href=https://www.elastic.co/downloads/beats/filebeat>download it</a>:</p>
+<pre><code class=language-sh>wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.1.1-darwin-x86_64.tar.gz
+tar xzf filebeat-5.1.1-darwin-x86_64.tar.gz
+mv filebeat-5.1.1-darwin-x86_64 filebeat-5.1.1
+# ^^^ Yeah I prefer shorter names :)
+cd filebeat-5.1.1
+</code></pre>
+<p>Let&rsquo;s have a look at the configuration file <code>filebeat.yml</code>.. It basically contains:</p>
+<pre><code class=language-yml>filebeat.prospectors:
+- input_type: log
+  paths:
+    - /var/log/*.log
+
+output.elasticsearch:
+  hosts: [&quot;localhost:9200&quot;]
+</code></pre>
+<p>Instead of reading from a file here, let&rsquo;s just send the data with a <code>cat ../talks_2016.csv | ./filebeat</code> command.
+So we will use <code>input_type</code> <code>stdin</code> instead of <code>log</code>.</p>
+<pre><code class=language-yml>filebeat.prospectors:
+- input_type: stdin
+</code></pre>
+<p>I also want to change the document type to <code>talk</code> instead of <code>log</code>:</p>
+<pre><code class=language-yml>filebeat.prospectors:
+- input_type: stdin
+  document_type: talk
+</code></pre>
+<p>I need to download <a href=https://www.elastic.co/products/elasticsearch>elasticsearch</a>, <a href=https://www.elastic.co/products/kibana>Kibana</a> and install all that now on my server.
+And secure it with <a href=https://www.elastic.co/products/x-pack>X-Pack</a>&mldr;</p>
+<p>Oh wait! Let&rsquo;s just use a <a href=https://www.elastic.co/cloud>cloud instance</a> which is ready to use!</p>
+<h2 id=connecting-to-elastic-cloud>Connecting to elastic cloud</h2>
+<p>In your cloud configuration page, just copy the URL of your cluster. It&rsquo;s something like <code>https://your-cluster-id.us-east-1.aws.found.io:9243/</code>.</p>
+<p>Then change the <code>filebeat.yml</code> file to use this cluster:</p>
+<pre><code class=language-yml>output.elasticsearch:
+  hosts: [&quot;your-cluster-id.us-east-1.aws.found.io:9243&quot;]
+  protocol: &quot;https&quot;
+  username: &quot;elastic&quot;
+  password: &quot;changeme&quot;
+</code></pre>
+<p>Note that you have to modify <code>changeme</code> which is a default password for local elasticsearch instances but fortunately not on cloud! :)</p>
+<p>Let&rsquo;s also change the default index name. Here, I&rsquo;ll send all my documents to a <code>talks</code> index:</p>
+<pre><code class=language-yml>output.elasticsearch:
+  index: &quot;talks&quot;
+</code></pre>
+<p>And start! I&rsquo;m using <code>-e</code> option to see what is happening behind the scene.</p>
+<pre><code class=language-sh>cat ../talks_2016.csv | ./filebeat -e
+</code></pre>
+<p>Sadly you can&rsquo;t use <code>-once</code> option for now because of <a href=https://github.com/elastic/beats/issues/3315>a race issue</a> when using <code>stdin</code> so you need to press <code>CTRL+C</code> when done.</p>
+<p>If you open your kibana instance and go to the console, you can run:</p>
+<pre><code class=language-json>GET talks/_search
+</code></pre>
+<p>Have a look at one of the produced documents:</p>
+<pre><code class=language-json>{
+  &quot;_index&quot;: &quot;talks&quot;,
+  &quot;_type&quot;: &quot;talk&quot;,
+  &quot;_id&quot;: &quot;AVmDDwY2MqKKvpoCuhya&quot;,
+  &quot;_score&quot;: 1,
+  &quot;_source&quot;: {
+    &quot;@timestamp&quot;: &quot;2017-01-09T11:49:18.008Z&quot;,
+    &quot;beat&quot;: {
+      &quot;hostname&quot;: &quot;MacBook-Pro-6.local&quot;,
+      &quot;name&quot;: &quot;MacBook-Pro-6.local&quot;,
+      &quot;version&quot;: &quot;5.1.1&quot;
+    },
+    &quot;input_type&quot;: &quot;stdin&quot;,
+    &quot;message&quot;: &quot;9;elastic{ON};0;16/02/2016;Conference;SAN FRANCISCO;37.7772284,-122.391211;9400;18800;20&quot;,
+    &quot;offset&quot;: 0,
+    &quot;source&quot;: &quot;&quot;,
+    &quot;type&quot;: &quot;talk&quot;
+  }
+}
+</code></pre>
+<p>We typically need to cleanup things a bit&mldr;</p>
+<h2 id=node-ingest-to-the-rescue>Node Ingest to the rescue</h2>
+<p>If you never heard about Node Ingest, you can read the introduction of my article about <a href=https://david.pilato.fr/blog/2016-10-17-creating-an-ingest-plugin-for-elasticsearch-updated-for-ga/>writing your own ingest plugin</a>.</p>
+<h3 id=parsing-csv-with-grok>Parsing CSV with Grok</h3>
+<p>Here I&rsquo;ll will use a <a href=https://www.elastic.co/guide/en/elasticsearch/reference/current/grok-processor.html>Grok processor</a> first to extract some data from the <code>message</code> field:</p>
+<pre><code class=language-json>{
+  &quot;grok&quot;: {
+    &quot;field&quot;: &quot;message&quot;,
+    &quot;patterns&quot;: [ &quot;%{INT:id};%{DATA:name};%{INT:number_of_talks};%{DATA:date};%{DATA:type};%{DATA:city};%{DATA:location.lat},%{DATA:location.lon};%{INT};%{INT:distance};%{INT:number_of_attendees}&quot; ]
+  }
+}
+</code></pre>
+<p>Let&rsquo;s simulate that:</p>
+<pre><code class=language-json>POST _ingest/pipeline/_simulate
+{
+  &quot;pipeline&quot; : {
+    &quot;processors&quot;: [
+      {
+       &quot;grok&quot;: {
+         &quot;field&quot;: &quot;message&quot;,
+         &quot;patterns&quot;: [ &quot;%{INT:id};%{DATA:name};%{INT:number_of_talks};%{DATA:date};%{DATA:type};%{DATA:city};%{DATA:location.lat},%{DATA:location.lon};%{INT};%{INT:distance};%{INT:number_of_attendees}&quot; ]
+       }
+      }
+    ]
+  },
+  &quot;docs&quot; : [
+    {
+      &quot;_index&quot;: &quot;talks&quot;,
+      &quot;_type&quot;: &quot;talk&quot;,
+      &quot;_id&quot;: &quot;AVmDDwY2MqKKvpoCuhya&quot;,
+      &quot;_score&quot;: 1,
+      &quot;_source&quot;: {
+        &quot;@timestamp&quot;: &quot;2017-01-09T11:49:18.008Z&quot;,
+        &quot;beat&quot;: {
+          &quot;hostname&quot;: &quot;MacBook-Pro-6.local&quot;,
+          &quot;name&quot;: &quot;MacBook-Pro-6.local&quot;,
+          &quot;version&quot;: &quot;5.1.1&quot;
+        },
+        &quot;input_type&quot;: &quot;stdin&quot;,
+        &quot;message&quot;: &quot;9;elastic{ON};0;16/02/2016;Conference;SAN FRANCISCO;37.7772284,-122.391211;9400;18800;20&quot;,
+        &quot;offset&quot;: 0,
+        &quot;source&quot;: &quot;&quot;,
+        &quot;type&quot;: &quot;talk&quot;
+      }
+    }
+  ]
+}
+</code></pre>
+<p>It now gives:</p>
+<pre><code class=language-json>{
+  &quot;_id&quot;: &quot;AVmDDwY2MqKKvpoCuhya&quot;,
+  &quot;_index&quot;: &quot;talks&quot;,
+  &quot;_type&quot;: &quot;talk&quot;,
+  &quot;_source&quot;: {
+    &quot;date&quot;: &quot;16/02/2016&quot;,
+    &quot;number_of_attendees&quot;: &quot;20&quot;,
+    &quot;offset&quot;: 0,
+    &quot;city&quot;: &quot;SAN FRANCISCO&quot;,
+    &quot;input_type&quot;: &quot;stdin&quot;,
+    &quot;source&quot;: &quot;&quot;,
+    &quot;message&quot;: &quot;9;elastic{ON};0;16/02/2016;Conference;SAN FRANCISCO;37.7772284,-122.391211;9400;18800;20&quot;,
+    &quot;type&quot;: &quot;Conference&quot;,
+    &quot;@timestamp&quot;: &quot;2017-01-09T11:49:18.008Z&quot;,
+    &quot;beat&quot;: {
+      &quot;hostname&quot;: &quot;MacBook-Pro-6.local&quot;,
+      &quot;name&quot;: &quot;MacBook-Pro-6.local&quot;,
+      &quot;version&quot;: &quot;5.1.1&quot;
+    },
+    &quot;name&quot;: &quot;elastic{ON}&quot;,
+    &quot;location&quot;: {
+      &quot;lon&quot;: &quot;-122.391211&quot;,
+      &quot;lat&quot;: &quot;37.7772284&quot;
+    },
+    &quot;id&quot;: &quot;9&quot;,
+    &quot;number_of_talks&quot;: &quot;0&quot;,
+    &quot;distance_total&quot;: &quot;18800&quot;
+  },
+  &quot;_ingest&quot;: {
+    &quot;timestamp&quot;: &quot;2017-01-09T13:13:04.519+0000&quot;
+  }
+}
+</code></pre>
+<h3 id=change-the-document-id>Change the document id</h3>
+<p>We just have to use a <a href=https://www.elastic.co/guide/en/elasticsearch/reference/current/set-processor.html>set processor</a>:</p>
+<pre><code class=language-json>{ &quot;set&quot;: { &quot;field&quot;: &quot;_id&quot;, &quot;value&quot;: &quot;{% raw %}{{id}}{% endraw %}&quot; } }
+</code></pre>
+<p>This will change the metadata of our document from:</p>
+<pre><code class=language-json>{
+  &quot;_id&quot;: &quot;AVmDDwY2MqKKvpoCuhya&quot;,
+  &quot;_index&quot;: &quot;talks&quot;,
+  &quot;_type&quot;: &quot;talk&quot;,
+  &quot;_source&quot;: { /* source */ },
+  &quot;_ingest&quot;: { &quot;timestamp&quot;: &quot;2017-01-09T13:13:04.519+0000&quot; }
+}
+</code></pre>
+<p>to</p>
+<pre><code class=language-json>{
+  &quot;_id&quot;: &quot;9&quot;,
+  &quot;_index&quot;: &quot;talks&quot;,
+  &quot;_type&quot;: &quot;talk&quot;,
+  &quot;_source&quot;: { /* source */ },
+  &quot;_ingest&quot;: { &quot;timestamp&quot;: &quot;2017-01-09T13:13:04.519+0000&quot; }
+}
+</code></pre>
+<h3 id=reconciliate-the-date>Reconciliate the date</h3>
+<p>We need to convert the <code>date</code> field wich has a format of <code>dd/MM/yyyy</code> to an actual json date. Let&rsquo;s do it with a <a href=https://www.elastic.co/guide/en/elasticsearch/reference/current/date-processor.html>date processor</a>:</p>
+<pre><code class=language-json>{ &quot;date&quot; : {
+    &quot;field&quot; : &quot;date&quot;,
+    &quot;target_field&quot; : &quot;@timestamp&quot;,
+    &quot;formats&quot; : [&quot;dd/MM/yyyy&quot;],
+    &quot;timezone&quot; : &quot;Europe/Paris&quot;
+} }
+</code></pre>
+<p>We now have:</p>
+<pre><code class=language-json>{
+  &quot;date&quot;: &quot;16/02/2016&quot;,
+  &quot;number_of_attendees&quot;: &quot;20&quot;,
+  &quot;offset&quot;: 0,
+  &quot;distance&quot;: &quot;18800&quot;,
+  &quot;city&quot;: &quot;SAN FRANCISCO&quot;,
+  &quot;input_type&quot;: &quot;stdin&quot;,
+  &quot;source&quot;: &quot;&quot;,
+  &quot;message&quot;: &quot;9;elastic{ON};0;16/02/2016;Conference;SAN FRANCISCO;37.7772284,-122.391211;9400;18800;20&quot;,
+  &quot;type&quot;: &quot;Conference&quot;,
+  &quot;@timestamp&quot;: &quot;2016-02-16T00:00:00.000+01:00&quot;,
+  &quot;beat&quot;: {
+    &quot;name&quot;: &quot;MacBook-Pro-6.local&quot;,
+    &quot;version&quot;: &quot;5.1.1&quot;,
+    &quot;hostname&quot;: &quot;MacBook-Pro-6.local&quot;
+  },
+  &quot;name&quot;: &quot;elastic{ON}&quot;,
+  &quot;location&quot;: {
+    &quot;lon&quot;: &quot;-122.391211&quot;,
+    &quot;lat&quot;: &quot;37.7772284&quot;
+  },
+  &quot;id&quot;: &quot;9&quot;,
+  &quot;number_of_talks&quot;: &quot;0&quot;
+}
+</code></pre>
+<p>As you can see <code>"date": "16/02/2016"</code> generated <code>"@timestamp": "2016-02-16T00:00:00.000+01:00"</code>.</p>
+<h3 id=removing-non-needed-fields>Removing non needed fields</h3>
+<p>We want to remove here <code>message</code>, <code>beat</code>, <code>input_type</code>, <code>offset</code>, <code>source</code>, <code>date</code> and <code>id</code>. We are going to use a <a href=https://www.elastic.co/guide/en/elasticsearch/reference/current/remove-processor.html>remove processor</a>:</p>
+<pre><code class=language-json>{ &quot;remove&quot;: { &quot;field&quot;: &quot;message&quot; } },
+{ &quot;remove&quot;: { &quot;field&quot;: &quot;beat&quot; } },
+{ &quot;remove&quot;: { &quot;field&quot;: &quot;input_type&quot; } },
+{ &quot;remove&quot;: { &quot;field&quot;: &quot;offset&quot; } },
+{ &quot;remove&quot;: { &quot;field&quot;: &quot;source&quot; } },
+{ &quot;remove&quot;: { &quot;field&quot;: &quot;date&quot; } },
+{ &quot;remove&quot;: { &quot;field&quot;: &quot;id&quot; } }
+</code></pre>
+<p>It is looking better:</p>
+<pre><code class=language-json>{
+  &quot;number_of_attendees&quot;: &quot;20&quot;,
+  &quot;distance&quot;: &quot;18800&quot;,
+  &quot;city&quot;: &quot;SAN FRANCISCO&quot;,
+  &quot;type&quot;: &quot;Conference&quot;,
+  &quot;@timestamp&quot;: &quot;2016-02-16T00:00:00.000+01:00&quot;,
+  &quot;name&quot;: &quot;elastic{ON}&quot;,
+  &quot;location&quot;: {
+    &quot;lon&quot;: &quot;-122.391211&quot;,
+    &quot;lat&quot;: &quot;37.7772284&quot;
+  },
+  &quot;number_of_talks&quot;: &quot;0&quot;
+}
+</code></pre>
+<h3 id=transform-to-numeric-values>Transform to numeric values</h3>
+<p>We have some fields which are numerics but extracted as strings by Grok: <code>number_of_attendees</code>, <code>distance</code>, <code>location.lon</code>, <code>location.lat</code>, <code>number_of_talks</code>.
+<a href=https://www.elastic.co/guide/en/elasticsearch/reference/current/convert-processor.html>Convert processor</a> will help us here:</p>
+<pre><code class=language-json>{ &quot;convert&quot;: { &quot;field&quot; : &quot;number_of_attendees&quot;, &quot;type&quot;: &quot;integer&quot; } },
+{ &quot;convert&quot;: { &quot;field&quot; : &quot;distance&quot;, &quot;type&quot;: &quot;integer&quot; } },
+{ &quot;convert&quot;: { &quot;field&quot; : &quot;location.lon&quot;, &quot;type&quot;: &quot;float&quot; } },
+{ &quot;convert&quot;: { &quot;field&quot; : &quot;location.lat&quot;, &quot;type&quot;: &quot;float&quot; } },
+{ &quot;convert&quot;: { &quot;field&quot; : &quot;number_of_talks&quot;, &quot;type&quot;: &quot;integer&quot; } }
+</code></pre>
+<p>It now gives:</p>
+<pre><code class=language-json>{
+  &quot;number_of_attendees&quot;: 20,
+  &quot;distance&quot;: 18800,
+  &quot;city&quot;: &quot;SAN FRANCISCO&quot;,
+  &quot;type&quot;: &quot;Conference&quot;,
+  &quot;@timestamp&quot;: &quot;2016-02-16T00:00:00.000+01:00&quot;,
+  &quot;name&quot;: &quot;elastic{ON}&quot;,
+  &quot;location&quot;: {
+    &quot;lon&quot;: -122.39121,
+    &quot;lat&quot;: 37.77723
+  },
+  &quot;number_of_talks&quot;: 0
+}
+</code></pre>
+<h3 id=register-the-pipeline>Register the pipeline</h3>
+<p>We are going to create a pipeline named <code>talks</code>:</p>
+<pre><code class=language-json>PUT _ingest/pipeline/talks
+{
+  &quot;processors&quot;: [
+    { &quot;grok&quot;: { &quot;field&quot;: &quot;message&quot;,
+        &quot;patterns&quot;: [ &quot;%{INT:id};%{DATA:name};%{INT:number_of_talks};%{DATA:date};%{DATA:type};%{DATA:city};%{DATA:location.lat},%{DATA:location.lon};%{INT};%{INT:distance};%{INT:number_of_attendees}&quot; ]
+    } },
+    { &quot;date&quot; : {
+        &quot;field&quot; : &quot;date&quot;,
+        &quot;target_field&quot; : &quot;@timestamp&quot;,
+        &quot;formats&quot; : [&quot;dd/MM/yyyy&quot;],
+        &quot;timezone&quot; : &quot;Europe/Paris&quot;
+    } },
+    { &quot;set&quot;: { &quot;field&quot;: &quot;_id&quot;, &quot;value&quot;: &quot;{% raw %}{{id}}{% endraw %}&quot; } },
+    { &quot;remove&quot;: { &quot;field&quot;: &quot;message&quot; } },
+    { &quot;remove&quot;: { &quot;field&quot;: &quot;beat&quot; } },
+    { &quot;remove&quot;: { &quot;field&quot;: &quot;input_type&quot; } },
+    { &quot;remove&quot;: { &quot;field&quot;: &quot;offset&quot; } },
+    { &quot;remove&quot;: { &quot;field&quot;: &quot;source&quot; } },
+    { &quot;remove&quot;: { &quot;field&quot;: &quot;date&quot; } },
+    { &quot;remove&quot;: { &quot;field&quot;: &quot;id&quot; } },
+    { &quot;convert&quot;: { &quot;field&quot; : &quot;number_of_attendees&quot;, &quot;type&quot;: &quot;integer&quot; } },
+    { &quot;convert&quot;: { &quot;field&quot; : &quot;distance&quot;, &quot;type&quot;: &quot;integer&quot; } },
+    { &quot;convert&quot;: { &quot;field&quot; : &quot;location.lon&quot;, &quot;type&quot;: &quot;float&quot; } },
+    { &quot;convert&quot;: { &quot;field&quot; : &quot;location.lat&quot;, &quot;type&quot;: &quot;float&quot; } },
+    { &quot;convert&quot;: { &quot;field&quot; : &quot;number_of_talks&quot;, &quot;type&quot;: &quot;integer&quot; } }
+  ]
+}
+</code></pre>
+<h3 id=send-documents-to-this-pipeline>Send documents to this pipeline</h3>
+<p>We need to tell filebeat to use our <code>talks</code> pipeline. We can configure that in <code>filebeat.yml</code>:</p>
+<pre><code class=language-yml>output.elasticsearch:
+  pipeline: &quot;talks&quot;
+</code></pre>
+<h3 id=remove-header-and-footer>Remove header and footer</h3>
+<p>If we run our configuration, we will see some errors:</p>
+<pre><code class=language-txt>2017/01/09 14:37:44.824640 client.go:436: INFO Bulk item insert failed (i=0, status=500): {&quot;type&quot;:&quot;exception&quot;,&quot;reason&quot;:&quot;java.lang.IllegalArgumentException: java.lang.IllegalArgumentException: Provided Grok expressions do not match field value: [;Talk;Nb;Date;Type;Location;Coordinates;Distance;Total;Attendees]&quot;,&quot;caused_by&quot;:{&quot;type&quot;:&quot;illegal_argument_exception&quot;,&quot;reason&quot;:&quot;java.lang.IllegalArgumentException: Provided Grok expressions do not match field value: [;Talk;Nb;Date;Type;Location;Coordinates;Distance;Total;Attendees]&quot;,&quot;caused_by&quot;:{&quot;type&quot;:&quot;illegal_argument_exception&quot;,&quot;reason&quot;:&quot;Provided Grok expressions do not match field value: [;Talk;Nb;Date;Type;Location;Coordinates;Distance;Total;Attendees]&quot;}},&quot;header&quot;:{&quot;processor_type&quot;:&quot;grok&quot;}}
+</code></pre>
+<p>Indeed we are sending 2 lines we would like to ignore actually:</p>
+<p>The header:</p>
+<pre><code class=language-txt>;Talk;Nb;Date;Type;Location;Coordinates;Distance;Total;Attendees
+</code></pre>
+<p>And the footer:</p>
+<pre><code class=language-txt>;;75;;;;0;27491;54802;4403
+</code></pre>
+<p>We can tell filebeat to ignore those lines using a <a href=https://www.elastic.co/guide/en/beats/filebeat/5.1/drop-event.html>drop_event processor</a> in case a given <a href=https://www.elastic.co/guide/en/beats/filebeat/5.1/configuration-processors.html#condition-regexp>regex condition</a> is met:</p>
+<pre><code class=language-yml>processors:
+- drop_event:
+    when:
+      regexp:
+          message: &quot;^;.*$&quot;
+</code></pre>
+<h3 id=mapping>Mapping</h3>
+<p>Let&rsquo;s see what our current mapping is with a <code>GET talks/_mapping</code>.
+We can see that <code>location</code> field is not mapped as a <code>geo_point</code> so let&rsquo;s fix that:</p>
+<pre><code class=language-json>DELETE talks
+PUT talks
+{
+  &quot;talks&quot;: {
+    &quot;mappings&quot;: {
+      &quot;talk&quot;: {
+        &quot;properties&quot;: {
+          &quot;@timestamp&quot;: {
+            &quot;type&quot;: &quot;date&quot;
+          },
+          &quot;city&quot;: {
+            &quot;type&quot;: &quot;text&quot;,
+            &quot;fields&quot;: {
+              &quot;keyword&quot;: {
+                &quot;type&quot;: &quot;keyword&quot;,
+                &quot;ignore_above&quot;: 256
+              }
+            }
+          },
+          &quot;distance&quot;: {
+            &quot;type&quot;: &quot;long&quot;
+          },
+          &quot;location&quot;: {
+            &quot;type&quot;: &quot;geo_point&quot;
+          },
+          &quot;name&quot;: {
+            &quot;type&quot;: &quot;text&quot;,
+            &quot;fields&quot;: {
+              &quot;keyword&quot;: {
+                &quot;type&quot;: &quot;keyword&quot;,
+                &quot;ignore_above&quot;: 256
+              }
+            }
+          },
+          &quot;number_of_attendees&quot;: {
+            &quot;type&quot;: &quot;long&quot;
+          },
+          &quot;number_of_talks&quot;: {
+            &quot;type&quot;: &quot;long&quot;
+          },
+          &quot;type&quot;: {
+            &quot;type&quot;: &quot;keyword&quot;
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<p>Now we are done. So we can start again filebeat:</p>
+<pre><code class=language-sh>cat ../talks_2016.csv | ./filebeat -e
+</code></pre>
+<h2 id=kibana>Kibana</h2>
+<p>First we need to create our index pattern:</p>
+<figure><img src=index-pattern.png alt="Index Pattern"><figcaption>
+<p>Index Pattern</p>
+</figcaption>
+</figure>
+<p>In Kibana, we can see some activity already over 2016:</p>
+<figure><img src=discover-2016.png alt="Discover 2016"><figcaption>
+<p>Discover 2016</p>
+</figcaption>
+</figure>
+<p>We can easily notice that I totally stopped doing evangelism during the summer. I think that if we look at the number of commits in GitHub we can probably find an inverted diagram. 😊</p>
+<p>We can now create a dashboard:</p>
+<figure><img src=dashboard.png alt=Dashboard><figcaption>
+<p>Dashboard</p>
+</figcaption>
+</figure>
+<p>Neat, right?</p>
+<p>My main activity is in Europe:</p>
+<figure><img src=europe.png alt=Europe><figcaption>
+<p>Europe</p>
+</figcaption>
+</figure>
+<p>And a big part of it is close to Paris:</p>
+<figure><img src=paris.png alt=Paris><figcaption>
+<p>Paris</p>
+</figcaption>
+</figure>
+<p>You can <a href=https://73531b275dde9af18f03de55b5d02fca.us-east-1.aws.found.io/app/kibana#/dashboard/Talks>open this dashboard</a> (username: <code>demo</code>, password: <code>elastic</code>) if you wish and look if I was close to you over the last year 😊</p>
+<h2 id=conclusion>Conclusion</h2>
+<p>Evangelism is part of my activity. It also includes a lot of presence on <a href=https://discuss.elastic.co>https://discuss.elastic.co</a>:</p>
+<figure><img src=discuss.png alt="Discuss activity the last years"><figcaption>
+<p>Discuss activity the last years</p>
+</figcaption>
+</figure>
+<p>The other part is of course code, specifically on <a href=https://github.com/elastic/elasticsearch>elasticsearch</a>.</p>
+<figure><img src=github.png alt="Git commits for elasticsearch in 2016"><figcaption>
+<p>Git commits for elasticsearch in 2016</p>
+</figcaption>
+</figure>
+<p>The company has now more than 400 employees. It&rsquo;s becoming harder and harder if not impossible to recall all people names.</p>
+<p>We have a great success and our stack is now used almost everywhere. When I&rsquo;m doing BBL talks, I can see that almost everytime I have an attendee who is saying to his colleagues:</p>
+<blockquote>
+<p>Oh yeah, it is powerful! We are actually using it already to solve this problem.</p>
+</blockquote>
+<p>And that&rsquo;s just begining I&rsquo;m telling you!</p>
+<figure><img src=keep-calm.png alt="Keep Calm"><figcaption>
+<p>Keep Calm</p>
+</figcaption>
+</figure>
+<h2 id=complete-filebeatyml-file>Complete filebeat.yml file</h2>
+<p>For the record, here is a copy of the complete <code>filebeat.yml</code> I used:</p>
+<pre><code class=language-yml>filebeat.prospectors:
+- input_type: stdin
+  document_type: talk
+
+processors:
+- drop_event:
+    when:
+      regexp:
+          message: &quot;^;.*$&quot;
+
+output.elasticsearch:
+output.elasticsearch:
+  hosts: [&quot;your-cluster-id.us-east-1.aws.found.io:9243&quot;]
+  protocol: &quot;https&quot;
+  username: &quot;elastic&quot;
+  password: &quot;changeme&quot;
+  index: &quot;talks&quot;
+  pipeline: &quot;talks&quot;
+</code></pre>
+</div>
+<div class=my-4>
+<a href=https://david.pilato.fr/tags/culture/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#culture</a>
+<a href=https://david.pilato.fr/tags/career/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#career</a>
+<a href=https://david.pilato.fr/tags/travels/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#travels</a>
+<a href=https://david.pilato.fr/tags/beats/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#beats</a>
+<a href=https://david.pilato.fr/tags/elasticsearch/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#elasticsearch</a>
+<a href=https://david.pilato.fr/tags/elastic-cloud/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#elastic-cloud</a>
+</div>
+<div class=py-2>
+<div class="flex flex-col md:flex-row items-center my-8">
+<a href=https://david.pilato.fr/authors/david-pilato/ class="w-24 h-24 md:mr-4">
+<img src=https://david.pilato.fr/authors/david-pilato/david_pilato.png class="w-full bg-primary-bg rounded-full" alt=Avatar>
+</a>
+<div class="w-full md:w-auto mt-4 md:mt-0">
+<a href=https://david.pilato.fr/authors/david-pilato/ class="block font-bold text-lg pb-1 mb-2 border-b">David Pilato</a>
+<span class="block pb-2">20+ years of experience, mostly in Java. Living in Cergy, France.</span>
+<a href=mailto:david+blog@pilato.fr class=mr-1>
+<i class="fas fa-envelope"></i>
+</a>
+<a href=https://twitter.com/dadoonet class=mr-1>
+<i class="fab fa-twitter"></i>
+</a>
+<a href=https://github.com/dadoonet class=mr-1>
+<i class="fab fa-github"></i>
+</a>
+<a href=https://www.linkedin.com/in/dadoonet/ class=mr-1>
+<i class="fab fa-linkedin"></i>
+</a>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+<div>
+<span class="block font-bold">Previous</span>
+<a href=https://david.pilato.fr/blog/2018-01-10-5-years-what-a-milestone/ class=block>5 years. What a milestone!</a>
+</div>
+<div class="md:text-right mt-4 md:mt-0">
+<span class="block font-bold">Next</span>
+<a href=https://david.pilato.fr/blog/2016-10-21-elasticsearch-real-integration-tests-with-security-enabled-updated-for-ga/ class=block>Elasticsearch real integration tests with security enabled (Updated for GA)</a>
+</div>
+</div>
+</div>
+<div class=col-span-2>
+<div class="bg-secondary-bg rounded p-6">
+<h3 class="text-lg font-semibold mb-4">Series of Posts</h3>
+<div class=content>
+<a href=https://david.pilato.fr/blog/2020-01-10-7-years-finding-the-right-balance/>7 years! Finding the right balance</a>
+<br>
+<a href=https://david.pilato.fr/blog/2019-01-10-from-a-startup-to-a-listed-company-6-years-of-fun/>From a startup to a listed company. 6 years of fun!</a>
+<br>
+<a href=https://david.pilato.fr/blog/2018-01-10-5-years-what-a-milestone/>5 years. What a milestone!</a>
+<br>
+<a href=https://david.pilato.fr/blog/2017-01-10-4-years-at-elastic/>4 years at elastic!</a>
+<br>
+<a href=https://david.pilato.fr/blog/2016-01-12-3-years-time-flies/>3 years! Time flies!</a>
+<br>
+<a href=https://david.pilato.fr/blog/2015-01-19-once-upon-a-time-make-your-dreams-come-true/>Once upon a time: Make your dreams come true</a>
+<br>
+<a href=https://david.pilato.fr/blog/2014-01-10-once-upon-a-time-a-year-later-dot-dot-dot/>Once upon a time: a year later...</a>
+<br>
+<a href=https://david.pilato.fr/blog/2013-01-15-once-upon-a-time-dot-dot-dot/>Once upon a time...</a>
+<br>
+<a href=https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/>Il était une fois : un conte de fées élastique !</a>
+<br>
+</div>
+</div>
+<div class="sticky top-16 z-10 hidden lg:block px-6 py-4 bg-primary-bg">
+<span class="text-lg font-semibold">On This Page</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#from-csv-to-json>From CSV to JSON</a></li>
+<li><a href=#connecting-to-elastic-cloud>Connecting to elastic cloud</a></li>
+<li><a href=#node-ingest-to-the-rescue>Node Ingest to the rescue</a>
+<ul>
+<li><a href=#parsing-csv-with-grok>Parsing CSV with Grok</a></li>
+<li><a href=#change-the-document-id>Change the document id</a></li>
+<li><a href=#reconciliate-the-date>Reconciliate the date</a></li>
+<li><a href=#removing-non-needed-fields>Removing non needed fields</a></li>
+<li><a href=#transform-to-numeric-values>Transform to numeric values</a></li>
+<li><a href=#register-the-pipeline>Register the pipeline</a></li>
+<li><a href=#send-documents-to-this-pipeline>Send documents to this pipeline</a></li>
+<li><a href=#remove-header-and-footer>Remove header and footer</a></li>
+<li><a href=#mapping>Mapping</a></li>
+</ul>
+</li>
+<li><a href=#kibana>Kibana</a></li>
+<li><a href=#conclusion>Conclusion</a></li>
+<li><a href=#complete-filebeatyml-file>Complete filebeat.yml file</a></li>
+</ul>
+</nav>
+</div>
+<script>window.addEventListener('DOMContentLoaded',()=>{enableStickyToc()})</script>
+</div>
+<div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded p-6">
+<h2 class="text-lg font-semibold mb-4">See Also</h2>
+<div class=content>
+<a href=https://david.pilato.fr/blog/2016-01-12-3-years-time-flies/>3 years! Time flies!</a>
+<br>
+<a href=https://david.pilato.fr/blog/2015-01-19-once-upon-a-time-make-your-dreams-come-true/>Once upon a time: Make your dreams come true</a>
+<br>
+<a href=https://david.pilato.fr/blog/2014-01-10-once-upon-a-time-a-year-later-dot-dot-dot/>Once upon a time: a year later...</a>
+<br>
+<a href=https://david.pilato.fr/blog/2013-01-15-once-upon-a-time-dot-dot-dot/>Once upon a time...</a>
+<br>
+<a href=https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/>Il était une fois : un conte de fées élastique !</a>
+<br>
+<a href=https://david.pilato.fr/blog/2016-03-17-and-the-beats-go-on/>And the beats go on!</a>
+<br>
+</div>
+</div>
+</div>
+<script>document.addEventListener('DOMContentLoaded',()=>{hljs.initHighlightingOnLoad()})</script>
+</div>
+</div>
+</main>
+<footer class=pl-scrollbar>
+<div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+<p class="text-sm text-tertiary-text">&copy; 2022, David Pilato, France
+&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p>
+</div></div>
+</footer>
+</body>
+</html>
