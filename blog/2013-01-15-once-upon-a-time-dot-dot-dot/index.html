@@ -14,6 +14,9 @@
 <script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin></script>
 <script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script>
 <script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js integrity="sha256-Zmpaaj+GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE=" crossorigin></script>
+<link rel=preconnect href=https://www.google-analytics.com crossorigin>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-62381049-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-62381049-1')</script>
 <meta name=description content="Once upon a time&mldr;
  In fact 2 years ago, I was looking for a way to make Hibernate search distributed on multiple nodes. My first idea was to store indexes in a single database shared by my nodes. Yes, it’s a stupid idea in term of performances but I would like to try to build it.
 Digging for source code, I came to the JdbcDirectory class from the compass project. And I saw on the compass front page something talking about the future of Compass and Elasticsearch.">
