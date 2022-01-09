@@ -17,6 +17,13 @@
 <link rel=preconnect href=https://www.google-analytics.com crossorigin>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-62381049-1"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-62381049-1')</script>
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://david.pilato.fr/blog/2011-09-14-mon-premier-plugin-elasticsearch-rss-river/featured.png">
+<meta name=twitter:title content="Mon premier plugin elasticsearch : RSS River">
+<meta name=twitter:description content="Il existe dans elasticsearch la notion de river (rivière) qui comme son nom le laisse supposer permet de voir s&rsquo;écouler des données depuis une source jusqu&rsquo;à elasticsearch.
+Au fur et à mesure que les données arrivent, la rivière les transporte et les envoie à l&rsquo;indexation dans elasticsearch.
+En standard, il existe 4 rivières :
+ CouchDB qui permet d&rsquo;indexer toutes les nouveautés d&rsquo;une base CouchDB. Voir aussi cet article à ce propos. RabbitMQ qui permet de récupérer des documents dans une queue de traitement asynchrone (genre JMS) Twitter qui permet d&rsquo;indexer votre flux de messages twitter par exemple Wikipedia qui permet d&rsquo;indexer toutes les nouveautés de l&rsquo;encyclopédie au fur et à mesure de leurs publications  Premiers pas J&rsquo;ai commencé par bidouiller un peu la rivière CouchDB pour y apporter quelques fonctionnalités dont mes collègues avaient besoin :">
 <meta name=description content="Il existe dans elasticsearch la notion de river (rivière) qui comme son nom le laisse supposer permet de voir s&rsquo;écouler des données depuis une source jusqu&rsquo;à elasticsearch.
 Au fur et à mesure que les données arrivent, la rivière les transporte et les envoie à l&rsquo;indexation dans elasticsearch.
 En standard, il existe 4 rivières :

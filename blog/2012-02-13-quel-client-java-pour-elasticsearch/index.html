@@ -17,6 +17,12 @@
 <link rel=preconnect href=https://www.google-analytics.com crossorigin>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-62381049-1"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-62381049-1')</script>
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Quel client Java pour elasticsearch ?">
+<meta name=twitter:description content="Il existe deux modes d&rsquo;accès à elasticsearch en Java :
+ Inscrire un noeud client dans le cluster elasticsearch Utiliser un client &ldquo;simple&rdquo;  Noeud client dans un cluster elasticsearch L&rsquo;idée de cette méthode est de fabriquer un noeud elasticsearch (node) qui démarre avec les mêmes caractéristiques qu&rsquo;un noeud d&rsquo;indexation et de recherche sauf qu&rsquo;on lui précise qu&rsquo;il n&rsquo;hébergera pas de données.
+Pour cela, on utilise la propriété suivante :
+node.data=false  Elle indique que le noeud que nous démarrons n&rsquo;hébergera pas de données.">
 <meta name=description content="Il existe deux modes d&rsquo;accès à elasticsearch en Java :
  Inscrire un noeud client dans le cluster elasticsearch Utiliser un client &ldquo;simple&rdquo;  Noeud client dans un cluster elasticsearch L&rsquo;idée de cette méthode est de fabriquer un noeud elasticsearch (node) qui démarre avec les mêmes caractéristiques qu&rsquo;un noeud d&rsquo;indexation et de recherche sauf qu&rsquo;on lui précise qu&rsquo;il n&rsquo;hébergera pas de données.
 Pour cela, on utilise la propriété suivante :

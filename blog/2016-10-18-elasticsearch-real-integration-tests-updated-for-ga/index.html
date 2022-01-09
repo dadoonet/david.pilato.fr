@@ -17,6 +17,12 @@
 <link rel=preconnect href=https://www.google-analytics.com crossorigin>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-62381049-1"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-62381049-1')</script>
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Elasticsearch real integration tests (Updated for GA)">
+<meta name=twitter:description content="NOTE: This article is an updated version of Elasticsearch real integration tests
+Integration tests&mldr; How do you run them?
+Often, you are tempted to run services you want to test from JUnit for example. In elasticsearch, you can extend ESIntegTestCase class which will start a cluster of a given number of nodes.
+public class BanoPluginIntegrationTest extends ESIntegTestCase { public void testPluginIsLoaded() throws Exception { // Your code here } }  But to be honest, the test you are running does not guarantee that you will have the same result in production.">
 <meta name=description content="NOTE: This article is an updated version of Elasticsearch real integration tests
 Integration tests&mldr; How do you run them?
 Often, you are tempted to run services you want to test from JUnit for example. In elasticsearch, you can extend ESIntegTestCase class which will start a cluster of a given number of nodes.

@@ -17,6 +17,12 @@
 <link rel=preconnect href=https://www.google-analytics.com crossorigin>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-62381049-1"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-62381049-1')</script>
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Importing from a database without a database">
+<meta name=twitter:description content="Recently, I got a database MySQL dump and I was thinking of importing it into elasticsearch.
+The first idea which pops up was:
+ install MySQL import the database read the database with Logstash and import into elasticsearch drop the database uninstall MySQL  Well. I found that some of the steps are really not needed.
+I can actually use ELK stack and create a simple recipe which can be used to import SQL dump scripts without needing to actually load the data to a database and then read it again from the database.">
 <meta name=description content="Recently, I got a database MySQL dump and I was thinking of importing it into elasticsearch.
 The first idea which pops up was:
  install MySQL import the database read the database with Logstash and import into elasticsearch drop the database uninstall MySQL  Well. I found that some of the steps are really not needed.

@@ -17,6 +17,11 @@
 <link rel=preconnect href=https://www.google-analytics.com crossorigin>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-62381049-1"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-62381049-1')</script>
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Problème Jetty / Maven sous Windows">
+<meta name=twitter:description content="Lorsqu&rsquo;on souhaite lancer une WebApp avec le plugin Jetty sous Maven 2 depuis un PC sous windows on obtient une erreur référencée sous JIRA #JETTY-1063 :
+java.net.URISyntaxException: Illegal character in path at index 18: file:/C:/Documents and Settings/USER/.m2/repository/org/mortbay/jetty/jetty-maven-plugin/7.0.0.1beta2/jetty-maven-plugin-7.0.0.1beta2.jar  Ce problème n’est résolu que sous Maven 3.
+Pour ceux qui souhaitent rester sous Maven 2 (Maven 3 est encore en version alpha), il faut modifier l&rsquo;emplacement de la repository pour éviter le souci du caractère ESPACE présent dans le chemin C:\Documents and settings\USER\.">
 <meta name=description content="Lorsqu&rsquo;on souhaite lancer une WebApp avec le plugin Jetty sous Maven 2 depuis un PC sous windows on obtient une erreur référencée sous JIRA #JETTY-1063 :
 java.net.URISyntaxException: Illegal character in path at index 18: file:/C:/Documents and Settings/USER/.m2/repository/org/mortbay/jetty/jetty-maven-plugin/7.0.0.1beta2/jetty-maven-plugin-7.0.0.1beta2.jar  Ce problème n’est résolu que sous Maven 3.
 Pour ceux qui souhaitent rester sous Maven 2 (Maven 3 est encore en version alpha), il faut modifier l&rsquo;emplacement de la repository pour éviter le souci du caractère ESPACE présent dans le chemin C:\Documents and settings\USER\.">
