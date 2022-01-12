@@ -19,26 +19,23 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-62381049-1')</script>
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Elasticsearch real integration tests">
-<meta name=twitter:description content="NOTE: This article is now outdated. Please read Elasticsearch real integration tests (Updated for GA) instead!
-Integration tests&mldr; How do you run them?
+<meta name=twitter:description content="Integration tests&mldr; How do you run them?
 Often, you are tempted to run services you want to test from JUnit for example. In elasticsearch, you can extend ESIntegTestCase class which will start a cluster of a given number of nodes.
 public class BanoPluginIntegrationTest extends ESIntegTestCase { public void testPluginIsLoaded() throws Exception { // Your code here } }  But to be honest, the test you are running does not guarantee that you will have the same result in production.">
-<meta name=description content="NOTE: This article is now outdated. Please read Elasticsearch real integration tests (Updated for GA) instead!
-Integration tests&mldr; How do you run them?
+<meta name=description content="Integration tests&mldr; How do you run them?
 Often, you are tempted to run services you want to test from JUnit for example. In elasticsearch, you can extend ESIntegTestCase class which will start a cluster of a given number of nodes.
 public class BanoPluginIntegrationTest extends ESIntegTestCase { public void testPluginIsLoaded() throws Exception { // Your code here } }  But to be honest, the test you are running does not guarantee that you will have the same result in production.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog","item":"https://david.pilato.fr/blog/"},{"@type":"ListItem","position":2,"name":"Elasticsearch real integration tests","item":"https://david.pilato.fr/blog/2016-07-29-elasticsearch-real-integration-tests/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://david.pilato.fr/blog/2016-07-29-elasticsearch-real-integration-tests/"},"headline":"Elasticsearch real integration tests - David Pilato","datePublished":"2016-07-29T03:02:48+02:00","dateModified":"2022-01-09T13:29:04+01:00","wordCount":2699,"author":{"@type":"Person","name":["David Pilato"]},"publisher":{"@type":"Person","name":"David Pilato"},"description":"NOTE: This article is now outdated. Please read Elasticsearch real integration tests (Updated for GA) instead!\nIntegration tests\u0026hellip; How do you run them?\nOften, you are tempted to run services you want to test from JUnit for example. In elasticsearch, you can extend ESIntegTestCase class which will start a cluster of a given number of nodes.\npublic class BanoPluginIntegrationTest extends ESIntegTestCase { public void testPluginIsLoaded() throws Exception { \/\/ Your code here } }  But to be honest, the test you are running does not guarantee that you will have the same result in production."}</script><meta property="og:title" content="Elasticsearch real integration tests - David Pilato">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://david.pilato.fr/blog/2016-07-29-elasticsearch-real-integration-tests/"},"headline":"Elasticsearch real integration tests - David Pilato","datePublished":"2016-07-29T03:02:48+02:00","dateModified":"2016-10-18T03:02:48+02:00","wordCount":2755,"author":{"@type":"Person","name":["David Pilato"]},"publisher":{"@type":"Person","name":"David Pilato"},"description":"Integration tests\u0026hellip; How do you run them?\nOften, you are tempted to run services you want to test from JUnit for example. In elasticsearch, you can extend ESIntegTestCase class which will start a cluster of a given number of nodes.\npublic class BanoPluginIntegrationTest extends ESIntegTestCase { public void testPluginIsLoaded() throws Exception { \/\/ Your code here } }  But to be honest, the test you are running does not guarantee that you will have the same result in production."}</script><meta property="og:title" content="Elasticsearch real integration tests - David Pilato">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://david.pilato.fr/blog/2016-07-29-elasticsearch-real-integration-tests/">
-<meta property="og:description" content="NOTE: This article is now outdated. Please read Elasticsearch real integration tests (Updated for GA) instead!
-Integration tests&mldr; How do you run them?
+<meta property="og:description" content="Integration tests&mldr; How do you run them?
 Often, you are tempted to run services you want to test from JUnit for example. In elasticsearch, you can extend ESIntegTestCase class which will start a cluster of a given number of nodes.
 public class BanoPluginIntegrationTest extends ESIntegTestCase { public void testPluginIsLoaded() throws Exception { // Your code here } }  But to be honest, the test you are running does not guarantee that you will have the same result in production.">
 <meta property="og:locale" content="en">
 <meta property="og:site_name" content="David Pilato">
 <meta property="article:published_time" content="2016-07-29T03:02:48+02:00">
-<meta property="article:modified_time" content="2022-01-09T13:29:04+01:00">
+<meta property="article:modified_time" content="2016-10-18T03:02:48+02:00">
 <meta property="article:section" content="blog">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="maven">
@@ -95,24 +92,25 @@ public class BanoPluginIntegrationTest extends ESIntegTestCase { public void tes
 <h1 class="font-bold text-3xl text-primary-text">Elasticsearch real integration tests</h1>
 <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
 <div class="mr-6 my-2">
-<i class="fas fa-calendar mr-1"></i>
+<i class="fas fa-calendar-alt mr-1"></i>
 <span>2016-07-29</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-history mr-1"></i>
+<span>2016-10-18</span>
 </div>
 <div class="mr-6 my-2">
 <i class="fas fa-clock mr-1"></i>
 <span>13 min read</span>
 </div>
 <div class="mr-6 my-2">
-<i class="fas fa-folder mr-1"></i>
-<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
+<i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
 </div>
 <div class="mr-6 my-2">
-<i class="fas fa-th-list mr-1"></i>
-<a href=https://david.pilato.fr/series/plugin-for-elasticsearch-v5/ class=hover:text-eureka>plugin for elasticsearch v5</a>
+<i class="fas fa-th-list mr-1"></i> <a href=https://david.pilato.fr/series/plugin-for-elasticsearch-v5/ class=hover:text-eureka>plugin for elasticsearch v5</a>
 </div>
 </div>
 <div class=content>
-<p><strong>NOTE:</strong> This article is now outdated. Please read <a href=https://david.pilato.fr/blog/2016-10-18-elasticsearch-real-integration-tests-updated-for-ga/>Elasticsearch real integration tests (Updated for GA)</a> instead!</p>
 <p>Integration tests&mldr; How do you run them?</p>
 <p>Often, you are tempted to run services you want to test from JUnit for example.
 In elasticsearch, you can extend <code>ESIntegTestCase</code> class which will start a cluster of a given
@@ -132,7 +130,7 @@ is the way to go.</p>
 <h2 id=how-do-we-want-to-test>How do we want to test?</h2>
 <p>Ideally, we want to:</p>
 <ul>
-<li>download elasticsearch 5.0.0-alpha5 version</li>
+<li>download elasticsearch 5.0.0 version</li>
 <li>unzip it</li>
 <li>install the plugin we are building if this is what we are doing</li>
 <li>install any other plugin we could need for the tests</li>
@@ -448,7 +446,7 @@ So this script has been tested against elasticsearch 1.x, 2.x and 5.x series.</p
 <p>You can use Maven dependency plugin for that.</p>
 <p>Define some properties first:</p>
 <pre><code class=language-xml>&lt;elasticsearch.groupid&gt;org.elasticsearch.distribution.zip&lt;/elasticsearch.groupid&gt;
-&lt;elasticsearch.version&gt;5.0.0-alpha5&lt;/elasticsearch.version&gt;
+&lt;elasticsearch.version&gt;5.0.0&lt;/elasticsearch.version&gt;
 &lt;skipTests&gt;false&lt;/skipTests&gt;
 
 &lt;!-- For integration tests using ANT --&gt;
@@ -642,16 +640,26 @@ We can use it to run our tests:</p>
 <pre><code class=language-xml>&lt;dependency&gt;
     &lt;groupId&gt;org.elasticsearch.client&lt;/groupId&gt;
     &lt;artifactId&gt;rest&lt;/artifactId&gt;
-    &lt;version&gt;${elasticsearch.version}&lt;/version&gt;
+    &lt;version&gt;${elasticsearch.rest.version}&lt;/version&gt;
     &lt;scope&gt;test&lt;/scope&gt;
 &lt;/dependency&gt;
 </code></pre>
+<p>Note that we added a new maven property called <code>elasticsearch.rest.version</code>:</p>
+<pre><code class=language-xml>&lt;properties&gt;
+    &lt;elasticsearch.rest.version&gt;5.0.0&lt;/elasticsearch.rest.version&gt;
+&lt;/properties&gt;
+</code></pre>
+<p>Why is it another property than <code>${elasticsearch.version}</code> than the elasticsearch?
+Actually if you run your tests against a 2.x or 1.x version, the REST client
+does not exist for versions before 5.0. But it is compatible with older versions.
+So when we use a profile <code>es-1x</code> or <code>es-2x</code>, we must stick with the version 5.x of
+the REST plugin.</p>
 <h3 id=skip-tests-if-no-cluster>Skip tests if no cluster</h3>
 <p>When we run from the IDE, we don&rsquo;t want to fail our tests because we did not start
 an external cluster.</p>
 <p>Let&rsquo;s build an abstract class for all our Integration tests:</p>
 <pre><code class=language-java>public abstract class AbstractITCase extends ESTestCase {
-    protected static final ESLogger staticLogger = ESLoggerFactory.getLogger(&quot;it&quot;);
+    protected static final Logger staticLogger = ESLoggerFactory.getLogger(&quot;it&quot;);
     protected final static int HTTP_TEST_PORT = 9400;
     protected static RestClient client;
 
@@ -715,7 +723,7 @@ If not, <code>assumeThat()</code> method will simply mark the test as ignored.</
 [INFO] Scanning for projects...
 [INFO]
 [INFO] ------------------------------------------------------------------------
-[INFO] Building Plugin: Ingest: BANO 5.0.0-alpha5-SNAPSHOT
+[INFO] Building Plugin: Ingest: BANO 5.0.0-SNAPSHOT
 [INFO] ------------------------------------------------------------------------
 [INFO]
 [INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ ingest-bano ---
@@ -746,11 +754,11 @@ Completed [1/1] in 4.18s, 1 test
 [INFO]
 [INFO] --- maven-assembly-plugin:2.6:single (default) @ ingest-bano ---
 [INFO] Reading assembly descriptor: /Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/src/main/assemblies/plugin.xml
-[INFO] Building zip: /Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/target/releases/ingest-bano-5.0.0-alpha5-SNAPSHOT.zip
+[INFO] Building zip: /Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/target/releases/ingest-bano-5.0.0-SNAPSHOT.zip
 [INFO]
 [INFO] --- maven-dependency-plugin:2.10:copy (integ-setup-dependencies) @ ingest-bano ---
-[INFO] Configured Artifact: org.elasticsearch.distribution.zip:elasticsearch:5.0.0-alpha5:zip
-[INFO] org.elasticsearch.distribution.zip:elasticsearch:5.0.0-alpha5:zip already exists in /Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/target/integration-tests/binaries
+[INFO] Configured Artifact: org.elasticsearch.distribution.zip:elasticsearch:5.0.0:zip
+[INFO] org.elasticsearch.distribution.zip:elasticsearch:5.0.0:zip already exists in /Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/target/integration-tests/binaries
 [INFO]
 [INFO] --- maven-antrun-plugin:1.8:run (integ-setup) @ ingest-bano ---
 [INFO] Executing tasks
@@ -761,7 +769,7 @@ stop-external-cluster:
 
 setup-workspace:
    [delete] Deleting directory /Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/target/integration-tests/run
-    [unzip] Expanding: /Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/target/integration-tests/binaries/elasticsearch-5.0.0-alpha5.zip into /Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/target/integration-tests/run
+    [unzip] Expanding: /Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/target/integration-tests/binaries/elasticsearch-5.0.0.zip into /Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/target/integration-tests/run
 
 start-external-cluster-with-plugin:
      [echo] Installing plugin ingest-bano...
@@ -769,10 +777,10 @@ start-external-cluster-with-plugin:
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;exec script=&quot;elasticsearch-plugin&quot;&gt;
   &lt;arg value=&quot;install&quot; /&gt;
-  &lt;arg value=&quot;file:/Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/target/releases/ingest-bano-5.0.0-alpha5.zip&quot; /&gt;
+  &lt;arg value=&quot;file:/Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/target/releases/ingest-bano-5.0.0.zip&quot; /&gt;
 &lt;/exec&gt;
-[elasticsearch-plugin] Plugins directory [/Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/target/integration-tests/run/elasticsearch-5.0.0-alpha5/plugins] does not exist. Creating...
-[elasticsearch-plugin] -&gt; Downloading file:/Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/target/releases/ingest-bano-5.0.0-alpha5-SNAPSHOT.zip
+[elasticsearch-plugin] Plugins directory [/Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/target/integration-tests/run/elasticsearch-5.0.0/plugins] does not exist. Creating...
+[elasticsearch-plugin] -&gt; Downloading file:/Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/target/releases/ingest-bano-5.0.0-SNAPSHOT.zip
 [elasticsearch-plugin]
 [elasticsearch-plugin] -&gt; Installed ingest-bano
      [echo] Starting up external cluster...
@@ -791,7 +799,7 @@ start-external-cluster-with-plugin:
 [elasticsearch] [2016-07-29 01:54:01,526][INFO ][env                      ] [GTlhLM8] using [1] data paths, mounts [[/ (/dev/disk1)]], net usable_space [24.1gb], net total_space [464.7gb], spins? [unknown], types [hfs]
 [elasticsearch] [2016-07-29 01:54:01,526][INFO ][env                      ] [GTlhLM8] heap size [1.9gb], compressed ordinary object pointers [true]
 [elasticsearch] [2016-07-29 01:54:01,527][INFO ][node                     ] [GTlhLM8] node name [GTlhLM8] derived from node ID; set [node.name] to override
-[elasticsearch] [2016-07-29 01:54:01,528][INFO ][node                     ] [GTlhLM8] version[5.0.0-alpha5], pid[2942], build[0d2ccf0/2016-07-28T15:02:31.650Z], OS[Mac OS X/10.11.5/x86_64], JVM[Oracle Corporation/Java HotSpot(TM) 64-Bit Server VM/1.8.0_60/25.60-b23]
+[elasticsearch] [2016-07-29 01:54:01,528][INFO ][node                     ] [GTlhLM8] version[5.0.0], pid[2942], build[0d2ccf0/2016-07-28T15:02:31.650Z], OS[Mac OS X/10.11.5/x86_64], JVM[Oracle Corporation/Java HotSpot(TM) 64-Bit Server VM/1.8.0_60/25.60-b23]
 [elasticsearch] [2016-07-29 01:54:02,442][INFO ][io.netty.util.internal.PlatformDependent] Your platform does not provide complete low-level API for accessing direct buffers reliably. Unless explicitly requested, heap buffer will always be preferred to avoid potential system unstability.
 [elasticsearch] [2016-07-29 01:54:02,472][INFO ][plugins                  ] [GTlhLM8] loaded module [aggs-matrix-stats]
 [elasticsearch] [2016-07-29 01:54:02,473][INFO ][plugins                  ] [GTlhLM8] loaded module [ingest-common]
@@ -844,9 +852,9 @@ stop-external-cluster:
 [INFO] Executed tasks
 [INFO]
 [INFO] --- maven-install-plugin:2.4:install (default-install) @ ingest-bano ---
-[INFO] Installing /Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/target/ingest-bano-5.0.0-alpha5-SNAPSHOT.jar to /Users/dpilato/.m2/repository/fr/pilato/elasticsearch/ingest/ingest-bano/5.0.0-alpha5-SNAPSHOT/ingest-bano-5.0.0-alpha5-SNAPSHOT.jar
-[INFO] Installing /Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/pom.xml to /Users/dpilato/.m2/repository/fr/pilato/elasticsearch/ingest/ingest-bano/5.0.0-alpha5-SNAPSHOT/ingest-bano-5.0.0-alpha5-SNAPSHOT.pom
-[INFO] Installing /Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/target/releases/ingest-bano-5.0.0-alpha5-SNAPSHOT.zip to /Users/dpilato/.m2/repository/fr/pilato/elasticsearch/ingest/ingest-bano/5.0.0-alpha5-SNAPSHOT/ingest-bano-5.0.0-alpha5-SNAPSHOT.zip
+[INFO] Installing /Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/target/ingest-bano-5.0.0-SNAPSHOT.jar to /Users/dpilato/.m2/repository/fr/pilato/elasticsearch/ingest/ingest-bano/5.0.0-SNAPSHOT/ingest-bano-5.0.0-SNAPSHOT.jar
+[INFO] Installing /Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/pom.xml to /Users/dpilato/.m2/repository/fr/pilato/elasticsearch/ingest/ingest-bano/5.0.0-SNAPSHOT/ingest-bano-5.0.0-SNAPSHOT.pom
+[INFO] Installing /Users/dpilato/Documents/Elasticsearch/dev/blog-tests/ingest-bano/target/releases/ingest-bano-5.0.0-SNAPSHOT.zip to /Users/dpilato/.m2/repository/fr/pilato/elasticsearch/ingest/ingest-bano/5.0.0-SNAPSHOT/ingest-bano-5.0.0-SNAPSHOT.zip
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
@@ -856,7 +864,8 @@ stop-external-cluster:
 [INFO] ------------------------------------------------------------------------
 </code></pre>
 <p>You can see at the end the execution of integration tests from this line:</p>
-<p><code>[INFO] --- junit4-maven-plugin:2.3.3:junit4 (integration-tests) @ ingest-bano ---</code></p>
+<pre><code class=language-txt>[INFO] --- junit4-maven-plugin:2.3.3:junit4 (integration-tests) @ ingest-bano ---
+</code></pre>
 <p>Done!</p>
 </div>
 <div class=my-4>
@@ -989,7 +998,7 @@ stop-external-cluster:
 <p class="text-sm text-tertiary-text">&copy; 2022, David Pilato, France
 &#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p>
 </div><div class="text-center p-1 pin-b">
-<p class="text-sm text-tertiary-text">Generated from 🇫🇷 with ❤️ on Mon Jan 10, 2022 at 14:25:11 UTC</p>
+<p class="text-sm text-tertiary-text">Generated from 🇫🇷 with ❤️ on Wed Jan 12, 2022 at 12:06:36 UTC</p>
 </div></div>
 </footer>
 </body>

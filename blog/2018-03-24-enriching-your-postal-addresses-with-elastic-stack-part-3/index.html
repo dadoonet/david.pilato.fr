@@ -27,7 +27,7 @@ Let&rsquo;s say we have an existing dataset we want to enrich.">
  Importing Bano dataset with Logstash Using Logstash to lookup for addresses in Bano index Using Logstash to enrich an existing dataset with Bano  In the previous post, we described how we can transform a postal address to a normalized one with also the geo location point or transform a geo location point to a postal address.
 Let&rsquo;s say we have an existing dataset we want to enrich.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog","item":"https://david.pilato.fr/blog/"},{"@type":"ListItem","position":2,"name":"Enriching your postal addresses with Elastic stack - part 3","item":"https://david.pilato.fr/blog/2018-03-24-enriching-your-postal-addresses-with-elastic-stack-part-3/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://david.pilato.fr/blog/2018-03-24-enriching-your-postal-addresses-with-elastic-stack-part-3/"},"headline":"Enriching your postal addresses with Elastic stack - part 3 - David Pilato","image":"https://david.pilato.fr/blog/2018-03-24-enriching-your-postal-addresses-with-elastic-stack-part-3/featured.png","datePublished":"2018-03-24T00:00:00+00:00","dateModified":"2022-01-09T14:40:45+01:00","wordCount":665,"author":{"@type":"Person","name":["David Pilato"]},"publisher":{"@type":"Person","name":"David Pilato"},"description":"This blog post is part of a series of 3:\n Importing Bano dataset with Logstash Using Logstash to lookup for addresses in Bano index Using Logstash to enrich an existing dataset with Bano  In the previous post, we described how we can transform a postal address to a normalized one with also the geo location point or transform a geo location point to a postal address.\nLet\u0026rsquo;s say we have an existing dataset we want to enrich."}</script><meta property="og:title" content="Enriching your postal addresses with Elastic stack - part 3 - David Pilato">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://david.pilato.fr/blog/2018-03-24-enriching-your-postal-addresses-with-elastic-stack-part-3/"},"headline":"Enriching your postal addresses with Elastic stack - part 3 - David Pilato","image":"https://david.pilato.fr/blog/2018-03-24-enriching-your-postal-addresses-with-elastic-stack-part-3/featured.png","datePublished":"2018-03-24T00:00:00+00:00","dateModified":"2018-03-24T00:00:00+00:00","wordCount":665,"author":{"@type":"Person","name":["David Pilato"]},"publisher":{"@type":"Person","name":"David Pilato"},"description":"This blog post is part of a series of 3:\n Importing Bano dataset with Logstash Using Logstash to lookup for addresses in Bano index Using Logstash to enrich an existing dataset with Bano  In the previous post, we described how we can transform a postal address to a normalized one with also the geo location point or transform a geo location point to a postal address.\nLet\u0026rsquo;s say we have an existing dataset we want to enrich."}</script><meta property="og:title" content="Enriching your postal addresses with Elastic stack - part 3 - David Pilato">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://david.pilato.fr/blog/2018-03-24-enriching-your-postal-addresses-with-elastic-stack-part-3/">
 <meta property="og:description" content="This blog post is part of a series of 3:
@@ -36,7 +36,7 @@ Let&rsquo;s say we have an existing dataset we want to enrich.">
 <meta property="og:locale" content="en">
 <meta property="og:site_name" content="David Pilato">
 <meta property="article:published_time" content="2018-03-24T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-01-09T14:40:45+01:00">
+<meta property="article:modified_time" content="2018-03-24T00:00:00+00:00">
 <meta property="article:section" content="blog">
 <meta property="article:tag" content="beats">
 <meta property="article:tag" content="logstash">
@@ -87,20 +87,14 @@ Let&rsquo;s say we have an existing dataset we want to enrich.">
 <h1 class="font-bold text-3xl text-primary-text">Enriching your postal addresses with Elastic stack - part 3</h1>
 <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
 <div class="mr-6 my-2">
-<i class="fas fa-calendar mr-1"></i>
+<i class="fas fa-calendar-alt mr-1"></i>
 <span>2018-03-24</span>
 </div>
 <div class="mr-6 my-2">
-<i class="fas fa-clock mr-1"></i>
-<span>4 min read</span>
+<i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
 </div>
 <div class="mr-6 my-2">
-<i class="fas fa-folder mr-1"></i>
-<a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
-</div>
-<div class="mr-6 my-2">
-<i class="fas fa-th-list mr-1"></i>
-<a href=https://david.pilato.fr/series/bano/ class=hover:text-eureka>bano</a>
+<i class="fas fa-th-list mr-1"></i> <a href=https://david.pilato.fr/series/bano/ class=hover:text-eureka>bano</a>
 </div>
 </div>
 <div class=my-4>
@@ -326,7 +320,7 @@ My plan is to index some other open data sources in elasticsearch and try to cov
 <p class="text-sm text-tertiary-text">&copy; 2022, David Pilato, France
 &#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p>
 </div><div class="text-center p-1 pin-b">
-<p class="text-sm text-tertiary-text">Generated from 🇫🇷 with ❤️ on Mon Jan 10, 2022 at 14:25:11 UTC</p>
+<p class="text-sm text-tertiary-text">Generated from 🇫🇷 with ❤️ on Wed Jan 12, 2022 at 12:06:36 UTC</p>
 </div></div>
 </footer>
 </body>
