@@ -1,118 +1,24 @@
-<!doctype html><html lang=en><meta charset=utf-8>
-<meta name=viewport content="width=device-width">
-<title>Adding a new REST endpoint to elasticsearch - David Pilato</title>
-<meta name=generator content="Hugo Eureka 0.8.4">
-<link rel=stylesheet href=https://david.pilato.fr/css/eureka.min.css>
-<script defer src=https://david.pilato.fr/js/eureka.min.js></script>
-<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
-<link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload="this.onload=null,this.rel='stylesheet'">
-<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css media=print onload="this.media='all',this.onload=null" crossorigin>
-<script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js crossorigin></script>
-<script defer src=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js integrity="sha256-uNYoXefWRqv+PsIF/OflNmwtKM4lStn9yrz2gVl6ymo=" crossorigin></script>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X media=print onload="this.media='all',this.onload=null" crossorigin>
-<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin></script>
-<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin></script>
-<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script>
-<script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js integrity="sha256-Zmpaaj+GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE=" crossorigin></script>
-<link rel=preconnect href=https://www.google-analytics.com crossorigin>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-62381049-1"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-62381049-1')</script>
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="Adding a new REST endpoint to elasticsearch">
-<meta name=twitter:description content="This blog post is part of a series which will teach you:
- How to write a plugin for elasticsearch 5.0 using Maven. How to add a new REST endpoint plugin to elasticsearch 5.0 (what you are reading now). How I wrote the ingest-bano plugin which will be hopefully released soonish. In this plugin, new REST endpoints have been added.  Imagine that you wish to add a new REST endpoint so you can send requests like:">
-<meta name=description content="This blog post is part of a series which will teach you:
- How to write a plugin for elasticsearch 5.0 using Maven. How to add a new REST endpoint plugin to elasticsearch 5.0 (what you are reading now). How I wrote the ingest-bano plugin which will be hopefully released soonish. In this plugin, new REST endpoints have been added.  Imagine that you wish to add a new REST endpoint so you can send requests like:">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog","item":"https://david.pilato.fr/blog/"},{"@type":"ListItem","position":2,"name":"Adding a new REST endpoint to elasticsearch","item":"https://david.pilato.fr/blog/2016-07-30-adding-a-new-rest-endpoint-to-elasticsearch/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://david.pilato.fr/blog/2016-07-30-adding-a-new-rest-endpoint-to-elasticsearch/"},"headline":"Adding a new REST endpoint to elasticsearch - David Pilato","datePublished":"2016-07-30T14:50:00+02:00","dateModified":"2016-10-19T14:50:00+02:00","wordCount":1460,"author":{"@type":"Person","name":["David Pilato"]},"publisher":{"@type":"Person","name":"David Pilato"},"description":"This blog post is part of a series which will teach you:\n How to write a plugin for elasticsearch 5.0 using Maven. How to add a new REST endpoint plugin to elasticsearch 5.0 (what you are reading now). How I wrote the ingest-bano plugin which will be hopefully released soonish. In this plugin, new REST endpoints have been added.  Imagine that you wish to add a new REST endpoint so you can send requests like:"}</script><meta property="og:title" content="Adding a new REST endpoint to elasticsearch - David Pilato">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://david.pilato.fr/blog/2016-07-30-adding-a-new-rest-endpoint-to-elasticsearch/">
-<meta property="og:description" content="This blog post is part of a series which will teach you:
- How to write a plugin for elasticsearch 5.0 using Maven. How to add a new REST endpoint plugin to elasticsearch 5.0 (what you are reading now). How I wrote the ingest-bano plugin which will be hopefully released soonish. In this plugin, new REST endpoints have been added.  Imagine that you wish to add a new REST endpoint so you can send requests like:">
-<meta property="og:locale" content="en">
-<meta property="og:site_name" content="David Pilato">
-<meta property="article:published_time" content="2016-07-30T14:50:00+02:00">
-<meta property="article:modified_time" content="2016-10-19T14:50:00+02:00">
-<meta property="article:section" content="blog">
-<meta property="article:tag" content="java">
-<meta property="article:tag" content="elasticsearch">
-<meta property="article:tag" content="plugin">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2016-08-03-elasticsearch-real-integration-tests-with-security-enabled/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2016-08-01-creating-elasticsearch-transport-action/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2016-07-29-elasticsearch-real-integration-tests/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2016-07-28-creating-an-ingest-plugin-for-elasticsearch/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2016-07-27-creating-a-plugin-for-elasticsearch-5-dot-0-using-maven/">
-<body class="flex flex-col min-h-screen">
-<header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
-<div class="w-full max-w-screen-xl mx-auto"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=='Auto'||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName('html')[0].classList.add('dark')</script>
-<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
-<a href=/ class="mr-6 text-primary-text text-xl font-bold">David Pilato</a>
+<!doctype html><html lang=en><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Adding a new REST endpoint to elasticsearch - David Pilato</title><meta name=generator content="Hugo Eureka 0.9.3"><link rel=stylesheet href=https://david.pilato.fr/css/eureka.min.9cec6350e37e534b0338fa9a085bf06855de3b0f2dcf857e792e5e97b07ea905d4d5513db554cbc26a9c3da622bae92d.css><script defer src=https://david.pilato.fr/js/eureka.min.c9397561036ecdb150468028e7807081e0823ad4b7207798ac3c0cdf9742e4300265511b6b457026c9a0e7b663e44683.js></script>
+<link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload="this.onload=null,this.rel='stylesheet'"><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/solarized-light.min.css media=print onload="this.media='all',this.onload=null" crossorigin><script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js crossorigin></script>
+<link rel=stylesheet href=https://david.pilato.fr/css/highlightjs.min.2958991528e43eb6fc9b8c4f2b8e052f79c4010718e1d1e888a777620e9ee63021c2c57ec7417a3108019bb8c41943e6.css media=print onload="this.media='all',this.onload=null"><script defer type=text/javascript src=https://david.pilato.fr/js/fontawesome.min.3b3a9010e96bcc23aa7ff4cef43506624c34c13b18fd1c67fe5138e9a95657d5f58ac4aebc370d569554fca0aedd65c5.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css integrity=sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ media=print onload="this.media='all',this.onload=null" crossorigin><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js integrity=sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script><script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js integrity=sha384-atOyb0FxAgN9LyAc6PEf9BjgwLISyansgdH8/VXQH8p2o5vfrRgmGIJ2Sg22L0A0 crossorigin></script>
+<link rel=preconnect href=https://www.google-analytics.com crossorigin><script async src="https://www.googletagmanager.com/gtag/js?id=UA-62381049-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-62381049-1')</script><meta name=twitter:card content="summary"><meta name=twitter:title content="Adding a new REST endpoint to elasticsearch"><meta name=twitter:description content="This blog post is part of a series which will teach you:
+How to write a plugin for elasticsearch 5.0 using Maven. How to add a new REST endpoint plugin to elasticsearch 5.0 (what you are reading now). How I wrote the ingest-bano plugin which will be hopefully released soonish. In this plugin, new REST endpoints have been added. Imagine that you wish to add a new REST endpoint so you can send requests like:"><meta name=description content="This blog post is part of a series which will teach you:
+How to write a plugin for elasticsearch 5.0 using Maven. How to add a new REST endpoint plugin to elasticsearch 5.0 (what you are reading now). How I wrote the ingest-bano plugin which will be hopefully released soonish. In this plugin, new REST endpoints have been added. Imagine that you wish to add a new REST endpoint so you can send requests like:"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog","item":"https://david.pilato.fr/blog/"},{"@type":"ListItem","position":2,"name":"Adding a new REST endpoint to elasticsearch","item":"https://david.pilato.fr/blog/2016-07-30-adding-a-new-rest-endpoint-to-elasticsearch/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://david.pilato.fr/blog/2016-07-30-adding-a-new-rest-endpoint-to-elasticsearch/"},"headline":"Adding a new REST endpoint to elasticsearch - David Pilato","datePublished":"2016-07-30T14:50:00+02:00","dateModified":"2016-10-19T14:50:00+02:00","wordCount":1460,"author":{"@type":"Person","name":["David Pilato"]},"publisher":{"@type":"Person","name":"David Pilato"},"description":"This blog post is part of a series which will teach you:\nHow to write a plugin for elasticsearch 5.0 using Maven. How to add a new REST endpoint plugin to elasticsearch 5.0 (what you are reading now). How I wrote the ingest-bano plugin which will be hopefully released soonish. In this plugin, new REST endpoints have been added. Imagine that you wish to add a new REST endpoint so you can send requests like:"}</script><meta property="og:title" content="Adding a new REST endpoint to elasticsearch - David Pilato"><meta property="og:type" content="article"><meta property="og:url" content="https://david.pilato.fr/blog/2016-07-30-adding-a-new-rest-endpoint-to-elasticsearch/"><meta property="og:description" content="This blog post is part of a series which will teach you:
+How to write a plugin for elasticsearch 5.0 using Maven. How to add a new REST endpoint plugin to elasticsearch 5.0 (what you are reading now). How I wrote the ingest-bano plugin which will be hopefully released soonish. In this plugin, new REST endpoints have been added. Imagine that you wish to add a new REST endpoint so you can send requests like:"><meta property="og:locale" content="en"><meta property="og:site_name" content="David Pilato"><meta property="article:published_time" content="2016-07-30T14:50:00+02:00"><meta property="article:modified_time" content="2016-10-19T14:50:00+02:00"><meta property="article:section" content="blog"><meta property="article:tag" content="java"><meta property="article:tag" content="elasticsearch"><meta property="article:tag" content="plugin"><meta property="og:see_also" content="https://david.pilato.fr/blog/2016-08-03-elasticsearch-real-integration-tests-with-security-enabled/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2016-08-01-creating-elasticsearch-transport-action/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2016-07-29-elasticsearch-real-integration-tests/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2016-07-28-creating-an-ingest-plugin-for-elasticsearch/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2016-07-27-creating-a-plugin-for-elasticsearch-5-dot-0-using-maven/"><body class="flex flex-col min-h-screen"><header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm"><div class="w-full max-w-screen-xl mx-auto"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=='Auto'||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName('html')[0].classList.add('dark')</script><nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0"><a href=/ class="me-6 text-primary-text text-xl font-bold">David Pilato</a>
 <button id=navbar-btn class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
-<i class="fas fa-bars"></i>
-</button>
-<div id=target class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
-<div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
-<a href=/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Home</a>
-<a href=/blog/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Blog</a>
-<a href=https://djdadoo.pilato.fr/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">DJ Mixes</a>
-<a href=/authors/david-pilato/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">About me</a>
-</div>
-<div class=flex>
-<div class="relative pt-4 md:pt-0">
-<div class="cursor-pointer hover:text-eureka" id=lightDarkMode>
-<i class="fas fa-adjust"></i>
-</div>
-<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open>
-</div>
-<div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions>
-<span class="px-4 py-1 hover:text-eureka" name=Light>Light</span>
+<i class="fas fa-bars"></i></button><div id=target class="hidden block md:flex md:grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20"><div class="md:flex md:h-16 text-sm md:grow pb-4 md:pb-0 border-b md:border-b-0"><a href=/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item me-4">Home</a>
+<a href=/blog/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item me-4">Blog</a>
+<a href=https://djdadoo.pilato.fr/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent me-4">DJ Mixes</a>
+<a href=/authors/david-pilato/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent me-4">About me</a></div><div class=flex><div class="relative pt-4 md:pt-0"><div class="cursor-pointer hover:text-eureka" id=lightDarkMode><i class="fas fa-adjust"></i></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open></div><div class="absolute flex flex-col start-0 md:start-auto end-auto md:end-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions><span class="px-4 py-1 hover:text-eureka" name=Light>Light</span>
 <span class="px-4 py-1 hover:text-eureka" name=Dark>Dark</span>
-<span class="px-4 py-1 hover:text-eureka" name=Auto>Auto</span>
-</div>
-</div>
-</div>
-</div>
-<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile>
-</div>
-</nav>
-<script>let element=document.getElementById('lightDarkMode');storageColorScheme==null||storageColorScheme=='Auto'?document.addEventListener('DOMContentLoaded',()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change',switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'sun'),element.firstElementChild.classList.add('fa-sun')):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'moon'),element.firstElementChild.classList.add('fa-moon')),document.addEventListener('DOMContentLoaded',()=>{getcolorscheme(),switchBurger()})</script>
-</div>
-</header>
-<main class="flex-grow pt-16">
-<div class=pl-scrollbar>
-<div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
-<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
-<div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
-<h1 class="font-bold text-3xl text-primary-text">Adding a new REST endpoint to elasticsearch</h1>
-<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
-<div class="mr-6 my-2">
-<i class="fas fa-calendar-alt mr-1"></i>
-<span>2016-07-30</span>
-</div>
-<div class="mr-6 my-2">
-<i class="fas fa-history mr-1"></i>
-<span>2016-10-19</span>
-</div>
-<div class="mr-6 my-2">
-<i class="fas fa-clock mr-1"></i>
-<span>7 min read</span>
-</div>
-<div class="mr-6 my-2">
-<i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
-</div>
-<div class="mr-6 my-2">
-<i class="fas fa-th-list mr-1"></i> <a href=https://david.pilato.fr/series/plugin-for-elasticsearch-v5/ class=hover:text-eureka>plugin for elasticsearch v5</a>
-</div>
-</div>
-<div class=content>
-<p>This blog post is part of a series which will teach you:</p>
-<ul>
-<li><a href=https://david.pilato.fr/blog/2016-07-27-creating-a-plugin-for-elasticsearch-5-dot-0-using-maven/>How to write a plugin for elasticsearch 5.0 using Maven</a>.</li>
-<li>How to add a new REST endpoint plugin to elasticsearch 5.0 (what you are reading now).</li>
-<li>How I wrote the <code>ingest-bano</code> plugin which will be hopefully released soonish. In this plugin, new REST endpoints have been added.</li>
-</ul>
-<p>Imagine that you wish to add a new REST endpoint so you can send requests like:</p>
-<pre><code class=language-sh>curl -XGET &quot;http://localhost:9200/_hello?name=David&amp;pretty&quot;
+<span class="px-4 py-1 hover:text-eureka" name=Auto>Auto</span></div></div></div></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile></div></nav><script>let element=document.getElementById('lightDarkMode');storageColorScheme==null||storageColorScheme=='Auto'?document.addEventListener('DOMContentLoaded',()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change',switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'sun'),element.firstElementChild.classList.add('fa-sun')):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'moon'),element.firstElementChild.classList.add('fa-moon')),document.addEventListener('DOMContentLoaded',()=>{getcolorscheme(),switchBurger()})</script></div></header><main class="flex-grow pt-16"><div class=pl-scrollbar><div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto"><div class="grid grid-cols-2 gap-4 lg:grid-cols-8 lg:pt-12"><div class="bg-secondary-bg col-span-2 rounded px-6 py-8 lg:col-span-6"><article class=prose><h1 class=mb-4>Adding a new REST endpoint to elasticsearch</h1><div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text"><div class="mr-6 my-2"><i class="fas fa-calendar-alt mr-1"></i>
+<span>2016-07-30</span></div><div class="mr-6 my-2"><i class="fas fa-history mr-1"></i>
+<span>2016-10-19</span></div><div class="mr-6 my-2"><i class="fas fa-clock mr-1"></i>
+<span></span></div><div class="mr-6 my-2"><i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a></div><div class="mr-6 my-2"><i class="fas fa-th-list mr-1"></i> <a href=https://david.pilato.fr/series/plugin-for-elasticsearch-v5/ class=hover:text-eureka>plugin for elasticsearch v5</a></div></div><p>This blog post is part of a series which will teach you:</p><ul><li><a href=https://david.pilato.fr/blog/2016-07-27-creating-a-plugin-for-elasticsearch-5-dot-0-using-maven/>How to write a plugin for elasticsearch 5.0 using Maven</a>.</li><li>How to add a new REST endpoint plugin to elasticsearch 5.0 (what you are reading now).</li><li>How I wrote the <code>ingest-bano</code> plugin which will be hopefully released soonish. In this plugin, new REST endpoints have been added.</li></ul><p>Imagine that you wish to add a new REST endpoint so you can send requests like:</p><pre><code class=language-sh>curl -XGET &quot;http://localhost:9200/_hello?name=David&amp;pretty&quot;
 
 # Or
 
@@ -129,31 +35,16 @@ curl -XGET &quot;http://localhost:9200/_hello?pretty&quot; -d '{
 curl -XPOST &quot;http://localhost:9200/_hello?pretty&quot; -d '{
     &quot;name&quot;: &quot;David&quot;
 }'
-</code></pre>
-<p>And you want to get back something like:</p>
-<pre><code class=language-json>{
+</code></pre><p>And you want to get back something like:</p><pre><code class=language-json>{
     &quot;message&quot;: &quot;Hello David!&quot;
 }
-</code></pre>
-<p>Without any parameter:</p>
-<pre><code class=language-sh>curl -XGET &quot;http://localhost:9200/_hello?pretty&quot;
-</code></pre>
-<p>It should return:</p>
-<pre><code class=language-json>{
+</code></pre><p>Without any parameter:</p><pre><code class=language-sh>curl -XGET &quot;http://localhost:9200/_hello?pretty&quot;
+</code></pre><p>It should return:</p><pre><code class=language-json>{
     &quot;message&quot;: &quot;Hello World!&quot;
 }
-</code></pre>
-<p>Or get back a list of existing indices and the number of documents for a given type of indices with:</p>
-<pre><code class=language-sh>curl -XGET http://localhost:9200/_bano
-</code></pre>
-<p>Let&rsquo;s see how to implement that!</p>
-<p>With what we saw <a href=https://david.pilato.fr/blog/2016-07-27-creating-a-plugin-for-elasticsearch-5-dot-0-using-maven/>in the previous article</a>, we now have a Plugin skeleton ready to host our REST endpoint code.
-We also have seen <a href=https://david.pilato.fr/blog/2016-07-29-elasticsearch-real-integration-tests/>how to create real integration tests</a>.</p>
-<p>We are now all set to implement the REST endpoint and be able to test it with a REST Client.</p>
-<h2 id=rest-handler>Rest Handler</h2>
-<h3 id=rest-handler-skeleton>Rest Handler skeleton</h3>
-<p>Basically, we will extend the <code>BaseRestHandler</code> class. Let&rsquo;s create a <code>HelloRestAction</code> in <code>src/main/java/org/elasticsearch/ingest/bano/</code>:</p>
-<pre><code class=language-java>public class HelloRestAction extends BaseRestHandler {
+</code></pre><p>Or get back a list of existing indices and the number of documents for a given type of indices with:</p><pre><code class=language-sh>curl -XGET http://localhost:9200/_bano
+</code></pre><p>Let&rsquo;s see how to implement that!</p><p>With what we saw <a href=https://david.pilato.fr/blog/2016-07-27-creating-a-plugin-for-elasticsearch-5-dot-0-using-maven/>in the previous article</a>, we now have a Plugin skeleton ready to host our REST endpoint code.
+We also have seen <a href=https://david.pilato.fr/blog/2016-07-29-elasticsearch-real-integration-tests/>how to create real integration tests</a>.</p><p>We are now all set to implement the REST endpoint and be able to test it with a REST Client.</p><h2 id=rest-handler>Rest Handler</h2><h3 id=rest-handler-skeleton>Rest Handler skeleton</h3><p>Basically, we will extend the <code>BaseRestHandler</code> class. Let&rsquo;s create a <code>HelloRestAction</code> in <code>src/main/java/org/elasticsearch/ingest/bano/</code>:</p><pre><code class=language-java>public class HelloRestAction extends BaseRestHandler {
 
     @Inject
     public HelloRestAction(Settings settings, RestController controller) {
@@ -166,42 +57,26 @@ We also have seen <a href=https://david.pilato.fr/blog/2016-07-29-elasticsearch-
         // Implement the REST logic here
     }
 }
-</code></pre>
-<h3 id=register-endpoints>Register endpoints</h3>
-<p>In the constructor, we can define when this class will be called:</p>
-<pre><code class=language-java>@Inject
+</code></pre><h3 id=register-endpoints>Register endpoints</h3><p>In the constructor, we can define when this class will be called:</p><pre><code class=language-java>@Inject
 public HelloRestAction(Settings settings, RestController controller) {
     super(settings);
     controller.registerHandler(GET, &quot;/_hello&quot;, this);
 }
-</code></pre>
-<p>Here we are expecting a <code>GET</code> request on <code>/_hello</code> endpoint.</p>
-<h3 id=register-the-rest-handler>Register the REST handler</h3>
-<p>We need to define the REST handler in the plugin:</p>
-<pre><code class=language-java>@Override
+</code></pre><p>Here we are expecting a <code>GET</code> request on <code>/_hello</code> endpoint.</p><h3 id=register-the-rest-handler>Register the REST handler</h3><p>We need to define the REST handler in the plugin:</p><pre><code class=language-java>@Override
 public List&lt;Class&lt;? extends RestHandler&gt;&gt; getRestHandlers() {
     return Collections.singletonList(HelloRestAction.class);
 }
-</code></pre>
-<h3 id=test-the-endpoint>Test the endpoint</h3>
-<p>We have to add some &ldquo;hacks&rdquo; to the default integration tests. Let&rsquo;s create a <code>BanoRestIT</code> in
+</code></pre><h3 id=test-the-endpoint>Test the endpoint</h3><p>We have to add some &ldquo;hacks&rdquo; to the default integration tests. Let&rsquo;s create a <code>BanoRestIT</code> in
 <code>src/test/java/org/elasticsearch/ingest/bano/</code>. Note that it extends <code>AbstractITCase</code>, which we have
-have seen <a href=https://david.pilato.fr/blog/2016-07-29-elasticsearch-real-integration-tests/>previously</a>:</p>
-<pre><code class=language-java>public class BanoRestIT extends AbstractITCase {
+have seen <a href=https://david.pilato.fr/blog/2016-07-29-elasticsearch-real-integration-tests/>previously</a>:</p><pre><code class=language-java>public class BanoRestIT extends AbstractITCase {
 }
-</code></pre>
-<p>Let&rsquo;s now implement our first test:</p>
-<pre><code class=language-java>public void testHelloWorld() throws Exception {
+</code></pre><p>Let&rsquo;s now implement our first test:</p><pre><code class=language-java>public void testHelloWorld() throws Exception {
     Response response = client.performRequest(&quot;GET&quot;, &quot;/_hello&quot;);
     assertThat(entityAsMap(response), hasEntry(&quot;message&quot;, &quot;Hello World!&quot;));
 }
-</code></pre>
-<h3 id=implement-handlerequest>Implement handleRequest</h3>
-<p>As we did not implemented the REST logic yet, this test will obviously fail. Let&rsquo;s fix that in <code>HelloRestAction</code>.</p>
-<p>First, we will send back a JSON object to the user. Elasticsearch provides <code>XContent</code> classes to deal
+</code></pre><h3 id=implement-handlerequest>Implement handleRequest</h3><p>As we did not implemented the REST logic yet, this test will obviously fail. Let&rsquo;s fix that in <code>HelloRestAction</code>.</p><p>First, we will send back a JSON object to the user. Elasticsearch provides <code>XContent</code> classes to deal
 with this.
-We can create a class which will represent our response:</p>
-<pre><code class=language-java>class Message implements ToXContent {
+We can create a class which will represent our response:</p><pre><code class=language-java>class Message implements ToXContent {
 
     private final String name;
 
@@ -218,10 +93,7 @@ We can create a class which will represent our response:</p>
         return builder.field(&quot;message&quot;, &quot;Hello &quot; + name + &quot;!&quot;);
     }
 }
-</code></pre>
-<p>This class implements <code>ToXContent</code> so it provides a <code>toXContent</code> method where we build the actual JSON response.</p>
-<p>Then, we implement <code>prepareRequest</code> method:</p>
-<pre><code class=language-java>@Override
+</code></pre><p>This class implements <code>ToXContent</code> so it provides a <code>toXContent</code> method where we build the actual JSON response.</p><p>Then, we implement <code>prepareRequest</code> method:</p><pre><code class=language-java>@Override
 protected RestChannelConsumer prepareRequest(RestRequest restRequest, NodeClient client) throws IOException {
     String name = restRequest.param(&quot;name&quot;);
     return channel -&gt; {
@@ -233,51 +105,29 @@ protected RestChannelConsumer prepareRequest(RestRequest restRequest, NodeClient
         channel.sendResponse(new BytesRestResponse(RestStatus.OK, builder));
     };
 }
-</code></pre>
-<p>This code is usig a lambda which builds a new <code>Message</code> object.
+</code></pre><p>This code is usig a lambda which builds a new <code>Message</code> object.
 Then we create our JSON document. Basically <code>builder.startObject()</code> and <code>builder.endObject()</code> create a JSON object <code>{}</code>. <code>message.toXContent(builder, restRequest)</code> will fill this object with a JSON representation of the <code>Message</code> object: <code>"message": "Hello name!"</code>.
-At the end, this code will produce:</p>
-<pre><code class=language-json>{
+At the end, this code will produce:</p><pre><code class=language-json>{
     &quot;message&quot;: &quot;Hello name!&quot;
 }
-</code></pre>
-<p>Then we send the JSON response over the wire.</p>
-<h2 id=dealing-with-parameters>Dealing with parameters</h2>
-<h3 id=query-parameters>Query Parameters</h3>
-<p>We want to support:</p>
-<pre><code class=language-sh>curl -XGET &quot;http://localhost:9200/_hello?name=David&amp;pretty&quot;
-</code></pre>
-<p>Let&rsquo;s first implement a test for it (yeah! I love test driven development):</p>
-<pre><code class=language-java>public void testHelloDaviddWithQueryParameters() throws Exception {
+</code></pre><p>Then we send the JSON response over the wire.</p><h2 id=dealing-with-parameters>Dealing with parameters</h2><h3 id=query-parameters>Query Parameters</h3><p>We want to support:</p><pre><code class=language-sh>curl -XGET &quot;http://localhost:9200/_hello?name=David&amp;pretty&quot;
+</code></pre><p>Let&rsquo;s first implement a test for it (yeah! I love test driven development):</p><pre><code class=language-java>public void testHelloDaviddWithQueryParameters() throws Exception {
     Response response = client.performRequest(&quot;GET&quot;, &quot;/_hello?name=David&quot;);
     assertThat(entityAsMap(response), hasEntry(&quot;message&quot;, &quot;Hello David!&quot;));
 }
-</code></pre>
-<p>And fix the test in <code>handleRequest</code> method&mldr;</p>
-<pre><code class=language-java>protected void handleRequest(RestRequest request, RestChannel channel, NodeClient client) throws Exception {
+</code></pre><p>And fix the test in <code>handleRequest</code> method&mldr;</p><pre><code class=language-java>protected void handleRequest(RestRequest request, RestChannel channel, NodeClient client) throws Exception {
     RestToXContentListener&lt;ToXContent&gt; listener = new RestToXContentListener&lt;&gt;(channel);
     String name = request.param(&quot;name&quot;);
     listener.onResponse(new Message(name));
 }
-</code></pre>
-<h3 id=parameters-in-url>Parameters in URL</h3>
-<p>We want to support:</p>
-<pre><code class=language-sh>curl -XGET &quot;http://localhost:9200/_hello/David&amp;pretty&quot;
-</code></pre>
-<p>Let&rsquo;s again implement a test for it:</p>
-<pre><code class=language-java>public void testHelloDavidWithURLParameters() throws Exception {
+</code></pre><h3 id=parameters-in-url>Parameters in URL</h3><p>We want to support:</p><pre><code class=language-sh>curl -XGET &quot;http://localhost:9200/_hello/David&amp;pretty&quot;
+</code></pre><p>Let&rsquo;s again implement a test for it:</p><pre><code class=language-java>public void testHelloDavidWithURLParameters() throws Exception {
     Response response = client.performRequest(&quot;GET&quot;, &quot;/_hello/David&quot;);
     assertThat(entityAsMap(response), hasEntry(&quot;message&quot;, &quot;Hello David!&quot;));
 }
-</code></pre>
-<p>It will send back an error <code>400 (Bad Request)</code> as this URL pattern does not exist.
-Let&rsquo;s add it in the <code>HelloRestAction</code> constructor by registering now:</p>
-<pre><code class=language-java>controller.registerHandler(GET, &quot;/_hello/{name}&quot;, this);
-</code></pre>
-<p><code>name</code> will be the placeholder for this parameter. Well. That&rsquo;s cool. We don&rsquo;t need to change the implementation!</p>
-<h3 id=parameters-as-json-documents>Parameters as JSON documents</h3>
-<p>We want to support:</p>
-<pre><code class=language-sh>curl -XGET &quot;http://localhost:9200/_hello?pretty&quot; -d '{
+</code></pre><p>It will send back an error <code>400 (Bad Request)</code> as this URL pattern does not exist.
+Let&rsquo;s add it in the <code>HelloRestAction</code> constructor by registering now:</p><pre><code class=language-java>controller.registerHandler(GET, &quot;/_hello/{name}&quot;, this);
+</code></pre><p><code>name</code> will be the placeholder for this parameter. Well. That&rsquo;s cool. We don&rsquo;t need to change the implementation!</p><h3 id=parameters-as-json-documents>Parameters as JSON documents</h3><p>We want to support:</p><pre><code class=language-sh>curl -XGET &quot;http://localhost:9200/_hello?pretty&quot; -d '{
     &quot;name&quot;: &quot;David&quot;
 }'
 
@@ -286,9 +136,7 @@ Let&rsquo;s add it in the <code>HelloRestAction</code> constructor by registerin
 curl -XPOST &quot;http://localhost:9200/_hello?pretty&quot; -d '{
     &quot;name&quot;: &quot;David&quot;
 }'
-</code></pre>
-<p>That&rsquo;s a good practice to support both as some clients don&rsquo;t support <code>GET</code> with body.</p>
-<pre><code class=language-java>public void testHelloDavidWithGetBody() throws Exception {
+</code></pre><p>That&rsquo;s a good practice to support both as some clients don&rsquo;t support <code>GET</code> with body.</p><pre><code class=language-java>public void testHelloDavidWithGetBody() throws Exception {
     Response response = client.performRequest(&quot;GET&quot;, &quot;/_hello&quot;,
             Collections.emptyMap(), new StringEntity(&quot;{\&quot;name\&quot;:\&quot;David\&quot;}&quot;));
     assertThat(entityAsMap(response), hasEntry(&quot;message&quot;, &quot;Hello David!&quot;));
@@ -299,9 +147,7 @@ public void testHelloDavidWithPostBody() throws Exception {
             Collections.emptyMap(), new StringEntity(&quot;{\&quot;name\&quot;:\&quot;David\&quot;}&quot;));
     assertThat(entityAsMap(response), hasEntry(&quot;message&quot;, &quot;Hello David!&quot;));
 }
-</code></pre>
-<p>We need in <code>prepareRequest</code> to extract the name from the body:</p>
-<pre><code class=language-java>@Override
+</code></pre><p>We need in <code>prepareRequest</code> to extract the name from the body:</p><pre><code class=language-java>@Override
 protected RestChannelConsumer prepareRequest(RestRequest restRequest, NodeClient client) throws IOException {
     String name = restRequest.param(&quot;name&quot;);
     if (name == null &amp;&amp; restRequest.content().length() &gt; 0) {
@@ -322,29 +168,17 @@ protected RestChannelConsumer prepareRequest(RestRequest restRequest, NodeClient
         channel.sendResponse(new BytesRestResponse(RestStatus.OK, builder));
     };
 }
-</code></pre>
-<p>And we also need to register the <code>POST</code> request. Let&rsquo;s add it in the <code>HelloRestAction</code> constructor by
-registering now:</p>
-<pre><code class=language-java>controller.registerHandler(POST, &quot;/_hello&quot;, this);
-</code></pre>
-<p>Et voilà!</p>
-<h2 id=calling-elasticsearch-client>Calling elasticsearch client</h2>
-<p>You can also call elasticsearch client to perform some tasks and then send the result back to the caller.</p>
-<p>Here for example, we want to call:</p>
-<pre><code class=language-sh>curl -XGET http://localhost:9200/_bano
-</code></pre>
-<p>And get back an array containing the list of all indices starting with <code>.bano</code> in the cluster:</p>
-<pre><code class=language-json>{
+</code></pre><p>And we also need to register the <code>POST</code> request. Let&rsquo;s add it in the <code>HelloRestAction</code> constructor by
+registering now:</p><pre><code class=language-java>controller.registerHandler(POST, &quot;/_hello&quot;, this);
+</code></pre><p>Et voilà!</p><h2 id=calling-elasticsearch-client>Calling elasticsearch client</h2><p>You can also call elasticsearch client to perform some tasks and then send the result back to the caller.</p><p>Here for example, we want to call:</p><pre><code class=language-sh>curl -XGET http://localhost:9200/_bano
+</code></pre><p>And get back an array containing the list of all indices starting with <code>.bano</code> in the cluster:</p><pre><code class=language-json>{
     &quot;bano&quot;: [
         &quot;.bano-17&quot;,
         &quot;.bano-95&quot;,
         &quot;.bano-29&quot;
     ]
 }
-</code></pre>
-<h3 id=add-a-test>Add a test</h3>
-<p>As usual, we start adding a test:</p>
-<pre><code class=language-java>public void testBano() throws Exception {
+</code></pre><h3 id=add-a-test>Add a test</h3><p>As usual, we start adding a test:</p><pre><code class=language-java>public void testBano() throws Exception {
     // We first create some indices
     int numIndices = randomIntBetween(1, 10);
     for (int i = 0; i &lt; numIndices; i++) {
@@ -366,10 +200,7 @@ registering now:</p>
         assertThat(bano, hasItem(&quot;.bano-&quot; + i));
     }
 }
-</code></pre>
-<p>The test generates a random number of indices starting with <code>.bano</code> plus some other unrelated indices.</p>
-<p>Let&rsquo;s now create a new <code>BanoRestAction</code> as we did for <code>HelloRestAction</code>:</p>
-<pre><code class=language-java>public class BanoRestAction extends BaseRestHandler {
+</code></pre><p>The test generates a random number of indices starting with <code>.bano</code> plus some other unrelated indices.</p><p>Let&rsquo;s now create a new <code>BanoRestAction</code> as we did for <code>HelloRestAction</code>:</p><pre><code class=language-java>public class BanoRestAction extends BaseRestHandler {
 
     @Inject
     public BanoRestAction(Settings settings, RestController controller) {
@@ -381,16 +212,12 @@ registering now:</p>
     protected RestChannelConsumer prepareRequest(RestRequest restRequest, NodeClient client) throws IOException {
     }
 }
-</code></pre>
-<p>We register it in the plugin:</p>
-<pre><code class=language-java>public List&lt;Class&lt;? extends RestHandler&gt;&gt; getRestHandlers() {
+</code></pre><p>We register it in the plugin:</p><pre><code class=language-java>public List&lt;Class&lt;? extends RestHandler&gt;&gt; getRestHandlers() {
 return Arrays.asList(
         HelloRestAction.class,
         BanoRestAction.class);
 }
-</code></pre>
-<p>Let&rsquo;s implement the logic in <code>handleRequest</code>:</p>
-<pre><code class=language-java>@Override
+</code></pre><p>Let&rsquo;s implement the logic in <code>handleRequest</code>:</p><pre><code class=language-java>@Override
 protected RestChannelConsumer prepareRequest(RestRequest restRequest, NodeClient client) throws IOException {
     return channel -&gt; client.admin().indices().prepareGetIndex()
         .setIndices(&quot;.bano*&quot;)
@@ -408,12 +235,8 @@ protected RestChannelConsumer prepareRequest(RestRequest restRequest, NodeClient
             }
         });
 }
-</code></pre>
-<p>As you can see, we don&rsquo;t block the thread here as we are using a Listener which is called once the request in the cluster is over.
-This is <strong>extremly important</strong> in the context of elasticsearch as it frees the network socket which can hold other requests and is not blocked by the current one.</p>
-<p>If everything goes well, <code>buildResponse</code> method will be called. Otherwise any exception will be thrown and elasticsearch REST layer mechanism will send that back to the caller.</p>
-<p><code>Indices</code> is a new class as we have seen before which will help us to serialize to JSON the response:</p>
-<pre><code class=language-java>class Indices implements ToXContent {
+</code></pre><p>As you can see, we don&rsquo;t block the thread here as we are using a Listener which is called once the request in the cluster is over.
+This is <strong>extremly important</strong> in the context of elasticsearch as it frees the network socket which can hold other requests and is not blocked by the current one.</p><p>If everything goes well, <code>buildResponse</code> method will be called. Otherwise any exception will be thrown and elasticsearch REST layer mechanism will send that back to the caller.</p><p><code>Indices</code> is a new class as we have seen before which will help us to serialize to JSON the response:</p><pre><code class=language-java>class Indices implements ToXContent {
 
     private final List&lt;String&gt; indices;
 
@@ -434,144 +257,14 @@ This is <strong>extremly important</strong> in the context of elasticsearch as i
         return builder.endArray();
     }
 }
-</code></pre>
-<h2 id=whats-next>What&rsquo;s next?</h2>
-<p>In a coming blog post, I&rsquo;ll explain how to create an ingest plugin which will helps you to transform a french postal address to geo coordinates or the other way around. We will use what we have just seen to add some administrative tasks like automatically create our datasources in elasticsearch (download CSV files from bano website, extract, transform to JSON and index in elasticsearch).</p>
-<p>Stay tuned!</p>
-</div>
-<div class=my-4>
-<a href=https://david.pilato.fr/tags/java/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#java</a>
-<a href=https://david.pilato.fr/tags/elasticsearch/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#elasticsearch</a>
-<a href=https://david.pilato.fr/tags/plugin/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#plugin</a>
-</div>
-<div class="flex md:justify-end my-4">
-<style>#share-buttons{display:inline-block;vertical-align:middle}#share-buttons:after{content:"";display:block;clear:both}#share-buttons>div{position:relative;text-align:left;height:36px;width:32px;float:left;text-align:center}#share-buttons>div>svg{height:16px;fill:#000;margin-top:10px}#share-buttons>div:hover{cursor:pointer}#share-buttons>div.facebook:hover>svg{fill:#3b5998}#share-buttons>div.twitter:hover>svg{fill:#55acee}#share-buttons>div.linkedin:hover>svg{fill:#0077b5}#share-buttons>div.pinterest:hover>svg{fill:#cb2027}#share-buttons>div.mail:hover>svg{fill:#7d7d7d}#share-buttons>div.facebook>svg{height:18px;margin-top:9px}#share-buttons>div.twitter>svg{height:20px;margin-top:8px}#share-buttons>div.linkedin>svg{height:19px;margin-top:7px}#share-buttons>div.pinterest>svg{height:20px;margin-top:9px}#share-buttons>div.mail>svg{height:14px;margin-top:11px}</style>
-<div id=share-buttons>
-<div class=facebook title="Share this on Facebook" onclick="window.open('http://www.facebook.com/share.php?u=https://david.pilato.fr/blog/2016-07-30-adding-a-new-rest-endpoint-to-elasticsearch/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759H734V905H479V609h255V391q0-186 104-288.5T1115 0q147 0 228 12z"/></svg></div>
-<div class=twitter title="Share this on Twitter" onclick="window.open('http://twitter.com/intent/tweet?via=dadoonet&text=🧑🏼‍💻 Blog: Adding a new REST endpoint to elasticsearch 👉🏼&url=https://david.pilato.fr/blog/2016-07-30-adding-a-new-rest-endpoint-to-elasticsearch/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5T1369.5 1125 1185 1335.5t-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5T285 1033q33 5 61 5 43 0 85-11-112-23-185.5-111.5T172 710v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5T884 653q-8-38-8-74 0-134 94.5-228.5T1199 256q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
-<div class=linkedin title="Share this on Linkedin" onclick="window.open('https://www.linkedin.com/shareArticle?mini=true&url=https://david.pilato.fr/blog/2016-07-30-adding-a-new-rest-endpoint-to-elasticsearch/&title=&summary=&source=')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991H147V625h330zm21-306q1 73-50.5 122T312 490h-2q-82 0-132-49t-50-122q0-74 51.5-122.5T314 148t133 48.5T498 319zm1166 729v568h-329v-530q0-105-40.5-164.5T1168 862q-63 0-105.5 34.5T999 982q-11 30-11 81v553H659q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5T1285 602q171 0 275 113.5t104 332.5z"/></svg></div>
-<div class=mail title="Share this through Email" onclick="window.open('mailto:?&body=https://david.pilato.fr/blog/2016-07-30-adding-a-new-rest-endpoint-to-elasticsearch/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47H160q-66 0-113-47T0 1504V710q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 1e2-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38T639 1015q-91-64-262-182.5T172 690q-62-42-117-115.5T0 438q0-78 41.5-130T160 256h1472q65 0 112.5 47t47.5 113z"/></svg></div>
-</div>
-<a href=https://github.com/dadoonet/dadoonet.github.io/tree/main/content/blog/2016-07-30-adding-a-new-rest-endpoint-to-elasticsearch/index.md title="Edit this page">
-<i class="fas fa-edit mr-1"></i>
-</a>
-</div>
-<div class=py-2>
-<div class="flex flex-col md:flex-row items-center my-8">
-<a href=https://david.pilato.fr/authors/david-pilato/ class="w-24 h-24 md:mr-4">
-<img src=https://david.pilato.fr/authors/david-pilato/david_pilato.png class="w-full bg-primary-bg rounded-full" alt=Avatar>
-</a>
-<div class="w-full md:w-auto mt-4 md:mt-0">
-<a href=https://david.pilato.fr/authors/david-pilato/ class="block font-bold text-lg pb-1 mb-2 border-b">David Pilato</a>
-<span class="block pb-2">20+ years of experience, mostly in Java. Living in Cergy, France.</span>
-<a href=mailto:david+blog@pilato.fr class=mr-1>
-<i class="fas fa-envelope"></i>
-</a>
-<a href=https://twitter.com/dadoonet class=mr-1>
-<i class="fab fa-twitter"></i>
-</a>
-<a href=https://github.com/dadoonet class=mr-1>
-<i class="fab fa-github"></i>
-</a>
-<a href=https://www.linkedin.com/in/dadoonet/ class=mr-1>
-<i class="fab fa-linkedin"></i>
-</a>
-</div>
-</div>
-</div>
-<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
-<div>
-<span class="block font-bold">Previous</span>
-<a href=https://david.pilato.fr/blog/2016-08-01-creating-elasticsearch-transport-action/ class=block>Creating Elasticsearch Transport Action</a>
-</div>
-<div class="md:text-right mt-4 md:mt-0">
-<span class="block font-bold">Next</span>
-<a href=https://david.pilato.fr/blog/2016-07-29-elasticsearch-real-integration-tests/ class=block>Elasticsearch real integration tests</a>
-</div>
-</div>
-<script id=utterances src=https://utteranc.es/client.js issue-term=pathname label=💬 comments repo=dadoonet/dadoonet.github.io theme=preferred-color-scheme crossorigin=anonymous async></script>
-<script>storageColorScheme=="Light"?document.getElementById('utterances').setAttribute('theme','github-light'):storageColorScheme=="Dark"&&document.getElementById('utterances').setAttribute('theme','github-dark')</script>
-</div>
-<div class=col-span-2>
-<div class="bg-secondary-bg rounded p-6">
-<h3 class="text-lg font-semibold mb-4">Series of Posts</h3>
-<div class=content>
-<a href=https://david.pilato.fr/blog/2016-08-03-elasticsearch-real-integration-tests-with-security-enabled/>Elasticsearch real integration tests with security enabled</a>
-<br>
-<a href=https://david.pilato.fr/blog/2016-08-01-creating-elasticsearch-transport-action/>Creating Elasticsearch Transport Action</a>
-<br>
-<a href=https://david.pilato.fr/blog/2016-07-30-adding-a-new-rest-endpoint-to-elasticsearch/>Adding a new REST endpoint to elasticsearch</a>
-<br>
-<a href=https://david.pilato.fr/blog/2016-07-29-elasticsearch-real-integration-tests/>Elasticsearch real integration tests</a>
-<br>
-<a href=https://david.pilato.fr/blog/2016-07-28-creating-an-ingest-plugin-for-elasticsearch/>Creating an Ingest plugin for elasticsearch</a>
-<br>
-<a href=https://david.pilato.fr/blog/2016-07-27-creating-a-plugin-for-elasticsearch-5-dot-0-using-maven/>Creating a plugin for elasticsearch 5.0 using Maven</a>
-<br>
-</div>
-</div>
-<div class="sticky top-16 z-10 hidden lg:block px-6 py-4 bg-primary-bg">
-<span class="text-lg font-semibold">On This Page</span>
-</div>
-<div class="sticky-toc hidden lg:block px-6 pb-6">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#rest-handler>Rest Handler</a>
-<ul>
-<li><a href=#rest-handler-skeleton>Rest Handler skeleton</a></li>
-<li><a href=#register-endpoints>Register endpoints</a></li>
-<li><a href=#register-the-rest-handler>Register the REST handler</a></li>
-<li><a href=#test-the-endpoint>Test the endpoint</a></li>
-<li><a href=#implement-handlerequest>Implement handleRequest</a></li>
-</ul>
-</li>
-<li><a href=#dealing-with-parameters>Dealing with parameters</a>
-<ul>
-<li><a href=#query-parameters>Query Parameters</a></li>
-<li><a href=#parameters-in-url>Parameters in URL</a></li>
-<li><a href=#parameters-as-json-documents>Parameters as JSON documents</a></li>
-</ul>
-</li>
-<li><a href=#calling-elasticsearch-client>Calling elasticsearch client</a>
-<ul>
-<li><a href=#add-a-test>Add a test</a></li>
-</ul>
-</li>
-<li><a href=#whats-next>What&rsquo;s next?</a></li>
-</ul>
-</nav>
-</div>
-<script>window.addEventListener('DOMContentLoaded',()=>{enableStickyToc()})</script>
-</div>
-<div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded p-6">
-<h2 class="text-lg font-semibold mb-4">See Also</h2>
-<div class=content>
-<a href=https://david.pilato.fr/blog/2016-07-29-elasticsearch-real-integration-tests/>Elasticsearch real integration tests</a>
-<br>
-<a href=https://david.pilato.fr/blog/2016-07-28-creating-an-ingest-plugin-for-elasticsearch/>Creating an Ingest plugin for elasticsearch</a>
-<br>
-<a href=https://david.pilato.fr/blog/2016-07-27-creating-a-plugin-for-elasticsearch-5-dot-0-using-maven/>Creating a plugin for elasticsearch 5.0 using Maven</a>
-<br>
-<a href=https://david.pilato.fr/blog/2011-09-14-mon-premier-plugin-elasticsearch-rss-river/>Mon premier plugin elasticsearch : RSS River</a>
-<br>
-<a href=https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/>ScrutMyDocs : un moteur de recherche pour documents</a>
-<br>
-<a href=https://david.pilato.fr/blog/2012-05-25-la-factory-spring-pour-elasticsearch-est-sortie/>La factory Spring pour Elasticsearch est sortie !</a>
-<br>
-</div>
-</div>
-</div>
-<script>document.addEventListener('DOMContentLoaded',()=>{hljs.initHighlightingOnLoad()})</script>
-</div>
-</div>
-</main>
-<footer class=pl-scrollbar>
-<div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
-<p class="text-sm text-tertiary-text">&copy; 2022, David Pilato, France
-&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p>
-</div><div class="text-center p-1 pin-b">
-<p class="text-sm text-tertiary-text">Generated from 🇫🇷 with ❤️ on Wed Jan 12, 2022 at 17:58:41 UTC</p>
-</div></div>
-</footer>
-</body>
-</html>
+</code></pre><h2 id=whats-next>What&rsquo;s next?</h2><p>In a coming blog post, I&rsquo;ll explain how to create an ingest plugin which will helps you to transform a french postal address to geo coordinates or the other way around. We will use what we have just seen to add some administrative tasks like automatically create our datasources in elasticsearch (download CSV files from bano website, extract, transform to JSON and index in elasticsearch).</p><p>Stay tuned!</p></article><div class=my-4><a href=https://david.pilato.fr/tags/java/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#java</a>
+<a href=https://david.pilato.fr/tags/elasticsearch/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#elasticsearch</a>
+<a href=https://david.pilato.fr/tags/plugin/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#plugin</a></div><div class="flex md:justify-end my-4"><style>#share-buttons{display:inline-block;vertical-align:middle}#share-buttons:after{content:"";display:block;clear:both}#share-buttons>div{position:relative;text-align:left;height:36px;width:32px;float:left;text-align:center}#share-buttons>div>svg{height:16px;fill:#000;margin-top:10px}#share-buttons>div:hover{cursor:pointer}#share-buttons>div.facebook:hover>svg{fill:#3b5998}#share-buttons>div.twitter:hover>svg{fill:#55acee}#share-buttons>div.linkedin:hover>svg{fill:#0077b5}#share-buttons>div.pinterest:hover>svg{fill:#cb2027}#share-buttons>div.mail:hover>svg{fill:#7d7d7d}#share-buttons>div.facebook>svg{height:18px;margin-top:9px}#share-buttons>div.twitter>svg{height:20px;margin-top:8px}#share-buttons>div.linkedin>svg{height:19px;margin-top:7px}#share-buttons>div.pinterest>svg{height:20px;margin-top:9px}#share-buttons>div.mail>svg{height:14px;margin-top:11px}</style><div id=share-buttons><div class=facebook title="Share this on Facebook" onclick="window.open('http://www.facebook.com/share.php?u=https://david.pilato.fr/blog/2016-07-30-adding-a-new-rest-endpoint-to-elasticsearch/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759H734V905H479V609h255V391q0-186 104-288.5T1115 0q147 0 228 12z"/></svg></div><div class=twitter title="Share this on Twitter" onclick="window.open('http://twitter.com/intent/tweet?via=dadoonet&text=🧑🏼‍💻 Blog: Adding a new REST endpoint to elasticsearch 👉🏼&url=https://david.pilato.fr/blog/2016-07-30-adding-a-new-rest-endpoint-to-elasticsearch/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5T1369.5 1125 1185 1335.5t-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5T285 1033q33 5 61 5 43 0 85-11-112-23-185.5-111.5T172 710v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5T884 653q-8-38-8-74 0-134 94.5-228.5T1199 256q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div><div class=linkedin title="Share this on Linkedin" onclick="window.open('https://www.linkedin.com/shareArticle?mini=true&url=https://david.pilato.fr/blog/2016-07-30-adding-a-new-rest-endpoint-to-elasticsearch/&title=&summary=&source=')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991H147V625h330zm21-306q1 73-50.5 122T312 490h-2q-82 0-132-49t-50-122q0-74 51.5-122.5T314 148t133 48.5T498 319zm1166 729v568h-329v-530q0-105-40.5-164.5T1168 862q-63 0-105.5 34.5T999 982q-11 30-11 81v553H659q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5T1285 602q171 0 275 113.5t104 332.5z"/></svg></div><div class=mail title="Share this through Email" onclick="window.open('mailto:?&body=https://david.pilato.fr/blog/2016-07-30-adding-a-new-rest-endpoint-to-elasticsearch/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47H160q-66 0-113-47T0 1504V710q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 1e2-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38T639 1015q-91-64-262-182.5T172 690q-62-42-117-115.5T0 438q0-78 41.5-130T160 256h1472q65 0 112.5 47t47.5 113z"/></svg></div></div><a href=https://github.com/dadoonet/dadoonet.github.io/tree/main/content/blog/2016-07-30-adding-a-new-rest-endpoint-to-elasticsearch/index.md title="Edit this page"><i class="fas fa-edit mr-1"></i></a></div><div class=py-2><div class="my-8 flex flex-col items-center md:flex-row"><a href=https://david.pilato.fr/authors/david-pilato/ class="md:me-4 text-primary-text h-24 w-24"><img src=https://david.pilato.fr/authors/david-pilato/david_pilato.png class="bg-primary-bg w-full rounded-full" alt=Avatar></a><div class="mt-4 w-full md:mt-0 md:w-auto"><a href=https://david.pilato.fr/authors/david-pilato/ class="mb-2 block border-b pb-1 text-lg font-bold"><h3>David Pilato</h3></a><span class="block pb-2">20+ years of experience, mostly in Java. Living in Cergy, France.</span>
+<a href=mailto:david+blog@pilato.fr class=me-2><i class="fas fa-envelope"></i></a>
+<a href=https://twitter.com/dadoonet class=me-2><i class="fab fa-twitter"></i></a>
+<a href=https://github.com/dadoonet class=me-2><i class="fab fa-github"></i></a>
+<a href=https://www.linkedin.com/in/dadoonet/ class=me-2><i class="fab fa-linkedin"></i></a></div></div></div><div class="-mx-2 mt-4 flex flex-col border-t px-2 pt-4 md:flex-row md:justify-between"><div><span class="text-primary-text block font-bold">Previous</span>
+<a href=https://david.pilato.fr/blog/2016-08-01-creating-elasticsearch-transport-action/ class=block>Creating Elasticsearch Transport Action</a></div><div class="mt-4 md:mt-0 md:text-right"><span class="text-primary-text block font-bold">Next</span>
+<a href=https://david.pilato.fr/blog/2016-07-29-elasticsearch-real-integration-tests/ class=block>Elasticsearch real integration tests</a></div></div><script id=utterances src=https://utteranc.es/client.js issue-term=pathname label=💬 comments repo=dadoonet/dadoonet.github.io theme=preferred-color-scheme crossorigin=anonymous async></script><script>storageColorScheme=="Light"?document.getElementById('utterances').setAttribute('theme','github-light'):storageColorScheme=="Dark"&&document.getElementById('utterances').setAttribute('theme','github-dark')</script></div><div class=col-span-2><div class="bg-secondary-bg prose max-w-none rounded p-6"><h3>Series of Posts</h3><a href=https://david.pilato.fr/blog/2016-08-03-elasticsearch-real-integration-tests-with-security-enabled/ class=no-underline>Elasticsearch real integration tests with security enabled</a><br><a href=https://david.pilato.fr/blog/2016-08-01-creating-elasticsearch-transport-action/ class=no-underline>Creating Elasticsearch Transport Action</a><br><a href=https://david.pilato.fr/blog/2016-07-30-adding-a-new-rest-endpoint-to-elasticsearch/ class=no-underline>Adding a new REST endpoint to elasticsearch</a><br><a href=https://david.pilato.fr/blog/2016-07-29-elasticsearch-real-integration-tests/ class=no-underline>Elasticsearch real integration tests</a><br><a href=https://david.pilato.fr/blog/2016-07-28-creating-an-ingest-plugin-for-elasticsearch/ class=no-underline>Creating an Ingest plugin for elasticsearch</a><br><a href=https://david.pilato.fr/blog/2016-07-27-creating-a-plugin-for-elasticsearch-5-dot-0-using-maven/ class=no-underline>Creating a plugin for elasticsearch 5.0 using Maven</a><br></div><div class="bg-primary-bg
+prose sticky top-16 z-10 hidden px-6 py-4 lg:block"><h3>On This Page</h3></div><div class="sticky-toc hidden px-6 pb-6 lg:block"><nav id=TableOfContents><ul><li><a href=#rest-handler>Rest Handler</a><ul><li><a href=#rest-handler-skeleton>Rest Handler skeleton</a></li><li><a href=#register-endpoints>Register endpoints</a></li><li><a href=#register-the-rest-handler>Register the REST handler</a></li><li><a href=#test-the-endpoint>Test the endpoint</a></li><li><a href=#implement-handlerequest>Implement handleRequest</a></li></ul></li><li><a href=#dealing-with-parameters>Dealing with parameters</a><ul><li><a href=#query-parameters>Query Parameters</a></li><li><a href=#parameters-in-url>Parameters in URL</a></li><li><a href=#parameters-as-json-documents>Parameters as JSON documents</a></li></ul></li><li><a href=#calling-elasticsearch-client>Calling elasticsearch client</a><ul><li><a href=#add-a-test>Add a test</a></li></ul></li><li><a href=#whats-next>What&rsquo;s next?</a></li></ul></nav></div><script>window.addEventListener("DOMContentLoaded",()=>{enableStickyToc()})</script></div><div class="bg-secondary-bg prose col-span-2 rounded p-6 lg:col-span-6"><h3>See Also</h3><a href=https://david.pilato.fr/blog/2016-07-29-elasticsearch-real-integration-tests/ class=no-underline>Elasticsearch real integration tests</a><br><a href=https://david.pilato.fr/blog/2016-07-28-creating-an-ingest-plugin-for-elasticsearch/ class=no-underline>Creating an Ingest plugin for elasticsearch</a><br><a href=https://david.pilato.fr/blog/2016-07-27-creating-a-plugin-for-elasticsearch-5-dot-0-using-maven/ class=no-underline>Creating a plugin for elasticsearch 5.0 using Maven</a><br><a href=https://david.pilato.fr/blog/2011-09-14-mon-premier-plugin-elasticsearch-rss-river/ class=no-underline>Mon premier plugin elasticsearch : RSS River</a><br><a href=https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/ class=no-underline>ScrutMyDocs : un moteur de recherche pour documents</a><br><a href=https://david.pilato.fr/blog/2012-05-25-la-factory-spring-pour-elasticsearch-est-sortie/ class=no-underline>La factory Spring pour Elasticsearch est sortie !</a><br></div></div><script>document.addEventListener("DOMContentLoaded",()=>{hljs.highlightAll()})</script></div></div></main><footer class=pl-scrollbar><div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b"><p class="text-sm text-tertiary-text">&copy; 2022, David Pilato, France
+&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p></div><div class="text-center p-1 pin-b"><p class="text-sm text-tertiary-text">Generated from 🇫🇷 with ❤️ on Tue Jun 14, 2022 at 12:48:11 UTC</p></div></div></footer></body></html>

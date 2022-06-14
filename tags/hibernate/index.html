@@ -1,221 +1,36 @@
-<!doctype html><html lang=en><meta charset=utf-8>
-<meta name=viewport content="width=device-width">
-<title>hibernate - David Pilato</title>
-<meta name=generator content="Hugo Eureka 0.8.4">
-<link rel=stylesheet href=https://david.pilato.fr/css/eureka.min.css>
-<script defer src=https://david.pilato.fr/js/eureka.min.js></script>
-<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
-<link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload="this.onload=null,this.rel='stylesheet'">
-<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css media=print onload="this.media='all',this.onload=null" crossorigin>
-<script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js crossorigin></script>
-<script defer src=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js integrity="sha256-uNYoXefWRqv+PsIF/OflNmwtKM4lStn9yrz2gVl6ymo=" crossorigin></script>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X media=print onload="this.media='all',this.onload=null" crossorigin>
-<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin></script>
-<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin></script>
-<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script>
-<script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js integrity="sha256-Zmpaaj+GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE=" crossorigin></script>
-<link rel=preconnect href=https://www.google-analytics.com crossorigin>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-62381049-1"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-62381049-1')</script>
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="hibernate">
-<meta name=twitter:description content="Developer | Evangelist">
-<meta name=description content="Developer | Evangelist">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tags","item":"https://david.pilato.fr/tags/"},{"@type":"ListItem","position":2,"name":"hibernate","item":"https://david.pilato.fr/tags/hibernate/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"name":"Advanced search for your Legacy application","description":"I gave recently a talk at Voxxed Istanbul 2015 and I\u0026rsquo;d like to share here the story of this talk.\nThe talk was about adding a real search engine for your legacy application. Here \u0026ldquo;legacy\u0026rdquo; means an application which is still using SQL statements to execute search requests.\n Our current CRM application can visualize our customers. Each person is represented as a Person bean and have some properties like name, dateOfBirth, children, country, city and some metrics related to the number of clicks each person did on the car or food buttons on our mobile application (center of interests that is).","image":"https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/featured.png","url":"https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/"},{"@type":"ListItem","position":2,"name":"Devoxx France 2015","description":"I gave recently a talk at Devoxx France 2015 with Colin Surprenant and I\u0026rsquo;d like to share here some of the examples we used for the talk.\nThe talk was about \u0026ldquo;what my data look like?\u0026rdquo;.\n We said that our manager was asking us to answer some questions:\n who are our customers? how do they use our services? what do they think about us on Twitter?  Our CRM database So we have a PostgreSQL database containing our data.","image":"https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/featured.png","url":"https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/"},{"@type":"ListItem","position":3,"name":"Using Log4J2 with Hibernate 4","description":"I was trying to use Hibernate 4.3.8.Final with Log4J2 and I spent some hours to find why Hibernate was not using Log4J2 though it was declared in my pom.xml file.\nActually, I hit issue JBLOGGING-107.\nThe workaround is simply to add a more recent jboss-logging dependency than the one shipped by default with Hibernate 4.3.8.Final.\n\u0026lt;dependency\u0026gt; \u0026lt;groupId\u0026gt;org.jboss.logging\u0026lt;/groupId\u0026gt; \u0026lt;artifactId\u0026gt;jboss-logging\u0026lt;/artifactId\u0026gt; \u0026lt;version\u0026gt;3.2.1.Final\u0026lt;/version\u0026gt; \u0026lt;/dependency\u0026gt;  ","url":"https://david.pilato.fr/blog/2015-03-05-using-log4j2-with-hibernate-4/"},{"@type":"ListItem","position":4,"name":"La recherche élastique...","description":"Elasticsearch, un projet mature en quelques mois\u0026hellip; A suivre de très près !\nEn cherchant un bout de code pour rendre la couche Hibernate Search facilement distribuable sur un cluster de machines JBoss, je suis tombé sur le projet Elasticsearch.\nAu début, un peu interloqué\u0026hellip; Puis, je me lance\u0026hellip;\nJe télécharge le projet. Je dézippe.\nJe lance\u0026hellip;\nMiracle. En quelques secondes, je dispose d\u0026rsquo;un outil dans un Cloud, simple, me permettant d\u0026rsquo;indexer n\u0026rsquo;importe quel type de document, de le récupérer et de faire une recherche (au sens google du terme) sur n\u0026rsquo;importe quel champ\u0026hellip; Et cela, quelque soit la technologie employée (Java, C#, .","url":"https://david.pilato.fr/blog/2011-03-09-la-recherche-elastique/"},{"@type":"ListItem","position":5,"name":"Utilisation du mode Lazy d'Hibernate avec Struts et Spring","description":"Lorsqu\u0026rsquo;on utilise Hibernate pour déléguer la gestion de la persistence, se pose alors le classique problème de l\u0026rsquo;exception LazyInitialisationException.\nEn effet, dans une modélisation assez classique, imaginons le cas suivant :\nCouche Modèle (ou DAO) Classe POJO contenant un attribut x et une collection cols @Entity @Inheritance(strategy=InheritanceType.SINGLE_TABLE) public class Dossier { @Id @GeneratedValue private Long id; private String x; @OneToMany(cascade=CascadeType.ALL) private Collections cols; // Getter et setters }  Classe DAO Voir le blog pour l\u0026rsquo;utilisation des generics de Java5 afin d\u0026rsquo;éviter d\u0026rsquo;avoir à coder toujours les mêmes méthodes CRUD.","url":"https://david.pilato.fr/blog/2010-02-24-utilisation-du-mode-lazy-dhibernate-avec-struts-et-spring/"}]}</script><meta property="og:title" content="hibernate - David Pilato">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://david.pilato.fr/tags/hibernate/">
-<meta property="og:description" content="Developer | Evangelist">
-<meta property="og:locale" content="en">
-<meta property="og:site_name" content="David Pilato">
-<meta property="og:updated_time" content="2015-05-09T14:15:05+03:00">
-<meta property="article:section" content="tags">
-<link rel=alternate type=application/rss+xml href=https://david.pilato.fr/tags/hibernate/index.xml title="David Pilato">
-<body class="flex flex-col min-h-screen">
-<header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
-<div class="w-full max-w-screen-xl mx-auto"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=='Auto'||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName('html')[0].classList.add('dark')</script>
-<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
-<a href=/ class="mr-6 text-primary-text text-xl font-bold">David Pilato</a>
+<!doctype html><html lang=en><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>hibernate - David Pilato</title><meta name=generator content="Hugo Eureka 0.9.3"><link rel=stylesheet href=https://david.pilato.fr/css/eureka.min.9cec6350e37e534b0338fa9a085bf06855de3b0f2dcf857e792e5e97b07ea905d4d5513db554cbc26a9c3da622bae92d.css><script defer src=https://david.pilato.fr/js/eureka.min.c9397561036ecdb150468028e7807081e0823ad4b7207798ac3c0cdf9742e4300265511b6b457026c9a0e7b663e44683.js></script>
+<link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload="this.onload=null,this.rel='stylesheet'"><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/solarized-light.min.css media=print onload="this.media='all',this.onload=null" crossorigin><script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js crossorigin></script>
+<link rel=stylesheet href=https://david.pilato.fr/css/highlightjs.min.2958991528e43eb6fc9b8c4f2b8e052f79c4010718e1d1e888a777620e9ee63021c2c57ec7417a3108019bb8c41943e6.css media=print onload="this.media='all',this.onload=null"><script defer type=text/javascript src=https://david.pilato.fr/js/fontawesome.min.3b3a9010e96bcc23aa7ff4cef43506624c34c13b18fd1c67fe5138e9a95657d5f58ac4aebc370d569554fca0aedd65c5.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css integrity=sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ media=print onload="this.media='all',this.onload=null" crossorigin><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js integrity=sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script><script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js integrity=sha384-atOyb0FxAgN9LyAc6PEf9BjgwLISyansgdH8/VXQH8p2o5vfrRgmGIJ2Sg22L0A0 crossorigin></script>
+<link rel=preconnect href=https://www.google-analytics.com crossorigin><script async src="https://www.googletagmanager.com/gtag/js?id=UA-62381049-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-62381049-1')</script><meta name=twitter:card content="summary"><meta name=twitter:title content="hibernate"><meta name=twitter:description content="Developer | Evangelist"><meta name=description content="Developer | Evangelist"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tags","item":"https://david.pilato.fr/tags/"},{"@type":"ListItem","position":2,"name":"hibernate","item":"https://david.pilato.fr/tags/hibernate/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"name":"Advanced search for your Legacy application","description":"I gave recently a talk at Voxxed Istanbul 2015 and I\u0026rsquo;d like to share here the story of this talk.\nThe talk was about adding a real search engine for your legacy application. Here \u0026ldquo;legacy\u0026rdquo; means an application which is still using SQL statements to execute search requests.\nOur current CRM application can visualize our customers. Each person is represented as a Person bean and have some properties like name, dateOfBirth, children, country, city and some metrics related to the number of clicks each person did on the car or food buttons on our mobile application (center of interests that is).","image":"https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/featured.png","url":"https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/"},{"@type":"ListItem","position":2,"name":"Devoxx France 2015","description":"I gave recently a talk at Devoxx France 2015 with Colin Surprenant and I\u0026rsquo;d like to share here some of the examples we used for the talk.\nThe talk was about \u0026ldquo;what my data look like?\u0026rdquo;.\nWe said that our manager was asking us to answer some questions:\nwho are our customers? how do they use our services? what do they think about us on Twitter? Our CRM database So we have a PostgreSQL database containing our data.","image":"https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/featured.png","url":"https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/"},{"@type":"ListItem","position":3,"name":"Using Log4J2 with Hibernate 4","description":"I was trying to use Hibernate 4.3.8.Final with Log4J2 and I spent some hours to find why Hibernate was not using Log4J2 though it was declared in my pom.xml file.\nActually, I hit issue JBLOGGING-107.\nThe workaround is simply to add a more recent jboss-logging dependency than the one shipped by default with Hibernate 4.3.8.Final.\n\u0026lt;dependency\u0026gt; \u0026lt;groupId\u0026gt;org.jboss.logging\u0026lt;/groupId\u0026gt; \u0026lt;artifactId\u0026gt;jboss-logging\u0026lt;/artifactId\u0026gt; \u0026lt;version\u0026gt;3.2.1.Final\u0026lt;/version\u0026gt; \u0026lt;/dependency\u0026gt; ","url":"https://david.pilato.fr/blog/2015-03-05-using-log4j2-with-hibernate-4/"},{"@type":"ListItem","position":4,"name":"La recherche élastique...","description":"Elasticsearch, un projet mature en quelques mois\u0026hellip; A suivre de très près !\nEn cherchant un bout de code pour rendre la couche Hibernate Search facilement distribuable sur un cluster de machines JBoss, je suis tombé sur le projet Elasticsearch.\nAu début, un peu interloqué\u0026hellip; Puis, je me lance\u0026hellip;\nJe télécharge le projet. Je dézippe.\nJe lance\u0026hellip;\nMiracle. En quelques secondes, je dispose d\u0026rsquo;un outil dans un Cloud, simple, me permettant d\u0026rsquo;indexer n\u0026rsquo;importe quel type de document, de le récupérer et de faire une recherche (au sens google du terme) sur n\u0026rsquo;importe quel champ\u0026hellip; Et cela, quelque soit la technologie employée (Java, C#, .","url":"https://david.pilato.fr/blog/2011-03-09-la-recherche-elastique/"},{"@type":"ListItem","position":5,"name":"Utilisation du mode Lazy d'Hibernate avec Struts et Spring","description":"Lorsqu\u0026rsquo;on utilise Hibernate pour déléguer la gestion de la persistence, se pose alors le classique problème de l\u0026rsquo;exception LazyInitialisationException.\nEn effet, dans une modélisation assez classique, imaginons le cas suivant :\nCouche Modèle (ou DAO) Classe POJO contenant un attribut x et une collection cols @Entity @Inheritance(strategy=InheritanceType.SINGLE_TABLE) public class Dossier { @Id @GeneratedValue private Long id; private String x; @OneToMany(cascade=CascadeType.ALL) private Collections cols; // Getter et setters } Classe DAO Voir le blog pour l\u0026rsquo;utilisation des generics de Java5 afin d\u0026rsquo;éviter d\u0026rsquo;avoir à coder toujours les mêmes méthodes CRUD.","url":"https://david.pilato.fr/blog/2010-02-24-utilisation-du-mode-lazy-dhibernate-avec-struts-et-spring/"}]}</script><meta property="og:title" content="hibernate - David Pilato"><meta property="og:type" content="website"><meta property="og:url" content="https://david.pilato.fr/tags/hibernate/"><meta property="og:description" content="Developer | Evangelist"><meta property="og:locale" content="en"><meta property="og:site_name" content="David Pilato"><meta property="og:updated_time" content="2015-05-09T14:15:05+03:00"><meta property="article:section" content="tags"><link rel=alternate type=application/rss+xml href=https://david.pilato.fr/tags/hibernate/index.xml title="David Pilato"><body class="flex flex-col min-h-screen"><header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm"><div class="w-full max-w-screen-xl mx-auto"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=='Auto'||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName('html')[0].classList.add('dark')</script><nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0"><a href=/ class="me-6 text-primary-text text-xl font-bold">David Pilato</a>
 <button id=navbar-btn class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
-<i class="fas fa-bars"></i>
-</button>
-<div id=target class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
-<div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
-<a href=/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Home</a>
-<a href=/blog/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">Blog</a>
-<a href=https://djdadoo.pilato.fr/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">DJ Mixes</a>
-<a href=/authors/david-pilato/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">About me</a>
-</div>
-<div class=flex>
-<div class="relative pt-4 md:pt-0">
-<div class="cursor-pointer hover:text-eureka" id=lightDarkMode>
-<i class="fas fa-adjust"></i>
-</div>
-<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open>
-</div>
-<div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions>
-<span class="px-4 py-1 hover:text-eureka" name=Light>Light</span>
+<i class="fas fa-bars"></i></button><div id=target class="hidden block md:flex md:grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20"><div class="md:flex md:h-16 text-sm md:grow pb-4 md:pb-0 border-b md:border-b-0"><a href=/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item me-4">Home</a>
+<a href=/blog/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent me-4">Blog</a>
+<a href=https://djdadoo.pilato.fr/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent me-4">DJ Mixes</a>
+<a href=/authors/david-pilato/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent me-4">About me</a></div><div class=flex><div class="relative pt-4 md:pt-0"><div class="cursor-pointer hover:text-eureka" id=lightDarkMode><i class="fas fa-adjust"></i></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open></div><div class="absolute flex flex-col start-0 md:start-auto end-auto md:end-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions><span class="px-4 py-1 hover:text-eureka" name=Light>Light</span>
 <span class="px-4 py-1 hover:text-eureka" name=Dark>Dark</span>
-<span class="px-4 py-1 hover:text-eureka" name=Auto>Auto</span>
-</div>
-</div>
-</div>
-</div>
-<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile>
-</div>
-</nav>
-<script>let element=document.getElementById('lightDarkMode');storageColorScheme==null||storageColorScheme=='Auto'?document.addEventListener('DOMContentLoaded',()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change',switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'sun'),element.firstElementChild.classList.add('fa-sun')):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'moon'),element.firstElementChild.classList.add('fa-moon')),document.addEventListener('DOMContentLoaded',()=>{getcolorscheme(),switchBurger()})</script>
-</div>
-</header>
-<main class="flex-grow pt-16">
-<div class=pl-scrollbar>
-<div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
-<article class="mx-6 my-8">
-<h1 class="font-bold text-3xl text-primary-text">hibernate</h1>
-</article>
-<div class="bg-secondary-bg rounded px-6">
-<div class="overflow-hidden divide-y">
-<div class=py-6>
-<div class="flex flex-col-reverse lg:flex-row justify-between">
-<div class="w-full lg:w-2/3">
-<div class=mb-4>
-<a href=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/ class="font-bold text-xl hover:text-eureka">Advanced search for your Legacy application</a>
-</div>
-<div class=content>
-I gave recently a talk at Voxxed Istanbul 2015 and I’d like to share here the story of this talk.
+<span class="px-4 py-1 hover:text-eureka" name=Auto>Auto</span></div></div></div></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile></div></nav><script>let element=document.getElementById('lightDarkMode');storageColorScheme==null||storageColorScheme=='Auto'?document.addEventListener('DOMContentLoaded',()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change',switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'sun'),element.firstElementChild.classList.add('fa-sun')):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'moon'),element.firstElementChild.classList.add('fa-moon')),document.addEventListener('DOMContentLoaded',()=>{getcolorscheme(),switchBurger()})</script></div></header><main class="flex-grow pt-16"><div class=pl-scrollbar><div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto"><article class="prose mx-6 my-8"><h1>hibernate</h1></article><div class="bg-secondary-bg rounded px-6"><div class="overflow-hidden divide-y"><div class=py-6><div class="flex flex-col-reverse lg:flex-row justify-between"><div class="w-full lg:w-2/3"><div class=prose><a href=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/ class=no-underline><h3 class=mt-0>Advanced search for your Legacy application</h3></a>I gave recently a talk at Voxxed Istanbul 2015 and I’d like to share here the story of this talk.
 The talk was about adding a real search engine for your legacy application. Here “legacy” means an application which is still using SQL statements to execute search requests.
-Our current CRM application can visualize our customers. Each person is represented as a Person bean and have some properties like name, dateOfBirth, children, country, city and some metrics related to the number of clicks each person did on the car or food buttons on our mobile application (center of interests that is).
-</div>
-<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
-<div class="mr-6 my-2">
-<i class="fas fa-calendar-alt mr-1"></i>
-<span>2015-05-09</span>
-</div>
-<div class="mr-6 my-2">
-<i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
-</div>
-</div>
-</div>
-<div class="w-full lg:w-1/3 mb-4 lg:mb-0 lg:ml-8">
-<img src=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/featured.png class=w-full alt="Featured Image">
-</div>
-</div>
-</div>
-<div class=py-6>
-<div class="flex flex-col-reverse lg:flex-row justify-between">
-<div class="w-full lg:w-2/3">
-<div class=mb-4>
-<a href=https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/ class="font-bold text-xl hover:text-eureka">Devoxx France 2015</a>
-</div>
-<div class=content>
-I gave recently a talk at Devoxx France 2015 with Colin Surprenant and I’d like to share here some of the examples we used for the talk.
+Our current CRM application can visualize our customers. Each person is represented as a Person bean and have some properties like name, dateOfBirth, children, country, city and some metrics related to the number of clicks each person did on the car or food buttons on our mobile application (center of interests that is).<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text"><div class="mr-6 my-2"><i class="fas fa-calendar-alt mr-1"></i>
+<span>2015-05-09</span></div><div class="mr-6 my-2"><i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a></div></div></div></div><div class="w-full lg:w-1/3 mb-4 lg:mb-0 lg:ms-8"><img src=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/featured.png class=w-full alt="Featured Image"></div></div></div><div class=py-6><div class="flex flex-col-reverse lg:flex-row justify-between"><div class="w-full lg:w-2/3"><div class=prose><a href=https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/ class=no-underline><h3 class=mt-0>Devoxx France 2015</h3></a>I gave recently a talk at Devoxx France 2015 with Colin Surprenant and I’d like to share here some of the examples we used for the talk.
 The talk was about “what my data look like?”.
 We said that our manager was asking us to answer some questions:
-who are our customers? how do they use our services? what do they think about us on Twitter? Our CRM database So we have a PostgreSQL database containing our data.
-</div>
-<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
-<div class="mr-6 my-2">
-<i class="fas fa-calendar-alt mr-1"></i>
-<span>2015-05-02</span>
-</div>
-<div class="mr-6 my-2">
-<i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
-</div>
-</div>
-</div>
-<div class="w-full lg:w-1/3 mb-4 lg:mb-0 lg:ml-8">
-<img src=https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/featured.png class=w-full alt="Featured Image">
-</div>
-</div>
-</div>
-<div class=py-6>
-<div class="flex flex-col-reverse lg:flex-row justify-between">
-<div class=w-full>
-<div class=mb-4>
-<a href=https://david.pilato.fr/blog/2015-03-05-using-log4j2-with-hibernate-4/ class="font-bold text-xl hover:text-eureka">Using Log4J2 with Hibernate 4</a>
-</div>
-<div class=content>
-I was trying to use Hibernate 4.3.8.Final with Log4J2 and I spent some hours to find why Hibernate was not using Log4J2 though it was declared in my pom.xml file.
+who are our customers? how do they use our services? what do they think about us on Twitter? Our CRM database So we have a PostgreSQL database containing our data.<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text"><div class="mr-6 my-2"><i class="fas fa-calendar-alt mr-1"></i>
+<span>2015-05-02</span></div><div class="mr-6 my-2"><i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a></div></div></div></div><div class="w-full lg:w-1/3 mb-4 lg:mb-0 lg:ms-8"><img src=https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/featured.png class=w-full alt="Featured Image"></div></div></div><div class=py-6><div class="flex flex-col-reverse lg:flex-row justify-between"><div class=w-full><div class=prose><a href=https://david.pilato.fr/blog/2015-03-05-using-log4j2-with-hibernate-4/ class=no-underline><h3 class=mt-0>Using Log4J2 with Hibernate 4</h3></a>I was trying to use Hibernate 4.3.8.Final with Log4J2 and I spent some hours to find why Hibernate was not using Log4J2 though it was declared in my pom.xml file.
 Actually, I hit issue JBLOGGING-107.
 The workaround is simply to add a more recent jboss-logging dependency than the one shipped by default with Hibernate 4.3.8.Final.
-&lt;dependency> &lt;groupId>org.jboss.logging&lt;/groupId> &lt;artifactId>jboss-logging&lt;/artifactId> &lt;version>3.2.1.Final&lt;/version> &lt;/dependency>
-</div>
-<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
-<div class="mr-6 my-2">
-<i class="fas fa-calendar-alt mr-1"></i>
-<span>2015-03-05</span>
-</div>
-<div class="mr-6 my-2">
-<i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/tips/ class=hover:text-eureka>tips</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class=py-6>
-<div class="flex flex-col-reverse lg:flex-row justify-between">
-<div class=w-full>
-<div class=mb-4>
-<a href=https://david.pilato.fr/blog/2011-03-09-la-recherche-elastique/ class="font-bold text-xl hover:text-eureka">La recherche élastique...</a>
-</div>
-<div class=content>
-Elasticsearch, un projet mature en quelques mois… A suivre de très près !
+&lt;dependency> &lt;groupId>org.jboss.logging&lt;/groupId> &lt;artifactId>jboss-logging&lt;/artifactId> &lt;version>3.2.1.Final&lt;/version> &lt;/dependency><div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text"><div class="mr-6 my-2"><i class="fas fa-calendar-alt mr-1"></i>
+<span>2015-03-05</span></div><div class="mr-6 my-2"><i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/tips/ class=hover:text-eureka>tips</a></div></div></div></div></div></div><div class=py-6><div class="flex flex-col-reverse lg:flex-row justify-between"><div class=w-full><div class=prose><a href=https://david.pilato.fr/blog/2011-03-09-la-recherche-elastique/ class=no-underline><h3 class=mt-0>La recherche élastique...</h3></a>Elasticsearch, un projet mature en quelques mois… A suivre de très près !
 En cherchant un bout de code pour rendre la couche Hibernate Search facilement distribuable sur un cluster de machines JBoss, je suis tombé sur le projet Elasticsearch.
 Au début, un peu interloqué… Puis, je me lance…
 Je télécharge le projet. Je dézippe.
 Je lance…
-Miracle. En quelques secondes, je dispose d’un outil dans un Cloud, simple, me permettant d’indexer n’importe quel type de document, de le récupérer et de faire une recherche (au sens google du terme) sur n’importe quel champ… Et cela, quelque soit la technologie employée (Java, C#, .
-</div>
-<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
-<div class="mr-6 my-2">
-<i class="fas fa-calendar-alt mr-1"></i>
-<span>2011-03-09</span>
-</div>
-<div class="mr-6 my-2">
-<i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
-</div>
-<div class="mr-6 my-2">
-<i class="fas fa-th-list mr-1"></i> <a href=https://david.pilato.fr/series/d%C3%A9couverte-elasticsearch/ class=hover:text-eureka>Découverte Elasticsearch</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class=py-6>
-<div class="flex flex-col-reverse lg:flex-row justify-between">
-<div class=w-full>
-<div class=mb-4>
-<a href=https://david.pilato.fr/blog/2010-02-24-utilisation-du-mode-lazy-dhibernate-avec-struts-et-spring/ class="font-bold text-xl hover:text-eureka">Utilisation du mode Lazy d'Hibernate avec Struts et Spring</a>
-</div>
-<div class=content>
-Lorsqu’on utilise Hibernate pour déléguer la gestion de la persistence, se pose alors le classique problème de l’exception LazyInitialisationException.
+Miracle. En quelques secondes, je dispose d’un outil dans un Cloud, simple, me permettant d’indexer n’importe quel type de document, de le récupérer et de faire une recherche (au sens google du terme) sur n’importe quel champ… Et cela, quelque soit la technologie employée (Java, C#, .<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text"><div class="mr-6 my-2"><i class="fas fa-calendar-alt mr-1"></i>
+<span>2011-03-09</span></div><div class="mr-6 my-2"><i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a></div><div class="mr-6 my-2"><i class="fas fa-th-list mr-1"></i> <a href=https://david.pilato.fr/series/d%C3%A9couverte-elasticsearch/ class=hover:text-eureka>Découverte Elasticsearch</a></div></div></div></div></div></div><div class=py-6><div class="flex flex-col-reverse lg:flex-row justify-between"><div class=w-full><div class=prose><a href=https://david.pilato.fr/blog/2010-02-24-utilisation-du-mode-lazy-dhibernate-avec-struts-et-spring/ class=no-underline><h3 class=mt-0>Utilisation du mode Lazy d'Hibernate avec Struts et Spring</h3></a>Lorsqu’on utilise Hibernate pour déléguer la gestion de la persistence, se pose alors le classique problème de l’exception LazyInitialisationException.
 En effet, dans une modélisation assez classique, imaginons le cas suivant :
-Couche Modèle (ou DAO) Classe POJO contenant un attribut x et une collection cols @Entity @Inheritance(strategy=InheritanceType.SINGLE_TABLE) public class Dossier { @Id @GeneratedValue private Long id; private String x; @OneToMany(cascade=CascadeType.ALL) private Collections cols; // Getter et setters } Classe DAO Voir le blog pour l’utilisation des generics de Java5 afin d’éviter d’avoir à coder toujours les mêmes méthodes CRUD.
-</div>
-<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
-<div class="mr-6 my-2">
-<i class="fas fa-calendar-alt mr-1"></i>
-<span>2010-02-24</span>
-</div>
-<div class="mr-6 my-2">
-<i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</main>
-<footer class=pl-scrollbar>
-<div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
-<p class="text-sm text-tertiary-text">&copy; 2022, David Pilato, France
-&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p>
-</div><div class="text-center p-1 pin-b">
-<p class="text-sm text-tertiary-text">Generated from 🇫🇷 with ❤️ on Wed Jan 12, 2022 at 17:58:42 UTC</p>
-</div></div>
-</footer>
-</body>
-</html>
+Couche Modèle (ou DAO) Classe POJO contenant un attribut x et une collection cols @Entity @Inheritance(strategy=InheritanceType.SINGLE_TABLE) public class Dossier { @Id @GeneratedValue private Long id; private String x; @OneToMany(cascade=CascadeType.ALL) private Collections cols; // Getter et setters } Classe DAO Voir le blog pour l’utilisation des generics de Java5 afin d’éviter d’avoir à coder toujours les mêmes méthodes CRUD.<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text"><div class="mr-6 my-2"><i class="fas fa-calendar-alt mr-1"></i>
+<span>2010-02-24</span></div><div class="mr-6 my-2"><i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a></div></div></div></div></div></div></div></div></div></div></main><footer class=pl-scrollbar><div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b"><p class="text-sm text-tertiary-text">&copy; 2022, David Pilato, France
+&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p></div><div class="text-center p-1 pin-b"><p class="text-sm text-tertiary-text">Generated from 🇫🇷 with ❤️ on Tue Jun 14, 2022 at 12:48:11 UTC</p></div></div></footer></body></html>

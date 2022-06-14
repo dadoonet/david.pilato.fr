@@ -1,184 +1,40 @@
-<!doctype html><html lang=en><meta charset=utf-8>
-<meta name=viewport content="width=device-width">
-<title>Advanced search for your Legacy application - David Pilato</title>
-<meta name=generator content="Hugo Eureka 0.8.4">
-<link rel=stylesheet href=https://david.pilato.fr/css/eureka.min.css>
-<script defer src=https://david.pilato.fr/js/eureka.min.js></script>
-<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
-<link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload="this.onload=null,this.rel='stylesheet'">
-<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css media=print onload="this.media='all',this.onload=null" crossorigin>
-<script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js crossorigin></script>
-<script defer src=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js integrity="sha256-uNYoXefWRqv+PsIF/OflNmwtKM4lStn9yrz2gVl6ymo=" crossorigin></script>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X media=print onload="this.media='all',this.onload=null" crossorigin>
-<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin></script>
-<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin></script>
-<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script>
-<script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js integrity="sha256-Zmpaaj+GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE=" crossorigin></script>
-<link rel=preconnect href=https://www.google-analytics.com crossorigin>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-62381049-1"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-62381049-1')</script>
-<meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/featured.png">
-<meta name=twitter:title content="Advanced search for your Legacy application">
-<meta name=twitter:description content="I gave recently a talk at Voxxed Istanbul 2015 and I&rsquo;d like to share here the story of this talk.
+<!doctype html><html lang=en><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Advanced search for your Legacy application - David Pilato</title><meta name=generator content="Hugo Eureka 0.9.3"><link rel=stylesheet href=https://david.pilato.fr/css/eureka.min.9cec6350e37e534b0338fa9a085bf06855de3b0f2dcf857e792e5e97b07ea905d4d5513db554cbc26a9c3da622bae92d.css><script defer src=https://david.pilato.fr/js/eureka.min.c9397561036ecdb150468028e7807081e0823ad4b7207798ac3c0cdf9742e4300265511b6b457026c9a0e7b663e44683.js></script>
+<link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload="this.onload=null,this.rel='stylesheet'"><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/solarized-light.min.css media=print onload="this.media='all',this.onload=null" crossorigin><script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js crossorigin></script>
+<link rel=stylesheet href=https://david.pilato.fr/css/highlightjs.min.2958991528e43eb6fc9b8c4f2b8e052f79c4010718e1d1e888a777620e9ee63021c2c57ec7417a3108019bb8c41943e6.css media=print onload="this.media='all',this.onload=null"><script defer type=text/javascript src=https://david.pilato.fr/js/fontawesome.min.3b3a9010e96bcc23aa7ff4cef43506624c34c13b18fd1c67fe5138e9a95657d5f58ac4aebc370d569554fca0aedd65c5.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css integrity=sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ media=print onload="this.media='all',this.onload=null" crossorigin><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js integrity=sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script><script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js integrity=sha384-atOyb0FxAgN9LyAc6PEf9BjgwLISyansgdH8/VXQH8p2o5vfrRgmGIJ2Sg22L0A0 crossorigin></script>
+<link rel=preconnect href=https://www.google-analytics.com crossorigin><script async src="https://www.googletagmanager.com/gtag/js?id=UA-62381049-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-62381049-1')</script><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/featured.png"><meta name=twitter:title content="Advanced search for your Legacy application"><meta name=twitter:description content="I gave recently a talk at Voxxed Istanbul 2015 and I&rsquo;d like to share here the story of this talk.
 The talk was about adding a real search engine for your legacy application. Here &ldquo;legacy&rdquo; means an application which is still using SQL statements to execute search requests.
- Our current CRM application can visualize our customers. Each person is represented as a Person bean and have some properties like name, dateOfBirth, children, country, city and some metrics related to the number of clicks each person did on the car or food buttons on our mobile application (center of interests that is).">
-<meta name=description content="I gave recently a talk at Voxxed Istanbul 2015 and I&rsquo;d like to share here the story of this talk.
+Our current CRM application can visualize our customers. Each person is represented as a Person bean and have some properties like name, dateOfBirth, children, country, city and some metrics related to the number of clicks each person did on the car or food buttons on our mobile application (center of interests that is)."><meta name=description content="I gave recently a talk at Voxxed Istanbul 2015 and I&rsquo;d like to share here the story of this talk.
 The talk was about adding a real search engine for your legacy application. Here &ldquo;legacy&rdquo; means an application which is still using SQL statements to execute search requests.
- Our current CRM application can visualize our customers. Each person is represented as a Person bean and have some properties like name, dateOfBirth, children, country, city and some metrics related to the number of clicks each person did on the car or food buttons on our mobile application (center of interests that is).">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog","item":"https://david.pilato.fr/blog/"},{"@type":"ListItem","position":2,"name":"Advanced search for your Legacy application","item":"https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/"},"headline":"Advanced search for your Legacy application - David Pilato","image":"https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/featured.png","datePublished":"2015-05-09T14:15:05+03:00","dateModified":"2015-05-09T14:15:05+03:00","wordCount":3689,"author":{"@type":"Person","name":["David Pilato"]},"publisher":{"@type":"Person","name":"David Pilato"},"description":"I gave recently a talk at Voxxed Istanbul 2015 and I\u0026rsquo;d like to share here the story of this talk.\nThe talk was about adding a real search engine for your legacy application. Here \u0026ldquo;legacy\u0026rdquo; means an application which is still using SQL statements to execute search requests.\n Our current CRM application can visualize our customers. Each person is represented as a Person bean and have some properties like name, dateOfBirth, children, country, city and some metrics related to the number of clicks each person did on the car or food buttons on our mobile application (center of interests that is)."}</script><meta property="og:title" content="Advanced search for your Legacy application - David Pilato">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/">
-<meta property="og:description" content="I gave recently a talk at Voxxed Istanbul 2015 and I&rsquo;d like to share here the story of this talk.
+Our current CRM application can visualize our customers. Each person is represented as a Person bean and have some properties like name, dateOfBirth, children, country, city and some metrics related to the number of clicks each person did on the car or food buttons on our mobile application (center of interests that is)."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog","item":"https://david.pilato.fr/blog/"},{"@type":"ListItem","position":2,"name":"Advanced search for your Legacy application","item":"https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/"},"headline":"Advanced search for your Legacy application - David Pilato","image":"https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/featured.png","datePublished":"2015-05-09T14:15:05+03:00","dateModified":"2015-05-09T14:15:05+03:00","wordCount":3689,"author":{"@type":"Person","name":["David Pilato"]},"publisher":{"@type":"Person","name":"David Pilato"},"description":"I gave recently a talk at Voxxed Istanbul 2015 and I\u0026rsquo;d like to share here the story of this talk.\nThe talk was about adding a real search engine for your legacy application. Here \u0026ldquo;legacy\u0026rdquo; means an application which is still using SQL statements to execute search requests.\nOur current CRM application can visualize our customers. Each person is represented as a Person bean and have some properties like name, dateOfBirth, children, country, city and some metrics related to the number of clicks each person did on the car or food buttons on our mobile application (center of interests that is)."}</script><meta property="og:title" content="Advanced search for your Legacy application - David Pilato"><meta property="og:type" content="article"><meta property="og:url" content="https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/"><meta property="og:description" content="I gave recently a talk at Voxxed Istanbul 2015 and I&rsquo;d like to share here the story of this talk.
 The talk was about adding a real search engine for your legacy application. Here &ldquo;legacy&rdquo; means an application which is still using SQL statements to execute search requests.
- Our current CRM application can visualize our customers. Each person is represented as a Person bean and have some properties like name, dateOfBirth, children, country, city and some metrics related to the number of clicks each person did on the car or food buttons on our mobile application (center of interests that is).">
-<meta property="og:locale" content="en">
-<meta property="og:site_name" content="David Pilato">
-<meta property="article:published_time" content="2015-05-09T14:15:05+03:00">
-<meta property="article:modified_time" content="2015-05-09T14:15:05+03:00">
-<meta property="article:section" content="blog">
-<meta property="article:tag" content="elasticsearch">
-<meta property="article:tag" content="hibernate">
-<meta property="article:tag" content="sql">
-<meta property="article:tag" content="conference">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2012-03-14-mon-talk-sur-elasticsearch-selectionne-pour-devoxx-france/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2011-03-09-la-recherche-elastique/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2015-03-05-using-log4j2-with-hibernate-4/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/">
-<body class="flex flex-col min-h-screen">
-<header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
-<div class="w-full max-w-screen-xl mx-auto"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=='Auto'||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName('html')[0].classList.add('dark')</script>
-<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
-<a href=/ class="mr-6 text-primary-text text-xl font-bold">David Pilato</a>
+Our current CRM application can visualize our customers. Each person is represented as a Person bean and have some properties like name, dateOfBirth, children, country, city and some metrics related to the number of clicks each person did on the car or food buttons on our mobile application (center of interests that is)."><meta property="og:locale" content="en"><meta property="og:site_name" content="David Pilato"><meta property="article:published_time" content="2015-05-09T14:15:05+03:00"><meta property="article:modified_time" content="2015-05-09T14:15:05+03:00"><meta property="article:section" content="blog"><meta property="article:tag" content="elasticsearch"><meta property="article:tag" content="hibernate"><meta property="article:tag" content="sql"><meta property="article:tag" content="conference"><meta property="og:see_also" content="https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2012-03-14-mon-talk-sur-elasticsearch-selectionne-pour-devoxx-france/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2011-03-09-la-recherche-elastique/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2015-03-05-using-log4j2-with-hibernate-4/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/"><body class="flex flex-col min-h-screen"><header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm"><div class="w-full max-w-screen-xl mx-auto"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=='Auto'||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName('html')[0].classList.add('dark')</script><nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0"><a href=/ class="me-6 text-primary-text text-xl font-bold">David Pilato</a>
 <button id=navbar-btn class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
-<i class="fas fa-bars"></i>
-</button>
-<div id=target class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
-<div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
-<a href=/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Home</a>
-<a href=/blog/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Blog</a>
-<a href=https://djdadoo.pilato.fr/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">DJ Mixes</a>
-<a href=/authors/david-pilato/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">About me</a>
-</div>
-<div class=flex>
-<div class="relative pt-4 md:pt-0">
-<div class="cursor-pointer hover:text-eureka" id=lightDarkMode>
-<i class="fas fa-adjust"></i>
-</div>
-<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open>
-</div>
-<div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions>
-<span class="px-4 py-1 hover:text-eureka" name=Light>Light</span>
+<i class="fas fa-bars"></i></button><div id=target class="hidden block md:flex md:grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20"><div class="md:flex md:h-16 text-sm md:grow pb-4 md:pb-0 border-b md:border-b-0"><a href=/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item me-4">Home</a>
+<a href=/blog/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item me-4">Blog</a>
+<a href=https://djdadoo.pilato.fr/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent me-4">DJ Mixes</a>
+<a href=/authors/david-pilato/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent me-4">About me</a></div><div class=flex><div class="relative pt-4 md:pt-0"><div class="cursor-pointer hover:text-eureka" id=lightDarkMode><i class="fas fa-adjust"></i></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open></div><div class="absolute flex flex-col start-0 md:start-auto end-auto md:end-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions><span class="px-4 py-1 hover:text-eureka" name=Light>Light</span>
 <span class="px-4 py-1 hover:text-eureka" name=Dark>Dark</span>
-<span class="px-4 py-1 hover:text-eureka" name=Auto>Auto</span>
-</div>
-</div>
-</div>
-</div>
-<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile>
-</div>
-</nav>
-<script>let element=document.getElementById('lightDarkMode');storageColorScheme==null||storageColorScheme=='Auto'?document.addEventListener('DOMContentLoaded',()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change',switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'sun'),element.firstElementChild.classList.add('fa-sun')):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'moon'),element.firstElementChild.classList.add('fa-moon')),document.addEventListener('DOMContentLoaded',()=>{getcolorscheme(),switchBurger()})</script>
-</div>
-</header>
-<main class="flex-grow pt-16">
-<div class=pl-scrollbar>
-<div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
-<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
-<div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
-<h1 class="font-bold text-3xl text-primary-text">Advanced search for your Legacy application</h1>
-<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
-<div class="mr-6 my-2">
-<i class="fas fa-calendar-alt mr-1"></i>
-<span>2015-05-09</span>
-</div>
-<div class="mr-6 my-2">
-<i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
-</div>
-</div>
-<div class=my-4>
-<img src=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/featured.png class=w-full alt="Featured Image">
-</div>
-<div class=content>
-<p>I gave recently a <a href=http://sched.co/2p7l>talk at Voxxed Istanbul 2015</a> and I&rsquo;d like to share here the story of this talk.</p>
-<p>The talk was about adding a real search engine for your legacy application.
-Here &ldquo;legacy&rdquo; means an application which is still using SQL statements to execute search requests.</p>
-<script async class=speakerdeck-embed data-id=14b4a923983d4fdd93a2cc218f0deee7 data-ratio src=//speakerdeck.com/assets/embed.js></script>
-<p>Our current CRM application can visualize our customers. Each person is represented as a <code>Person</code> bean and have some properties like <code>name</code>, <code>dateOfBirth</code>, <code>children</code>, <code>country</code>, <code>city</code> and some metrics related to the number of clicks each person did on the <code>car</code> or <code>food</code> buttons on our mobile application (center of interests that is).</p>
-<figure><img src=beans.png alt="Java Beans"><figcaption>
-<p>Java Beans</p>
-</figcaption>
-</figure>
-<p>Our database schema is quite similar.</p>
-<figure><img src=tables.png alt="Database tables"><figcaption>
-<p>Database tables</p>
-</figcaption>
-</figure>
-<h2 id=running-the-existing-code>Running the existing code</h2>
-<p>The existing code is available on <a href=https://github.com/dadoonet/legacy-search>Github</a>:</p>
-<pre><code class=language-sh>git clone https://github.com/dadoonet/legacy-search.git
+<span class="px-4 py-1 hover:text-eureka" name=Auto>Auto</span></div></div></div></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile></div></nav><script>let element=document.getElementById('lightDarkMode');storageColorScheme==null||storageColorScheme=='Auto'?document.addEventListener('DOMContentLoaded',()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change',switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'sun'),element.firstElementChild.classList.add('fa-sun')):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'moon'),element.firstElementChild.classList.add('fa-moon')),document.addEventListener('DOMContentLoaded',()=>{getcolorscheme(),switchBurger()})</script></div></header><main class="flex-grow pt-16"><div class=pl-scrollbar><div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto"><div class="grid grid-cols-2 gap-4 lg:grid-cols-8 lg:pt-12"><div class="bg-secondary-bg col-span-2 rounded px-6 py-8 lg:col-span-6"><article class=prose><h1 class=mb-4>Advanced search for your Legacy application</h1><div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text"><div class="mr-6 my-2"><i class="fas fa-calendar-alt mr-1"></i>
+<span>2015-05-09</span></div><div class="mr-6 my-2"><i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a></div></div><img src=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/featured.png class=w-full alt="Featured Image"><p>I gave recently a <a href=http://sched.co/2p7l>talk at Voxxed Istanbul 2015</a> and I&rsquo;d like to share here the story of this talk.</p><p>The talk was about adding a real search engine for your legacy application.
+Here &ldquo;legacy&rdquo; means an application which is still using SQL statements to execute search requests.</p><script async class=speakerdeck-embed data-id=14b4a923983d4fdd93a2cc218f0deee7 data-ratio src=//speakerdeck.com/assets/embed.js></script><p>Our current CRM application can visualize our customers. Each person is represented as a <code>Person</code> bean and have some properties like <code>name</code>, <code>dateOfBirth</code>, <code>children</code>, <code>country</code>, <code>city</code> and some metrics related to the number of clicks each person did on the <code>car</code> or <code>food</code> buttons on our mobile application (center of interests that is).</p><figure><img src=beans.png alt="Java Beans"><figcaption><p>Java Beans</p></figcaption></figure><p>Our database schema is quite similar.</p><figure><img src=tables.png alt="Database tables"><figcaption><p>Database tables</p></figcaption></figure><h2 id=running-the-existing-code>Running the existing code</h2><p>The existing code is available on <a href=https://github.com/dadoonet/legacy-search>Github</a>:</p><pre><code class=language-sh>git clone https://github.com/dadoonet/legacy-search.git
 git checkout 00-legacy
-</code></pre>
-<p>You need to have:</p>
-<ul>
-<li>Maven</li>
-<li>JDK7 or higher</li>
-<li>Postgresql up and running</li>
-</ul>
-<p>Modify <a href=src/main/resources/hibernate.cfg.xml>src/main/resources/hibernate.cfg.xml</a> file to reflect your own postgresql settings:</p>
-<pre><code class=language-xml>&lt;!-- Database connection settings --&gt;
+</code></pre><p>You need to have:</p><ul><li>Maven</li><li>JDK7 or higher</li><li>Postgresql up and running</li></ul><p>Modify <a href=src/main/resources/hibernate.cfg.xml>src/main/resources/hibernate.cfg.xml</a> file to reflect your own postgresql settings:</p><pre><code class=language-xml>&lt;!-- Database connection settings --&gt;
 &lt;property name=&quot;hibernate.connection.url&quot;&gt;jdbc:postgresql://localhost:5432/dpilato&lt;/property&gt;
 &lt;property name=&quot;hibernate.connection.username&quot;&gt;dpilato&lt;/property&gt;
 &lt;property name=&quot;hibernate.connection.password&quot;&gt;&lt;/property&gt;
-</code></pre>
-<p>Start the server using jetty:</p>
-<pre><code class=language-sh>mvn clean install
+</code></pre><p>Start the server using jetty:</p><pre><code class=language-sh>mvn clean install
 mvn jetty:run
-</code></pre>
-<p>Then open your browser at <a href=http://0.0.0.0:8080/>http://0.0.0.0:8080/</a>. You should see that our database is empty.</p>
-<p>Click on the <a href=http://0.0.0.0:8080/#/init>init tab</a> and inject 10000 random persons.</p>
-<figure><img src=00-inject.png alt="Injecting 10 000 documents"><figcaption>
-<p>Injecting 10 000 documents</p>
-</figcaption>
-</figure>
-<p><a href=http://0.0.0.0:8080/#/>Home page</a> now gives you your 10 000 persons back.</p>
-<figure><img src=00-search-all.png alt="Searching all"><figcaption>
-<p>Searching all</p>
-</figcaption>
-</figure>
-<p>Note that you can search within <code>name</code>, <code>country</code> and <code>city</code> fields.</p>
-<figure><img src=00-search-jo.png alt="Searching for jo"><figcaption>
-<p>Searching for jo</p>
-</figcaption>
-</figure>
-<p>The <a href=http://0.0.0.0:8080/#/advanced>Advanced Search tab</a> allows to run more specific searches using a more classic search form with 3 fields.</p>
-<figure><img src=00-search-advanced.png alt="Searching for joe, england, plymouth"><figcaption>
-<p>Searching for joe, england, plymouth</p>
-</figcaption>
-</figure>
-<h2 id=connecting-to-elasticsearch>Connecting to elasticsearch</h2>
-<h3 id=using-an-etl-or-a-jdbc-river>Using an ETL or a JDBC River</h3>
-<p>You can use an ETL and to read again your database and inject documents in elasticsearch. But you have to think of keeping all the things in sync. For example, when you want to remove an object from the database, you need to deal with that to remove it as well from elasticsearch. You can potentially use a technical table to do that which will contain something like a date, the id of the person which has been modified and the type of action, like <code>upsert</code> or <code>delete</code>.</p>
-<p>This way the ETL can read again the same table every x minutes and do what is needed and also remove from this technical table all objects that has been processed so far.</p>
-<p>Remember that reading again a database might have a cost on the database especially if you have a complicated model with collections of collections of collections of attributes.</p>
-<p>And also, if you need to propose to your user real-time search or near real-time search, that won&rsquo;t be possible with an ETL which runs every x minutes.</p>
-<p>The exact same thing applies to the <a href=https://github.com/jprante/elasticsearch-river-jdbc>JDBC river</a> although it&rsquo;s a very well written component, it&rsquo;s still an ETL but running inside an elasticsearch node. Also consider that <a href=https://www.elastic.co/blog/deprecating_rivers>rivers have been deprecated</a> and will be removed in the future.</p>
-<h3 id=direct-connection>Direct connection</h3>
-<p>So, my favorite way to deal with that and by the way reduce the overall complexity is by modifying directly the existing application. When you are about to write a bean to the database, you can reuse the exact same bean which is already loaded in memory, serialize it to JSON and send it to elasticsearch.</p>
-<h3 id=adding-elasticsearch>Adding elasticsearch</h3>
-<p>You first need to add elasticsearch library to your <code>pom.xml</code> file:</p>
-<pre><code class=language-xml>&lt;!-- Elasticsearch --&gt;
+</code></pre><p>Then open your browser at <a href=http://0.0.0.0:8080/>http://0.0.0.0:8080/</a>. You should see that our database is empty.</p><p>Click on the <a href=http://0.0.0.0:8080/#/init>init tab</a> and inject 10000 random persons.</p><figure><img src=00-inject.png alt="Injecting 10 000 documents"><figcaption><p>Injecting 10 000 documents</p></figcaption></figure><p><a href=http://0.0.0.0:8080/#/>Home page</a> now gives you your 10 000 persons back.</p><figure><img src=00-search-all.png alt="Searching all"><figcaption><p>Searching all</p></figcaption></figure><p>Note that you can search within <code>name</code>, <code>country</code> and <code>city</code> fields.</p><figure><img src=00-search-jo.png alt="Searching for jo"><figcaption><p>Searching for jo</p></figcaption></figure><p>The <a href=http://0.0.0.0:8080/#/advanced>Advanced Search tab</a> allows to run more specific searches using a more classic search form with 3 fields.</p><figure><img src=00-search-advanced.png alt="Searching for joe, england, plymouth"><figcaption><p>Searching for joe, england, plymouth</p></figcaption></figure><h2 id=connecting-to-elasticsearch>Connecting to elasticsearch</h2><h3 id=using-an-etl-or-a-jdbc-river>Using an ETL or a JDBC River</h3><p>You can use an ETL and to read again your database and inject documents in elasticsearch. But you have to think of keeping all the things in sync. For example, when you want to remove an object from the database, you need to deal with that to remove it as well from elasticsearch. You can potentially use a technical table to do that which will contain something like a date, the id of the person which has been modified and the type of action, like <code>upsert</code> or <code>delete</code>.</p><p>This way the ETL can read again the same table every x minutes and do what is needed and also remove from this technical table all objects that has been processed so far.</p><p>Remember that reading again a database might have a cost on the database especially if you have a complicated model with collections of collections of collections of attributes.</p><p>And also, if you need to propose to your user real-time search or near real-time search, that won&rsquo;t be possible with an ETL which runs every x minutes.</p><p>The exact same thing applies to the <a href=https://github.com/jprante/elasticsearch-river-jdbc>JDBC river</a> although it&rsquo;s a very well written component, it&rsquo;s still an ETL but running inside an elasticsearch node. Also consider that <a href=https://www.elastic.co/blog/deprecating_rivers>rivers have been deprecated</a> and will be removed in the future.</p><h3 id=direct-connection>Direct connection</h3><p>So, my favorite way to deal with that and by the way reduce the overall complexity is by modifying directly the existing application. When you are about to write a bean to the database, you can reuse the exact same bean which is already loaded in memory, serialize it to JSON and send it to elasticsearch.</p><h3 id=adding-elasticsearch>Adding elasticsearch</h3><p>You first need to add elasticsearch library to your <code>pom.xml</code> file:</p><pre><code class=language-xml>&lt;!-- Elasticsearch --&gt;
 &lt;dependency&gt;
   &lt;groupId&gt;org.elasticsearch&lt;/groupId&gt;
   &lt;artifactId&gt;elasticsearch&lt;/artifactId&gt;
   &lt;version&gt;1.5.2&lt;/version&gt;
 &lt;/dependency&gt;
-</code></pre>
-<p>Create a new <code>ElasticsearchDao</code> class in the <code>dao</code> package:</p>
-<pre><code class=language-java>// We are using RESTX framework here so it's a restx.factory.Component annotation
+</code></pre><p>Create a new <code>ElasticsearchDao</code> class in the <code>dao</code> package:</p><pre><code class=language-java>// We are using RESTX framework here so it's a restx.factory.Component annotation
 @Component
 public class ElasticsearchDao {
   final private ObjectMapper mapper;
@@ -203,9 +59,7 @@ public class ElasticsearchDao {
     return null;
   }
 }
-</code></pre>
-<p>Inject this class in <code>PersonService</code>:</p>
-<pre><code class=language-java>public class PersonService {
+</code></pre><p>Inject this class in <code>PersonService</code>:</p><pre><code class=language-java>public class PersonService {
   // ...
   private final ElasticsearchDao elasticsearchDao;
 
@@ -219,9 +73,7 @@ public class ElasticsearchDao {
   }
 // ...
 }
-</code></pre>
-<p>Call elasticsearch DAO save and delete methods from the service layer:</p>
-<pre><code class=language-java>public Person save(Person person) {
+</code></pre><p>Call elasticsearch DAO save and delete methods from the service layer:</p><pre><code class=language-java>public Person save(Person person) {
   // ...
   Person personDb = personDao.save(person);
   // Add here the call to delete method
@@ -232,8 +84,7 @@ public class ElasticsearchDao {
   }
   // ...
 }
-</code></pre>
-<pre><code class=language-java>public boolean delete(String id) {
+</code></pre><pre><code class=language-java>public boolean delete(String id) {
   // ...
   personDao.delete(person);
   // Add here the call to delete method
@@ -244,22 +95,13 @@ public class ElasticsearchDao {
   }
   // ...
 }
-</code></pre>
-<p>Note that we choose here to simply log the error and not fail the transaction because we want to make sure that our bean is stored in the database.
-You could potentially want to rollback the current transaction and keep both systems consistent.</p>
-<p>Here we just log so it will be the responsability of our OPS team to deal with errors and reinject missing documents.
-You could also think of sending errors in another table or in a message queue system to process them later.</p>
-<h3 id=create-a-client>Create a client</h3>
-<p>Let&rsquo;s implement our dao. First we need to create a client to connect to a running elasticsearch cluster:</p>
-<pre><code class=language-java>this.esClient = new TransportClient()
+</code></pre><p>Note that we choose here to simply log the error and not fail the transaction because we want to make sure that our bean is stored in the database.
+You could potentially want to rollback the current transaction and keep both systems consistent.</p><p>Here we just log so it will be the responsability of our OPS team to deal with errors and reinject missing documents.
+You could also think of sending errors in another table or in a message queue system to process them later.</p><h3 id=create-a-client>Create a client</h3><p>Let&rsquo;s implement our dao. First we need to create a client to connect to a running elasticsearch cluster:</p><pre><code class=language-java>this.esClient = new TransportClient()
   .addTransportAddress(
     // We will connect locally on default transport port 9300
     new InetSocketTransportAddress(&quot;127.0.0.1&quot;, 9300));
-</code></pre>
-<p>We are using here a <code>TransportClient</code> but you can use also a <code>NodeClient</code>. See <a href=https://david.pilato.fr/blog/2012-02-13-quel-client-java-pour-elasticsearch/>this article (french)</a>.</p>
-<h3 id=save-an-object>Save an object</h3>
-<p>Then, implement our <code>save</code> method:</p>
-<pre><code class=language-java>// We use Jackson to generate a JSON document from our bean
+</code></pre><p>We are using here a <code>TransportClient</code> but you can use also a <code>NodeClient</code>. See <a href=https://david.pilato.fr/blog/2012-02-13-quel-client-java-pour-elasticsearch/>this article (french)</a>.</p><h3 id=save-an-object>Save an object</h3><p>Then, implement our <code>save</code> method:</p><pre><code class=language-java>// We use Jackson to generate a JSON document from our bean
 byte[] bytes = mapper.writeValueAsBytes(person);
 
 // We execute an index operation
@@ -271,23 +113,14 @@ esClient.index(
     )
     .source(bytes)           // We provide the JSON content
   ).get();                   // We execute and get back the response
-</code></pre>
-<h3 id=remove-an-object>Remove an object</h3>
-<p><code>delete</code> method is quite similar:</p>
-<pre><code class=language-java>esClient.delete(
+</code></pre><h3 id=remove-an-object>Remove an object</h3><p><code>delete</code> method is quite similar:</p><pre><code class=language-java>esClient.delete(
   new DeleteRequest(
     &quot;person&quot;,       // Index name
     &quot;person&quot;,       // Our document type
     reference)      // The document we want to remove
   ).get();          // We execute and get back the response
-</code></pre>
-<h3 id=using-bulk>Using bulk</h3>
-<p>But this is not the more efficient way for doing that. In order to have a much faster injection time, please use bulk. Bulk allows to add a set of requests and process the bulk every <code>x</code> seconds or every <code>y</code> documents.</p>
-<p>Instead of writing all the logic by yourself you can easily use the <code>BulkProcessor</code> class which has been designed for that. Add it to the <code>ElasticsearchDao</code> class:</p>
-<pre><code class=language-java>final private BulkProcessor bulkProcessor;
-</code></pre>
-<p>In the contructor, add:</p>
-<pre><code class=language-java>this.bulkProcessor = BulkProcessor.builder(esClient, new BulkProcessor.Listener() {
+</code></pre><h3 id=using-bulk>Using bulk</h3><p>But this is not the more efficient way for doing that. In order to have a much faster injection time, please use bulk. Bulk allows to add a set of requests and process the bulk every <code>x</code> seconds or every <code>y</code> documents.</p><p>Instead of writing all the logic by yourself you can easily use the <code>BulkProcessor</code> class which has been designed for that. Add it to the <code>ElasticsearchDao</code> class:</p><pre><code class=language-java>final private BulkProcessor bulkProcessor;
+</code></pre><p>In the contructor, add:</p><pre><code class=language-java>this.bulkProcessor = BulkProcessor.builder(esClient, new BulkProcessor.Listener() {
   @Override
   public void beforeBulk(long executionId, BulkRequest request) { }
 
@@ -300,9 +133,7 @@ esClient.index(
   .setBulkActions(10000) // We flush every 10 000 requests
   .setFlushInterval(TimeValue.timeValueSeconds(5)) // Or every 5 seconds
   .build();
-</code></pre>
-<p>Replace in the <code>save</code> method:</p>
-<pre><code class=language-java>esClient.index(
+</code></pre><p>Replace in the <code>save</code> method:</p><pre><code class=language-java>esClient.index(
   new IndexRequest(
       &quot;person&quot;,              // Index name
       &quot;person&quot;,              // Our document type
@@ -310,9 +141,7 @@ esClient.index(
     )
     .source(bytes)           // We provide the JSON content
   ).get();                   // We execute and get back the response
-</code></pre>
-<p>by</p>
-<pre><code class=language-java>bulkProcessor.add(
+</code></pre><p>by</p><pre><code class=language-java>bulkProcessor.add(
   new IndexRequest(
       &quot;person&quot;,              // Index name
       &quot;person&quot;,              // Our document type
@@ -320,27 +149,19 @@ esClient.index(
     )
     .source(bytes)           // We provide the JSON content
   );
-</code></pre>
-<p>Same for <code>delete</code>:</p>
-<pre><code class=language-java>bulkProcessor.add(
+</code></pre><p>Same for <code>delete</code>:</p><pre><code class=language-java>bulkProcessor.add(
   new DeleteRequest(
     &quot;person&quot;,       // Index name
     &quot;person&quot;,       // Our document type
     reference)      // The document we want to remove
   );
-</code></pre>
-<h3 id=searching-for-documents>Searching for documents</h3>
-<p>So far, we can save and delete documents but we need to adapt our search to this as it&rsquo;s still using the SQL search.</p>
-<p>We have already created a skeleton for the <code>search</code> method in the <code>ElasticsearchDao</code> class. Let&rsquo;s implement it!</p>
-<pre><code class=language-java>return esClient.prepareSearch(&quot;person&quot;) // We search in &quot;person&quot; index
+</code></pre><h3 id=searching-for-documents>Searching for documents</h3><p>So far, we can save and delete documents but we need to adapt our search to this as it&rsquo;s still using the SQL search.</p><p>We have already created a skeleton for the <code>search</code> method in the <code>ElasticsearchDao</code> class. Let&rsquo;s implement it!</p><pre><code class=language-java>return esClient.prepareSearch(&quot;person&quot;) // We search in &quot;person&quot; index
   .setTypes(&quot;person&quot;)                   // We only want &quot;person&quot; documents
   .setQuery(query)                      // We pass the query
   .setFrom(from)                        // We set the pagination (from)
   .setSize(size)                        // We set the page size
   .get();                               // We execute, get back the result and return it
-</code></pre>
-<p>In <code>PersonService</code> we can create the Query we need for our fulltext search.</p>
-<pre><code class=language-java>public String search(String q, String f_country, String f_date, Integer from, Integer size) {
+</code></pre><p>In <code>PersonService</code> we can create the Query we need for our fulltext search.</p><pre><code class=language-java>public String search(String q, String f_country, String f_date, Integer from, Integer size) {
   QueryBuilder query;
   // If the user does not provide any text to query, let's match all documents
   if (!Strings.hasText(q)) {
@@ -357,9 +178,7 @@ esClient.index(
   // We return here the result as a JSON document as we have an AngularJS webapp
   return response.toString();
 }
-</code></pre>
-<p>Same for advanced search:</p>
-<pre><code class=language-java>public String advancedSearch(String name, String country, String city, Integer from, Integer size) {
+</code></pre><p>Same for advanced search:</p><pre><code class=language-java>public String advancedSearch(String name, String country, String city, Integer from, Integer size) {
   QueryBuilder query;
 
   // If the user does not provide any text to query, let's match all documents
@@ -395,47 +214,19 @@ esClient.index(
   // We return here the result as a JSON document as we have an AngularJS webapp
   return response.toString();
 }
-</code></pre>
-<h3 id=running-it>Running it</h3>
-<p>Have a look at the final result in branch <code>02-bulk</code>.</p>
-<pre><code class=language-sh>git checkout 02-bulk
-</code></pre>
-<p>We are now ready to run it.</p>
-<pre><code class=language-sh>mvn clean install
+</code></pre><h3 id=running-it>Running it</h3><p>Have a look at the final result in branch <code>02-bulk</code>.</p><pre><code class=language-sh>git checkout 02-bulk
+</code></pre><p>We are now ready to run it.</p><pre><code class=language-sh>mvn clean install
 mvn jetty:run
-</code></pre>
-<p>Download, install and start elasticsearch:</p>
-<pre><code class=language-sh>wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.5.2.tar.gz
+</code></pre><p>Download, install and start elasticsearch:</p><pre><code class=language-sh>wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.5.2.tar.gz
 tar xzf elasticsearch-1.5.2.tar.gz
 # Install marvel
 elasticsearch-1.5.2/bin/plugin -install elasticsearch/marvel/latest
 # Start elasticsearch
 elasticsearch-1.5.2/bin/elasticsearch
-</code></pre>
-<p><a href=http://0.0.0.0:8080/#/init>Initialize 10000 persons</a> and look at the effect in <a href=http://127.0.0.1:9200/_plugin/marvel/>marvel</a>.</p>
-<figure><img src=02-marvel.png alt="Marvel 10k documents"><figcaption>
-<p>Marvel 10k documents</p>
-</figcaption>
-</figure>
-<p>Try now <a href=http://0.0.0.0:8080/>to search for</a> <code>j</code>, <code>jo</code> or <code>joe</code>. What&rsquo;s wrong?
-Searching for <code>j</code> or <code>jo</code> does not match any document but <code>joe</code> gives expected results.</p>
-<blockquote>
-<p>Why this?</p>
-</blockquote>
-<p>Because elasticsearch analyze your text at index and search times and compare then tokens.
-In the inverted index, for the first name <code>Joe</code>, we have actually indexed <code>joe</code>. And <code>j</code> is different than <code>joe</code>. Same for <code>jo</code>. But <code>joe</code> equals <code>joe</code> so a document which contains <code>Joe</code> will match the query.</p>
-<p>Same goes for advanced search. Searching for a country <code>fran</code> won&rsquo;t match but the full term <code>france</code> would match.</p>
-<p>If you want to learn more about the analysis process, I&rsquo;d suggest you read the fantastic <a href=http://www.elastic.co/guide/en/elasticsearch/guide/current/mapping-analysis.html>Mapping and Analysis chapter</a> of the official elasticsearch user guide.</p>
-<blockquote>
-<p>Can we fix that?</p>
-</blockquote>
-<p>For sure, we can use a <a href=http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html>wildcard query</a> or a <a href=http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html>prefix query</a> but this is really inefficient! Please, don&rsquo;t do that! :)</p>
-<h2 id=fix-the-mapping>Fix the mapping</h2>
-<p>Give a look <a href=http://127.0.0.1:9200/_plugin/marvel/sense/index.html>in sense</a> at the generated mapping:</p>
-<pre><code class=language-json>GET person/person/_mapping
-</code></pre>
-<p>It gives</p>
-<pre><code class=language-json>{
+</code></pre><p><a href=http://0.0.0.0:8080/#/init>Initialize 10000 persons</a> and look at the effect in <a href=http://127.0.0.1:9200/_plugin/marvel/>marvel</a>.</p><figure><img src=02-marvel.png alt="Marvel 10k documents"><figcaption><p>Marvel 10k documents</p></figcaption></figure><p>Try now <a href=http://0.0.0.0:8080/>to search for</a> <code>j</code>, <code>jo</code> or <code>joe</code>. What&rsquo;s wrong?
+Searching for <code>j</code> or <code>jo</code> does not match any document but <code>joe</code> gives expected results.</p><blockquote><p>Why this?</p></blockquote><p>Because elasticsearch analyze your text at index and search times and compare then tokens.
+In the inverted index, for the first name <code>Joe</code>, we have actually indexed <code>joe</code>. And <code>j</code> is different than <code>joe</code>. Same for <code>jo</code>. But <code>joe</code> equals <code>joe</code> so a document which contains <code>Joe</code> will match the query.</p><p>Same goes for advanced search. Searching for a country <code>fran</code> won&rsquo;t match but the full term <code>france</code> would match.</p><p>If you want to learn more about the analysis process, I&rsquo;d suggest you read the fantastic <a href=http://www.elastic.co/guide/en/elasticsearch/guide/current/mapping-analysis.html>Mapping and Analysis chapter</a> of the official elasticsearch user guide.</p><blockquote><p>Can we fix that?</p></blockquote><p>For sure, we can use a <a href=http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html>wildcard query</a> or a <a href=http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html>prefix query</a> but this is really inefficient! Please, don&rsquo;t do that! :)</p><h2 id=fix-the-mapping>Fix the mapping</h2><p>Give a look <a href=http://127.0.0.1:9200/_plugin/marvel/sense/index.html>in sense</a> at the generated mapping:</p><pre><code class=language-json>GET person/person/_mapping
+</code></pre><p>It gives</p><pre><code class=language-json>{
    &quot;person&quot;: {
       &quot;mappings&quot;: {
          &quot;person&quot;: {
@@ -518,10 +309,7 @@ In the inverted index, for the first name <code>Joe</code>, we have actually ind
       }
    }
 }
-</code></pre>
-<p>As you can imagine, we are using here all defaults to elasticsearch. So we are using a <a href=http://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-standard-analyzer.html>standard analyzer</a> for example to analyze our text.</p>
-<p>Let&rsquo;s say that instead of indexing <code>joe</code>, we want also to index <code>j</code> and <code>jo</code>. We can do that using a <a href=http://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-edgengram-tokenizer.html>edge ngram tokenfilter</a>. To do that, you need to create your own analyzer. It can be done when you create your index by providing settings:</p>
-<pre><code class=language-json>{
+</code></pre><p>As you can imagine, we are using here all defaults to elasticsearch. So we are using a <a href=http://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-standard-analyzer.html>standard analyzer</a> for example to analyze our text.</p><p>Let&rsquo;s say that instead of indexing <code>joe</code>, we want also to index <code>j</code> and <code>jo</code>. We can do that using a <a href=http://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-edgengram-tokenizer.html>edge ngram tokenfilter</a>. To do that, you need to create your own analyzer. It can be done when you create your index by providing settings:</p><pre><code class=language-json>{
     &quot;analysis&quot;: {
         &quot;analyzer&quot;: {
             &quot;ngram&quot;: {
@@ -544,32 +332,21 @@ In the inverted index, for the first name <code>Joe</code>, we have actually ind
         }
     }
 }
-</code></pre>
-<p>We have defined here a <code>ngram</code> analyzer which will lowercase the content we need to index and will produce grams for each token (up to 10 characters).</p>
-<p>Now, we need to force the mapping instead of letting elasticsearch automatically guessing for us.</p>
-<p>For example let&rsquo;s look at our <code>name</code> field. It looks like this by default:</p>
-<pre><code class=language-json>&quot;name&quot;: {
+</code></pre><p>We have defined here a <code>ngram</code> analyzer which will lowercase the content we need to index and will produce grams for each token (up to 10 characters).</p><p>Now, we need to force the mapping instead of letting elasticsearch automatically guessing for us.</p><p>For example let&rsquo;s look at our <code>name</code> field. It looks like this by default:</p><pre><code class=language-json>&quot;name&quot;: {
   &quot;type&quot;: &quot;string&quot;
 }
-</code></pre>
-<p>We can now change its analyzer:</p>
-<pre><code class=language-json>&quot;name&quot;: {
+</code></pre><p>We can now change its analyzer:</p><pre><code class=language-json>&quot;name&quot;: {
   &quot;type&quot;: &quot;string&quot;,
   &quot;analyzer&quot;: &quot;ngram&quot;
 }
-</code></pre>
-<p>But at search time, searching for <code>joe</code> will also return unexpected results such as <code>jane</code>. Why this? Because by default, we use the same analyzer at search time and index time.
+</code></pre><p>But at search time, searching for <code>joe</code> will also return unexpected results such as <code>jane</code>. Why this? Because by default, we use the same analyzer at search time and index time.
 <code>joe</code> is once again analyzed at search time and produces <code>j</code>, <code>jo</code> and <code>joe</code>.
-<code>jane</code> has been indexed as <code>j</code>, <code>ja</code>, <code>jan</code> and <code>jane</code>. <code>j</code> from <code>joe</code> equals <code>j</code> from <code>jane</code>!</p>
-<p>In this use case, a user who enters <code>joe</code> is probably looking for someone named <code>joe</code> so we should only use a <code>lowercase</code> filter. The <a href=http://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-simple-analyzer.html>simple analyzer</a> does that perfectly. Let&rsquo;s use it:</p>
-<pre><code class=language-json>&quot;name&quot;: {
+<code>jane</code> has been indexed as <code>j</code>, <code>ja</code>, <code>jan</code> and <code>jane</code>. <code>j</code> from <code>joe</code> equals <code>j</code> from <code>jane</code>!</p><p>In this use case, a user who enters <code>joe</code> is probably looking for someone named <code>joe</code> so we should only use a <code>lowercase</code> filter. The <a href=http://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-simple-analyzer.html>simple analyzer</a> does that perfectly. Let&rsquo;s use it:</p><pre><code class=language-json>&quot;name&quot;: {
   &quot;type&quot;: &quot;string&quot;,
   &quot;index_analyzer&quot;: &quot;ngram&quot;,
   &quot;search_analyzer&quot;: &quot;simple&quot;
 }
-</code></pre>
-<p>If for some reason, you want to keep the &ldquo;old&rdquo; (standard) analyzer as well and index the same field in different ways, you can use the multifield feature of elasticsearch and write:</p>
-<pre><code class=language-json>&quot;name&quot;: {
+</code></pre><p>If for some reason, you want to keep the &ldquo;old&rdquo; (standard) analyzer as well and index the same field in different ways, you can use the multifield feature of elasticsearch and write:</p><pre><code class=language-json>&quot;name&quot;: {
   &quot;type&quot;: &quot;string&quot;,
   &quot;fields&quot;: {
     &quot;autocomplete&quot; : {
@@ -579,27 +356,16 @@ In the inverted index, for the first name <code>Joe</code>, we have actually ind
     }
   }
 }
-</code></pre>
-<p>It means that if you search in <code>name</code> you will use the standard analyzer. But if you search in <code>name.autocomplete</code>, you will use the expected behavior we have just described.</p>
-<p>And you can do that for all other fields&mldr;</p>
-<blockquote>
-<p>Why not indexing all fields in a single field?</p>
-</blockquote>
-<p>Instead of searching in <code>name</code>, <code>address.country</code>, <code>address.city</code> and <code>gender</code> fields, we can create at index time a new field on the fly using the very cool <a href=http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-core-types.html#copy-to>copy_to feature</a>:</p>
-<pre><code class=language-json>&quot;name&quot;: {
+</code></pre><p>It means that if you search in <code>name</code> you will use the standard analyzer. But if you search in <code>name.autocomplete</code>, you will use the expected behavior we have just described.</p><p>And you can do that for all other fields&mldr;</p><blockquote><p>Why not indexing all fields in a single field?</p></blockquote><p>Instead of searching in <code>name</code>, <code>address.country</code>, <code>address.city</code> and <code>gender</code> fields, we can create at index time a new field on the fly using the very cool <a href=http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-core-types.html#copy-to>copy_to feature</a>:</p><pre><code class=language-json>&quot;name&quot;: {
   &quot;type&quot;: &quot;string&quot;,
   &quot;copy_to&quot;: &quot;fulltext&quot;
 }
-</code></pre>
-<p>You can define analyzer you want to use for this new field:</p>
-<pre><code class=language-json>&quot;fulltext&quot; : {
+</code></pre><p>You can define analyzer you want to use for this new field:</p><pre><code class=language-json>&quot;fulltext&quot; : {
   &quot;type&quot; : &quot;string&quot;,
   &quot;index_analyzer&quot;: &quot;ngram&quot;,
   &quot;search_analyzer&quot;: &quot;simple&quot;
 }
-</code></pre>
-<p>At the end, you full mapping will become:</p>
-<pre><code class=language-json>{
+</code></pre><p>At the end, you full mapping will become:</p><pre><code class=language-json>{
     &quot;person&quot;: {
         &quot;_all&quot;: {
             &quot;enabled&quot;: false
@@ -704,46 +470,28 @@ In the inverted index, for the first name <code>Joe</code>, we have actually ind
         }
     }
 }
-</code></pre>
-<p>Note that we also disabled <code>_all</code> field as we won&rsquo;t use it and defined <code>location</code> field as a <code>geo_point</code>.</p>
-<h2 id=elasticsearch-beyonder>Elasticsearch Beyonder</h2>
-<p>You can of course use your client to create your index with the settings we have defined and then create a new type <code>person</code> which will use the mapping we created.</p>
-<p><a href=https://github.com/dadoonet/elasticsearch-beyonder>Elasticsearch Beyonder</a> project will do that <em>automagically</em> for you if they don&rsquo;t exist already by reading what you have in the classloader.</p>
-<p>By convention, it will search in your classloader for a <code>/elasticsearch</code> resource. If it contains a directory, that will be the index name. If this directory contains a <code>_settings.json</code> file, it will use it to put the settings when creating the index.
-Then for each other <code>.json</code> file, it will create a new type based on the file name and will apply the mapping defined in it.</p>
-<p>In our case, we will create in <code>src/main/resources</code>:</p>
-<pre><code class=language-txt>resources/
+</code></pre><p>Note that we also disabled <code>_all</code> field as we won&rsquo;t use it and defined <code>location</code> field as a <code>geo_point</code>.</p><h2 id=elasticsearch-beyonder>Elasticsearch Beyonder</h2><p>You can of course use your client to create your index with the settings we have defined and then create a new type <code>person</code> which will use the mapping we created.</p><p><a href=https://github.com/dadoonet/elasticsearch-beyonder>Elasticsearch Beyonder</a> project will do that <em>automagically</em> for you if they don&rsquo;t exist already by reading what you have in the classloader.</p><p>By convention, it will search in your classloader for a <code>/elasticsearch</code> resource. If it contains a directory, that will be the index name. If this directory contains a <code>_settings.json</code> file, it will use it to put the settings when creating the index.
+Then for each other <code>.json</code> file, it will create a new type based on the file name and will apply the mapping defined in it.</p><p>In our case, we will create in <code>src/main/resources</code>:</p><pre><code class=language-txt>resources/
 ├── elasticsearch
 │   └── person
 │       ├── _settings.json
 │       └── person.json
-</code></pre>
-<p>Let&rsquo;s now add Beyonder project in our <code>pom.xml</code> file:</p>
-<pre><code class=language-xml>&lt;dependency&gt;
+</code></pre><p>Let&rsquo;s now add Beyonder project in our <code>pom.xml</code> file:</p><pre><code class=language-xml>&lt;dependency&gt;
   &lt;groupId&gt;fr.pilato.elasticsearch&lt;/groupId&gt;
   &lt;artifactId&gt;elasticsearch-beyonder&lt;/artifactId&gt;
   &lt;version&gt;1.5.0&lt;/version&gt;
 &lt;/dependency&gt;
-</code></pre>
-<p>To use it, just after you have created your client in <code>ElasticsearchDao</code> constructor, you can use it by calling:</p>
-<pre><code class=language-java>try {
+</code></pre><p>To use it, just after you have created your client in <code>ElasticsearchDao</code> constructor, you can use it by calling:</p><pre><code class=language-java>try {
   ElasticsearchBeyonder.start(esClient);
 } catch (Exception e) {
   logger.warn(&quot;can not create index and mappings&quot;, e);
 }
-</code></pre>
-<h2 id=modify-search-queries>Modify search queries</h2>
-<p>Instead of searching in all fields we can now search in <code>fulltext</code> field:</p>
-<pre><code class=language-java>query = QueryBuilders.simpleQueryStringQuery(q)
+</code></pre><h2 id=modify-search-queries>Modify search queries</h2><p>Instead of searching in all fields we can now search in <code>fulltext</code> field:</p><pre><code class=language-java>query = QueryBuilders.simpleQueryStringQuery(q)
   .field(&quot;fulltext&quot;);
-</code></pre>
-<p>But we can also play with relevancy here. Let&rsquo;s say that a user has the name <code>France</code> but lives in <code>Germany</code> and another one is <code>Joe</code> living in <code>France</code>. We want to make sure that in that case the first one will appear at the first position. Let&rsquo;s search also in <code>name</code> field and boost the score by a factor 3 in case it matches:</p>
-<pre><code class=language-java>query = QueryBuilders.simpleQueryStringQuery(q)
+</code></pre><p>But we can also play with relevancy here. Let&rsquo;s say that a user has the name <code>France</code> but lives in <code>Germany</code> and another one is <code>Joe</code> living in <code>France</code>. We want to make sure that in that case the first one will appear at the first position. Let&rsquo;s search also in <code>name</code> field and boost the score by a factor 3 in case it matches:</p><pre><code class=language-java>query = QueryBuilders.simpleQueryStringQuery(q)
   .field(&quot;fulltext&quot;);
   .field(&quot;name&quot;, 3.0f);
-</code></pre>
-<p>We can also modify our advanced search and use now <code>.autocomplete</code> subfields:</p>
-<pre><code class=language-java>BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+</code></pre><p>We can also modify our advanced search and use now <code>.autocomplete</code> subfields:</p><pre><code class=language-java>BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
 if (Strings.hasText(name)) {
   boolQueryBuilder.must(
     QueryBuilders.matchQuery(&quot;name.autocomplete&quot;, name)
@@ -759,22 +507,8 @@ if (Strings.hasText(city)) {
     QueryBuilders.matchQuery(&quot;address.city.autocomplete&quot;, city)
   );
 }
-</code></pre>
-<p>To run that, first delete your existing documents with SENSE to have Beyonder creating again index and type:</p>
-<pre><code class=language-json>DELETE person
-</code></pre>
-<p>And restart the application, inject 10 000 documents and search for <code>j</code> and then for <code>joe</code>.</p>
-<figure><img src=03-search-j.png alt="Searching for J"><figcaption>
-<p>Searching for J</p>
-</figcaption>
-</figure>
-<p>It works as it was working before we started! <code>\o/</code></p>
-<h2 id=but-it-will-slow-down-my-application-right>But it will slow down my application, right?</h2>
-<p>I have this question very often when doing talks.</p>
-<p>Indeed. Adding something to your current injection process might slow it down. But is elasticsearch really the thing you need to optimize first?</p>
-<p>Let&rsquo;s run a small test about that.</p>
-<p>In our <code>PersonService#save</code> method, we can try to disable database operation and only keep indexing operation.</p>
-<pre><code class=language-java>public Person save(Person person) {
+</code></pre><p>To run that, first delete your existing documents with SENSE to have Beyonder creating again index and type:</p><pre><code class=language-json>DELETE person
+</code></pre><p>And restart the application, inject 10 000 documents and search for <code>j</code> and then for <code>joe</code>.</p><figure><img src=03-search-j.png alt="Searching for J"><figcaption><p>Searching for J</p></figcaption></figure><p>It works as it was working before we started! <code>\o/</code></p><h2 id=but-it-will-slow-down-my-application-right>But it will slow down my application, right?</h2><p>I have this question very often when doing talks.</p><p>Indeed. Adding something to your current injection process might slow it down. But is elasticsearch really the thing you need to optimize first?</p><p>Let&rsquo;s run a small test about that.</p><p>In our <code>PersonService#save</code> method, we can try to disable database operation and only keep indexing operation.</p><pre><code class=language-java>public Person save(Person person) {
   try {
     elasticsearchDao.save(person);
   } catch (Exception e) {
@@ -782,15 +516,8 @@ if (Strings.hasText(city)) {
   }
   return person;
 }
-</code></pre>
-<p>Restart. And now inject 10 000 documents. You might not see that it has been done as it was so fast&mldr; So inject 1 000 000 documents now. You should see that you are injecting must faster without the database then with the database. On my laptop, it&rsquo;s from around 200 docs per second to around 10 000 docs per second. Ok, I have SSD drives but this gives you an idea.</p>
-<p>It means that basically elasticsearch won&rsquo;t slow down that much your process.</p>
-<h2 id=faceted-navigation>Faceted navigation</h2>
-<p>Let&rsquo;s do something even more interesting. Let&rsquo;s try to add a <a href=http://en.wikipedia.org/wiki/Faceted_search>faceted navigation</a>.
-We want to display our result set broken per 10 years (<code>by_year</code>) and also get the repartition of our result set per country (<code>by_country</code>).</p>
-<p>Everything was <a href=https://github.com/dadoonet/legacy-search/blob/01-direct/src/main/webapp/partials/search.html#L27-60>already coded on the interface</a>. So we just have to provide the aggregation result now&mldr;</p>
-<p>Let&rsquo;s modify <code>ElasticsearchDao#search</code> method:</p>
-<pre><code class=language-java>public SearchResponse search(QueryBuilder query, Integer from, Integer size) {
+</code></pre><p>Restart. And now inject 10 000 documents. You might not see that it has been done as it was so fast&mldr; So inject 1 000 000 documents now. You should see that you are injecting must faster without the database then with the database. On my laptop, it&rsquo;s from around 200 docs per second to around 10 000 docs per second. Ok, I have SSD drives but this gives you an idea.</p><p>It means that basically elasticsearch won&rsquo;t slow down that much your process.</p><h2 id=faceted-navigation>Faceted navigation</h2><p>Let&rsquo;s do something even more interesting. Let&rsquo;s try to add a <a href=http://en.wikipedia.org/wiki/Faceted_search>faceted navigation</a>.
+We want to display our result set broken per 10 years (<code>by_year</code>) and also get the repartition of our result set per country (<code>by_country</code>).</p><p>Everything was <a href=https://github.com/dadoonet/legacy-search/blob/01-direct/src/main/webapp/partials/search.html#L27-60>already coded on the interface</a>. So we just have to provide the aggregation result now&mldr;</p><p>Let&rsquo;s modify <code>ElasticsearchDao#search</code> method:</p><pre><code class=language-java>public SearchResponse search(QueryBuilder query, Integer from, Integer size) {
   return esClient.prepareSearch(&quot;person&quot;)
     .setTypes(&quot;person&quot;)
     .setQuery(query)
@@ -811,15 +538,7 @@ We want to display our result set broken per 10 years (<code>by_year</code>) and
     .setSize(size)
     .get();
 }
-</code></pre>
-<p>Relaunching will now give you the following.</p>
-<figure><img src=04-faceted-1.png alt="Faceted results"><figcaption>
-<p>Faceted results</p>
-</figcaption>
-</figure>
-<p>Let say you now want to click on a country to filter results or on a decade.</p>
-<p>Change <code>PersonService#search</code> with the following code.</p>
-<pre><code class=language-java>public String search(String q, String f_country, String f_date, Integer from, Integer size) {
+</code></pre><p>Relaunching will now give you the following.</p><figure><img src=04-faceted-1.png alt="Faceted results"><figcaption><p>Faceted results</p></figcaption></figure><p>Let say you now want to click on a country to filter results or on a decade.</p><p>Change <code>PersonService#search</code> with the following code.</p><pre><code class=language-java>public String search(String q, String f_country, String f_date, Integer from, Integer size) {
   QueryBuilder query;
   if (!Strings.hasText(q)) {
     query = QueryBuilders.matchAllQuery();
@@ -850,19 +569,8 @@ We want to display our result set broken per 10 years (<code>by_year</code>) and
   SearchResponse response = elasticsearchDao.search(query, from, size);
   return response.toString();
 }
-</code></pre>
-<p>You can now filter your results!</p>
-<figure><img src=04-faceted-2.png alt="Filtered results"><figcaption>
-<p>Filtered results</p>
-</figcaption>
-</figure>
-<h2 id=understand-your-dataset>Understand your dataset</h2>
-<blockquote>
-<p>Ok. We have 1 000 000 documents. What do they look like?</p>
-</blockquote>
-<p>We can change our first aggregation and create an aggregation tree.
-So for each country, we want to break down our data to <a href=https://github.com/elastic/elasticsearch/issues/8939>almost every 10 years (3659 days)</a> and for each &ldquo;decade&rdquo; get the average number of children.</p>
-<pre><code class=language-java>public SearchResponse search(QueryBuilder query, Integer from, Integer size) {
+</code></pre><p>You can now filter your results!</p><figure><img src=04-faceted-2.png alt="Filtered results"><figcaption><p>Filtered results</p></figcaption></figure><h2 id=understand-your-dataset>Understand your dataset</h2><blockquote><p>Ok. We have 1 000 000 documents. What do they look like?</p></blockquote><p>We can change our first aggregation and create an aggregation tree.
+So for each country, we want to break down our data to <a href=https://github.com/elastic/elasticsearch/issues/8939>almost every 10 years (3659 days)</a> and for each &ldquo;decade&rdquo; get the average number of children.</p><pre><code class=language-java>public SearchResponse search(QueryBuilder query, Integer from, Integer size) {
   return esClient.prepareSearch(&quot;person&quot;)
     .setTypes(&quot;person&quot;)
     .setQuery(query)
@@ -891,147 +599,19 @@ So for each country, we want to break down our data to <a href=https://github.co
     .setSize(size)
     .get();
 }
-</code></pre>
-<p>Also add the compute tab in <code>index.html</code>.</p>
-<pre><code class=language-html>&lt;li&gt;&lt;a href=&quot;/#/compute&quot;&gt;Compute&lt;/a&gt;&lt;/li&gt;
-</code></pre>
-<p>You can run the final version using <code>05-compute</code> branch:</p>
-<pre><code class=language-sh>git checkout 05-compute
+</code></pre><p>Also add the compute tab in <code>index.html</code>.</p><pre><code class=language-html>&lt;li&gt;&lt;a href=&quot;/#/compute&quot;&gt;Compute&lt;/a&gt;&lt;/li&gt;
+</code></pre><p>You can run the final version using <code>05-compute</code> branch:</p><pre><code class=language-sh>git checkout 05-compute
 mvn clean install
 mvn jetty:run
-</code></pre>
-<p>Opening <a href=http://0.0.0.0:8080/#/compute>Compute tab</a> now gives you more knowledge about your dataset.</p>
-<figure><img src=05-compute.png alt="Compute results"><figcaption>
-<p>Compute results</p>
-</figcaption>
-</figure>
-<h2 id=conclusion>Conclusion</h2>
-<p>So we have migrated our search part of our application to a search engine instead of using search features provided by our datastore. We are keeping our source of truth in the SQL database but you could also imagine migrating from the legacy datastore to a NoSQL one if you need/want to.</p>
-<p>What would happen in case of failure? For example, let say you want to stop your elasticsearch cluster for whatever reason. All index operation will failed and you will have to deal with that by yourself.</p>
-<p>If you want to introduce an asynchronous indexing process, you could image to push your JSON documents to a message queue system and instead of writing by yourself the code which will read from the message queue, push to elasticsearch, deal with failures, you can use <a href=https://www.elastic.co/products/logstash>Logstash</a> and one of its <a href=http://www.elastic.co/guide/en/logstash/current/input-plugins.html>input plugins</a>, for example:</p>
-<ul>
-<li><a href=http://www.elastic.co/guide/en/logstash/current/plugins-inputs-kafka.html>Kafka</a></li>
-<li><a href=http://www.elastic.co/guide/en/logstash/current/plugins-inputs-rabbitmq.html>RabbitMQ</a></li>
-<li><a href=http://www.elastic.co/guide/en/logstash/current/plugins-inputs-redis.html>Redis</a></li>
-</ul>
-<p>You can also scale out Logstash on multiple nodes if you need more injection power.</p>
-</div>
-<div class=my-4>
-<a href=https://david.pilato.fr/tags/elasticsearch/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#elasticsearch</a>
-<a href=https://david.pilato.fr/tags/hibernate/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#hibernate</a>
-<a href=https://david.pilato.fr/tags/sql/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#sql</a>
-<a href=https://david.pilato.fr/tags/conference/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#conference</a>
-</div>
-<div class="flex md:justify-end my-4">
-<style>#share-buttons{display:inline-block;vertical-align:middle}#share-buttons:after{content:"";display:block;clear:both}#share-buttons>div{position:relative;text-align:left;height:36px;width:32px;float:left;text-align:center}#share-buttons>div>svg{height:16px;fill:#000;margin-top:10px}#share-buttons>div:hover{cursor:pointer}#share-buttons>div.facebook:hover>svg{fill:#3b5998}#share-buttons>div.twitter:hover>svg{fill:#55acee}#share-buttons>div.linkedin:hover>svg{fill:#0077b5}#share-buttons>div.pinterest:hover>svg{fill:#cb2027}#share-buttons>div.mail:hover>svg{fill:#7d7d7d}#share-buttons>div.facebook>svg{height:18px;margin-top:9px}#share-buttons>div.twitter>svg{height:20px;margin-top:8px}#share-buttons>div.linkedin>svg{height:19px;margin-top:7px}#share-buttons>div.pinterest>svg{height:20px;margin-top:9px}#share-buttons>div.mail>svg{height:14px;margin-top:11px}</style>
-<div id=share-buttons>
-<div class=facebook title="Share this on Facebook" onclick="window.open('http://www.facebook.com/share.php?u=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759H734V905H479V609h255V391q0-186 104-288.5T1115 0q147 0 228 12z"/></svg></div>
-<div class=twitter title="Share this on Twitter" onclick="window.open('http://twitter.com/intent/tweet?via=dadoonet&text=🧑🏼‍💻 Blog: Advanced search for your Legacy application 👉🏼&url=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5T1369.5 1125 1185 1335.5t-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5T285 1033q33 5 61 5 43 0 85-11-112-23-185.5-111.5T172 710v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5T884 653q-8-38-8-74 0-134 94.5-228.5T1199 256q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
-<div class=linkedin title="Share this on Linkedin" onclick="window.open('https://www.linkedin.com/shareArticle?mini=true&url=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/&title=&summary=&source=')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991H147V625h330zm21-306q1 73-50.5 122T312 490h-2q-82 0-132-49t-50-122q0-74 51.5-122.5T314 148t133 48.5T498 319zm1166 729v568h-329v-530q0-105-40.5-164.5T1168 862q-63 0-105.5 34.5T999 982q-11 30-11 81v553H659q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5T1285 602q171 0 275 113.5t104 332.5z"/></svg></div>
-<div class=mail title="Share this through Email" onclick="window.open('mailto:?&body=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47H160q-66 0-113-47T0 1504V710q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 1e2-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38T639 1015q-91-64-262-182.5T172 690q-62-42-117-115.5T0 438q0-78 41.5-130T160 256h1472q65 0 112.5 47t47.5 113z"/></svg></div>
-</div>
-<a href=https://github.com/dadoonet/dadoonet.github.io/tree/main/content/blog/2015-05-09-advanced-search-for-your-legacy-application/index.md title="Edit this page">
-<i class="fas fa-edit mr-1"></i>
-</a>
-</div>
-<div class=py-2>
-<div class="flex flex-col md:flex-row items-center my-8">
-<a href=https://david.pilato.fr/authors/david-pilato/ class="w-24 h-24 md:mr-4">
-<img src=https://david.pilato.fr/authors/david-pilato/david_pilato.png class="w-full bg-primary-bg rounded-full" alt=Avatar>
-</a>
-<div class="w-full md:w-auto mt-4 md:mt-0">
-<a href=https://david.pilato.fr/authors/david-pilato/ class="block font-bold text-lg pb-1 mb-2 border-b">David Pilato</a>
-<span class="block pb-2">20+ years of experience, mostly in Java. Living in Cergy, France.</span>
-<a href=mailto:david+blog@pilato.fr class=mr-1>
-<i class="fas fa-envelope"></i>
-</a>
-<a href=https://twitter.com/dadoonet class=mr-1>
-<i class="fab fa-twitter"></i>
-</a>
-<a href=https://github.com/dadoonet class=mr-1>
-<i class="fab fa-github"></i>
-</a>
-<a href=https://www.linkedin.com/in/dadoonet/ class=mr-1>
-<i class="fab fa-linkedin"></i>
-</a>
-</div>
-</div>
-</div>
-<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
-<div>
-<span class="block font-bold">Previous</span>
-<a href=https://david.pilato.fr/blog/2015-05-19-using-js-auth-with-found-cluster/ class=block>Using JS Auth with found cluster</a>
-</div>
-<div class="md:text-right mt-4 md:mt-0">
-<span class="block font-bold">Next</span>
-<a href=https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/ class=block>Devoxx France 2015</a>
-</div>
-</div>
-<script id=utterances src=https://utteranc.es/client.js issue-term=pathname label=💬 comments repo=dadoonet/dadoonet.github.io theme=preferred-color-scheme crossorigin=anonymous async></script>
-<script>storageColorScheme=="Light"?document.getElementById('utterances').setAttribute('theme','github-light'):storageColorScheme=="Dark"&&document.getElementById('utterances').setAttribute('theme','github-dark')</script>
-</div>
-<div class=col-span-2>
-<div class="sticky top-16 z-10 hidden lg:block px-6 py-4 bg-primary-bg">
-<span class="text-lg font-semibold">On This Page</span>
-</div>
-<div class="sticky-toc hidden lg:block px-6 pb-6">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#running-the-existing-code>Running the existing code</a></li>
-<li><a href=#connecting-to-elasticsearch>Connecting to elasticsearch</a>
-<ul>
-<li><a href=#using-an-etl-or-a-jdbc-river>Using an ETL or a JDBC River</a></li>
-<li><a href=#direct-connection>Direct connection</a></li>
-<li><a href=#adding-elasticsearch>Adding elasticsearch</a></li>
-<li><a href=#create-a-client>Create a client</a></li>
-<li><a href=#save-an-object>Save an object</a></li>
-<li><a href=#remove-an-object>Remove an object</a></li>
-<li><a href=#using-bulk>Using bulk</a></li>
-<li><a href=#searching-for-documents>Searching for documents</a></li>
-<li><a href=#running-it>Running it</a></li>
-</ul>
-</li>
-<li><a href=#fix-the-mapping>Fix the mapping</a></li>
-<li><a href=#elasticsearch-beyonder>Elasticsearch Beyonder</a></li>
-<li><a href=#modify-search-queries>Modify search queries</a></li>
-<li><a href=#but-it-will-slow-down-my-application-right>But it will slow down my application, right?</a></li>
-<li><a href=#faceted-navigation>Faceted navigation</a></li>
-<li><a href=#understand-your-dataset>Understand your dataset</a></li>
-<li><a href=#conclusion>Conclusion</a></li>
-</ul>
-</nav>
-</div>
-<script>window.addEventListener('DOMContentLoaded',()=>{enableStickyToc()})</script>
-</div>
-<div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded p-6">
-<h2 class="text-lg font-semibold mb-4">See Also</h2>
-<div class=content>
-<a href=https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/>Devoxx France 2015</a>
-<br>
-<a href=https://david.pilato.fr/blog/2012-03-14-mon-talk-sur-elasticsearch-selectionne-pour-devoxx-france/>Mon talk sur Elasticsearch sélectionné pour Devoxx France</a>
-<br>
-<a href=https://david.pilato.fr/blog/2011-03-09-la-recherche-elastique/>La recherche élastique...</a>
-<br>
-<a href=https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/>Exploring Capitaine Train dataset</a>
-<br>
-<a href=https://david.pilato.fr/blog/2015-03-05-using-log4j2-with-hibernate-4/>Using Log4J2 with Hibernate 4</a>
-<br>
-<a href=https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/>ScrutMyDocs : un moteur de recherche pour documents</a>
-<br>
-</div>
-</div>
-</div>
-<script>document.addEventListener('DOMContentLoaded',()=>{hljs.initHighlightingOnLoad()})</script>
-</div>
-</div>
-</main>
-<footer class=pl-scrollbar>
-<div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
-<p class="text-sm text-tertiary-text">&copy; 2022, David Pilato, France
-&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p>
-</div><div class="text-center p-1 pin-b">
-<p class="text-sm text-tertiary-text">Generated from 🇫🇷 with ❤️ on Wed Jan 12, 2022 at 17:58:41 UTC</p>
-</div></div>
-</footer>
-</body>
-</html>
+</code></pre><p>Opening <a href=http://0.0.0.0:8080/#/compute>Compute tab</a> now gives you more knowledge about your dataset.</p><figure><img src=05-compute.png alt="Compute results"><figcaption><p>Compute results</p></figcaption></figure><h2 id=conclusion>Conclusion</h2><p>So we have migrated our search part of our application to a search engine instead of using search features provided by our datastore. We are keeping our source of truth in the SQL database but you could also imagine migrating from the legacy datastore to a NoSQL one if you need/want to.</p><p>What would happen in case of failure? For example, let say you want to stop your elasticsearch cluster for whatever reason. All index operation will failed and you will have to deal with that by yourself.</p><p>If you want to introduce an asynchronous indexing process, you could image to push your JSON documents to a message queue system and instead of writing by yourself the code which will read from the message queue, push to elasticsearch, deal with failures, you can use <a href=https://www.elastic.co/products/logstash>Logstash</a> and one of its <a href=http://www.elastic.co/guide/en/logstash/current/input-plugins.html>input plugins</a>, for example:</p><ul><li><a href=http://www.elastic.co/guide/en/logstash/current/plugins-inputs-kafka.html>Kafka</a></li><li><a href=http://www.elastic.co/guide/en/logstash/current/plugins-inputs-rabbitmq.html>RabbitMQ</a></li><li><a href=http://www.elastic.co/guide/en/logstash/current/plugins-inputs-redis.html>Redis</a></li></ul><p>You can also scale out Logstash on multiple nodes if you need more injection power.</p></article><div class=my-4><a href=https://david.pilato.fr/tags/elasticsearch/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#elasticsearch</a>
+<a href=https://david.pilato.fr/tags/hibernate/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#hibernate</a>
+<a href=https://david.pilato.fr/tags/sql/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#sql</a>
+<a href=https://david.pilato.fr/tags/conference/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#conference</a></div><div class="flex md:justify-end my-4"><style>#share-buttons{display:inline-block;vertical-align:middle}#share-buttons:after{content:"";display:block;clear:both}#share-buttons>div{position:relative;text-align:left;height:36px;width:32px;float:left;text-align:center}#share-buttons>div>svg{height:16px;fill:#000;margin-top:10px}#share-buttons>div:hover{cursor:pointer}#share-buttons>div.facebook:hover>svg{fill:#3b5998}#share-buttons>div.twitter:hover>svg{fill:#55acee}#share-buttons>div.linkedin:hover>svg{fill:#0077b5}#share-buttons>div.pinterest:hover>svg{fill:#cb2027}#share-buttons>div.mail:hover>svg{fill:#7d7d7d}#share-buttons>div.facebook>svg{height:18px;margin-top:9px}#share-buttons>div.twitter>svg{height:20px;margin-top:8px}#share-buttons>div.linkedin>svg{height:19px;margin-top:7px}#share-buttons>div.pinterest>svg{height:20px;margin-top:9px}#share-buttons>div.mail>svg{height:14px;margin-top:11px}</style><div id=share-buttons><div class=facebook title="Share this on Facebook" onclick="window.open('http://www.facebook.com/share.php?u=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759H734V905H479V609h255V391q0-186 104-288.5T1115 0q147 0 228 12z"/></svg></div><div class=twitter title="Share this on Twitter" onclick="window.open('http://twitter.com/intent/tweet?via=dadoonet&text=🧑🏼‍💻 Blog: Advanced search for your Legacy application 👉🏼&url=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5T1369.5 1125 1185 1335.5t-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5T285 1033q33 5 61 5 43 0 85-11-112-23-185.5-111.5T172 710v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5T884 653q-8-38-8-74 0-134 94.5-228.5T1199 256q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div><div class=linkedin title="Share this on Linkedin" onclick="window.open('https://www.linkedin.com/shareArticle?mini=true&url=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/&title=&summary=&source=')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991H147V625h330zm21-306q1 73-50.5 122T312 490h-2q-82 0-132-49t-50-122q0-74 51.5-122.5T314 148t133 48.5T498 319zm1166 729v568h-329v-530q0-105-40.5-164.5T1168 862q-63 0-105.5 34.5T999 982q-11 30-11 81v553H659q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5T1285 602q171 0 275 113.5t104 332.5z"/></svg></div><div class=mail title="Share this through Email" onclick="window.open('mailto:?&body=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47H160q-66 0-113-47T0 1504V710q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 1e2-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38T639 1015q-91-64-262-182.5T172 690q-62-42-117-115.5T0 438q0-78 41.5-130T160 256h1472q65 0 112.5 47t47.5 113z"/></svg></div></div><a href=https://github.com/dadoonet/dadoonet.github.io/tree/main/content/blog/2015-05-09-advanced-search-for-your-legacy-application/index.md title="Edit this page"><i class="fas fa-edit mr-1"></i></a></div><div class=py-2><div class="my-8 flex flex-col items-center md:flex-row"><a href=https://david.pilato.fr/authors/david-pilato/ class="md:me-4 text-primary-text h-24 w-24"><img src=https://david.pilato.fr/authors/david-pilato/david_pilato.png class="bg-primary-bg w-full rounded-full" alt=Avatar></a><div class="mt-4 w-full md:mt-0 md:w-auto"><a href=https://david.pilato.fr/authors/david-pilato/ class="mb-2 block border-b pb-1 text-lg font-bold"><h3>David Pilato</h3></a><span class="block pb-2">20+ years of experience, mostly in Java. Living in Cergy, France.</span>
+<a href=mailto:david+blog@pilato.fr class=me-2><i class="fas fa-envelope"></i></a>
+<a href=https://twitter.com/dadoonet class=me-2><i class="fab fa-twitter"></i></a>
+<a href=https://github.com/dadoonet class=me-2><i class="fab fa-github"></i></a>
+<a href=https://www.linkedin.com/in/dadoonet/ class=me-2><i class="fab fa-linkedin"></i></a></div></div></div><div class="-mx-2 mt-4 flex flex-col border-t px-2 pt-4 md:flex-row md:justify-between"><div><span class="text-primary-text block font-bold">Previous</span>
+<a href=https://david.pilato.fr/blog/2015-05-19-using-js-auth-with-found-cluster/ class=block>Using JS Auth with found cluster</a></div><div class="mt-4 md:mt-0 md:text-right"><span class="text-primary-text block font-bold">Next</span>
+<a href=https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/ class=block>Devoxx France 2015</a></div></div><script id=utterances src=https://utteranc.es/client.js issue-term=pathname label=💬 comments repo=dadoonet/dadoonet.github.io theme=preferred-color-scheme crossorigin=anonymous async></script><script>storageColorScheme=="Light"?document.getElementById('utterances').setAttribute('theme','github-light'):storageColorScheme=="Dark"&&document.getElementById('utterances').setAttribute('theme','github-dark')</script></div><div class=col-span-2><div class="bg-primary-bg
+prose sticky top-16 z-10 hidden px-6 py-4 lg:block"><h3>On This Page</h3></div><div class="sticky-toc hidden px-6 pb-6 lg:block"><nav id=TableOfContents><ul><li><a href=#running-the-existing-code>Running the existing code</a></li><li><a href=#connecting-to-elasticsearch>Connecting to elasticsearch</a><ul><li><a href=#using-an-etl-or-a-jdbc-river>Using an ETL or a JDBC River</a></li><li><a href=#direct-connection>Direct connection</a></li><li><a href=#adding-elasticsearch>Adding elasticsearch</a></li><li><a href=#create-a-client>Create a client</a></li><li><a href=#save-an-object>Save an object</a></li><li><a href=#remove-an-object>Remove an object</a></li><li><a href=#using-bulk>Using bulk</a></li><li><a href=#searching-for-documents>Searching for documents</a></li><li><a href=#running-it>Running it</a></li></ul></li><li><a href=#fix-the-mapping>Fix the mapping</a></li><li><a href=#elasticsearch-beyonder>Elasticsearch Beyonder</a></li><li><a href=#modify-search-queries>Modify search queries</a></li><li><a href=#but-it-will-slow-down-my-application-right>But it will slow down my application, right?</a></li><li><a href=#faceted-navigation>Faceted navigation</a></li><li><a href=#understand-your-dataset>Understand your dataset</a></li><li><a href=#conclusion>Conclusion</a></li></ul></nav></div><script>window.addEventListener("DOMContentLoaded",()=>{enableStickyToc()})</script></div><div class="bg-secondary-bg prose col-span-2 rounded p-6 lg:col-span-6"><h3>See Also</h3><a href=https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/ class=no-underline>Devoxx France 2015</a><br><a href=https://david.pilato.fr/blog/2012-03-14-mon-talk-sur-elasticsearch-selectionne-pour-devoxx-france/ class=no-underline>Mon talk sur Elasticsearch sélectionné pour Devoxx France</a><br><a href=https://david.pilato.fr/blog/2011-03-09-la-recherche-elastique/ class=no-underline>La recherche élastique...</a><br><a href=https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/ class=no-underline>Exploring Capitaine Train dataset</a><br><a href=https://david.pilato.fr/blog/2015-03-05-using-log4j2-with-hibernate-4/ class=no-underline>Using Log4J2 with Hibernate 4</a><br><a href=https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/ class=no-underline>ScrutMyDocs : un moteur de recherche pour documents</a><br></div></div><script>document.addEventListener("DOMContentLoaded",()=>{hljs.highlightAll()})</script></div></div></main><footer class=pl-scrollbar><div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b"><p class="text-sm text-tertiary-text">&copy; 2022, David Pilato, France
+&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p></div><div class="text-center p-1 pin-b"><p class="text-sm text-tertiary-text">Generated from 🇫🇷 with ❤️ on Tue Jun 14, 2022 at 12:48:10 UTC</p></div></div></footer></body></html>

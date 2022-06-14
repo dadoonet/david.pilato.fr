@@ -1,145 +1,36 @@
-<!doctype html><html lang=en><meta charset=utf-8>
-<meta name=viewport content="width=device-width">
-<title>Exploring Capitaine Train dataset - David Pilato</title>
-<meta name=generator content="Hugo Eureka 0.8.4">
-<link rel=stylesheet href=https://david.pilato.fr/css/eureka.min.css>
-<script defer src=https://david.pilato.fr/js/eureka.min.js></script>
-<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
-<link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload="this.onload=null,this.rel='stylesheet'">
-<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css media=print onload="this.media='all',this.onload=null" crossorigin>
-<script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js crossorigin></script>
-<script defer src=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js integrity="sha256-uNYoXefWRqv+PsIF/OflNmwtKM4lStn9yrz2gVl6ymo=" crossorigin></script>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X media=print onload="this.media='all',this.onload=null" crossorigin>
-<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin></script>
-<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin></script>
-<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script>
-<script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js integrity="sha256-Zmpaaj+GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE=" crossorigin></script>
-<link rel=preconnect href=https://www.google-analytics.com crossorigin>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-62381049-1"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-62381049-1')</script>
-<meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/featured.png">
-<meta name=twitter:title content="Exploring Capitaine Train dataset">
-<meta name=twitter:description content="Recently I saw a tweet where Capitaine Train team started to open data they have collected and enriched or corrected.
+<!doctype html><html lang=en><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Exploring Capitaine Train dataset - David Pilato</title><meta name=generator content="Hugo Eureka 0.9.3"><link rel=stylesheet href=https://david.pilato.fr/css/eureka.min.9cec6350e37e534b0338fa9a085bf06855de3b0f2dcf857e792e5e97b07ea905d4d5513db554cbc26a9c3da622bae92d.css><script defer src=https://david.pilato.fr/js/eureka.min.c9397561036ecdb150468028e7807081e0823ad4b7207798ac3c0cdf9742e4300265511b6b457026c9a0e7b663e44683.js></script>
+<link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload="this.onload=null,this.rel='stylesheet'"><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/solarized-light.min.css media=print onload="this.media='all',this.onload=null" crossorigin><script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js crossorigin></script>
+<link rel=stylesheet href=https://david.pilato.fr/css/highlightjs.min.2958991528e43eb6fc9b8c4f2b8e052f79c4010718e1d1e888a777620e9ee63021c2c57ec7417a3108019bb8c41943e6.css media=print onload="this.media='all',this.onload=null"><script defer type=text/javascript src=https://david.pilato.fr/js/fontawesome.min.3b3a9010e96bcc23aa7ff4cef43506624c34c13b18fd1c67fe5138e9a95657d5f58ac4aebc370d569554fca0aedd65c5.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css integrity=sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ media=print onload="this.media='all',this.onload=null" crossorigin><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js integrity=sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script><script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js integrity=sha384-atOyb0FxAgN9LyAc6PEf9BjgwLISyansgdH8/VXQH8p2o5vfrRgmGIJ2Sg22L0A0 crossorigin></script>
+<link rel=preconnect href=https://www.google-analytics.com crossorigin><script async src="https://www.googletagmanager.com/gtag/js?id=UA-62381049-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-62381049-1')</script><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/featured.png"><meta name=twitter:title content="Exploring Capitaine Train dataset"><meta name=twitter:description content="Recently I saw a tweet where Capitaine Train team started to open data they have collected and enriched or corrected.
 Ouvrez, ouvrez, les données structurées. Capitaine Train libère les gares : https://t.co/y6DjWsbALF #opendata
-&mdash; Trainline France (@trainline_fr) April 23, 2015  I decided to play a bit with ELK stack and create a simple recipe which can be used with any other CSV like data.
+&mdash; Trainline France (@trainline_fr) April 23, 2015 I decided to play a bit with ELK stack and create a simple recipe which can be used with any other CSV like data.
 Prerequisites You will need:
- Logstash: I&rsquo;m using 1.5.0-rc3. Elasticsearch: I&rsquo;m using 1.">
-<meta name=description content="Recently I saw a tweet where Capitaine Train team started to open data they have collected and enriched or corrected.
+Logstash: I&rsquo;m using 1.5.0-rc3. Elasticsearch: I&rsquo;m using 1."><meta name=description content="Recently I saw a tweet where Capitaine Train team started to open data they have collected and enriched or corrected.
 Ouvrez, ouvrez, les données structurées. Capitaine Train libère les gares : https://t.co/y6DjWsbALF #opendata
-&mdash; Trainline France (@trainline_fr) April 23, 2015  I decided to play a bit with ELK stack and create a simple recipe which can be used with any other CSV like data.
+&mdash; Trainline France (@trainline_fr) April 23, 2015 I decided to play a bit with ELK stack and create a simple recipe which can be used with any other CSV like data.
 Prerequisites You will need:
- Logstash: I&rsquo;m using 1.5.0-rc3. Elasticsearch: I&rsquo;m using 1.">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog","item":"https://david.pilato.fr/blog/"},{"@type":"ListItem","position":2,"name":"Exploring Capitaine Train dataset","item":"https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/"},"headline":"Exploring Capitaine Train dataset - David Pilato","image":"https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/featured.png","datePublished":"2015-04-28T13:31:34+02:00","dateModified":"2015-04-28T13:31:34+02:00","wordCount":1948,"author":{"@type":"Person","name":["David Pilato"]},"publisher":{"@type":"Person","name":"David Pilato"},"description":"Recently I saw a tweet where Capitaine Train team started to open data they have collected and enriched or corrected.\nOuvrez, ouvrez, les données structurées. Capitaine Train libère les gares : https:\/\/t.co\/y6DjWsbALF #opendata\n\u0026mdash; Trainline France (@trainline_fr) April 23, 2015  I decided to play a bit with ELK stack and create a simple recipe which can be used with any other CSV like data.\nPrerequisites You will need:\n Logstash: I\u0026rsquo;m using 1.5.0-rc3. Elasticsearch: I\u0026rsquo;m using 1."}</script><meta property="og:title" content="Exploring Capitaine Train dataset - David Pilato">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/">
-<meta property="og:description" content="Recently I saw a tweet where Capitaine Train team started to open data they have collected and enriched or corrected.
+Logstash: I&rsquo;m using 1.5.0-rc3. Elasticsearch: I&rsquo;m using 1."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog","item":"https://david.pilato.fr/blog/"},{"@type":"ListItem","position":2,"name":"Exploring Capitaine Train dataset","item":"https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/"},"headline":"Exploring Capitaine Train dataset - David Pilato","image":"https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/featured.png","datePublished":"2015-04-28T13:31:34+02:00","dateModified":"2015-04-28T13:31:34+02:00","wordCount":1948,"author":{"@type":"Person","name":["David Pilato"]},"publisher":{"@type":"Person","name":"David Pilato"},"description":"Recently I saw a tweet where Capitaine Train team started to open data they have collected and enriched or corrected.\nOuvrez, ouvrez, les données structurées. Capitaine Train libère les gares : https:\/\/t.co\/y6DjWsbALF #opendata\n\u0026mdash; Trainline France (@trainline_fr) April 23, 2015 I decided to play a bit with ELK stack and create a simple recipe which can be used with any other CSV like data.\nPrerequisites You will need:\nLogstash: I\u0026rsquo;m using 1.5.0-rc3. Elasticsearch: I\u0026rsquo;m using 1."}</script><meta property="og:title" content="Exploring Capitaine Train dataset - David Pilato"><meta property="og:type" content="article"><meta property="og:url" content="https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/"><meta property="og:description" content="Recently I saw a tweet where Capitaine Train team started to open data they have collected and enriched or corrected.
 Ouvrez, ouvrez, les données structurées. Capitaine Train libère les gares : https://t.co/y6DjWsbALF #opendata
-&mdash; Trainline France (@trainline_fr) April 23, 2015  I decided to play a bit with ELK stack and create a simple recipe which can be used with any other CSV like data.
+&mdash; Trainline France (@trainline_fr) April 23, 2015 I decided to play a bit with ELK stack and create a simple recipe which can be used with any other CSV like data.
 Prerequisites You will need:
- Logstash: I&rsquo;m using 1.5.0-rc3. Elasticsearch: I&rsquo;m using 1.">
-<meta property="og:locale" content="en">
-<meta property="og:site_name" content="David Pilato">
-<meta property="article:published_time" content="2015-04-28T13:31:34+02:00">
-<meta property="article:modified_time" content="2015-04-28T13:31:34+02:00">
-<meta property="article:section" content="blog">
-<meta property="article:tag" content="elasticsearch">
-<meta property="article:tag" content="logstash">
-<meta property="article:tag" content="kibana">
-<meta property="article:tag" content="dataset">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2012-05-25-la-factory-spring-pour-elasticsearch-est-sortie/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2012-04-10-proteger-son-cluster-elasticsearch-avec-jetty/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2012-04-02-une-factory-spring-pour-elasticsearch/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2012-03-14-mon-talk-sur-elasticsearch-selectionne-pour-devoxx-france/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2012-02-13-quel-client-java-pour-elasticsearch/">
-<body class="flex flex-col min-h-screen">
-<header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
-<div class="w-full max-w-screen-xl mx-auto"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=='Auto'||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName('html')[0].classList.add('dark')</script>
-<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
-<a href=/ class="mr-6 text-primary-text text-xl font-bold">David Pilato</a>
+Logstash: I&rsquo;m using 1.5.0-rc3. Elasticsearch: I&rsquo;m using 1."><meta property="og:locale" content="en"><meta property="og:site_name" content="David Pilato"><meta property="article:published_time" content="2015-04-28T13:31:34+02:00"><meta property="article:modified_time" content="2015-04-28T13:31:34+02:00"><meta property="article:section" content="blog"><meta property="article:tag" content="elasticsearch"><meta property="article:tag" content="logstash"><meta property="article:tag" content="kibana"><meta property="article:tag" content="dataset"><meta property="og:see_also" content="https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2012-05-25-la-factory-spring-pour-elasticsearch-est-sortie/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2012-04-10-proteger-son-cluster-elasticsearch-avec-jetty/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2012-04-02-une-factory-spring-pour-elasticsearch/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2012-03-14-mon-talk-sur-elasticsearch-selectionne-pour-devoxx-france/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2012-02-13-quel-client-java-pour-elasticsearch/"><body class="flex flex-col min-h-screen"><header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm"><div class="w-full max-w-screen-xl mx-auto"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=='Auto'||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName('html')[0].classList.add('dark')</script><nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0"><a href=/ class="me-6 text-primary-text text-xl font-bold">David Pilato</a>
 <button id=navbar-btn class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
-<i class="fas fa-bars"></i>
-</button>
-<div id=target class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
-<div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
-<a href=/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Home</a>
-<a href=/blog/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Blog</a>
-<a href=https://djdadoo.pilato.fr/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">DJ Mixes</a>
-<a href=/authors/david-pilato/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">About me</a>
-</div>
-<div class=flex>
-<div class="relative pt-4 md:pt-0">
-<div class="cursor-pointer hover:text-eureka" id=lightDarkMode>
-<i class="fas fa-adjust"></i>
-</div>
-<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open>
-</div>
-<div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions>
-<span class="px-4 py-1 hover:text-eureka" name=Light>Light</span>
+<i class="fas fa-bars"></i></button><div id=target class="hidden block md:flex md:grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20"><div class="md:flex md:h-16 text-sm md:grow pb-4 md:pb-0 border-b md:border-b-0"><a href=/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item me-4">Home</a>
+<a href=/blog/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item me-4">Blog</a>
+<a href=https://djdadoo.pilato.fr/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent me-4">DJ Mixes</a>
+<a href=/authors/david-pilato/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent me-4">About me</a></div><div class=flex><div class="relative pt-4 md:pt-0"><div class="cursor-pointer hover:text-eureka" id=lightDarkMode><i class="fas fa-adjust"></i></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open></div><div class="absolute flex flex-col start-0 md:start-auto end-auto md:end-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions><span class="px-4 py-1 hover:text-eureka" name=Light>Light</span>
 <span class="px-4 py-1 hover:text-eureka" name=Dark>Dark</span>
-<span class="px-4 py-1 hover:text-eureka" name=Auto>Auto</span>
-</div>
-</div>
-</div>
-</div>
-<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile>
-</div>
-</nav>
-<script>let element=document.getElementById('lightDarkMode');storageColorScheme==null||storageColorScheme=='Auto'?document.addEventListener('DOMContentLoaded',()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change',switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'sun'),element.firstElementChild.classList.add('fa-sun')):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'moon'),element.firstElementChild.classList.add('fa-moon')),document.addEventListener('DOMContentLoaded',()=>{getcolorscheme(),switchBurger()})</script>
-</div>
-</header>
-<main class="flex-grow pt-16">
-<div class=pl-scrollbar>
-<div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
-<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
-<div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
-<h1 class="font-bold text-3xl text-primary-text">Exploring Capitaine Train dataset</h1>
-<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
-<div class="mr-6 my-2">
-<i class="fas fa-calendar-alt mr-1"></i>
-<span>2015-04-28</span>
-</div>
-<div class="mr-6 my-2">
-<i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
-</div>
-</div>
-<div class=my-4>
-<img src=https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/featured.png class=w-full alt="Featured Image">
-</div>
-<div class=content>
-<p>Recently I saw a tweet where <a href=https://www.capitainetrain.com/>Capitaine Train</a> team started to open data they have collected and enriched or corrected.</p>
-<blockquote class=twitter-tweet><p lang=fr dir=ltr>Ouvrez, ouvrez, les données structurées. Capitaine Train libère les gares : <a href=https://t.co/y6DjWsbALF>https://t.co/y6DjWsbALF</a> <a href="https://twitter.com/hashtag/opendata?src=hash&ref_src=twsrc%5Etfw">#opendata</a></p>&mdash; Trainline France (@trainline_fr) <a href="https://twitter.com/trainline_fr/status/591184013034938368?ref_src=twsrc%5Etfw">April 23, 2015</a></blockquote>
-<script async src=https://platform.twitter.com/widgets.js></script>
-<p>I decided to play a bit with <a href=https://www.elastic.co/products>ELK stack</a> and create a simple recipe which can be used with any other <code>CSV</code> like data.</p>
-<h2 id=prerequisites>Prerequisites</h2>
-<p>You will need:</p>
-<ul>
-<li><a href=https://www.elastic.co/downloads/logstash>Logstash</a>: I&rsquo;m using <a href=https://download.elastic.co/logstash/logstash/logstash-1.5.0-rc3.tar.gz>1.5.0-rc3</a>.</li>
-<li><a href=https://www.elastic.co/downloads/elasticsearch>Elasticsearch</a>: I&rsquo;m using <a href=https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.5.2.tar.gz>1.5.2</a></li>
-<li><a href=https://www.elastic.co/downloads/kibana>Kibana</a>: I&rsquo;m using <a href=https://download.elastic.co/kibana/kibana/kibana-4.0.2-darwin-x64.tar.gz>4.0.2 Mac version</a></li>
-</ul>
-<h2 id=download-the-dataset>Download the dataset</h2>
-<pre><code class=language-sh>wget https://raw.githubusercontent.com/capitainetrain/stations/master/stations.csv
-</code></pre>
-<p>What does it look like?</p>
-<pre><code class=language-sh>head -3 stations.csv
-</code></pre>
-<pre><code class=language-txt>id;name;slug;uic;uic8_sncf;longitude;latitude;parent_station_id;is_city;country;is_main_station;time_zone;is_suggestable;sncf_id;sncf_is_enabled;idtgv_id;idtgv_is_enabled;db_id;db_is_enabled;idbus_id;idbus_is_enabled;ouigo_id;ouigo_is_enabled;trenitalia_id;trenitalia_is_enabled;ntv_id;ntv_is_enabled;info:fr;info:en;info:de;info:it;same_as
+<span class="px-4 py-1 hover:text-eureka" name=Auto>Auto</span></div></div></div></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile></div></nav><script>let element=document.getElementById('lightDarkMode');storageColorScheme==null||storageColorScheme=='Auto'?document.addEventListener('DOMContentLoaded',()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change',switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'sun'),element.firstElementChild.classList.add('fa-sun')):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'moon'),element.firstElementChild.classList.add('fa-moon')),document.addEventListener('DOMContentLoaded',()=>{getcolorscheme(),switchBurger()})</script></div></header><main class="flex-grow pt-16"><div class=pl-scrollbar><div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto"><div class="grid grid-cols-2 gap-4 lg:grid-cols-8 lg:pt-12"><div class="bg-secondary-bg col-span-2 rounded px-6 py-8 lg:col-span-6"><article class=prose><h1 class=mb-4>Exploring Capitaine Train dataset</h1><div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text"><div class="mr-6 my-2"><i class="fas fa-calendar-alt mr-1"></i>
+<span>2015-04-28</span></div><div class="mr-6 my-2"><i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a></div></div><img src=https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/featured.png class=w-full alt="Featured Image"><p>Recently I saw a tweet where <a href=https://www.capitainetrain.com/>Capitaine Train</a> team started to open data they have collected and enriched or corrected.</p><blockquote class=twitter-tweet><p lang=fr dir=ltr>Ouvrez, ouvrez, les données structurées. Capitaine Train libère les gares : <a href=https://t.co/y6DjWsbALF>https://t.co/y6DjWsbALF</a> <a href="https://twitter.com/hashtag/opendata?src=hash&ref_src=twsrc%5Etfw">#opendata</a></p>&mdash; Trainline France (@trainline_fr) <a href="https://twitter.com/trainline_fr/status/591184013034938368?ref_src=twsrc%5Etfw">April 23, 2015</a></blockquote><script async src=https://platform.twitter.com/widgets.js></script><p>I decided to play a bit with <a href=https://www.elastic.co/products>ELK stack</a> and create a simple recipe which can be used with any other <code>CSV</code> like data.</p><h2 id=prerequisites>Prerequisites</h2><p>You will need:</p><ul><li><a href=https://www.elastic.co/downloads/logstash>Logstash</a>: I&rsquo;m using <a href=https://download.elastic.co/logstash/logstash/logstash-1.5.0-rc3.tar.gz>1.5.0-rc3</a>.</li><li><a href=https://www.elastic.co/downloads/elasticsearch>Elasticsearch</a>: I&rsquo;m using <a href=https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.5.2.tar.gz>1.5.2</a></li><li><a href=https://www.elastic.co/downloads/kibana>Kibana</a>: I&rsquo;m using <a href=https://download.elastic.co/kibana/kibana/kibana-4.0.2-darwin-x64.tar.gz>4.0.2 Mac version</a></li></ul><h2 id=download-the-dataset>Download the dataset</h2><pre><code class=language-sh>wget https://raw.githubusercontent.com/capitainetrain/stations/master/stations.csv
+</code></pre><p>What does it look like?</p><pre><code class=language-sh>head -3 stations.csv
+</code></pre><pre><code class=language-txt>id;name;slug;uic;uic8_sncf;longitude;latitude;parent_station_id;is_city;country;is_main_station;time_zone;is_suggestable;sncf_id;sncf_is_enabled;idtgv_id;idtgv_is_enabled;db_id;db_is_enabled;idbus_id;idbus_is_enabled;ouigo_id;ouigo_is_enabled;trenitalia_id;trenitalia_is_enabled;ntv_id;ntv_is_enabled;info:fr;info:en;info:de;info:it;same_as
 1;Château-Arnoux—St-Auban;chateau-arnoux-st-auban;;;6.0016250000;44.0817900000;;t;FR;f;Europe/Paris;f;FRAAA;t;;f;;f;;f;;f;;f;;f;;;;;
 2;Château-Arnoux—St-Auban;chateau-arnoux-st-auban;8775123;87751230;5.997342;44.061499;1;f;FR;t;Europe/Paris;t;FRCAA;t;;f;8700156;f;;f;;f;;f;;f;;;;;
-</code></pre>
-<p>So it&rsquo;s a CSV file containing some information that might worth to explore:</p>
-<ul>
-<li><code>name</code>: obviously the name of the train station</li>
-<li><code>longitude</code> and <code>latitude</code>: location</li>
-<li><code>country</code>: the country ISO code (2 letters)</li>
-<li><code>xxx_is_enabled</code>: true if <code>xxx</code> offer exists in the current train station (1 letter boolean value)</li>
-</ul>
-<h2 id=processing-with-logstash>Processing with logstash</h2>
-<p>Let&rsquo;s start with a blank logstash configuration file <code>station.conf</code> which will process our <a href=http://www.elastic.co/guide/en/logstash/current/plugins-inputs-stdin.html>standard input</a> and print it on <a href=http://www.elastic.co/guide/en/logstash/current/plugins-outputs-stdout.html>standard output</a> using <a href=http://www.elastic.co/guide/en/logstash/current/plugins-codecs-rubydebug.html>ruby debug codec</a>:</p>
-<pre><code class=language-rb>input {
+</code></pre><p>So it&rsquo;s a CSV file containing some information that might worth to explore:</p><ul><li><code>name</code>: obviously the name of the train station</li><li><code>longitude</code> and <code>latitude</code>: location</li><li><code>country</code>: the country ISO code (2 letters)</li><li><code>xxx_is_enabled</code>: true if <code>xxx</code> offer exists in the current train station (1 letter boolean value)</li></ul><h2 id=processing-with-logstash>Processing with logstash</h2><p>Let&rsquo;s start with a blank logstash configuration file <code>station.conf</code> which will process our <a href=http://www.elastic.co/guide/en/logstash/current/plugins-inputs-stdin.html>standard input</a> and print it on <a href=http://www.elastic.co/guide/en/logstash/current/plugins-outputs-stdout.html>standard output</a> using <a href=http://www.elastic.co/guide/en/logstash/current/plugins-codecs-rubydebug.html>ruby debug codec</a>:</p><pre><code class=language-rb>input {
    stdin {}
 }
 
@@ -149,12 +40,8 @@ filter {
 output {
    stdout { codec =&gt; rubydebug }
 }
-</code></pre>
-<p>Launch this a first time and make sure logstash is working fine:</p>
-<pre><code class=language-sh>head -2 station.csv | bin/logstash -f station.conf
-</code></pre>
-<p>You should see something like:</p>
-<pre><code class=language-rb>Logstash startup completed
+</code></pre><p>Launch this a first time and make sure logstash is working fine:</p><pre><code class=language-sh>head -2 station.csv | bin/logstash -f station.conf
+</code></pre><p>You should see something like:</p><pre><code class=language-rb>Logstash startup completed
 {
        &quot;message&quot; =&gt; &quot;id;name;slug;uic;uic8_sncf;longitude;latitude;parent_station_id;is_city;country;is_main_station;time_zone;is_suggestable;sncf_id;sncf_is_enabled;idtgv_id;idtgv_is_enabled;db_id;db_is_enabled;idbus_id;idbus_is_enabled;ouigo_id;ouigo_is_enabled;trenitalia_id;trenitalia_is_enabled;ntv_id;ntv_is_enabled;info:fr;info:en;info:de;info:it;same_as&quot;,
       &quot;@version&quot; =&gt; &quot;1&quot;,
@@ -168,10 +55,7 @@ output {
           &quot;host&quot; =&gt; &quot;MacBook-Air-de-David-2.local&quot;
 }
 Logstash shutdown completed
-</code></pre>
-<h3 id=csv-parsing>CSV parsing</h3>
-<p>We have a CSV file so we should use here the <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-csv.html>CSV filter plugin</a> and define <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-csv.html#plugins-filters-csv-separator><code>separator</code></a> as <code>;</code> instead of default <code>,</code> and also define the name of fields we want to generate instead of default <code>column_1</code>, <code>column_2</code>&mldr; using <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-csv.html#plugins-filters-csv-columns><code>columns</code> parameter</a>:</p>
-<pre><code class=language-rb>csv {
+</code></pre><h3 id=csv-parsing>CSV parsing</h3><p>We have a CSV file so we should use here the <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-csv.html>CSV filter plugin</a> and define <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-csv.html#plugins-filters-csv-separator><code>separator</code></a> as <code>;</code> instead of default <code>,</code> and also define the name of fields we want to generate instead of default <code>column_1</code>, <code>column_2</code>&mldr; using <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-csv.html#plugins-filters-csv-columns><code>columns</code> parameter</a>:</p><pre><code class=language-rb>csv {
     separator =&gt; &quot;;&quot;
     columns =&gt; [
       &quot;id&quot;,&quot;name&quot;,&quot;slug&quot;,&quot;uic&quot;,&quot;uic8_sncf&quot;,&quot;longitude&quot;,&quot;latitude&quot;,&quot;parent_station_id&quot;,&quot;is_city&quot;,&quot;country&quot;,
@@ -181,9 +65,7 @@ Logstash shutdown completed
       &quot;info_en&quot;,&quot;info_de&quot;,&quot;info_it&quot;,&quot;same_as&quot;
     ]
 }
-</code></pre>
-<p>When running it again, it now generates a more strutured data:</p>
-<pre><code class=language-rb>Logstash startup completed
+</code></pre><p>When running it again, it now generates a more strutured data:</p><pre><code class=language-rb>Logstash startup completed
 {
               &quot;message&quot; =&gt; [
     [0] &quot;id;name;slug;uic;uic8_sncf;longitude;latitude;parent_station_id;is_city;country;is_main_station;time_zone;is_suggestable;sncf_id;sncf_is_enabled;idtgv_id;idtgv_is_enabled;db_id;db_is_enabled;idbus_id;idbus_is_enabled;ouigo_id;ouigo_is_enabled;trenitalia_id;trenitalia_is_enabled;ntv_id;ntv_is_enabled;info:fr;info:en;info:de;info:it;same_as&quot;
@@ -263,78 +145,48 @@ Logstash shutdown completed
               &quot;info_it&quot; =&gt; nil,
               &quot;same_as&quot; =&gt; nil
 }
-</code></pre>
-<h3 id=skip-header>Skip header</h3>
-<p>We can see that we are still parsing the header so it will be sent to elasticsearch which is obviously something we dont want. We can use <a href=http://www.elastic.co/guide/en/logstash/current/configuration.html#conditionals>Logstash conditionals</a> for that and <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-drop.html>Drop filter plugin</a>:</p>
-<pre><code class=language-rb>if [id] == &quot;id&quot; {
+</code></pre><h3 id=skip-header>Skip header</h3><p>We can see that we are still parsing the header so it will be sent to elasticsearch which is obviously something we dont want. We can use <a href=http://www.elastic.co/guide/en/logstash/current/configuration.html#conditionals>Logstash conditionals</a> for that and <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-drop.html>Drop filter plugin</a>:</p><pre><code class=language-rb>if [id] == &quot;id&quot; {
  drop { }
 } else {
  # continue processing data
 }
-</code></pre>
-<h3 id=remove-duplicated-fields>Remove duplicated fields</h3>
-<p>We can see that we have some duplicated contents and some fields are not really needed for our use case:</p>
-<pre><code class=language-rb>      &quot;message&quot; =&gt; [
+</code></pre><h3 id=remove-duplicated-fields>Remove duplicated fields</h3><p>We can see that we have some duplicated contents and some fields are not really needed for our use case:</p><pre><code class=language-rb>      &quot;message&quot; =&gt; [
     [0] &quot;id;name;slug;uic;uic8_sncf;longitude;latitude;parent_station_id;is_city;country;is_main_station;time_zone;is_suggestable;sncf_id;sncf_is_enabled;idtgv_id;idtgv_is_enabled;db_id;db_is_enabled;idbus_id;idbus_is_enabled;ouigo_id;ouigo_is_enabled;trenitalia_id;trenitalia_is_enabled;ntv_id;ntv_is_enabled;info:fr;info:en;info:de;info:it;same_as&quot;
 ],
      &quot;@version&quot; =&gt; &quot;1&quot;,
    &quot;@timestamp&quot; =&gt; &quot;2015-04-27T11:40:57.936Z&quot;,
       &quot;host&quot; =&gt; &quot;MacBook-Air-de-David-2.local&quot;
-</code></pre>
-<p>So we can remove <code>message</code>, <code>@version</code> and <code>@timestamp</code> using <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-mutate.html>Mutate filter plugin</a> and its <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-mutate.html#plugins-filters-mutate-remove_field>remove_field</a>. You can put that in the <code>else</code> part:</p>
-<pre><code class=language-rb>mutate {
+</code></pre><p>So we can remove <code>message</code>, <code>@version</code> and <code>@timestamp</code> using <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-mutate.html>Mutate filter plugin</a> and its <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-mutate.html#plugins-filters-mutate-remove_field>remove_field</a>. You can put that in the <code>else</code> part:</p><pre><code class=language-rb>mutate {
  remove_field =&gt; [ &quot;message&quot;, &quot;host&quot;, &quot;@timestamp&quot;, &quot;@version&quot; ]
 }
-</code></pre>
-<h3 id=convert-numbers-to-numbers>Convert numbers to numbers</h3>
-<p>We have seen that the CSV plugin has generated <code>latitude</code> and <code>longitude</code> fields as strings:</p>
-<pre><code class=language-rb>&quot;longitude&quot; =&gt; &quot;6.0016250000&quot;,
+</code></pre><h3 id=convert-numbers-to-numbers>Convert numbers to numbers</h3><p>We have seen that the CSV plugin has generated <code>latitude</code> and <code>longitude</code> fields as strings:</p><pre><code class=language-rb>&quot;longitude&quot; =&gt; &quot;6.0016250000&quot;,
  &quot;latitude&quot; =&gt; &quot;44.0817900000&quot;,
-</code></pre>
-<p>Using the mutate filter, we can <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-mutate.html#plugins-filters-mutate-convert>convert</a> our fields to <code>float</code>:</p>
-<pre><code class=language-rb>mutate {
+</code></pre><p>Using the mutate filter, we can <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-mutate.html#plugins-filters-mutate-convert>convert</a> our fields to <code>float</code>:</p><pre><code class=language-rb>mutate {
  convert =&gt; { &quot;longitude&quot; =&gt; &quot;float&quot; }
  convert =&gt; { &quot;latitude&quot; =&gt; &quot;float&quot; }
 }
-</code></pre>
-<p>This will now output:</p>
-<pre><code class=language-rb>&quot;longitude&quot; =&gt; 6.001625,
+</code></pre><p>This will now output:</p><pre><code class=language-rb>&quot;longitude&quot; =&gt; 6.001625,
  &quot;latitude&quot; =&gt; 44.08179,
-</code></pre>
-<h3 id=build-a-location-data-structure>Build a location data structure</h3>
-<p>Elasticsearch uses a specific data structure called <a href=http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-geo-point-type.html>geo_point</a> to deal with geographic location coordinates.</p>
-<p>So a point should look like:</p>
-<pre><code class=language-js>&quot;location&quot;: {
+</code></pre><h3 id=build-a-location-data-structure>Build a location data structure</h3><p>Elasticsearch uses a specific data structure called <a href=http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-geo-point-type.html>geo_point</a> to deal with geographic location coordinates.</p><p>So a point should look like:</p><pre><code class=language-js>&quot;location&quot;: {
  &quot;lat&quot;: x.xxx,
  &quot;lon&quot;: y.yyy
 }
-</code></pre>
-<p>It means that we need to change our <code>latitude</code> and <code>longitude</code> fields to inner fields inside a new <code>location</code> field. We can use <code>mutate</code> <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-mutate.html#plugins-filters-mutate-rename><code>rename</code> parameter</a> for this:</p>
-<pre><code class=language-rb>mutate {
+</code></pre><p>It means that we need to change our <code>latitude</code> and <code>longitude</code> fields to inner fields inside a new <code>location</code> field. We can use <code>mutate</code> <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-mutate.html#plugins-filters-mutate-rename><code>rename</code> parameter</a> for this:</p><pre><code class=language-rb>mutate {
  rename =&gt; {
   &quot;longitude&quot; =&gt; &quot;[location][lon]&quot; 
   &quot;latitude&quot; =&gt; &quot;[location][lat]&quot; 
  }
 }
-</code></pre>
-<p>This now produces:</p>
-<pre><code class=language-rb>             &quot;location&quot; =&gt; {
+</code></pre><p>This now produces:</p><pre><code class=language-rb>             &quot;location&quot; =&gt; {
     &quot;lon&quot; =&gt; 6.001625,
     &quot;lat&quot; =&gt; 44.08179
 }
-</code></pre>
-<h3 id=convert-booleans-to-booleanshhhhhhhh-strings>Convert booleans to booleans<code>^H^H^H^H^H^H^H^H</code> strings</h3>
-<p>We have a lot of fields which looks as boolean fields like:</p>
-<pre><code class=language-rb>          &quot;is_city&quot; =&gt; &quot;t&quot;,
+</code></pre><h3 id=convert-booleans-to-booleanshhhhhhhh-strings>Convert booleans to booleans<code>^H^H^H^H^H^H^H^H</code> strings</h3><p>We have a lot of fields which looks as boolean fields like:</p><pre><code class=language-rb>          &quot;is_city&quot; =&gt; &quot;t&quot;,
   &quot;is_main_station&quot; =&gt; &quot;f&quot;,
    &quot;is_suggestable&quot; =&gt; &quot;f&quot;,
   &quot;sncf_is_enabled&quot; =&gt; &quot;t&quot;,
  &quot;idtgv_is_enabled&quot; =&gt; &quot;f&quot;,
-</code></pre>
-<p>Sadly, the mutate convert parameter does not support yet <code>boolean</code> option. It will be merged really soon with <a href=https://github.com/logstash-plugins/logstash-filter-mutate/pull/22>#22</a>.</p>
-<p>For now, we are going to use <a href=http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-core-types.html#boolean>elasticsearch boolean parsing</a> which can detect a <code>false</code> value if provided as <code>"false"</code>, <code>"off"</code> and <code>"no"</code>.</p>
-<p>To do that, we can use <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-mutate.html#plugins-filters-mutate-gsub><code>gsub</code> mutate parameter</a>:</p>
-<pre><code class=language-rb>mutate {
+</code></pre><p>Sadly, the mutate convert parameter does not support yet <code>boolean</code> option. It will be merged really soon with <a href=https://github.com/logstash-plugins/logstash-filter-mutate/pull/22>#22</a>.</p><p>For now, we are going to use <a href=http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-core-types.html#boolean>elasticsearch boolean parsing</a> which can detect a <code>false</code> value if provided as <code>"false"</code>, <code>"off"</code> and <code>"no"</code>.</p><p>To do that, we can use <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-mutate.html#plugins-filters-mutate-gsub><code>gsub</code> mutate parameter</a>:</p><pre><code class=language-rb>mutate {
  gsub =&gt; [
   &quot;is_city&quot;, &quot;t&quot;, &quot;true&quot;,
   &quot;is_city&quot;, &quot;f&quot;, &quot;false&quot;,
@@ -358,17 +210,12 @@ Logstash shutdown completed
   &quot;ntv_is_enabled&quot;, &quot;f&quot;, &quot;false&quot;
  ]
 }
-</code></pre>
-<p>It will now transform our booleans to:</p>
-<pre><code class=language-rb>          &quot;is_city&quot; =&gt; &quot;true&quot;,
+</code></pre><p>It will now transform our booleans to:</p><pre><code class=language-rb>          &quot;is_city&quot; =&gt; &quot;true&quot;,
   &quot;is_main_station&quot; =&gt; &quot;false&quot;,
    &quot;is_suggestable&quot; =&gt; &quot;false&quot;,
   &quot;sncf_is_enabled&quot; =&gt; &quot;true&quot;,
  &quot;idtgv_is_enabled&quot; =&gt; &quot;false&quot;,
-</code></pre>
-<h2 id=indexing-into-elasticsearch>Indexing into elasticsearch</h2>
-<p>Now we have our data generated:</p>
-<pre><code class=language-rb>{
+</code></pre><h2 id=indexing-into-elasticsearch>Indexing into elasticsearch</h2><p>Now we have our data generated:</p><pre><code class=language-rb>{
                        &quot;id&quot; =&gt; &quot;1&quot;,
                      &quot;name&quot; =&gt; &quot;Château-Arnoux—St-Auban&quot;,
                      &quot;slug&quot; =&gt; &quot;chateau-arnoux-st-auban&quot;,
@@ -404,15 +251,9 @@ Logstash shutdown completed
         &quot;lat&quot; =&gt; 44.08179
     }
 }
-</code></pre>
-<p>Let&rsquo;s say that you have already elasticsearch up and running:</p>
-<pre><code class=language-sh>bin/elasticsearch
-</code></pre>
-<h3 id=defining-our-mapping>Defining our mapping</h3>
-<p>We need to create the right mapping to define our fields. As we have a lot of fields named with <code>*_is_enabled</code> or <code>is_*</code> we can use an <a href=http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-templates.html>index template</a> to define those automatically as booleans when field name is <code>*is_*</code>.
-Also, it&rsquo;s definitely better to use <code>not_analyzed</code> strings to do aggregations so we can define a sub field <code>raw</code> which is not analyzed at index time for each string field.</p>
-<p>This would lead us to the following index template <code>stations_template.json</code>:</p>
-<pre><code class=language-js>{
+</code></pre><p>Let&rsquo;s say that you have already elasticsearch up and running:</p><pre><code class=language-sh>bin/elasticsearch
+</code></pre><h3 id=defining-our-mapping>Defining our mapping</h3><p>We need to create the right mapping to define our fields. As we have a lot of fields named with <code>*_is_enabled</code> or <code>is_*</code> we can use an <a href=http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-templates.html>index template</a> to define those automatically as booleans when field name is <code>*is_*</code>.
+Also, it&rsquo;s definitely better to use <code>not_analyzed</code> strings to do aggregations so we can define a sub field <code>raw</code> which is not analyzed at index time for each string field.</p><p>This would lead us to the following index template <code>stations_template.json</code>:</p><pre><code class=language-js>{
   &quot;template&quot;: &quot;stations&quot;,
   &quot;order&quot;:    1, 
   &quot;settings&quot;: {
@@ -458,17 +299,7 @@ Also, it&rsquo;s definitely better to use <code>not_analyzed</code> strings to d
     }
   }
 }
-</code></pre>
-<h3 id=connect-logstash-and-elasticsearch>Connect logstash and elasticsearch</h3>
-<p>We are going to obviously use <a href=http://www.elastic.co/guide/en/logstash/current/plugins-outputs-elasticsearch.html>elasticsearch output plugin</a> to send our data to elasticsearch cluster. We will:</p>
-<ul>
-<li>use <code>http</code> protocol</li>
-<li>index our data in <code>stations</code> index and use <code>station</code> type</li>
-<li>extract elasticsearch <code>_id</code> field from <code>id</code> event field</li>
-<li>use our <code>stations</code> template defined in <code>stations_template.json</code> local file</li>
-</ul>
-<p>Let&rsquo;s add this as an <code>output</code> in our logstash configuration file:</p>
-<pre><code class=language-rb>elasticsearch {
+</code></pre><h3 id=connect-logstash-and-elasticsearch>Connect logstash and elasticsearch</h3><p>We are going to obviously use <a href=http://www.elastic.co/guide/en/logstash/current/plugins-outputs-elasticsearch.html>elasticsearch output plugin</a> to send our data to elasticsearch cluster. We will:</p><ul><li>use <code>http</code> protocol</li><li>index our data in <code>stations</code> index and use <code>station</code> type</li><li>extract elasticsearch <code>_id</code> field from <code>id</code> event field</li><li>use our <code>stations</code> template defined in <code>stations_template.json</code> local file</li></ul><p>Let&rsquo;s add this as an <code>output</code> in our logstash configuration file:</p><pre><code class=language-rb>elasticsearch {
  protocol =&gt; &quot;http&quot;
  host =&gt; &quot;localhost&quot;
  index =&gt; &quot;stations&quot;
@@ -477,11 +308,8 @@ Also, it&rsquo;s definitely better to use <code>not_analyzed</code> strings to d
  template =&gt; &quot;stations_template.json&quot;
  template_name =&gt; &quot;stations&quot;
 }
-</code></pre>
-<p>Test again as usual and you should be able to see your document in elasticsearch:</p>
-<pre><code class=language-sh>curl &quot;http://localhost:9200/stations/station/_search?pretty&quot;
-</code></pre>
-<pre><code class=language-json>{
+</code></pre><p>Test again as usual and you should be able to see your document in elasticsearch:</p><pre><code class=language-sh>curl &quot;http://localhost:9200/stations/station/_search?pretty&quot;
+</code></pre><pre><code class=language-json>{
    &quot;took&quot;: 1,
    &quot;timed_out&quot;: false,
    &quot;_shards&quot;: {
@@ -538,12 +366,8 @@ Also, it&rsquo;s definitely better to use <code>not_analyzed</code> strings to d
       ]
    }
 }
-</code></pre>
-<h3 id=inject-them-all>Inject them all</h3>
-<p>It&rsquo;s now time to inject all data we have.
-Instead of debugging each line, we can change the <code>stdout</code> codec to <a href=http://www.elastic.co/guide/en/logstash/current/plugins-codecs-dots.html><code>dots</code></a> instead of <code>rubydebug</code>.</p>
-<p>At the end, here is our logstash configuration file:</p>
-<pre><code class=language-rb>input {
+</code></pre><h3 id=inject-them-all>Inject them all</h3><p>It&rsquo;s now time to inject all data we have.
+Instead of debugging each line, we can change the <code>stdout</code> codec to <a href=http://www.elastic.co/guide/en/logstash/current/plugins-codecs-dots.html><code>dots</code></a> instead of <code>rubydebug</code>.</p><p>At the end, here is our logstash configuration file:</p><pre><code class=language-rb>input {
  stdin {}
 }
 
@@ -618,14 +442,9 @@ output {
   template_name =&gt; &quot;stations&quot;
  }
 }
-</code></pre>
-<p>Let&rsquo;s use it:</p>
-<pre><code class=language-sh>cat station.csv | bin/logstash -f station.conf
-</code></pre>
-<p>At the end, check that everything has been correctly indexed:</p>
-<pre><code class=language-sh>curl &quot;http://localhost:9200/sncf/gare/_search?pretty&amp;size=0&quot;
-</code></pre>
-<pre><code class=language-json>{
+</code></pre><p>Let&rsquo;s use it:</p><pre><code class=language-sh>cat station.csv | bin/logstash -f station.conf
+</code></pre><p>At the end, check that everything has been correctly indexed:</p><pre><code class=language-sh>curl &quot;http://localhost:9200/sncf/gare/_search?pretty&amp;size=0&quot;
+</code></pre><pre><code class=language-json>{
    &quot;took&quot;: 1,
    &quot;timed_out&quot;: false,
    &quot;_shards&quot;: {
@@ -639,208 +458,15 @@ output {
       &quot;hits&quot;: []
    }
 }
-</code></pre>
-<h2 id=kibana-ftw>Kibana FTW</h2>
-<p>Start your kibana instance, <a href=http://0.0.0.0:5601>open kibana</a>.</p>
-<h3 id=settings>Settings</h3>
-<p>Configure your <code>stations</code> index:</p>
-<figure><img src=settings-set-index.png alt="Set index name"><figcaption>
-<p>Set index name</p>
-</figcaption>
-</figure>
-<h3 id=discover-your-data>Discover your data</h3>
-<p>If not already set, define in <code>discover</code> your <code>stations</code> index:</p>
-<figure><img src=discover-set-index.png alt="Set index name"><figcaption>
-<p>Set index name</p>
-</figcaption>
-</figure>
-<p>Then choose fields you want to display:</p>
-<figure><img src=discover-set-fields.png alt="Set fields"><figcaption>
-<p>Set fields</p>
-</figcaption>
-</figure>
-<p>And save your search:</p>
-<figure><img src=discover-save-search.png alt="Save your search"><figcaption>
-<p>Save your search</p>
-</figcaption>
-</figure>
-<h3 id=visualize-your-data>Visualize your data</h3>
-<p>Create a new visualization and choose <code>Pie chart</code>:</p>
-<figure><img src=visualize-pie-chart.png alt="Create visualisation"><figcaption>
-<p>Create visualisation</p>
-</figcaption>
-</figure>
-<p>Select your saved search:</p>
-<figure><img src=visualize-pie-choose-search.png alt="Select saved search"><figcaption>
-<p>Select saved search</p>
-</figcaption>
-</figure>
-<p>Split the slices using <code>country.raw</code> field so you will display number of train stations broken per country code.</p>
-<figure><img src=visualize-pie-final.png alt="Final Pie"><figcaption>
-<p>Final Pie</p>
-</figcaption>
-</figure>
-<p>Save your visualization and create a new <code>Pie chart</code> on <code>idtgv_is_enabled</code> field:</p>
-<figure><img src=visualize-pie-idtgv.png alt="IDTGV stations"><figcaption>
-<p>IDTGV stations</p>
-</figcaption>
-</figure>
-<p>Save your visualization and create a new <code>Tile map</code>:</p>
-<figure><img src=visualize-tile.png alt="Create visualization"><figcaption>
-<p>Create visualization</p>
-</figcaption>
-</figure>
-<p>Select a <code>Geohash</code> aggregation on <code>location</code> field and increase <code>Precision</code> to <code>4</code>:</p>
-<figure><img src=visualize-tile-final.png alt="Tile map"><figcaption>
-<p>Tile map</p>
-</figcaption>
-</figure>
-<p>Don&rsquo;t forget to save it!</p>
-<p>You can build as many visualization you need.</p>
-<h3 id=put-them-all-on-the-same-page>Put them all on the same page</h3>
-<p>Open <code>Dashboard</code> and add all your visualizations:</p>
-<figure><img src=dashboard-add-vis.png alt="Select visualizations"><figcaption>
-<p>Select visualizations</p>
-</figcaption>
-</figure>
-<p>And your saved search:</p>
-<figure><img src=dashboard-add-search.png alt="Add a saved search"><figcaption>
-<p>Add a saved search</p>
-</figcaption>
-</figure>
-<p>Arrange your dashboard and play with it!</p>
-<figure><img src=dashboard-final-1.png alt="The final dashboard"><figcaption>
-<p>The final dashboard</p>
-</figcaption>
-</figure>
-<p>For example, if you click on <code>FR</code> in the country pie and then select <code>T</code> on IDTGV pie, you will be able to display all IDTGV stations located in France.</p>
-<figure><img src=dashboard-idtgv.png alt="IDTGV stations in France"><figcaption>
-<p>IDTGV stations in France</p>
-</figcaption>
-</figure>
-</div>
-<div class=my-4>
-<a href=https://david.pilato.fr/tags/elasticsearch/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#elasticsearch</a>
-<a href=https://david.pilato.fr/tags/logstash/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#logstash</a>
-<a href=https://david.pilato.fr/tags/kibana/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#kibana</a>
-<a href=https://david.pilato.fr/tags/dataset/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#dataset</a>
-</div>
-<div class="flex md:justify-end my-4">
-<style>#share-buttons{display:inline-block;vertical-align:middle}#share-buttons:after{content:"";display:block;clear:both}#share-buttons>div{position:relative;text-align:left;height:36px;width:32px;float:left;text-align:center}#share-buttons>div>svg{height:16px;fill:#000;margin-top:10px}#share-buttons>div:hover{cursor:pointer}#share-buttons>div.facebook:hover>svg{fill:#3b5998}#share-buttons>div.twitter:hover>svg{fill:#55acee}#share-buttons>div.linkedin:hover>svg{fill:#0077b5}#share-buttons>div.pinterest:hover>svg{fill:#cb2027}#share-buttons>div.mail:hover>svg{fill:#7d7d7d}#share-buttons>div.facebook>svg{height:18px;margin-top:9px}#share-buttons>div.twitter>svg{height:20px;margin-top:8px}#share-buttons>div.linkedin>svg{height:19px;margin-top:7px}#share-buttons>div.pinterest>svg{height:20px;margin-top:9px}#share-buttons>div.mail>svg{height:14px;margin-top:11px}</style>
-<div id=share-buttons>
-<div class=facebook title="Share this on Facebook" onclick="window.open('http://www.facebook.com/share.php?u=https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759H734V905H479V609h255V391q0-186 104-288.5T1115 0q147 0 228 12z"/></svg></div>
-<div class=twitter title="Share this on Twitter" onclick="window.open('http://twitter.com/intent/tweet?via=dadoonet&text=🧑🏼‍💻 Blog: Exploring Capitaine Train dataset 👉🏼&url=https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5T1369.5 1125 1185 1335.5t-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5T285 1033q33 5 61 5 43 0 85-11-112-23-185.5-111.5T172 710v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5T884 653q-8-38-8-74 0-134 94.5-228.5T1199 256q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
-<div class=linkedin title="Share this on Linkedin" onclick="window.open('https://www.linkedin.com/shareArticle?mini=true&url=https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/&title=&summary=&source=')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991H147V625h330zm21-306q1 73-50.5 122T312 490h-2q-82 0-132-49t-50-122q0-74 51.5-122.5T314 148t133 48.5T498 319zm1166 729v568h-329v-530q0-105-40.5-164.5T1168 862q-63 0-105.5 34.5T999 982q-11 30-11 81v553H659q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5T1285 602q171 0 275 113.5t104 332.5z"/></svg></div>
-<div class=mail title="Share this through Email" onclick="window.open('mailto:?&body=https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47H160q-66 0-113-47T0 1504V710q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 1e2-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38T639 1015q-91-64-262-182.5T172 690q-62-42-117-115.5T0 438q0-78 41.5-130T160 256h1472q65 0 112.5 47t47.5 113z"/></svg></div>
-</div>
-<a href=https://github.com/dadoonet/dadoonet.github.io/tree/main/content/blog/2015-04-28-exploring-capitaine-train-dataset/index.md title="Edit this page">
-<i class="fas fa-edit mr-1"></i>
-</a>
-</div>
-<div class=py-2>
-<div class="flex flex-col md:flex-row items-center my-8">
-<a href=https://david.pilato.fr/authors/david-pilato/ class="w-24 h-24 md:mr-4">
-<img src=https://david.pilato.fr/authors/david-pilato/david_pilato.png class="w-full bg-primary-bg rounded-full" alt=Avatar>
-</a>
-<div class="w-full md:w-auto mt-4 md:mt-0">
-<a href=https://david.pilato.fr/authors/david-pilato/ class="block font-bold text-lg pb-1 mb-2 border-b">David Pilato</a>
-<span class="block pb-2">20+ years of experience, mostly in Java. Living in Cergy, France.</span>
-<a href=mailto:david+blog@pilato.fr class=mr-1>
-<i class="fas fa-envelope"></i>
-</a>
-<a href=https://twitter.com/dadoonet class=mr-1>
-<i class="fab fa-twitter"></i>
-</a>
-<a href=https://github.com/dadoonet class=mr-1>
-<i class="fab fa-github"></i>
-</a>
-<a href=https://www.linkedin.com/in/dadoonet/ class=mr-1>
-<i class="fab fa-linkedin"></i>
-</a>
-</div>
-</div>
-</div>
-<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
-<div>
-<span class="block font-bold">Previous</span>
-<a href=https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/ class=block>Devoxx France 2015</a>
-</div>
-<div class="md:text-right mt-4 md:mt-0">
-<span class="block font-bold">Next</span>
-<a href=https://david.pilato.fr/blog/2015-03-05-using-log4j2-with-hibernate-4/ class=block>Using Log4J2 with Hibernate 4</a>
-</div>
-</div>
-<script id=utterances src=https://utteranc.es/client.js issue-term=pathname label=💬 comments repo=dadoonet/dadoonet.github.io theme=preferred-color-scheme crossorigin=anonymous async></script>
-<script>storageColorScheme=="Light"?document.getElementById('utterances').setAttribute('theme','github-light'):storageColorScheme=="Dark"&&document.getElementById('utterances').setAttribute('theme','github-dark')</script>
-</div>
-<div class=col-span-2>
-<div class="sticky top-16 z-10 hidden lg:block px-6 py-4 bg-primary-bg">
-<span class="text-lg font-semibold">On This Page</span>
-</div>
-<div class="sticky-toc hidden lg:block px-6 pb-6">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#prerequisites>Prerequisites</a></li>
-<li><a href=#download-the-dataset>Download the dataset</a></li>
-<li><a href=#processing-with-logstash>Processing with logstash</a>
-<ul>
-<li><a href=#csv-parsing>CSV parsing</a></li>
-<li><a href=#skip-header>Skip header</a></li>
-<li><a href=#remove-duplicated-fields>Remove duplicated fields</a></li>
-<li><a href=#convert-numbers-to-numbers>Convert numbers to numbers</a></li>
-<li><a href=#build-a-location-data-structure>Build a location data structure</a></li>
-<li><a href=#convert-booleans-to-booleanshhhhhhhh-strings>Convert booleans to booleans<code>^H^H^H^H^H^H^H^H</code> strings</a></li>
-</ul>
-</li>
-<li><a href=#indexing-into-elasticsearch>Indexing into elasticsearch</a>
-<ul>
-<li><a href=#defining-our-mapping>Defining our mapping</a></li>
-<li><a href=#connect-logstash-and-elasticsearch>Connect logstash and elasticsearch</a></li>
-<li><a href=#inject-them-all>Inject them all</a></li>
-</ul>
-</li>
-<li><a href=#kibana-ftw>Kibana FTW</a>
-<ul>
-<li><a href=#settings>Settings</a></li>
-<li><a href=#discover-your-data>Discover your data</a></li>
-<li><a href=#visualize-your-data>Visualize your data</a></li>
-<li><a href=#put-them-all-on-the-same-page>Put them all on the same page</a></li>
-</ul>
-</li>
-</ul>
-</nav>
-</div>
-<script>window.addEventListener('DOMContentLoaded',()=>{enableStickyToc()})</script>
-</div>
-<div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded p-6">
-<h2 class="text-lg font-semibold mb-4">See Also</h2>
-<div class=content>
-<a href=https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/>ScrutMyDocs : un moteur de recherche pour documents</a>
-<br>
-<a href=https://david.pilato.fr/blog/2012-05-25-la-factory-spring-pour-elasticsearch-est-sortie/>La factory Spring pour Elasticsearch est sortie !</a>
-<br>
-<a href=https://david.pilato.fr/blog/2012-04-10-proteger-son-cluster-elasticsearch-avec-jetty/>Protéger son cluster Elasticsearch avec Jetty</a>
-<br>
-<a href=https://david.pilato.fr/blog/2012-04-02-une-factory-spring-pour-elasticsearch/>Une factory Spring pour Elasticsearch</a>
-<br>
-<a href=https://david.pilato.fr/blog/2012-03-14-mon-talk-sur-elasticsearch-selectionne-pour-devoxx-france/>Mon talk sur Elasticsearch sélectionné pour Devoxx France</a>
-<br>
-<a href=https://david.pilato.fr/blog/2012-02-13-quel-client-java-pour-elasticsearch/>Quel client Java pour elasticsearch ?</a>
-<br>
-</div>
-</div>
-</div>
-<script>document.addEventListener('DOMContentLoaded',()=>{hljs.initHighlightingOnLoad()})</script>
-</div>
-</div>
-</main>
-<footer class=pl-scrollbar>
-<div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
-<p class="text-sm text-tertiary-text">&copy; 2022, David Pilato, France
-&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p>
-</div><div class="text-center p-1 pin-b">
-<p class="text-sm text-tertiary-text">Generated from 🇫🇷 with ❤️ on Wed Jan 12, 2022 at 17:58:41 UTC</p>
-</div></div>
-</footer>
-</body>
-</html>
+</code></pre><h2 id=kibana-ftw>Kibana FTW</h2><p>Start your kibana instance, <a href=http://0.0.0.0:5601>open kibana</a>.</p><h3 id=settings>Settings</h3><p>Configure your <code>stations</code> index:</p><figure><img src=settings-set-index.png alt="Set index name"><figcaption><p>Set index name</p></figcaption></figure><h3 id=discover-your-data>Discover your data</h3><p>If not already set, define in <code>discover</code> your <code>stations</code> index:</p><figure><img src=discover-set-index.png alt="Set index name"><figcaption><p>Set index name</p></figcaption></figure><p>Then choose fields you want to display:</p><figure><img src=discover-set-fields.png alt="Set fields"><figcaption><p>Set fields</p></figcaption></figure><p>And save your search:</p><figure><img src=discover-save-search.png alt="Save your search"><figcaption><p>Save your search</p></figcaption></figure><h3 id=visualize-your-data>Visualize your data</h3><p>Create a new visualization and choose <code>Pie chart</code>:</p><figure><img src=visualize-pie-chart.png alt="Create visualisation"><figcaption><p>Create visualisation</p></figcaption></figure><p>Select your saved search:</p><figure><img src=visualize-pie-choose-search.png alt="Select saved search"><figcaption><p>Select saved search</p></figcaption></figure><p>Split the slices using <code>country.raw</code> field so you will display number of train stations broken per country code.</p><figure><img src=visualize-pie-final.png alt="Final Pie"><figcaption><p>Final Pie</p></figcaption></figure><p>Save your visualization and create a new <code>Pie chart</code> on <code>idtgv_is_enabled</code> field:</p><figure><img src=visualize-pie-idtgv.png alt="IDTGV stations"><figcaption><p>IDTGV stations</p></figcaption></figure><p>Save your visualization and create a new <code>Tile map</code>:</p><figure><img src=visualize-tile.png alt="Create visualization"><figcaption><p>Create visualization</p></figcaption></figure><p>Select a <code>Geohash</code> aggregation on <code>location</code> field and increase <code>Precision</code> to <code>4</code>:</p><figure><img src=visualize-tile-final.png alt="Tile map"><figcaption><p>Tile map</p></figcaption></figure><p>Don&rsquo;t forget to save it!</p><p>You can build as many visualization you need.</p><h3 id=put-them-all-on-the-same-page>Put them all on the same page</h3><p>Open <code>Dashboard</code> and add all your visualizations:</p><figure><img src=dashboard-add-vis.png alt="Select visualizations"><figcaption><p>Select visualizations</p></figcaption></figure><p>And your saved search:</p><figure><img src=dashboard-add-search.png alt="Add a saved search"><figcaption><p>Add a saved search</p></figcaption></figure><p>Arrange your dashboard and play with it!</p><figure><img src=dashboard-final-1.png alt="The final dashboard"><figcaption><p>The final dashboard</p></figcaption></figure><p>For example, if you click on <code>FR</code> in the country pie and then select <code>T</code> on IDTGV pie, you will be able to display all IDTGV stations located in France.</p><figure><img src=dashboard-idtgv.png alt="IDTGV stations in France"><figcaption><p>IDTGV stations in France</p></figcaption></figure></article><div class=my-4><a href=https://david.pilato.fr/tags/elasticsearch/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#elasticsearch</a>
+<a href=https://david.pilato.fr/tags/logstash/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#logstash</a>
+<a href=https://david.pilato.fr/tags/kibana/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#kibana</a>
+<a href=https://david.pilato.fr/tags/dataset/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#dataset</a></div><div class="flex md:justify-end my-4"><style>#share-buttons{display:inline-block;vertical-align:middle}#share-buttons:after{content:"";display:block;clear:both}#share-buttons>div{position:relative;text-align:left;height:36px;width:32px;float:left;text-align:center}#share-buttons>div>svg{height:16px;fill:#000;margin-top:10px}#share-buttons>div:hover{cursor:pointer}#share-buttons>div.facebook:hover>svg{fill:#3b5998}#share-buttons>div.twitter:hover>svg{fill:#55acee}#share-buttons>div.linkedin:hover>svg{fill:#0077b5}#share-buttons>div.pinterest:hover>svg{fill:#cb2027}#share-buttons>div.mail:hover>svg{fill:#7d7d7d}#share-buttons>div.facebook>svg{height:18px;margin-top:9px}#share-buttons>div.twitter>svg{height:20px;margin-top:8px}#share-buttons>div.linkedin>svg{height:19px;margin-top:7px}#share-buttons>div.pinterest>svg{height:20px;margin-top:9px}#share-buttons>div.mail>svg{height:14px;margin-top:11px}</style><div id=share-buttons><div class=facebook title="Share this on Facebook" onclick="window.open('http://www.facebook.com/share.php?u=https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759H734V905H479V609h255V391q0-186 104-288.5T1115 0q147 0 228 12z"/></svg></div><div class=twitter title="Share this on Twitter" onclick="window.open('http://twitter.com/intent/tweet?via=dadoonet&text=🧑🏼‍💻 Blog: Exploring Capitaine Train dataset 👉🏼&url=https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5T1369.5 1125 1185 1335.5t-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5T285 1033q33 5 61 5 43 0 85-11-112-23-185.5-111.5T172 710v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5T884 653q-8-38-8-74 0-134 94.5-228.5T1199 256q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div><div class=linkedin title="Share this on Linkedin" onclick="window.open('https://www.linkedin.com/shareArticle?mini=true&url=https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/&title=&summary=&source=')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991H147V625h330zm21-306q1 73-50.5 122T312 490h-2q-82 0-132-49t-50-122q0-74 51.5-122.5T314 148t133 48.5T498 319zm1166 729v568h-329v-530q0-105-40.5-164.5T1168 862q-63 0-105.5 34.5T999 982q-11 30-11 81v553H659q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5T1285 602q171 0 275 113.5t104 332.5z"/></svg></div><div class=mail title="Share this through Email" onclick="window.open('mailto:?&body=https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47H160q-66 0-113-47T0 1504V710q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 1e2-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38T639 1015q-91-64-262-182.5T172 690q-62-42-117-115.5T0 438q0-78 41.5-130T160 256h1472q65 0 112.5 47t47.5 113z"/></svg></div></div><a href=https://github.com/dadoonet/dadoonet.github.io/tree/main/content/blog/2015-04-28-exploring-capitaine-train-dataset/index.md title="Edit this page"><i class="fas fa-edit mr-1"></i></a></div><div class=py-2><div class="my-8 flex flex-col items-center md:flex-row"><a href=https://david.pilato.fr/authors/david-pilato/ class="md:me-4 text-primary-text h-24 w-24"><img src=https://david.pilato.fr/authors/david-pilato/david_pilato.png class="bg-primary-bg w-full rounded-full" alt=Avatar></a><div class="mt-4 w-full md:mt-0 md:w-auto"><a href=https://david.pilato.fr/authors/david-pilato/ class="mb-2 block border-b pb-1 text-lg font-bold"><h3>David Pilato</h3></a><span class="block pb-2">20+ years of experience, mostly in Java. Living in Cergy, France.</span>
+<a href=mailto:david+blog@pilato.fr class=me-2><i class="fas fa-envelope"></i></a>
+<a href=https://twitter.com/dadoonet class=me-2><i class="fab fa-twitter"></i></a>
+<a href=https://github.com/dadoonet class=me-2><i class="fab fa-github"></i></a>
+<a href=https://www.linkedin.com/in/dadoonet/ class=me-2><i class="fab fa-linkedin"></i></a></div></div></div><div class="-mx-2 mt-4 flex flex-col border-t px-2 pt-4 md:flex-row md:justify-between"><div><span class="text-primary-text block font-bold">Previous</span>
+<a href=https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/ class=block>Devoxx France 2015</a></div><div class="mt-4 md:mt-0 md:text-right"><span class="text-primary-text block font-bold">Next</span>
+<a href=https://david.pilato.fr/blog/2015-03-05-using-log4j2-with-hibernate-4/ class=block>Using Log4J2 with Hibernate 4</a></div></div><script id=utterances src=https://utteranc.es/client.js issue-term=pathname label=💬 comments repo=dadoonet/dadoonet.github.io theme=preferred-color-scheme crossorigin=anonymous async></script><script>storageColorScheme=="Light"?document.getElementById('utterances').setAttribute('theme','github-light'):storageColorScheme=="Dark"&&document.getElementById('utterances').setAttribute('theme','github-dark')</script></div><div class=col-span-2><div class="bg-primary-bg
+prose sticky top-16 z-10 hidden px-6 py-4 lg:block"><h3>On This Page</h3></div><div class="sticky-toc hidden px-6 pb-6 lg:block"><nav id=TableOfContents><ul><li><a href=#prerequisites>Prerequisites</a></li><li><a href=#download-the-dataset>Download the dataset</a></li><li><a href=#processing-with-logstash>Processing with logstash</a><ul><li><a href=#csv-parsing>CSV parsing</a></li><li><a href=#skip-header>Skip header</a></li><li><a href=#remove-duplicated-fields>Remove duplicated fields</a></li><li><a href=#convert-numbers-to-numbers>Convert numbers to numbers</a></li><li><a href=#build-a-location-data-structure>Build a location data structure</a></li><li><a href=#convert-booleans-to-booleanshhhhhhhh-strings>Convert booleans to booleans<code>^H^H^H^H^H^H^H^H</code> strings</a></li></ul></li><li><a href=#indexing-into-elasticsearch>Indexing into elasticsearch</a><ul><li><a href=#defining-our-mapping>Defining our mapping</a></li><li><a href=#connect-logstash-and-elasticsearch>Connect logstash and elasticsearch</a></li><li><a href=#inject-them-all>Inject them all</a></li></ul></li><li><a href=#kibana-ftw>Kibana FTW</a><ul><li><a href=#settings>Settings</a></li><li><a href=#discover-your-data>Discover your data</a></li><li><a href=#visualize-your-data>Visualize your data</a></li><li><a href=#put-them-all-on-the-same-page>Put them all on the same page</a></li></ul></li></ul></nav></div><script>window.addEventListener("DOMContentLoaded",()=>{enableStickyToc()})</script></div><div class="bg-secondary-bg prose col-span-2 rounded p-6 lg:col-span-6"><h3>See Also</h3><a href=https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/ class=no-underline>ScrutMyDocs : un moteur de recherche pour documents</a><br><a href=https://david.pilato.fr/blog/2012-05-25-la-factory-spring-pour-elasticsearch-est-sortie/ class=no-underline>La factory Spring pour Elasticsearch est sortie !</a><br><a href=https://david.pilato.fr/blog/2012-04-10-proteger-son-cluster-elasticsearch-avec-jetty/ class=no-underline>Protéger son cluster Elasticsearch avec Jetty</a><br><a href=https://david.pilato.fr/blog/2012-04-02-une-factory-spring-pour-elasticsearch/ class=no-underline>Une factory Spring pour Elasticsearch</a><br><a href=https://david.pilato.fr/blog/2012-03-14-mon-talk-sur-elasticsearch-selectionne-pour-devoxx-france/ class=no-underline>Mon talk sur Elasticsearch sélectionné pour Devoxx France</a><br><a href=https://david.pilato.fr/blog/2012-02-13-quel-client-java-pour-elasticsearch/ class=no-underline>Quel client Java pour elasticsearch ?</a><br></div></div><script>document.addEventListener("DOMContentLoaded",()=>{hljs.highlightAll()})</script></div></div></main><footer class=pl-scrollbar><div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b"><p class="text-sm text-tertiary-text">&copy; 2022, David Pilato, France
+&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p></div><div class="text-center p-1 pin-b"><p class="text-sm text-tertiary-text">Generated from 🇫🇷 with ❤️ on Tue Jun 14, 2022 at 12:48:11 UTC</p></div></div></footer></body></html>

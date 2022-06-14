@@ -1,224 +1,31 @@
-<!doctype html><html lang=en><meta charset=utf-8>
-<meta name=viewport content="width=device-width">
-<title>Il était une fois : un conte de fées élastique ! - David Pilato</title>
-<meta name=generator content="Hugo Eureka 0.8.4">
-<link rel=stylesheet href=https://david.pilato.fr/css/eureka.min.css>
-<script defer src=https://david.pilato.fr/js/eureka.min.js></script>
-<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
-<link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload="this.onload=null,this.rel='stylesheet'">
-<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css media=print onload="this.media='all',this.onload=null" crossorigin>
-<script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js crossorigin></script>
-<script defer src=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js integrity="sha256-uNYoXefWRqv+PsIF/OflNmwtKM4lStn9yrz2gVl6ymo=" crossorigin></script>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X media=print onload="this.media='all',this.onload=null" crossorigin>
-<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin></script>
-<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin></script>
-<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script>
-<script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js integrity="sha256-Zmpaaj+GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE=" crossorigin></script>
-<link rel=preconnect href=https://www.google-analytics.com crossorigin>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-62381049-1"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-62381049-1')</script>
-<meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/featured.png">
-<meta name=twitter:title content="Il était une fois : un conte de fées élastique !">
-<meta name=twitter:description content="Il était une fois&mldr;
- En fait, il y a 2 ans, je cherchais un moyen pour distribuer Hibernate search sur plusieurs noeuds. Ma première idée était de stocker les index dans une base de données partagée par les différents noeuds. Oui ! Il s&rsquo;agit d&rsquo;une idée stupide en terme de performances, mais j&rsquo;avais envie d&rsquo;essayer et de construire ce modèle.
-Après avoir cherché du code source, je suis finalement tombé sur la classe JdbcDirectory du projet Compass.">
-<meta name=description content="Il était une fois&mldr;
- En fait, il y a 2 ans, je cherchais un moyen pour distribuer Hibernate search sur plusieurs noeuds. Ma première idée était de stocker les index dans une base de données partagée par les différents noeuds. Oui ! Il s&rsquo;agit d&rsquo;une idée stupide en terme de performances, mais j&rsquo;avais envie d&rsquo;essayer et de construire ce modèle.
-Après avoir cherché du code source, je suis finalement tombé sur la classe JdbcDirectory du projet Compass.">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog","item":"https://david.pilato.fr/blog/"},{"@type":"ListItem","position":2,"name":"Il était une fois : un conte de fées élastique !","item":"https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/"},"headline":"Il était une fois : un conte de fées élastique ! - David Pilato","image":"https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/featured.png","datePublished":"2013-01-15T19:00:13+02:00","dateModified":"2013-01-15T19:00:13+02:00","wordCount":466,"author":{"@type":"Person","name":["David Pilato"]},"publisher":{"@type":"Person","name":"David Pilato"},"description":"Il était une fois\u0026hellip;\n En fait, il y a 2 ans, je cherchais un moyen pour distribuer Hibernate search sur plusieurs noeuds. Ma première idée était de stocker les index dans une base de données partagée par les différents noeuds. Oui ! Il s\u0026rsquo;agit d\u0026rsquo;une idée stupide en terme de performances, mais j\u0026rsquo;avais envie d\u0026rsquo;essayer et de construire ce modèle.\nAprès avoir cherché du code source, je suis finalement tombé sur la classe JdbcDirectory du projet Compass."}</script><meta property="og:title" content="Il était une fois : un conte de fées élastique ! - David Pilato">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/">
-<meta property="og:description" content="Il était une fois&mldr;
- En fait, il y a 2 ans, je cherchais un moyen pour distribuer Hibernate search sur plusieurs noeuds. Ma première idée était de stocker les index dans une base de données partagée par les différents noeuds. Oui ! Il s&rsquo;agit d&rsquo;une idée stupide en terme de performances, mais j&rsquo;avais envie d&rsquo;essayer et de construire ce modèle.
-Après avoir cherché du code source, je suis finalement tombé sur la classe JdbcDirectory du projet Compass.">
-<meta property="og:locale" content="en">
-<meta property="og:site_name" content="David Pilato">
-<meta property="article:published_time" content="2013-01-15T19:00:13+02:00">
-<meta property="article:modified_time" content="2013-01-15T19:00:13+02:00">
-<meta property="article:section" content="blog">
-<meta property="article:tag" content="career">
-<meta property="article:tag" content="culture">
-<meta property="article:tag" content="travels">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2022-01-10-9-years-a-whole-new-world/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2020-01-10-7-years-finding-the-right-balance/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2019-01-10-from-a-startup-to-a-listed-company-6-years-of-fun/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2018-01-10-5-years-what-a-milestone/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2017-01-10-4-years-at-elastic/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2016-01-12-3-years-time-flies/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2015-01-19-once-upon-a-time-make-your-dreams-come-true/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2014-01-10-once-upon-a-time-a-year-later-dot-dot-dot/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2013-01-15-once-upon-a-time-dot-dot-dot/">
-<body class="flex flex-col min-h-screen">
-<header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
-<div class="w-full max-w-screen-xl mx-auto"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=='Auto'||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName('html')[0].classList.add('dark')</script>
-<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
-<a href=/ class="mr-6 text-primary-text text-xl font-bold">David Pilato</a>
+<!doctype html><html lang=en><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Il était une fois : un conte de fées élastique ! - David Pilato</title><meta name=generator content="Hugo Eureka 0.9.3"><link rel=stylesheet href=https://david.pilato.fr/css/eureka.min.9cec6350e37e534b0338fa9a085bf06855de3b0f2dcf857e792e5e97b07ea905d4d5513db554cbc26a9c3da622bae92d.css><script defer src=https://david.pilato.fr/js/eureka.min.c9397561036ecdb150468028e7807081e0823ad4b7207798ac3c0cdf9742e4300265511b6b457026c9a0e7b663e44683.js></script>
+<link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload="this.onload=null,this.rel='stylesheet'"><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/solarized-light.min.css media=print onload="this.media='all',this.onload=null" crossorigin><script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js crossorigin></script>
+<link rel=stylesheet href=https://david.pilato.fr/css/highlightjs.min.2958991528e43eb6fc9b8c4f2b8e052f79c4010718e1d1e888a777620e9ee63021c2c57ec7417a3108019bb8c41943e6.css media=print onload="this.media='all',this.onload=null"><script defer type=text/javascript src=https://david.pilato.fr/js/fontawesome.min.3b3a9010e96bcc23aa7ff4cef43506624c34c13b18fd1c67fe5138e9a95657d5f58ac4aebc370d569554fca0aedd65c5.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css integrity=sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ media=print onload="this.media='all',this.onload=null" crossorigin><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js integrity=sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script><script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js integrity=sha384-atOyb0FxAgN9LyAc6PEf9BjgwLISyansgdH8/VXQH8p2o5vfrRgmGIJ2Sg22L0A0 crossorigin></script>
+<link rel=preconnect href=https://www.google-analytics.com crossorigin><script async src="https://www.googletagmanager.com/gtag/js?id=UA-62381049-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-62381049-1')</script><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/featured.png"><meta name=twitter:title content="Il était une fois : un conte de fées élastique !"><meta name=twitter:description content="Il était une fois&mldr;
+En fait, il y a 2 ans, je cherchais un moyen pour distribuer Hibernate search sur plusieurs noeuds. Ma première idée était de stocker les index dans une base de données partagée par les différents noeuds. Oui ! Il s&rsquo;agit d&rsquo;une idée stupide en terme de performances, mais j&rsquo;avais envie d&rsquo;essayer et de construire ce modèle.
+Après avoir cherché du code source, je suis finalement tombé sur la classe JdbcDirectory du projet Compass."><meta name=description content="Il était une fois&mldr;
+En fait, il y a 2 ans, je cherchais un moyen pour distribuer Hibernate search sur plusieurs noeuds. Ma première idée était de stocker les index dans une base de données partagée par les différents noeuds. Oui ! Il s&rsquo;agit d&rsquo;une idée stupide en terme de performances, mais j&rsquo;avais envie d&rsquo;essayer et de construire ce modèle.
+Après avoir cherché du code source, je suis finalement tombé sur la classe JdbcDirectory du projet Compass."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog","item":"https://david.pilato.fr/blog/"},{"@type":"ListItem","position":2,"name":"Il était une fois : un conte de fées élastique !","item":"https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/"},"headline":"Il était une fois : un conte de fées élastique ! - David Pilato","image":"https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/featured.png","datePublished":"2013-01-15T19:00:13+02:00","dateModified":"2013-01-15T19:00:13+02:00","wordCount":466,"author":{"@type":"Person","name":["David Pilato"]},"publisher":{"@type":"Person","name":"David Pilato"},"description":"Il était une fois\u0026hellip;\nEn fait, il y a 2 ans, je cherchais un moyen pour distribuer Hibernate search sur plusieurs noeuds. Ma première idée était de stocker les index dans une base de données partagée par les différents noeuds. Oui ! Il s\u0026rsquo;agit d\u0026rsquo;une idée stupide en terme de performances, mais j\u0026rsquo;avais envie d\u0026rsquo;essayer et de construire ce modèle.\nAprès avoir cherché du code source, je suis finalement tombé sur la classe JdbcDirectory du projet Compass."}</script><meta property="og:title" content="Il était une fois : un conte de fées élastique ! - David Pilato"><meta property="og:type" content="article"><meta property="og:url" content="https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/"><meta property="og:description" content="Il était une fois&mldr;
+En fait, il y a 2 ans, je cherchais un moyen pour distribuer Hibernate search sur plusieurs noeuds. Ma première idée était de stocker les index dans une base de données partagée par les différents noeuds. Oui ! Il s&rsquo;agit d&rsquo;une idée stupide en terme de performances, mais j&rsquo;avais envie d&rsquo;essayer et de construire ce modèle.
+Après avoir cherché du code source, je suis finalement tombé sur la classe JdbcDirectory du projet Compass."><meta property="og:locale" content="en"><meta property="og:site_name" content="David Pilato"><meta property="article:published_time" content="2013-01-15T19:00:13+02:00"><meta property="article:modified_time" content="2013-01-15T19:00:13+02:00"><meta property="article:section" content="blog"><meta property="article:tag" content="career"><meta property="article:tag" content="culture"><meta property="article:tag" content="travels"><meta property="og:see_also" content="https://david.pilato.fr/blog/2022-06-10-la-potion-magique-pour-faire-avancer-ta-carriere/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2022-01-10-9-years-a-whole-new-world/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2020-01-10-7-years-finding-the-right-balance/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2019-01-10-from-a-startup-to-a-listed-company-6-years-of-fun/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2018-01-10-5-years-what-a-milestone/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2017-01-10-4-years-at-elastic/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2016-01-12-3-years-time-flies/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2015-01-19-once-upon-a-time-make-your-dreams-come-true/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2014-01-10-once-upon-a-time-a-year-later-dot-dot-dot/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2013-01-15-once-upon-a-time-dot-dot-dot/"><body class="flex flex-col min-h-screen"><header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm"><div class="w-full max-w-screen-xl mx-auto"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=='Auto'||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName('html')[0].classList.add('dark')</script><nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0"><a href=/ class="me-6 text-primary-text text-xl font-bold">David Pilato</a>
 <button id=navbar-btn class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
-<i class="fas fa-bars"></i>
-</button>
-<div id=target class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
-<div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
-<a href=/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Home</a>
-<a href=/blog/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Blog</a>
-<a href=https://djdadoo.pilato.fr/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">DJ Mixes</a>
-<a href=/authors/david-pilato/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">About me</a>
-</div>
-<div class=flex>
-<div class="relative pt-4 md:pt-0">
-<div class="cursor-pointer hover:text-eureka" id=lightDarkMode>
-<i class="fas fa-adjust"></i>
-</div>
-<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open>
-</div>
-<div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions>
-<span class="px-4 py-1 hover:text-eureka" name=Light>Light</span>
+<i class="fas fa-bars"></i></button><div id=target class="hidden block md:flex md:grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20"><div class="md:flex md:h-16 text-sm md:grow pb-4 md:pb-0 border-b md:border-b-0"><a href=/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item me-4">Home</a>
+<a href=/blog/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item me-4">Blog</a>
+<a href=https://djdadoo.pilato.fr/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent me-4">DJ Mixes</a>
+<a href=/authors/david-pilato/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent me-4">About me</a></div><div class=flex><div class="relative pt-4 md:pt-0"><div class="cursor-pointer hover:text-eureka" id=lightDarkMode><i class="fas fa-adjust"></i></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open></div><div class="absolute flex flex-col start-0 md:start-auto end-auto md:end-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions><span class="px-4 py-1 hover:text-eureka" name=Light>Light</span>
 <span class="px-4 py-1 hover:text-eureka" name=Dark>Dark</span>
-<span class="px-4 py-1 hover:text-eureka" name=Auto>Auto</span>
-</div>
-</div>
-</div>
-</div>
-<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile>
-</div>
-</nav>
-<script>let element=document.getElementById('lightDarkMode');storageColorScheme==null||storageColorScheme=='Auto'?document.addEventListener('DOMContentLoaded',()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change',switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'sun'),element.firstElementChild.classList.add('fa-sun')):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'moon'),element.firstElementChild.classList.add('fa-moon')),document.addEventListener('DOMContentLoaded',()=>{getcolorscheme(),switchBurger()})</script>
-</div>
-</header>
-<main class="flex-grow pt-16">
-<div class=pl-scrollbar>
-<div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
-<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
-<div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
-<h1 class="font-bold text-3xl text-primary-text">Il était une fois : un conte de fées élastique !</h1>
-<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
-<div class="mr-6 my-2">
-<i class="fas fa-calendar-alt mr-1"></i>
-<span>2013-01-15</span>
-</div>
-<div class="mr-6 my-2">
-<i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/culture/ class=hover:text-eureka>culture</a>
-</div>
-<div class="mr-6 my-2">
-<i class="fas fa-th-list mr-1"></i> <a href=https://david.pilato.fr/series/career-at-elastic/ class=hover:text-eureka>career at elastic</a>
-</div>
-</div>
-<div class=my-4>
-<img src=https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/featured.png class=w-full alt="Featured Image">
-</div>
-<div class=content>
-<blockquote>
-<p>Il était une fois&mldr;</p>
-</blockquote>
-<p>En fait, il y a 2 ans, je cherchais un moyen pour distribuer Hibernate search sur plusieurs noeuds. Ma première idée était de stocker les index dans une base de données partagée par les différents noeuds. Oui ! Il s&rsquo;agit d&rsquo;une idée stupide en terme de performances, mais j&rsquo;avais envie d&rsquo;essayer et de construire ce modèle.</p>
-<p>Après avoir cherché du code source, je suis finalement tombé sur la <a href=http://www.compass-project.org/docs/2.0.1/api/org/apache/lucene/store/jdbc/JdbcDirectory.html>classe JdbcDirectory</a> du projet Compass. Et sur la page d&rsquo;accueil du projet, j&rsquo;aperçois quelque chose qui parle du future de Compass et d&rsquo;Elasticsearch.</p>
-<figure><img src=es1.png alt="Le futur de Compass et Elasticsearch"><figcaption>
-<p>Le futur de Compass et Elasticsearch</p>
-</figcaption>
-</figure>
-<p>Deux clics plus tard, je découvre Elasticsearch. Je le télécharge, le démarre et me dis : &ldquo;Bordel ! Mais comment est-ce possible ?&rdquo;. Ce projet venait non seulement de résoudre tous mes problèmes en ajoutant des fonctionnalités dont je n&rsquo;avais même pas conscience, le tout en moins de 30 secondes ! Je n&rsquo;ai pas dormi pendant une semaine entière, vraiment ! C&rsquo;était trop magique pour être vrai ! Après quelques heures de travail, Elasticsearch était intégré dans mon projet et fournissait déjà les premières recherches full text. J&rsquo;ai dit à mes collègues que ce projet est si magnifique que je veux en faire parti si un jour une société est créée.</p>
-<p>A partir de ce moment, j&rsquo;ai cherché comment contribuer en retour sur le projet. Mais, je n&rsquo;étais ni un expert Elasticsearch, ni même un expert Lucene. J&rsquo;ai alors cherché du contenu français parlant du projet et je n&rsquo;ai trouvé qu&rsquo;un ou deux articles. J&rsquo;ai commencé alors à écrire du contenu sur <a href=https://david.pilato.fr/blog/2011-03-09-la-recherche-elastique/>mon blog personnel</a>. J&rsquo;ai également commencé à écrire quelques plugins. La <a href=http://david.pilato.fr/rssriver/>rivière RSS</a> fut la première. Elle fut d&rsquo;ailleurs mon premier projet open-source.</p>
-<p>J&rsquo;ai rencontré Shay Banon la première fois en Juin 2011 pour une conférence donnée à Paris. Il donnait un talk sans slides comme il sait les faire. Très impressionnant ! It just works ! Je lui ai alors dit que comme je ne pouvais pas directement contribuer au coeur du projet, je pouvais essayer de promouvoir le projet en France. Il a immédiatement accepté. La communauté française était née !</p>
-<figure><img src=es2.png alt="Communauté française Elasticsearch"><figcaption>
-<p>Communauté française Elasticsearch</p>
-</figcaption>
-</figure>
-<p>Une année plus tard, <a href=http://www.devoxx.com/display/FR12/ElasticSearch+++moteur+de+recherche+NoSQL+REST+JSON+taille+pour+le+cloud>mon talk pour Devoxx France</a> était accepté et tout allait vraiment démarrer à partir de là. Le groupe français n&rsquo;a pas cessé de grossir depuis, de jour en jour.</p>
-<p>Quelques mois plus tard, la société Elasticsearch BV était créée. Il était vraiment clair dans mon esprit que je devais les rejoindre. Quand vous tombez amoureux, vous devez vous marier ! J&rsquo;ai rencontré à nouveau Shay à Devoxx 2012 et nous en avons parlé, notamment de ce que je pourrais apporter à Elasticsearch. Et maintenant, deux ans après ma première rencontre avec Elasticsearch, mon rêve devient réalité, comme dans les contes de fées !</p>
-</div>
-<div class=my-4>
-<a href=https://david.pilato.fr/tags/career/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#career</a>
-<a href=https://david.pilato.fr/tags/culture/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#culture</a>
-<a href=https://david.pilato.fr/tags/travels/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#travels</a>
-</div>
-<div class="flex md:justify-end my-4">
-<style>#share-buttons{display:inline-block;vertical-align:middle}#share-buttons:after{content:"";display:block;clear:both}#share-buttons>div{position:relative;text-align:left;height:36px;width:32px;float:left;text-align:center}#share-buttons>div>svg{height:16px;fill:#000;margin-top:10px}#share-buttons>div:hover{cursor:pointer}#share-buttons>div.facebook:hover>svg{fill:#3b5998}#share-buttons>div.twitter:hover>svg{fill:#55acee}#share-buttons>div.linkedin:hover>svg{fill:#0077b5}#share-buttons>div.pinterest:hover>svg{fill:#cb2027}#share-buttons>div.mail:hover>svg{fill:#7d7d7d}#share-buttons>div.facebook>svg{height:18px;margin-top:9px}#share-buttons>div.twitter>svg{height:20px;margin-top:8px}#share-buttons>div.linkedin>svg{height:19px;margin-top:7px}#share-buttons>div.pinterest>svg{height:20px;margin-top:9px}#share-buttons>div.mail>svg{height:14px;margin-top:11px}</style>
-<div id=share-buttons>
-<div class=facebook title="Share this on Facebook" onclick="window.open('http://www.facebook.com/share.php?u=https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759H734V905H479V609h255V391q0-186 104-288.5T1115 0q147 0 228 12z"/></svg></div>
-<div class=twitter title="Share this on Twitter" onclick="window.open('http://twitter.com/intent/tweet?via=dadoonet&text=🧑🏼‍💻 Blog: Il était une fois : un conte de fées élastique ! 👉🏼&url=https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5T1369.5 1125 1185 1335.5t-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5T285 1033q33 5 61 5 43 0 85-11-112-23-185.5-111.5T172 710v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5T884 653q-8-38-8-74 0-134 94.5-228.5T1199 256q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
-<div class=linkedin title="Share this on Linkedin" onclick="window.open('https://www.linkedin.com/shareArticle?mini=true&url=https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/&title=&summary=&source=')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991H147V625h330zm21-306q1 73-50.5 122T312 490h-2q-82 0-132-49t-50-122q0-74 51.5-122.5T314 148t133 48.5T498 319zm1166 729v568h-329v-530q0-105-40.5-164.5T1168 862q-63 0-105.5 34.5T999 982q-11 30-11 81v553H659q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5T1285 602q171 0 275 113.5t104 332.5z"/></svg></div>
-<div class=mail title="Share this through Email" onclick="window.open('mailto:?&body=https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47H160q-66 0-113-47T0 1504V710q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 1e2-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38T639 1015q-91-64-262-182.5T172 690q-62-42-117-115.5T0 438q0-78 41.5-130T160 256h1472q65 0 112.5 47t47.5 113z"/></svg></div>
-</div>
-<a href=https://github.com/dadoonet/dadoonet.github.io/tree/main/content/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/index.md title="Edit this page">
-<i class="fas fa-edit mr-1"></i>
-</a>
-</div>
-<div class=py-2>
-<div class="flex flex-col md:flex-row items-center my-8">
-<a href=https://david.pilato.fr/authors/david-pilato/ class="w-24 h-24 md:mr-4">
-<img src=https://david.pilato.fr/authors/david-pilato/david_pilato.png class="w-full bg-primary-bg rounded-full" alt=Avatar>
-</a>
-<div class="w-full md:w-auto mt-4 md:mt-0">
-<a href=https://david.pilato.fr/authors/david-pilato/ class="block font-bold text-lg pb-1 mb-2 border-b">David Pilato</a>
-<span class="block pb-2">20+ years of experience, mostly in Java. Living in Cergy, France.</span>
-<a href=mailto:david+blog@pilato.fr class=mr-1>
-<i class="fas fa-envelope"></i>
-</a>
-<a href=https://twitter.com/dadoonet class=mr-1>
-<i class="fab fa-twitter"></i>
-</a>
-<a href=https://github.com/dadoonet class=mr-1>
-<i class="fab fa-github"></i>
-</a>
-<a href=https://www.linkedin.com/in/dadoonet/ class=mr-1>
-<i class="fab fa-linkedin"></i>
-</a>
-</div>
-</div>
-</div>
-<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
-<div>
-<span class="block font-bold">Previous</span>
-<a href=https://david.pilato.fr/blog/2013-01-15-once-upon-a-time-dot-dot-dot/ class=block>Once upon a time...</a>
-</div>
-<div class="md:text-right mt-4 md:mt-0">
-<span class="block font-bold">Next</span>
-<a href=https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/ class=block>ScrutMyDocs : un moteur de recherche pour documents</a>
-</div>
-</div>
-<script id=utterances src=https://utteranc.es/client.js issue-term=pathname label=💬 comments repo=dadoonet/dadoonet.github.io theme=preferred-color-scheme crossorigin=anonymous async></script>
-<script>storageColorScheme=="Light"?document.getElementById('utterances').setAttribute('theme','github-light'):storageColorScheme=="Dark"&&document.getElementById('utterances').setAttribute('theme','github-dark')</script>
-</div>
-<div class=col-span-2>
-<div class="bg-secondary-bg rounded p-6">
-<h3 class="text-lg font-semibold mb-4">Series of Posts</h3>
-<div class=content>
-<a href=https://david.pilato.fr/blog/2022-01-10-9-years-a-whole-new-world/>9 years! A whole new world.</a>
-<br>
-<a href=https://david.pilato.fr/blog/2020-01-10-7-years-finding-the-right-balance/>7 years! Finding the right balance</a>
-<br>
-<a href=https://david.pilato.fr/blog/2019-01-10-from-a-startup-to-a-listed-company-6-years-of-fun/>From a startup to a listed company. 6 years of fun!</a>
-<br>
-<a href=https://david.pilato.fr/blog/2018-01-10-5-years-what-a-milestone/>5 years. What a milestone!</a>
-<br>
-<a href=https://david.pilato.fr/blog/2017-01-10-4-years-at-elastic/>4 years at elastic!</a>
-<br>
-<a href=https://david.pilato.fr/blog/2016-01-12-3-years-time-flies/>3 years! Time flies!</a>
-<br>
-<a href=https://david.pilato.fr/blog/2015-01-19-once-upon-a-time-make-your-dreams-come-true/>Once upon a time: Make your dreams come true</a>
-<br>
-<a href=https://david.pilato.fr/blog/2014-01-10-once-upon-a-time-a-year-later-dot-dot-dot/>Once upon a time: a year later...</a>
-<br>
-<a href=https://david.pilato.fr/blog/2013-01-15-once-upon-a-time-dot-dot-dot/>Once upon a time...</a>
-<br>
-<a href=https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/>Il était une fois : un conte de fées élastique !</a>
-<br>
-</div>
-</div>
-</div>
-</div>
-<script>document.addEventListener('DOMContentLoaded',()=>{hljs.initHighlightingOnLoad()})</script>
-</div>
-</div>
-</main>
-<footer class=pl-scrollbar>
-<div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
-<p class="text-sm text-tertiary-text">&copy; 2022, David Pilato, France
-&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p>
-</div><div class="text-center p-1 pin-b">
-<p class="text-sm text-tertiary-text">Generated from 🇫🇷 with ❤️ on Wed Jan 12, 2022 at 17:58:41 UTC</p>
-</div></div>
-</footer>
-</body>
-</html>
+<span class="px-4 py-1 hover:text-eureka" name=Auto>Auto</span></div></div></div></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile></div></nav><script>let element=document.getElementById('lightDarkMode');storageColorScheme==null||storageColorScheme=='Auto'?document.addEventListener('DOMContentLoaded',()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change',switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'sun'),element.firstElementChild.classList.add('fa-sun')):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'moon'),element.firstElementChild.classList.add('fa-moon')),document.addEventListener('DOMContentLoaded',()=>{getcolorscheme(),switchBurger()})</script></div></header><main class="flex-grow pt-16"><div class=pl-scrollbar><div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto"><div class="grid grid-cols-2 gap-4 lg:grid-cols-8 lg:pt-12"><div class="bg-secondary-bg col-span-2 rounded px-6 py-8 lg:col-span-6"><article class=prose><h1 class=mb-4>Il était une fois : un conte de fées élastique !</h1><div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text"><div class="mr-6 my-2"><i class="fas fa-calendar-alt mr-1"></i>
+<span>2013-01-15</span></div><div class="mr-6 my-2"><i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/culture/ class=hover:text-eureka>culture</a></div><div class="mr-6 my-2"><i class="fas fa-th-list mr-1"></i> <a href=https://david.pilato.fr/series/career-at-elastic/ class=hover:text-eureka>career at elastic</a></div></div><img src=https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/featured.png class=w-full alt="Featured Image"><blockquote><p>Il était une fois&mldr;</p></blockquote><p>En fait, il y a 2 ans, je cherchais un moyen pour distribuer Hibernate search sur plusieurs noeuds. Ma première idée était de stocker les index dans une base de données partagée par les différents noeuds. Oui ! Il s&rsquo;agit d&rsquo;une idée stupide en terme de performances, mais j&rsquo;avais envie d&rsquo;essayer et de construire ce modèle.</p><p>Après avoir cherché du code source, je suis finalement tombé sur la <a href=http://www.compass-project.org/docs/2.0.1/api/org/apache/lucene/store/jdbc/JdbcDirectory.html>classe JdbcDirectory</a> du projet Compass. Et sur la page d&rsquo;accueil du projet, j&rsquo;aperçois quelque chose qui parle du future de Compass et d&rsquo;Elasticsearch.</p><figure><img src=es1.png alt="Le futur de Compass et Elasticsearch"><figcaption><p>Le futur de Compass et Elasticsearch</p></figcaption></figure><p>Deux clics plus tard, je découvre Elasticsearch. Je le télécharge, le démarre et me dis : &ldquo;Bordel ! Mais comment est-ce possible ?&rdquo;. Ce projet venait non seulement de résoudre tous mes problèmes en ajoutant des fonctionnalités dont je n&rsquo;avais même pas conscience, le tout en moins de 30 secondes ! Je n&rsquo;ai pas dormi pendant une semaine entière, vraiment ! C&rsquo;était trop magique pour être vrai ! Après quelques heures de travail, Elasticsearch était intégré dans mon projet et fournissait déjà les premières recherches full text. J&rsquo;ai dit à mes collègues que ce projet est si magnifique que je veux en faire parti si un jour une société est créée.</p><p>A partir de ce moment, j&rsquo;ai cherché comment contribuer en retour sur le projet. Mais, je n&rsquo;étais ni un expert Elasticsearch, ni même un expert Lucene. J&rsquo;ai alors cherché du contenu français parlant du projet et je n&rsquo;ai trouvé qu&rsquo;un ou deux articles. J&rsquo;ai commencé alors à écrire du contenu sur <a href=https://david.pilato.fr/blog/2011-03-09-la-recherche-elastique/>mon blog personnel</a>. J&rsquo;ai également commencé à écrire quelques plugins. La <a href=http://david.pilato.fr/rssriver/>rivière RSS</a> fut la première. Elle fut d&rsquo;ailleurs mon premier projet open-source.</p><p>J&rsquo;ai rencontré Shay Banon la première fois en Juin 2011 pour une conférence donnée à Paris. Il donnait un talk sans slides comme il sait les faire. Très impressionnant ! It just works ! Je lui ai alors dit que comme je ne pouvais pas directement contribuer au coeur du projet, je pouvais essayer de promouvoir le projet en France. Il a immédiatement accepté. La communauté française était née !</p><figure><img src=es2.png alt="Communauté française Elasticsearch"><figcaption><p>Communauté française Elasticsearch</p></figcaption></figure><p>Une année plus tard, <a href=http://www.devoxx.com/display/FR12/ElasticSearch+++moteur+de+recherche+NoSQL+REST+JSON+taille+pour+le+cloud>mon talk pour Devoxx France</a> était accepté et tout allait vraiment démarrer à partir de là. Le groupe français n&rsquo;a pas cessé de grossir depuis, de jour en jour.</p><p>Quelques mois plus tard, la société Elasticsearch BV était créée. Il était vraiment clair dans mon esprit que je devais les rejoindre. Quand vous tombez amoureux, vous devez vous marier ! J&rsquo;ai rencontré à nouveau Shay à Devoxx 2012 et nous en avons parlé, notamment de ce que je pourrais apporter à Elasticsearch. Et maintenant, deux ans après ma première rencontre avec Elasticsearch, mon rêve devient réalité, comme dans les contes de fées !</p></article><div class=my-4><a href=https://david.pilato.fr/tags/career/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#career</a>
+<a href=https://david.pilato.fr/tags/culture/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#culture</a>
+<a href=https://david.pilato.fr/tags/travels/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#travels</a></div><div class="flex md:justify-end my-4"><style>#share-buttons{display:inline-block;vertical-align:middle}#share-buttons:after{content:"";display:block;clear:both}#share-buttons>div{position:relative;text-align:left;height:36px;width:32px;float:left;text-align:center}#share-buttons>div>svg{height:16px;fill:#000;margin-top:10px}#share-buttons>div:hover{cursor:pointer}#share-buttons>div.facebook:hover>svg{fill:#3b5998}#share-buttons>div.twitter:hover>svg{fill:#55acee}#share-buttons>div.linkedin:hover>svg{fill:#0077b5}#share-buttons>div.pinterest:hover>svg{fill:#cb2027}#share-buttons>div.mail:hover>svg{fill:#7d7d7d}#share-buttons>div.facebook>svg{height:18px;margin-top:9px}#share-buttons>div.twitter>svg{height:20px;margin-top:8px}#share-buttons>div.linkedin>svg{height:19px;margin-top:7px}#share-buttons>div.pinterest>svg{height:20px;margin-top:9px}#share-buttons>div.mail>svg{height:14px;margin-top:11px}</style><div id=share-buttons><div class=facebook title="Share this on Facebook" onclick="window.open('http://www.facebook.com/share.php?u=https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759H734V905H479V609h255V391q0-186 104-288.5T1115 0q147 0 228 12z"/></svg></div><div class=twitter title="Share this on Twitter" onclick="window.open('http://twitter.com/intent/tweet?via=dadoonet&text=🧑🏼‍💻 Blog: Il était une fois : un conte de fées élastique ! 👉🏼&url=https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5T1369.5 1125 1185 1335.5t-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5T285 1033q33 5 61 5 43 0 85-11-112-23-185.5-111.5T172 710v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5T884 653q-8-38-8-74 0-134 94.5-228.5T1199 256q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div><div class=linkedin title="Share this on Linkedin" onclick="window.open('https://www.linkedin.com/shareArticle?mini=true&url=https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/&title=&summary=&source=')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991H147V625h330zm21-306q1 73-50.5 122T312 490h-2q-82 0-132-49t-50-122q0-74 51.5-122.5T314 148t133 48.5T498 319zm1166 729v568h-329v-530q0-105-40.5-164.5T1168 862q-63 0-105.5 34.5T999 982q-11 30-11 81v553H659q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5T1285 602q171 0 275 113.5t104 332.5z"/></svg></div><div class=mail title="Share this through Email" onclick="window.open('mailto:?&body=https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47H160q-66 0-113-47T0 1504V710q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 1e2-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38T639 1015q-91-64-262-182.5T172 690q-62-42-117-115.5T0 438q0-78 41.5-130T160 256h1472q65 0 112.5 47t47.5 113z"/></svg></div></div><a href=https://github.com/dadoonet/dadoonet.github.io/tree/main/content/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/index.md title="Edit this page"><i class="fas fa-edit mr-1"></i></a></div><div class=py-2><div class="my-8 flex flex-col items-center md:flex-row"><a href=https://david.pilato.fr/authors/david-pilato/ class="md:me-4 text-primary-text h-24 w-24"><img src=https://david.pilato.fr/authors/david-pilato/david_pilato.png class="bg-primary-bg w-full rounded-full" alt=Avatar></a><div class="mt-4 w-full md:mt-0 md:w-auto"><a href=https://david.pilato.fr/authors/david-pilato/ class="mb-2 block border-b pb-1 text-lg font-bold"><h3>David Pilato</h3></a><span class="block pb-2">20+ years of experience, mostly in Java. Living in Cergy, France.</span>
+<a href=mailto:david+blog@pilato.fr class=me-2><i class="fas fa-envelope"></i></a>
+<a href=https://twitter.com/dadoonet class=me-2><i class="fab fa-twitter"></i></a>
+<a href=https://github.com/dadoonet class=me-2><i class="fab fa-github"></i></a>
+<a href=https://www.linkedin.com/in/dadoonet/ class=me-2><i class="fab fa-linkedin"></i></a></div></div></div><div class="-mx-2 mt-4 flex flex-col border-t px-2 pt-4 md:flex-row md:justify-between"><div><span class="text-primary-text block font-bold">Previous</span>
+<a href=https://david.pilato.fr/blog/2013-01-15-once-upon-a-time-dot-dot-dot/ class=block>Once upon a time...</a></div><div class="mt-4 md:mt-0 md:text-right"><span class="text-primary-text block font-bold">Next</span>
+<a href=https://david.pilato.fr/blog/2012-07-20-scrutmydocs-un-moteur-de-recherche-pour-documents/ class=block>ScrutMyDocs : un moteur de recherche pour documents</a></div></div><script id=utterances src=https://utteranc.es/client.js issue-term=pathname label=💬 comments repo=dadoonet/dadoonet.github.io theme=preferred-color-scheme crossorigin=anonymous async></script><script>storageColorScheme=="Light"?document.getElementById('utterances').setAttribute('theme','github-light'):storageColorScheme=="Dark"&&document.getElementById('utterances').setAttribute('theme','github-dark')</script></div><div class=col-span-2><div class="bg-secondary-bg prose max-w-none rounded p-6"><h3>Series of Posts</h3><a href=https://david.pilato.fr/blog/2022-06-10-la-potion-magique-pour-faire-avancer-ta-carriere/ class=no-underline>La potion magique pour faire avancer ta carrière</a><br><a href=https://david.pilato.fr/blog/2022-01-10-9-years-a-whole-new-world/ class=no-underline>9 years! A whole new world.</a><br><a href=https://david.pilato.fr/blog/2020-01-10-7-years-finding-the-right-balance/ class=no-underline>7 years! Finding the right balance</a><br><a href=https://david.pilato.fr/blog/2019-01-10-from-a-startup-to-a-listed-company-6-years-of-fun/ class=no-underline>From a startup to a listed company. 6 years of fun!</a><br><a href=https://david.pilato.fr/blog/2018-01-10-5-years-what-a-milestone/ class=no-underline>5 years. What a milestone!</a><br><a href=https://david.pilato.fr/blog/2017-01-10-4-years-at-elastic/ class=no-underline>4 years at elastic!</a><br><a href=https://david.pilato.fr/blog/2016-01-12-3-years-time-flies/ class=no-underline>3 years! Time flies!</a><br><a href=https://david.pilato.fr/blog/2015-01-19-once-upon-a-time-make-your-dreams-come-true/ class=no-underline>Once upon a time: Make your dreams come true</a><br><a href=https://david.pilato.fr/blog/2014-01-10-once-upon-a-time-a-year-later-dot-dot-dot/ class=no-underline>Once upon a time: a year later...</a><br><a href=https://david.pilato.fr/blog/2013-01-15-once-upon-a-time-dot-dot-dot/ class=no-underline>Once upon a time...</a><br><a href=https://david.pilato.fr/blog/2013-01-15-il-etait-une-fois-un-conte-de-fees-elastique/ class=no-underline>Il était une fois : un conte de fées élastique !</a><br></div></div></div><script>document.addEventListener("DOMContentLoaded",()=>{hljs.highlightAll()})</script></div></div></main><footer class=pl-scrollbar><div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b"><p class="text-sm text-tertiary-text">&copy; 2022, David Pilato, France
+&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p></div><div class="text-center p-1 pin-b"><p class="text-sm text-tertiary-text">Generated from 🇫🇷 with ❤️ on Tue Jun 14, 2022 at 12:48:10 UTC</p></div></div></footer></body></html>

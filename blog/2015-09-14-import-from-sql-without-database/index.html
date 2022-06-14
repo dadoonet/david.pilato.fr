@@ -1,125 +1,28 @@
-<!doctype html><html lang=en><meta charset=utf-8>
-<meta name=viewport content="width=device-width">
-<title>Importing from a database without a database - David Pilato</title>
-<meta name=generator content="Hugo Eureka 0.8.4">
-<link rel=stylesheet href=https://david.pilato.fr/css/eureka.min.css>
-<script defer src=https://david.pilato.fr/js/eureka.min.js></script>
-<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
-<link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload="this.onload=null,this.rel='stylesheet'">
-<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css media=print onload="this.media='all',this.onload=null" crossorigin>
-<script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js crossorigin></script>
-<script defer src=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js integrity="sha256-uNYoXefWRqv+PsIF/OflNmwtKM4lStn9yrz2gVl6ymo=" crossorigin></script>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X media=print onload="this.media='all',this.onload=null" crossorigin>
-<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin></script>
-<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin></script>
-<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script>
-<script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js integrity="sha256-Zmpaaj+GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE=" crossorigin></script>
-<link rel=preconnect href=https://www.google-analytics.com crossorigin>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-62381049-1"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-62381049-1')</script>
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="Importing from a database without a database">
-<meta name=twitter:description content="Recently, I got a database MySQL dump and I was thinking of importing it into elasticsearch.
+<!doctype html><html lang=en><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Importing from a database without a database - David Pilato</title><meta name=generator content="Hugo Eureka 0.9.3"><link rel=stylesheet href=https://david.pilato.fr/css/eureka.min.9cec6350e37e534b0338fa9a085bf06855de3b0f2dcf857e792e5e97b07ea905d4d5513db554cbc26a9c3da622bae92d.css><script defer src=https://david.pilato.fr/js/eureka.min.c9397561036ecdb150468028e7807081e0823ad4b7207798ac3c0cdf9742e4300265511b6b457026c9a0e7b663e44683.js></script>
+<link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload="this.onload=null,this.rel='stylesheet'"><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/solarized-light.min.css media=print onload="this.media='all',this.onload=null" crossorigin><script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js crossorigin></script>
+<link rel=stylesheet href=https://david.pilato.fr/css/highlightjs.min.2958991528e43eb6fc9b8c4f2b8e052f79c4010718e1d1e888a777620e9ee63021c2c57ec7417a3108019bb8c41943e6.css media=print onload="this.media='all',this.onload=null"><script defer type=text/javascript src=https://david.pilato.fr/js/fontawesome.min.3b3a9010e96bcc23aa7ff4cef43506624c34c13b18fd1c67fe5138e9a95657d5f58ac4aebc370d569554fca0aedd65c5.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css integrity=sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ media=print onload="this.media='all',this.onload=null" crossorigin><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js integrity=sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script><script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js integrity=sha384-atOyb0FxAgN9LyAc6PEf9BjgwLISyansgdH8/VXQH8p2o5vfrRgmGIJ2Sg22L0A0 crossorigin></script>
+<link rel=preconnect href=https://www.google-analytics.com crossorigin><script async src="https://www.googletagmanager.com/gtag/js?id=UA-62381049-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-62381049-1')</script><meta name=twitter:card content="summary"><meta name=twitter:title content="Importing from a database without a database"><meta name=twitter:description content="Recently, I got a database MySQL dump and I was thinking of importing it into elasticsearch.
 The first idea which pops up was:
- install MySQL import the database read the database with Logstash and import into elasticsearch drop the database uninstall MySQL  Well. I found that some of the steps are really not needed.
-I can actually use ELK stack and create a simple recipe which can be used to import SQL dump scripts without needing to actually load the data to a database and then read it again from the database.">
-<meta name=description content="Recently, I got a database MySQL dump and I was thinking of importing it into elasticsearch.
+install MySQL import the database read the database with Logstash and import into elasticsearch drop the database uninstall MySQL Well. I found that some of the steps are really not needed.
+I can actually use ELK stack and create a simple recipe which can be used to import SQL dump scripts without needing to actually load the data to a database and then read it again from the database."><meta name=description content="Recently, I got a database MySQL dump and I was thinking of importing it into elasticsearch.
 The first idea which pops up was:
- install MySQL import the database read the database with Logstash and import into elasticsearch drop the database uninstall MySQL  Well. I found that some of the steps are really not needed.
-I can actually use ELK stack and create a simple recipe which can be used to import SQL dump scripts without needing to actually load the data to a database and then read it again from the database.">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog","item":"https://david.pilato.fr/blog/"},{"@type":"ListItem","position":2,"name":"Importing from a database without a database","item":"https://david.pilato.fr/blog/2015-09-14-import-from-sql-without-database/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://david.pilato.fr/blog/2015-09-14-import-from-sql-without-database/"},"headline":"Importing from a database without a database - David Pilato","datePublished":"2015-09-14T11:05:00+02:00","dateModified":"2015-09-14T11:05:00+02:00","wordCount":1171,"author":{"@type":"Person","name":["David Pilato"]},"publisher":{"@type":"Person","name":"David Pilato"},"description":"Recently, I got a database MySQL dump and I was thinking of importing it into elasticsearch.\nThe first idea which pops up was:\n install MySQL import the database read the database with Logstash and import into elasticsearch drop the database uninstall MySQL  Well. I found that some of the steps are really not needed.\nI can actually use ELK stack and create a simple recipe which can be used to import SQL dump scripts without needing to actually load the data to a database and then read it again from the database."}</script><meta property="og:title" content="Importing from a database without a database - David Pilato">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://david.pilato.fr/blog/2015-09-14-import-from-sql-without-database/">
-<meta property="og:description" content="Recently, I got a database MySQL dump and I was thinking of importing it into elasticsearch.
+install MySQL import the database read the database with Logstash and import into elasticsearch drop the database uninstall MySQL Well. I found that some of the steps are really not needed.
+I can actually use ELK stack and create a simple recipe which can be used to import SQL dump scripts without needing to actually load the data to a database and then read it again from the database."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog","item":"https://david.pilato.fr/blog/"},{"@type":"ListItem","position":2,"name":"Importing from a database without a database","item":"https://david.pilato.fr/blog/2015-09-14-import-from-sql-without-database/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://david.pilato.fr/blog/2015-09-14-import-from-sql-without-database/"},"headline":"Importing from a database without a database - David Pilato","datePublished":"2015-09-14T11:05:00+02:00","dateModified":"2015-09-14T11:05:00+02:00","wordCount":1171,"author":{"@type":"Person","name":["David Pilato"]},"publisher":{"@type":"Person","name":"David Pilato"},"description":"Recently, I got a database MySQL dump and I was thinking of importing it into elasticsearch.\nThe first idea which pops up was:\ninstall MySQL import the database read the database with Logstash and import into elasticsearch drop the database uninstall MySQL Well. I found that some of the steps are really not needed.\nI can actually use ELK stack and create a simple recipe which can be used to import SQL dump scripts without needing to actually load the data to a database and then read it again from the database."}</script><meta property="og:title" content="Importing from a database without a database - David Pilato"><meta property="og:type" content="article"><meta property="og:url" content="https://david.pilato.fr/blog/2015-09-14-import-from-sql-without-database/"><meta property="og:description" content="Recently, I got a database MySQL dump and I was thinking of importing it into elasticsearch.
 The first idea which pops up was:
- install MySQL import the database read the database with Logstash and import into elasticsearch drop the database uninstall MySQL  Well. I found that some of the steps are really not needed.
-I can actually use ELK stack and create a simple recipe which can be used to import SQL dump scripts without needing to actually load the data to a database and then read it again from the database.">
-<meta property="og:locale" content="en">
-<meta property="og:site_name" content="David Pilato">
-<meta property="article:published_time" content="2015-09-14T11:05:00+02:00">
-<meta property="article:modified_time" content="2015-09-14T11:05:00+02:00">
-<meta property="article:section" content="blog">
-<meta property="article:tag" content="elasticsearch">
-<meta property="article:tag" content="logstash">
-<meta property="article:tag" content="mysql">
-<meta property="article:tag" content="sql">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2015-06-01-indexing-twitter-with-logstash-and-elasticsearch/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2015-05-20-reindex-elasticsearch-with-logstash/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/">
-<meta property="og:see_also" content="https://david.pilato.fr/blog/2015-05-19-using-js-auth-with-found-cluster/">
-<body class="flex flex-col min-h-screen">
-<header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
-<div class="w-full max-w-screen-xl mx-auto"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=='Auto'||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName('html')[0].classList.add('dark')</script>
-<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
-<a href=/ class="mr-6 text-primary-text text-xl font-bold">David Pilato</a>
+install MySQL import the database read the database with Logstash and import into elasticsearch drop the database uninstall MySQL Well. I found that some of the steps are really not needed.
+I can actually use ELK stack and create a simple recipe which can be used to import SQL dump scripts without needing to actually load the data to a database and then read it again from the database."><meta property="og:locale" content="en"><meta property="og:site_name" content="David Pilato"><meta property="article:published_time" content="2015-09-14T11:05:00+02:00"><meta property="article:modified_time" content="2015-09-14T11:05:00+02:00"><meta property="article:section" content="blog"><meta property="article:tag" content="elasticsearch"><meta property="article:tag" content="logstash"><meta property="article:tag" content="mysql"><meta property="article:tag" content="sql"><meta property="og:see_also" content="https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2015-06-01-indexing-twitter-with-logstash-and-elasticsearch/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2015-05-20-reindex-elasticsearch-with-logstash/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/"><meta property="og:see_also" content="https://david.pilato.fr/blog/2015-05-19-using-js-auth-with-found-cluster/"><body class="flex flex-col min-h-screen"><header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm"><div class="w-full max-w-screen-xl mx-auto"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=='Auto'||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName('html')[0].classList.add('dark')</script><nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0"><a href=/ class="me-6 text-primary-text text-xl font-bold">David Pilato</a>
 <button id=navbar-btn class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
-<i class="fas fa-bars"></i>
-</button>
-<div id=target class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
-<div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
-<a href=/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Home</a>
-<a href=/blog/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Blog</a>
-<a href=https://djdadoo.pilato.fr/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">DJ Mixes</a>
-<a href=/authors/david-pilato/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">About me</a>
-</div>
-<div class=flex>
-<div class="relative pt-4 md:pt-0">
-<div class="cursor-pointer hover:text-eureka" id=lightDarkMode>
-<i class="fas fa-adjust"></i>
-</div>
-<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open>
-</div>
-<div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions>
-<span class="px-4 py-1 hover:text-eureka" name=Light>Light</span>
+<i class="fas fa-bars"></i></button><div id=target class="hidden block md:flex md:grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20"><div class="md:flex md:h-16 text-sm md:grow pb-4 md:pb-0 border-b md:border-b-0"><a href=/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item me-4">Home</a>
+<a href=/blog/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item me-4">Blog</a>
+<a href=https://djdadoo.pilato.fr/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent me-4">DJ Mixes</a>
+<a href=/authors/david-pilato/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent me-4">About me</a></div><div class=flex><div class="relative pt-4 md:pt-0"><div class="cursor-pointer hover:text-eureka" id=lightDarkMode><i class="fas fa-adjust"></i></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open></div><div class="absolute flex flex-col start-0 md:start-auto end-auto md:end-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions><span class="px-4 py-1 hover:text-eureka" name=Light>Light</span>
 <span class="px-4 py-1 hover:text-eureka" name=Dark>Dark</span>
-<span class="px-4 py-1 hover:text-eureka" name=Auto>Auto</span>
-</div>
-</div>
-</div>
-</div>
-<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile>
-</div>
-</nav>
-<script>let element=document.getElementById('lightDarkMode');storageColorScheme==null||storageColorScheme=='Auto'?document.addEventListener('DOMContentLoaded',()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change',switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'sun'),element.firstElementChild.classList.add('fa-sun')):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'moon'),element.firstElementChild.classList.add('fa-moon')),document.addEventListener('DOMContentLoaded',()=>{getcolorscheme(),switchBurger()})</script>
-</div>
-</header>
-<main class="flex-grow pt-16">
-<div class=pl-scrollbar>
-<div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
-<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
-<div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
-<h1 class="font-bold text-3xl text-primary-text">Importing from a database without a database</h1>
-<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
-<div class="mr-6 my-2">
-<i class="fas fa-calendar-alt mr-1"></i>
-<span>2015-09-14</span>
-</div>
-<div class="mr-6 my-2">
-<i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a>
-</div>
-</div>
-<div class=content>
-<p>Recently, I got a database MySQL dump and I was thinking of importing it into elasticsearch.</p>
-<p>The first idea which pops up was:</p>
-<ul>
-<li>install MySQL</li>
-<li>import the database</li>
-<li>read the database with Logstash and import into elasticsearch</li>
-<li>drop the database</li>
-<li>uninstall MySQL</li>
-</ul>
-<p>Well. I found that some of the steps are really not needed.</p>
-<p>I can actually use <a href=https://www.elastic.co/products>ELK stack</a> and create a simple recipe which can be used to import SQL dump scripts without needing to actually load the data to a database and then read it again from the database.</p>
-<p>Let&rsquo;s do it!</p>
-<h2 id=parsing-sql-script-with-logstash>Parsing SQL script with logstash</h2>
-<p>I exported some data from a MySQL example database I have. You can download the same <a href=https://gist.github.com/dadoonet/2e83d126e5a5666598b1>data</a>.</p>
-<h3 id=sql-insert-script>SQL Insert script</h3>
-<p>Our objects are split on 3 tables but we are not going to do joins here. We will only import data from <code>Person</code> table.</p>
-<p>Let&rsquo;s look at the important lines of the script:</p>
-<pre><code class=language-sql>--
+<span class="px-4 py-1 hover:text-eureka" name=Auto>Auto</span></div></div></div></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile></div></nav><script>let element=document.getElementById('lightDarkMode');storageColorScheme==null||storageColorScheme=='Auto'?document.addEventListener('DOMContentLoaded',()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change',switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'sun'),element.firstElementChild.classList.add('fa-sun')):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'moon'),element.firstElementChild.classList.add('fa-moon')),document.addEventListener('DOMContentLoaded',()=>{getcolorscheme(),switchBurger()})</script></div></header><main class="flex-grow pt-16"><div class=pl-scrollbar><div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto"><div class="grid grid-cols-2 gap-4 lg:grid-cols-8 lg:pt-12"><div class="bg-secondary-bg col-span-2 rounded px-6 py-8 lg:col-span-6"><article class=prose><h1 class=mb-4>Importing from a database without a database</h1><div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text"><div class="mr-6 my-2"><i class="fas fa-calendar-alt mr-1"></i>
+<span>2015-09-14</span></div><div class="mr-6 my-2"><i class="fas fa-folder mr-1"></i> <a href=https://david.pilato.fr/categories/tutorial/ class=hover:text-eureka>tutorial</a></div></div><p>Recently, I got a database MySQL dump and I was thinking of importing it into elasticsearch.</p><p>The first idea which pops up was:</p><ul><li>install MySQL</li><li>import the database</li><li>read the database with Logstash and import into elasticsearch</li><li>drop the database</li><li>uninstall MySQL</li></ul><p>Well. I found that some of the steps are really not needed.</p><p>I can actually use <a href=https://www.elastic.co/products>ELK stack</a> and create a simple recipe which can be used to import SQL dump scripts without needing to actually load the data to a database and then read it again from the database.</p><p>Let&rsquo;s do it!</p><h2 id=parsing-sql-script-with-logstash>Parsing SQL script with logstash</h2><p>I exported some data from a MySQL example database I have. You can download the same <a href=https://gist.github.com/dadoonet/2e83d126e5a5666598b1>data</a>.</p><h3 id=sql-insert-script>SQL Insert script</h3><p>Our objects are split on 3 tables but we are not going to do joins here. We will only import data from <code>Person</code> table.</p><p>Let&rsquo;s look at the important lines of the script:</p><pre><code class=language-sql>--
 -- Table structure for table `Person`
 --
 
@@ -151,58 +54,33 @@ LOCK TABLES `Person` WRITE;
 /*!40000 ALTER TABLE `Person` DISABLE KEYS */;
 INSERT INTO `Person` VALUES (1,4,'1944-07-21 00:00:00','male','Joe Smith','0',1,1),...,(10000,0,'2009-09-10 00:00:00','female','Stephanie Rebecca','9999',10000,10000);
 /*!40000 ALTER TABLE `Person` ENABLE KEYS */;
-</code></pre>
-<p>Two important sections in this file:</p>
-<ul>
-<li><code>CREATE TABLE</code> gives us all column titles</li>
-<li><code>INSERT INTO</code> are our data</li>
-</ul>
-<p>In a real backup with much more data than that, you will probably have more than one single <code>INSERT INTO</code> line.</p>
-<p>We basically need here to ignore the first 108 lines of our backup at first.</p>
-<p>Let&rsquo;s look then at the first line:</p>
-<pre><code class=language-sh>cat person.sql | head -109 | tail -1
-</code></pre>
-<pre><code class=language-sql>INSERT INTO `Person` VALUES (1,4,'1944-07-21 00:00:00','male','Joe Smith','0',1,1),...,(10000,0,'2009-09-10 00:00:00','female','Stephanie Rebecca','9999',10000,10000);
-</code></pre>
-<h3 id=read-it-with-logstash>Read it with logstash</h3>
-<p>What we need to do here is to split each line with the following pattern:</p>
-<pre><code class=language-sql>INSERT INTO `Person` VALUES (DATA),(DATA),***,(DATA);
-</code></pre>
-<p>We can create a <code>mysql.conf</code> for logstash to parse this. As usual, start with an &ldquo;empty&rdquo; one:</p>
-<pre><code class=language-ruby>input { stdin {} }
+</code></pre><p>Two important sections in this file:</p><ul><li><code>CREATE TABLE</code> gives us all column titles</li><li><code>INSERT INTO</code> are our data</li></ul><p>In a real backup with much more data than that, you will probably have more than one single <code>INSERT INTO</code> line.</p><p>We basically need here to ignore the first 108 lines of our backup at first.</p><p>Let&rsquo;s look then at the first line:</p><pre><code class=language-sh>cat person.sql | head -109 | tail -1
+</code></pre><pre><code class=language-sql>INSERT INTO `Person` VALUES (1,4,'1944-07-21 00:00:00','male','Joe Smith','0',1,1),...,(10000,0,'2009-09-10 00:00:00','female','Stephanie Rebecca','9999',10000,10000);
+</code></pre><h3 id=read-it-with-logstash>Read it with logstash</h3><p>What we need to do here is to split each line with the following pattern:</p><pre><code class=language-sql>INSERT INTO `Person` VALUES (DATA),(DATA),***,(DATA);
+</code></pre><p>We can create a <code>mysql.conf</code> for logstash to parse this. As usual, start with an &ldquo;empty&rdquo; one:</p><pre><code class=language-ruby>input { stdin {} }
 
 filter {
 }
 
 output { stdout { codec =&gt; rubydebug } }
-</code></pre>
-<p>Then, let&rsquo;s ignore the <code>INSERT INTO ...</code> part and extract the data in a new field named <code>extracted_sql</code>. Let&rsquo;s use a <a href=https://www.elastic.co/guide/en/logstash/current/plugins-filters-grok.html>grok filter</a> for that:</p>
-<pre><code class=language-ruby>grok {
+</code></pre><p>Then, let&rsquo;s ignore the <code>INSERT INTO ...</code> part and extract the data in a new field named <code>extracted_sql</code>. Let&rsquo;s use a <a href=https://www.elastic.co/guide/en/logstash/current/plugins-filters-grok.html>grok filter</a> for that:</p><pre><code class=language-ruby>grok {
   match =&gt; {
     &quot;message&quot; =&gt; &quot;INSERT INTO \`Person\` VALUES (%{GREEDYDATA:extracted_sql})&quot;
   }
   remove_field =&gt; &quot;message&quot;
 }
-</code></pre>
-<p>Execute it:</p>
-<pre><code class=language-sh>cat person.sql | head -109 | tail -1 | bin/logstash -f mysql.conf
-</code></pre>
-<p>It gives something like this:</p>
-<pre><code class=language-ruby>{
+</code></pre><p>Execute it:</p><pre><code class=language-sh>cat person.sql | head -109 | tail -1 | bin/logstash -f mysql.conf
+</code></pre><p>It gives something like this:</p><pre><code class=language-ruby>{
          &quot;@version&quot; =&gt; &quot;1&quot;,
        &quot;@timestamp&quot; =&gt; &quot;2015-09-14T07:32:43.495Z&quot;,
              &quot;host&quot; =&gt; &quot;MacBook-Air-de-David.local&quot;,
     &quot;extracted_sql&quot; =&gt; &quot;(..),..(..);
 }
-</code></pre>
-<p>We now need to split <code>extracted_sql</code> in multiple events. Let&rsquo;s add a <a href=https://www.elastic.co/guide/en/logstash/current/plugins-filters-split.html>split filter</a>:</p>
-<pre><code class=language-ruby>split {
+</code></pre><p>We now need to split <code>extracted_sql</code> in multiple events. Let&rsquo;s add a <a href=https://www.elastic.co/guide/en/logstash/current/plugins-filters-split.html>split filter</a>:</p><pre><code class=language-ruby>split {
   terminator =&gt; &quot;),(&quot;
   field =&gt; &quot;extracted_sql&quot;
 }
-</code></pre>
-<p>Launch again and it now gives one event per table line:</p>
-<pre><code class=language-ruby>{
+</code></pre><p>Launch again and it now gives one event per table line:</p><pre><code class=language-ruby>{
          &quot;@version&quot; =&gt; &quot;1&quot;,
        &quot;@timestamp&quot; =&gt; &quot;2015-09-14T07:38:34.489Z&quot;,
              &quot;host&quot; =&gt; &quot;MacBook-Air-de-David.local&quot;,
@@ -222,10 +100,7 @@ output { stdout { codec =&gt; rubydebug } }
              &quot;host&quot; =&gt; &quot;MacBook-Air-de-David.local&quot;,
     &quot;extracted_sql&quot; =&gt; &quot;10000,0,'2009-09-10 00:00:00','female','Stephanie Rebecca','9999',10000,10000&quot;
 }
-</code></pre>
-<p>Sounds like we have now a CSV structure&mldr; We can either use a <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-csv.html>CSV filter</a> or a <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-grok.html>GROK filter</a>.</p>
-<p>Grok gives more flexibility because it helps to define the right data type you want for each field. The CSV filter can not directly do it <a href=https://github.com/logstash-plugins/logstash-filter-csv/pull/7>at the moment</a>. Grok can do it but it&rsquo;s based on regular expressions and it&rsquo;s a way slower than the CSV filter which is optimized to parse CSV content. So I&rsquo;m trading here flexibility and ease to use for performance.</p>
-<pre><code class=language-ruby>csv {
+</code></pre><p>Sounds like we have now a CSV structure&mldr; We can either use a <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-csv.html>CSV filter</a> or a <a href=http://www.elastic.co/guide/en/logstash/current/plugins-filters-grok.html>GROK filter</a>.</p><p>Grok gives more flexibility because it helps to define the right data type you want for each field. The CSV filter can not directly do it <a href=https://github.com/logstash-plugins/logstash-filter-csv/pull/7>at the moment</a>. Grok can do it but it&rsquo;s based on regular expressions and it&rsquo;s a way slower than the CSV filter which is optimized to parse CSV content. So I&rsquo;m trading here flexibility and ease to use for performance.</p><pre><code class=language-ruby>csv {
   source =&gt; &quot;extracted_sql&quot;
   quote_char =&gt; &quot;'&quot;
   columns =&gt; [ &quot;id&quot;, 
@@ -233,40 +108,23 @@ output { stdout { codec =&gt; rubydebug } }
     &quot;reference&quot;, &quot;address_id&quot;, &quot;marketing_id&quot; ]
   remove_field =&gt; &quot;extracted_sql&quot;
 }
-</code></pre>
-<h3 id=deal-with-null>Deal with NULL</h3>
-<p>If you have to deal with <code>NULL</code> values, just add before the CSV filter:</p>
-<pre><code class=language-ruby>mutate {
+</code></pre><h3 id=deal-with-null>Deal with NULL</h3><p>If you have to deal with <code>NULL</code> values, just add before the CSV filter:</p><pre><code class=language-ruby>mutate {
     gsub =&gt; [
       &quot;extracted_sql&quot;, &quot;NULL&quot;, &quot;&quot;
     ]
 }
-</code></pre>
-<h3 id=select-a-timestamp>Select a timestamp</h3>
-<p>We also have some dates in various formats:</p>
-<pre><code class=language-ruby>   &quot;@timestamp&quot; =&gt; &quot;2015-09-14T07:38:34.489Z&quot;,
+</code></pre><h3 id=select-a-timestamp>Select a timestamp</h3><p>We also have some dates in various formats:</p><pre><code class=language-ruby>   &quot;@timestamp&quot; =&gt; &quot;2015-09-14T07:38:34.489Z&quot;,
   &quot;dateOfBirth&quot; =&gt; &quot;2009-09-10 00:00:00&quot;
-</code></pre>
-<p><code>dateOfBirth</code> is obviously the creation date. <code>@timestamp</code> is as always the internal logstash timestamp. We want <code>dateOfBirth</code> to become our event date.</p>
-<pre><code class=language-ruby>date {
+</code></pre><p><code>dateOfBirth</code> is obviously the creation date. <code>@timestamp</code> is as always the internal logstash timestamp. We want <code>dateOfBirth</code> to become our event date.</p><pre><code class=language-ruby>date {
     match =&gt; [ &quot;dateOfBirth&quot;, &quot;YYYY-MM-DD HH:mm:ss&quot; ]
     remove_field =&gt; &quot;dateOfBirth&quot;
 }
-</code></pre>
-<h3 id=drop-the-header>Drop the header</h3>
-<p>Nice so far. But what about the header part?</p>
-<p>Well we have our first <code>grok</code> pattern which tries to parse <code>INSERT ...</code> so if it fails, it will generate a <code>_grokparsefailure</code> tag. We can drop each line which contains that:</p>
-<pre><code class=language-ruby># Just after the grok filter
+</code></pre><h3 id=drop-the-header>Drop the header</h3><p>Nice so far. But what about the header part?</p><p>Well we have our first <code>grok</code> pattern which tries to parse <code>INSERT ...</code> so if it fails, it will generate a <code>_grokparsefailure</code> tag. We can drop each line which contains that:</p><pre><code class=language-ruby># Just after the grok filter
 if &quot;_grokparsefailure&quot; in [tags] {
   drop { }
 } 
-</code></pre>
-<p>We can now run our logstash configuration on the full file:</p>
-<pre><code class=language-sh>cat person.sql | bin/logstash -f mysql.conf
-</code></pre>
-<h3 id=cleanup>Cleanup</h3>
-<p>We output for now:</p>
-<pre><code class=language-ruby>{
+</code></pre><p>We can now run our logstash configuration on the full file:</p><pre><code class=language-sh>cat person.sql | bin/logstash -f mysql.conf
+</code></pre><h3 id=cleanup>Cleanup</h3><p>We output for now:</p><pre><code class=language-ruby>{
         &quot;@version&quot; =&gt; &quot;1&quot;,
       &quot;@timestamp&quot; =&gt; &quot;1967-01-17T23:00:00.000Z&quot;,
             &quot;host&quot; =&gt; &quot;MacBook-Air-de-David.local&quot;,
@@ -278,14 +136,10 @@ if &quot;_grokparsefailure&quot; in [tags] {
       &quot;address_id&quot; =&gt; &quot;9999&quot;,
     &quot;marketing_id&quot; =&gt; &quot;9999&quot;
 }
-</code></pre>
-<p>We don&rsquo;t need to keep <code>@version</code> and <code>host</code> fields:</p>
-<pre><code class=language-rb>mutate {
+</code></pre><p>We don&rsquo;t need to keep <code>@version</code> and <code>host</code> fields:</p><pre><code class=language-rb>mutate {
   remove_field =&gt; [ &quot;@version&quot;, &quot;host&quot; ]
 }
-</code></pre>
-<p>It gives:</p>
-<pre><code class=language-ruby>{
+</code></pre><p>It gives:</p><pre><code class=language-ruby>{
       &quot;@timestamp&quot; =&gt; &quot;1967-01-17T23:00:00.000Z&quot;,
               &quot;id&quot; =&gt; &quot;9999&quot;,
         &quot;children&quot; =&gt; &quot;1&quot;,
@@ -295,18 +149,7 @@ if &quot;_grokparsefailure&quot; in [tags] {
       &quot;address_id&quot; =&gt; &quot;9999&quot;,
     &quot;marketing_id&quot; =&gt; &quot;9999&quot;
 }
-</code></pre>
-<h2 id=connect-to-elasticsearch>Connect to elasticsearch</h2>
-<p>Not the hardest part. But may be because I&rsquo;m practicing elasticsearch for almost 5 years :)!</p>
-<p>For new comers, you have to:</p>
-<ul>
-<li><a href=https://www.elastic.co/downloads/elasticsearch>download</a>. 1.7.1 was the latest at this moment.</li>
-<li>unzip: <code>tar xzf elasticsearch-1.7.1.tar.gz</code></li>
-<li>install <a href=https://www.elastic.co/products/marvel/>marvel</a>: <code>bin/plugin install elasticsearch/marvel/latest</code></li>
-<li>launch: <code>bin/elasticsearch</code></li>
-</ul>
-<p>And connect logstash&mldr;</p>
-<pre><code class=language-ruby>output {
+</code></pre><h2 id=connect-to-elasticsearch>Connect to elasticsearch</h2><p>Not the hardest part. But may be because I&rsquo;m practicing elasticsearch for almost 5 years :)!</p><p>For new comers, you have to:</p><ul><li><a href=https://www.elastic.co/downloads/elasticsearch>download</a>. 1.7.1 was the latest at this moment.</li><li>unzip: <code>tar xzf elasticsearch-1.7.1.tar.gz</code></li><li>install <a href=https://www.elastic.co/products/marvel/>marvel</a>: <code>bin/plugin install elasticsearch/marvel/latest</code></li><li>launch: <code>bin/elasticsearch</code></li></ul><p>And connect logstash&mldr;</p><pre><code class=language-ruby>output {
   elasticsearch {
     host =&gt; &quot;localhost&quot;
     port =&gt; &quot;9200&quot;
@@ -322,10 +165,7 @@ if &quot;_grokparsefailure&quot; in [tags] {
     codec =&gt; &quot;dots&quot;
   }
 }
-</code></pre>
-<p>Note that we send documents grouped by year in an index named <code>persons-YEAR4DIGITS</code>, using type <code>person</code> and with the original <code>id</code> as the document <code>_id</code>.</p>
-<p><code>person.json</code> file contains our template. We define that we use 1 single shard, that we don&rsquo;t need <code>_all</code> field and some other settings:</p>
-<pre><code class=language-json>{
+</code></pre><p>Note that we send documents grouped by year in an index named <code>persons-YEAR4DIGITS</code>, using type <code>person</code> and with the original <code>id</code> as the document <code>_id</code>.</p><p><code>person.json</code> file contains our template. We define that we use 1 single shard, that we don&rsquo;t need <code>_all</code> field and some other settings:</p><pre><code class=language-json>{
   &quot;template&quot;: &quot;persons-*&quot;,
   &quot;order&quot;:    1, 
   &quot;settings&quot;: {
@@ -357,120 +197,17 @@ if &quot;_grokparsefailure&quot; in [tags] {
     }
   }
 }
-</code></pre>
-<p>Launch!</p>
-<pre><code class=language-sh>cat person.sql | bin/logstash -f mysql.conf
-</code></pre>
-<p>If you want to increase the injection rate, just add more workers to logstash:</p>
-<pre><code class=language-sh>cat person.sql | bin/logstash -f mysql.conf -w 2
-</code></pre>
-</div>
-<div class=my-4>
-<a href=https://david.pilato.fr/tags/elasticsearch/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#elasticsearch</a>
-<a href=https://david.pilato.fr/tags/logstash/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#logstash</a>
-<a href=https://david.pilato.fr/tags/mysql/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#mysql</a>
-<a href=https://david.pilato.fr/tags/sql/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#sql</a>
-</div>
-<div class="flex md:justify-end my-4">
-<style>#share-buttons{display:inline-block;vertical-align:middle}#share-buttons:after{content:"";display:block;clear:both}#share-buttons>div{position:relative;text-align:left;height:36px;width:32px;float:left;text-align:center}#share-buttons>div>svg{height:16px;fill:#000;margin-top:10px}#share-buttons>div:hover{cursor:pointer}#share-buttons>div.facebook:hover>svg{fill:#3b5998}#share-buttons>div.twitter:hover>svg{fill:#55acee}#share-buttons>div.linkedin:hover>svg{fill:#0077b5}#share-buttons>div.pinterest:hover>svg{fill:#cb2027}#share-buttons>div.mail:hover>svg{fill:#7d7d7d}#share-buttons>div.facebook>svg{height:18px;margin-top:9px}#share-buttons>div.twitter>svg{height:20px;margin-top:8px}#share-buttons>div.linkedin>svg{height:19px;margin-top:7px}#share-buttons>div.pinterest>svg{height:20px;margin-top:9px}#share-buttons>div.mail>svg{height:14px;margin-top:11px}</style>
-<div id=share-buttons>
-<div class=facebook title="Share this on Facebook" onclick="window.open('http://www.facebook.com/share.php?u=https://david.pilato.fr/blog/2015-09-14-import-from-sql-without-database/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759H734V905H479V609h255V391q0-186 104-288.5T1115 0q147 0 228 12z"/></svg></div>
-<div class=twitter title="Share this on Twitter" onclick="window.open('http://twitter.com/intent/tweet?via=dadoonet&text=🧑🏼‍💻 Blog: Importing from a database without a database 👉🏼&url=https://david.pilato.fr/blog/2015-09-14-import-from-sql-without-database/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5T1369.5 1125 1185 1335.5t-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5T285 1033q33 5 61 5 43 0 85-11-112-23-185.5-111.5T172 710v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5T884 653q-8-38-8-74 0-134 94.5-228.5T1199 256q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
-<div class=linkedin title="Share this on Linkedin" onclick="window.open('https://www.linkedin.com/shareArticle?mini=true&url=https://david.pilato.fr/blog/2015-09-14-import-from-sql-without-database/&title=&summary=&source=')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991H147V625h330zm21-306q1 73-50.5 122T312 490h-2q-82 0-132-49t-50-122q0-74 51.5-122.5T314 148t133 48.5T498 319zm1166 729v568h-329v-530q0-105-40.5-164.5T1168 862q-63 0-105.5 34.5T999 982q-11 30-11 81v553H659q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5T1285 602q171 0 275 113.5t104 332.5z"/></svg></div>
-<div class=mail title="Share this through Email" onclick="window.open('mailto:?&body=https://david.pilato.fr/blog/2015-09-14-import-from-sql-without-database/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47H160q-66 0-113-47T0 1504V710q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 1e2-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38T639 1015q-91-64-262-182.5T172 690q-62-42-117-115.5T0 438q0-78 41.5-130T160 256h1472q65 0 112.5 47t47.5 113z"/></svg></div>
-</div>
-<a href=https://github.com/dadoonet/dadoonet.github.io/tree/main/content/blog/2015-09-14-import-from-sql-without-database/index.md title="Edit this page">
-<i class="fas fa-edit mr-1"></i>
-</a>
-</div>
-<div class=py-2>
-<div class="flex flex-col md:flex-row items-center my-8">
-<a href=https://david.pilato.fr/authors/david-pilato/ class="w-24 h-24 md:mr-4">
-<img src=https://david.pilato.fr/authors/david-pilato/david_pilato.png class="w-full bg-primary-bg rounded-full" alt=Avatar>
-</a>
-<div class="w-full md:w-auto mt-4 md:mt-0">
-<a href=https://david.pilato.fr/authors/david-pilato/ class="block font-bold text-lg pb-1 mb-2 border-b">David Pilato</a>
-<span class="block pb-2">20+ years of experience, mostly in Java. Living in Cergy, France.</span>
-<a href=mailto:david+blog@pilato.fr class=mr-1>
-<i class="fas fa-envelope"></i>
-</a>
-<a href=https://twitter.com/dadoonet class=mr-1>
-<i class="fab fa-twitter"></i>
-</a>
-<a href=https://github.com/dadoonet class=mr-1>
-<i class="fab fa-github"></i>
-</a>
-<a href=https://www.linkedin.com/in/dadoonet/ class=mr-1>
-<i class="fab fa-linkedin"></i>
-</a>
-</div>
-</div>
-</div>
-<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
-<div>
-<span class="block font-bold">Previous</span>
-<a href=https://david.pilato.fr/blog/2015-09-17-next-movie-to-watch-based-on-recommendation/ class=block>Next movie to watch based on recommendation</a>
-</div>
-<div class="md:text-right mt-4 md:mt-0">
-<span class="block font-bold">Next</span>
-<a href=https://david.pilato.fr/blog/2015-06-01-indexing-twitter-with-logstash-and-elasticsearch/ class=block>Indexing Twitter with Logstash and Elasticsearch</a>
-</div>
-</div>
-<script id=utterances src=https://utteranc.es/client.js issue-term=pathname label=💬 comments repo=dadoonet/dadoonet.github.io theme=preferred-color-scheme crossorigin=anonymous async></script>
-<script>storageColorScheme=="Light"?document.getElementById('utterances').setAttribute('theme','github-light'):storageColorScheme=="Dark"&&document.getElementById('utterances').setAttribute('theme','github-dark')</script>
-</div>
-<div class=col-span-2>
-<div class="sticky top-16 z-10 hidden lg:block px-6 py-4 bg-primary-bg">
-<span class="text-lg font-semibold">On This Page</span>
-</div>
-<div class="sticky-toc hidden lg:block px-6 pb-6">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#parsing-sql-script-with-logstash>Parsing SQL script with logstash</a>
-<ul>
-<li><a href=#sql-insert-script>SQL Insert script</a></li>
-<li><a href=#read-it-with-logstash>Read it with logstash</a></li>
-<li><a href=#deal-with-null>Deal with NULL</a></li>
-<li><a href=#select-a-timestamp>Select a timestamp</a></li>
-<li><a href=#drop-the-header>Drop the header</a></li>
-<li><a href=#cleanup>Cleanup</a></li>
-</ul>
-</li>
-<li><a href=#connect-to-elasticsearch>Connect to elasticsearch</a></li>
-</ul>
-</nav>
-</div>
-<script>window.addEventListener('DOMContentLoaded',()=>{enableStickyToc()})</script>
-</div>
-<div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded p-6">
-<h2 class="text-lg font-semibold mb-4">See Also</h2>
-<div class=content>
-<a href=https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/>Devoxx France 2015</a>
-<br>
-<a href=https://david.pilato.fr/blog/2015-06-01-indexing-twitter-with-logstash-and-elasticsearch/>Indexing Twitter with Logstash and Elasticsearch</a>
-<br>
-<a href=https://david.pilato.fr/blog/2015-05-20-reindex-elasticsearch-with-logstash/>Reindex elasticsearch with Logstash</a>
-<br>
-<a href=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/>Advanced search for your Legacy application</a>
-<br>
-<a href=https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/>Exploring Capitaine Train dataset</a>
-<br>
-<a href=https://david.pilato.fr/blog/2015-05-19-using-js-auth-with-found-cluster/>Using JS Auth with found cluster</a>
-<br>
-</div>
-</div>
-</div>
-<script>document.addEventListener('DOMContentLoaded',()=>{hljs.initHighlightingOnLoad()})</script>
-</div>
-</div>
-</main>
-<footer class=pl-scrollbar>
-<div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
-<p class="text-sm text-tertiary-text">&copy; 2022, David Pilato, France
-&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p>
-</div><div class="text-center p-1 pin-b">
-<p class="text-sm text-tertiary-text">Generated from 🇫🇷 with ❤️ on Wed Jan 12, 2022 at 17:58:41 UTC</p>
-</div></div>
-</footer>
-</body>
-</html>
+</code></pre><p>Launch!</p><pre><code class=language-sh>cat person.sql | bin/logstash -f mysql.conf
+</code></pre><p>If you want to increase the injection rate, just add more workers to logstash:</p><pre><code class=language-sh>cat person.sql | bin/logstash -f mysql.conf -w 2
+</code></pre></article><div class=my-4><a href=https://david.pilato.fr/tags/elasticsearch/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#elasticsearch</a>
+<a href=https://david.pilato.fr/tags/logstash/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#logstash</a>
+<a href=https://david.pilato.fr/tags/mysql/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#mysql</a>
+<a href=https://david.pilato.fr/tags/sql/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#sql</a></div><div class="flex md:justify-end my-4"><style>#share-buttons{display:inline-block;vertical-align:middle}#share-buttons:after{content:"";display:block;clear:both}#share-buttons>div{position:relative;text-align:left;height:36px;width:32px;float:left;text-align:center}#share-buttons>div>svg{height:16px;fill:#000;margin-top:10px}#share-buttons>div:hover{cursor:pointer}#share-buttons>div.facebook:hover>svg{fill:#3b5998}#share-buttons>div.twitter:hover>svg{fill:#55acee}#share-buttons>div.linkedin:hover>svg{fill:#0077b5}#share-buttons>div.pinterest:hover>svg{fill:#cb2027}#share-buttons>div.mail:hover>svg{fill:#7d7d7d}#share-buttons>div.facebook>svg{height:18px;margin-top:9px}#share-buttons>div.twitter>svg{height:20px;margin-top:8px}#share-buttons>div.linkedin>svg{height:19px;margin-top:7px}#share-buttons>div.pinterest>svg{height:20px;margin-top:9px}#share-buttons>div.mail>svg{height:14px;margin-top:11px}</style><div id=share-buttons><div class=facebook title="Share this on Facebook" onclick="window.open('http://www.facebook.com/share.php?u=https://david.pilato.fr/blog/2015-09-14-import-from-sql-without-database/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759H734V905H479V609h255V391q0-186 104-288.5T1115 0q147 0 228 12z"/></svg></div><div class=twitter title="Share this on Twitter" onclick="window.open('http://twitter.com/intent/tweet?via=dadoonet&text=🧑🏼‍💻 Blog: Importing from a database without a database 👉🏼&url=https://david.pilato.fr/blog/2015-09-14-import-from-sql-without-database/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5T1369.5 1125 1185 1335.5t-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5T285 1033q33 5 61 5 43 0 85-11-112-23-185.5-111.5T172 710v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5T884 653q-8-38-8-74 0-134 94.5-228.5T1199 256q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div><div class=linkedin title="Share this on Linkedin" onclick="window.open('https://www.linkedin.com/shareArticle?mini=true&url=https://david.pilato.fr/blog/2015-09-14-import-from-sql-without-database/&title=&summary=&source=')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991H147V625h330zm21-306q1 73-50.5 122T312 490h-2q-82 0-132-49t-50-122q0-74 51.5-122.5T314 148t133 48.5T498 319zm1166 729v568h-329v-530q0-105-40.5-164.5T1168 862q-63 0-105.5 34.5T999 982q-11 30-11 81v553H659q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5T1285 602q171 0 275 113.5t104 332.5z"/></svg></div><div class=mail title="Share this through Email" onclick="window.open('mailto:?&body=https://david.pilato.fr/blog/2015-09-14-import-from-sql-without-database/')"><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47H160q-66 0-113-47T0 1504V710q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 1e2-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38T639 1015q-91-64-262-182.5T172 690q-62-42-117-115.5T0 438q0-78 41.5-130T160 256h1472q65 0 112.5 47t47.5 113z"/></svg></div></div><a href=https://github.com/dadoonet/dadoonet.github.io/tree/main/content/blog/2015-09-14-import-from-sql-without-database/index.md title="Edit this page"><i class="fas fa-edit mr-1"></i></a></div><div class=py-2><div class="my-8 flex flex-col items-center md:flex-row"><a href=https://david.pilato.fr/authors/david-pilato/ class="md:me-4 text-primary-text h-24 w-24"><img src=https://david.pilato.fr/authors/david-pilato/david_pilato.png class="bg-primary-bg w-full rounded-full" alt=Avatar></a><div class="mt-4 w-full md:mt-0 md:w-auto"><a href=https://david.pilato.fr/authors/david-pilato/ class="mb-2 block border-b pb-1 text-lg font-bold"><h3>David Pilato</h3></a><span class="block pb-2">20+ years of experience, mostly in Java. Living in Cergy, France.</span>
+<a href=mailto:david+blog@pilato.fr class=me-2><i class="fas fa-envelope"></i></a>
+<a href=https://twitter.com/dadoonet class=me-2><i class="fab fa-twitter"></i></a>
+<a href=https://github.com/dadoonet class=me-2><i class="fab fa-github"></i></a>
+<a href=https://www.linkedin.com/in/dadoonet/ class=me-2><i class="fab fa-linkedin"></i></a></div></div></div><div class="-mx-2 mt-4 flex flex-col border-t px-2 pt-4 md:flex-row md:justify-between"><div><span class="text-primary-text block font-bold">Previous</span>
+<a href=https://david.pilato.fr/blog/2015-09-17-next-movie-to-watch-based-on-recommendation/ class=block>Next movie to watch based on recommendation</a></div><div class="mt-4 md:mt-0 md:text-right"><span class="text-primary-text block font-bold">Next</span>
+<a href=https://david.pilato.fr/blog/2015-06-01-indexing-twitter-with-logstash-and-elasticsearch/ class=block>Indexing Twitter with Logstash and Elasticsearch</a></div></div><script id=utterances src=https://utteranc.es/client.js issue-term=pathname label=💬 comments repo=dadoonet/dadoonet.github.io theme=preferred-color-scheme crossorigin=anonymous async></script><script>storageColorScheme=="Light"?document.getElementById('utterances').setAttribute('theme','github-light'):storageColorScheme=="Dark"&&document.getElementById('utterances').setAttribute('theme','github-dark')</script></div><div class=col-span-2><div class="bg-primary-bg
+prose sticky top-16 z-10 hidden px-6 py-4 lg:block"><h3>On This Page</h3></div><div class="sticky-toc hidden px-6 pb-6 lg:block"><nav id=TableOfContents><ul><li><a href=#parsing-sql-script-with-logstash>Parsing SQL script with logstash</a><ul><li><a href=#sql-insert-script>SQL Insert script</a></li><li><a href=#read-it-with-logstash>Read it with logstash</a></li><li><a href=#deal-with-null>Deal with NULL</a></li><li><a href=#select-a-timestamp>Select a timestamp</a></li><li><a href=#drop-the-header>Drop the header</a></li><li><a href=#cleanup>Cleanup</a></li></ul></li><li><a href=#connect-to-elasticsearch>Connect to elasticsearch</a></li></ul></nav></div><script>window.addEventListener("DOMContentLoaded",()=>{enableStickyToc()})</script></div><div class="bg-secondary-bg prose col-span-2 rounded p-6 lg:col-span-6"><h3>See Also</h3><a href=https://david.pilato.fr/blog/2015-05-02-devoxx-france-2015/ class=no-underline>Devoxx France 2015</a><br><a href=https://david.pilato.fr/blog/2015-06-01-indexing-twitter-with-logstash-and-elasticsearch/ class=no-underline>Indexing Twitter with Logstash and Elasticsearch</a><br><a href=https://david.pilato.fr/blog/2015-05-20-reindex-elasticsearch-with-logstash/ class=no-underline>Reindex elasticsearch with Logstash</a><br><a href=https://david.pilato.fr/blog/2015-05-09-advanced-search-for-your-legacy-application/ class=no-underline>Advanced search for your Legacy application</a><br><a href=https://david.pilato.fr/blog/2015-04-28-exploring-capitaine-train-dataset/ class=no-underline>Exploring Capitaine Train dataset</a><br><a href=https://david.pilato.fr/blog/2015-05-19-using-js-auth-with-found-cluster/ class=no-underline>Using JS Auth with found cluster</a><br></div></div><script>document.addEventListener("DOMContentLoaded",()=>{hljs.highlightAll()})</script></div></div></main><footer class=pl-scrollbar><div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b"><p class="text-sm text-tertiary-text">&copy; 2022, David Pilato, France
+&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p></div><div class="text-center p-1 pin-b"><p class="text-sm text-tertiary-text">Generated from 🇫🇷 with ❤️ on Tue Jun 14, 2022 at 12:48:11 UTC</p></div></div></footer></body></html>
